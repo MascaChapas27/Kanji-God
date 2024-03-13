@@ -21,6 +21,9 @@ class Button : public sf::Drawable{
         // they will be at the same Y position. 10 means the top part will be
         // 10 pixels on top of the bottom part
         double topOffset;
+
+        // Indicates if the button is currently being pressed
+        bool pressed;
     
     public:
         Button();
@@ -43,7 +46,7 @@ class Button : public sf::Drawable{
         void notify(sf::Event &event);
 
         // Draws the button
-        void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+        virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 };
 
 #endif
