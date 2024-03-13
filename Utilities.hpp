@@ -11,7 +11,7 @@
 const double MAX_BUTTON_TOP_OFFSET = 10;
 
 // Offset for a button used when the mouse hovers over the button
-const double MID_BUTTON_TOP_OFFSET = 7;
+const double MID_BUTTON_TOP_OFFSET = 8;
 
 // Minimun offset for a button, used when the button was just pressed
 const double MIN_BUTTON_TOP_OFFSET = 2;

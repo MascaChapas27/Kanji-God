@@ -50,10 +50,18 @@ void Button::notify(sf::Event &event)
     } else if (!pressed && event.type == sf::Event::EventType::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Button::Left){
         if(util::isInRectangle(event.mouseButton.x,event.mouseButton.y,topSprite.getPosition().x-topSprite.getTextureRect().width/2,topSprite.getPosition().y-topSprite.getTextureRect().height/2,topSprite.getTextureRect().width,topSprite.getTextureRect().height)){
             topSprite.setPosition(bottomSprite.getPosition());
-            topOffset = MID_BUTTON_TOP_OFFSET;
+            topOffset = MIN_BUTTON_TOP_OFFSET;
+            pressed = true;
         }
     } else if (pressed && event.type == sf::Event::EventType::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Button::Left){
-        topOffset = MAX_BUTTON_TOP_OFFSET;
+        
+        if(util::isInRectangle(event.mouseButton.x,event.mouseButton.y,topSprite.getPosition().x-topSprite.getTextureRect().width/2,topSprite.getPosition().y-topSprite.getTextureRect().height/2,topSprite.getTextureRect().width,topSprite.getTextureRect().height)){
+            topOffset = MID_BUTTON_TOP_OFFSET;
+        } else {
+            topOffset = MAX_BUTTON_TOP_OFFSET;
+        }
+        
+        pressed = false;
     }
 }
 
