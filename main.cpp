@@ -18,6 +18,7 @@ int main(){
     button.setTopTexture(topTexture);
     button.setPosition(200,150);
     button.setText(L"あ");
+    button.setTextColor(FONT_COLOR);
 
     while(window.isOpen()){
         

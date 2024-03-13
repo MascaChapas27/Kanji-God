@@ -47,6 +47,9 @@ class Button : public sf::Drawable{
         // Sets the text to be displayed on the button
         void setText(sf::String text);
 
+        // Sets the color for the text
+        void setTextColor(sf::Color textColor);
+
         // Update the position of the top part of the button
         void update();
 

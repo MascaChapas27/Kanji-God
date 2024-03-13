@@ -1,6 +1,8 @@
 #ifndef __UTILITIES_HPP__
 #define __UTILITIES_HPP__
 
+#include <SFML/Graphics.hpp>
+
 /*
     This file contains constants and other important stuff that needs to
     be global
@@ -26,6 +28,8 @@ const int FPS = 60;
 
 // Font size all fonts start at. It then gets smaller to fit in the button or label
 const int INITIAL_FONT_SIZE = 100;
+
+const sf::Color FONT_COLOR = sf::Color(200,200,200);
 
 namespace util {
     // Calculates whether a point is in a rectangle

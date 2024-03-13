@@ -50,8 +50,11 @@ void Button::setText(sf::String textString)
     sf::Vector2f localBounds(center.x + text.getLocalBounds().getPosition().x, center.y + text.getLocalBounds().getPosition().y);
     text.setOrigin(localBounds);
     text.setPosition(topSprite.getPosition());
+}
 
-    text.setFillColor(sf::Color(122,122,122));
+void Button::setTextColor(sf::Color textColor)
+{
+    text.setFillColor(textColor);
 }
 
 void Button::update()
