@@ -24,6 +24,11 @@ class Button : public sf::Drawable{
 
         // Indicates if the button is currently being pressed
         bool pressed;
+
+        sf::Font font; // TODO get rid of this
+
+        // Text to be displayed on the button
+        sf::Text text;
     
     public:
         Button();
@@ -38,6 +43,9 @@ class Button : public sf::Drawable{
         // follow it and position itself some pixels above depending on the offset
         void setPosition(double x, double y);
         void setPosition(sf::Vector2f position);
+
+        // Sets the text to be displayed on the button
+        void setText(sf::String text);
 
         // Update the position of the top part of the button
         void update();

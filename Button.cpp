@@ -30,6 +30,30 @@ void Button::setPosition(sf::Vector2f position)
     this->setPosition(position.x,position.y);
 }
 
+void Button::setText(sf::String textString)
+{
+    if(!font.loadFromFile("fonts/MOBO-Bold.otf"))
+    {
+        exit(EXIT_FAILURE);
+    }
+
+    text.setFont(font);
+
+    text.setString(textString);
+    text.setCharacterSize(INITIAL_FONT_SIZE);
+
+    while(text.getGlobalBounds().getSize().x > topSprite.getTextureRect().width*0.6){
+        text.setCharacterSize(text.getCharacterSize()-1);
+    }
+
+    sf::Vector2f center(text.getGlobalBounds().getSize().x / 2.0, text.getGlobalBounds().getSize().y / 2.0);
+    sf::Vector2f localBounds(center.x + text.getLocalBounds().getPosition().x, center.y + text.getLocalBounds().getPosition().y);
+    text.setOrigin(localBounds);
+    text.setPosition(topSprite.getPosition());
+
+    text.setFillColor(sf::Color(122,122,122));
+}
+
 void Button::update()
 {
     double currentOffset = bottomSprite.getPosition().y - topSprite.getPosition().y;
@@ -37,6 +61,7 @@ void Button::update()
     double newOffset = currentOffset + (topOffset - currentOffset) / BUTTON_PRESS_SPEED;
 
     topSprite.setPosition(bottomSprite.getPosition().x, bottomSprite.getPosition().y-newOffset);
+    text.setPosition(topSprite.getPosition());
 }
 
 void Button::notify(sf::Event &event)
@@ -70,4 +95,5 @@ void Button::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
     target.draw(bottomSprite);
     target.draw(topSprite);
+    if(text.getString() != "") target.draw(text);
 }

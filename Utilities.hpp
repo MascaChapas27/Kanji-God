@@ -24,6 +24,9 @@ const double BUTTON_PRESS_SPEED = 5.0;
 // Desired framerate for the game
 const int FPS = 60;
 
+// Font size all fonts start at. It then gets smaller to fit in the button or label
+const int INITIAL_FONT_SIZE = 100;
+
 namespace util {
     // Calculates whether a point is in a rectangle
     bool isInRectangle(int x, int y, int rectX, int rectY, int rectWidth, int rectHeight);

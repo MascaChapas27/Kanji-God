@@ -17,6 +17,7 @@ int main(){
     button.setBottomTexture(bottomTexture);
     button.setTopTexture(topTexture);
     button.setPosition(200,150);
+    button.setText(L"あ");
 
     while(window.isOpen()){
         
