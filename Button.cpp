@@ -42,12 +42,12 @@ void Button::setText(sf::String textString)
     text.setString(textString);
     text.setCharacterSize(INITIAL_FONT_SIZE);
 
-    while(text.getGlobalBounds().getSize().x > topSprite.getTextureRect().width*0.6){
+    while(text.getGlobalBounds().left > topSprite.getTextureRect().width*0.6){
         text.setCharacterSize(text.getCharacterSize()-1);
     }
 
-    sf::Vector2f center(text.getGlobalBounds().getSize().x / 2.0, text.getGlobalBounds().getSize().y / 2.0);
-    sf::Vector2f localBounds(center.x + text.getLocalBounds().getPosition().x, center.y + text.getLocalBounds().getPosition().y);
+    sf::Vector2f center(text.getGlobalBounds().width / 2.0, text.getGlobalBounds().height / 2.0);
+    sf::Vector2f localBounds(center.x + text.getLocalBounds().left, center.y + text.getLocalBounds().top);
     text.setOrigin(localBounds);
     text.setPosition(topSprite.getPosition());
 }
@@ -69,26 +69,26 @@ void Button::update()
 
 void Button::notify(sf::Event &event)
 {
-    if(!pressed && event.type == sf::Event::EventType::MouseMoved){
+    if(!pressed && event.type == sf::Event::MouseMoved){
         if(util::isInRectangle(event.mouseMove.x,event.mouseMove.y,topSprite.getPosition().x-topSprite.getTextureRect().width/2,topSprite.getPosition().y-topSprite.getTextureRect().height/2,topSprite.getTextureRect().width,topSprite.getTextureRect().height)){
             topOffset = MID_BUTTON_TOP_OFFSET;
         } else {
             topOffset = MAX_BUTTON_TOP_OFFSET;
         }
-    } else if (!pressed && event.type == sf::Event::EventType::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Button::Left){
+    } else if (!pressed && event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left){
         if(util::isInRectangle(event.mouseButton.x,event.mouseButton.y,topSprite.getPosition().x-topSprite.getTextureRect().width/2,topSprite.getPosition().y-topSprite.getTextureRect().height/2,topSprite.getTextureRect().width,topSprite.getTextureRect().height)){
             topSprite.setPosition(bottomSprite.getPosition());
             topOffset = MIN_BUTTON_TOP_OFFSET;
             pressed = true;
         }
-    } else if (pressed && event.type == sf::Event::EventType::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Button::Left){
-        
+    } else if (pressed && event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left){
+
         if(util::isInRectangle(event.mouseButton.x,event.mouseButton.y,topSprite.getPosition().x-topSprite.getTextureRect().width/2,topSprite.getPosition().y-topSprite.getTextureRect().height/2,topSprite.getTextureRect().width,topSprite.getTextureRect().height)){
             topOffset = MID_BUTTON_TOP_OFFSET;
         } else {
             topOffset = MAX_BUTTON_TOP_OFFSET;
         }
-        
+
         pressed = false;
     }
 }
