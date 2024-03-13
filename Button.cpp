@@ -40,11 +40,7 @@ void Button::update()
 void Button::notify(sf::Event &event)
 {
     if(event.type == sf::Event::EventType::MouseMoved){
-        if(event.mouseMove.x > topSprite.getPosition().x &&
-           event.mouseMove.x < topSprite.getPosition().x+topSprite.getTextureRect().width &&
-           event.mouseMove.y > topSprite.getPosition().y &&
-           event.mouseMove.y < topSprite.getPosition().y+topSprite.getTextureRect().height){
-            
+        if(util::isInRectangle(event.mouseMove.x,event.mouseMove.y,topSprite.getPosition().x-topSprite.getTextureRect().width/2,topSprite.getPosition().y-topSprite.getTextureRect().height/2,topSprite.getTextureRect().width,topSprite.getTextureRect().height)){
             topOffset = util::MID_BUTTON_TOP_OFFSET;
         }
     } else if (event)
