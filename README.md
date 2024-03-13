@@ -1,1 +1,1 @@
-# Kanji-God
+# Kanji God
