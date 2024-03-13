@@ -42,7 +42,7 @@ void Button::setText(sf::String textString)
     text.setString(textString);
     text.setCharacterSize(INITIAL_FONT_SIZE);
 
-    while(text.getGlobalBounds().left > topSprite.getTextureRect().width*0.6){
+    while(text.getGlobalBounds().width > topSprite.getTextureRect().width*0.6){
         text.setCharacterSize(text.getCharacterSize()-1);
     }
 

@@ -24,7 +24,7 @@ int main(){
     button2.setBottomTexture(bottomTexture);
     button2.setTopTexture(topTexture);
     button2.setPosition(275,150);
-    button2.setText(L"A");
+    button2.setText(L"Me pican\nlos CoCo\naaaAY");
     button2.setTextColor(FONT_COLOR);
 
     while(window.isOpen()){
