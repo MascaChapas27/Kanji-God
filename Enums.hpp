@@ -27,7 +27,7 @@ enum class ProgramState{
     TitleScreen,
     KanjiKun, KanjiOn, KanjiMean, WordPron, WordMean,
     KanjiTutor, WordTutor,
-    SavingAndExiting
+    Saving
 };
 
 #endif

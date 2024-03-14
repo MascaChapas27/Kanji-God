@@ -27,8 +27,6 @@ class Controller {
         // word mode (ignored if godMode is true)
         bool kanjiMode;
 
-        
-
     public:
         // NEVER CLONE A SINGLETON
         Controller(Controller &other) = delete;
@@ -46,7 +44,7 @@ class Controller {
         void setGodMode(bool godMode);
 
         // Returns exercise
-        void getExercise();
+        Exercise getExercise();
 };
 
 #endif
