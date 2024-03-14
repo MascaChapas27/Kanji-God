@@ -48,7 +48,8 @@ void Button::setText(sf::String textString)
     text.setString(textString);
     text.setCharacterSize(INITIAL_FONT_SIZE);
 
-    while(text.getGlobalBounds().width > topSprite.getTextureRect().width*0.6){
+    while(text.getGlobalBounds().width > topSprite.getTextureRect().width*TEXT_IN_BUTTON_MAX_RATIO ||
+          text.getGlobalBounds().height > topSprite.getTextureRect().height*TEXT_IN_BUTTON_MAX_RATIO){
         text.setCharacterSize(text.getCharacterSize()-1);
     }
 
@@ -61,6 +62,12 @@ void Button::setText(sf::String textString)
 void Button::setTextColor(sf::Color textColor)
 {
     text.setFillColor(textColor);
+}
+
+void Button::setButtonColor(sf::Color color)
+{
+    topSprite.setColor(color);
+    bottomSprite.setColor(color);
 }
 
 void Button::update()

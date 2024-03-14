@@ -2,6 +2,7 @@
 #define __MAIN_WINDOW_HPP__
 
 #include "Button.hpp"
+#include "Enums.hpp"
 #include <SFML/Graphics.hpp>
 #include <list>
 
@@ -22,9 +23,12 @@ class MainWindow {
         // Sprite for the background
         sf::Sprite background;
 
+        // Current state of the program, determines what happens
+        ProgramState programState;
+
         // Buttons that show when you open the program
-        // and let you choose the exercise
-        std::list<Button> chooseExerciseButtons;
+        // and it lets you choose the exercise
+        std::list<Button> menuButtons;
 
         // Buttons that let you answer when the answer is short
         // (kunyomi and onyomi for one kanji)
@@ -60,7 +64,7 @@ class MainWindow {
         // std::list<Sign> tutorialOnyomis;
 
     public:
-        
+
         // Makes the window start working
         void start();
 };

@@ -66,6 +66,9 @@ void ResourceHolder<Resource,Identifier>::loadAllTextures()
 {
     load(TextureID::Title,"sprites/title.png");
     load(TextureID::Background,"sprites/background.png");
+
+    load(TextureID::SmallMenuButtonBottom,"sprites/small_menu_button_bottom.png");
+    load(TextureID::SmallMenuButtonTop,"sprites/small_menu_button_top.png");
 }
 
 template <class Resource, class Identifier>
@@ -77,5 +80,5 @@ void ResourceHolder<Resource,Identifier>::loadAllSounds()
 template <class Resource, class Identifier>
 void ResourceHolder<Resource,Identifier>::loadAllFonts()
 {
-    load(FontID::MoboFont,"fonts/MOBO-Bold.otf");
+    load(FontID::MoboFont,"fonts/MOBO_Bold.otf");
 }

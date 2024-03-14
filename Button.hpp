@@ -50,7 +50,7 @@ class Button : public sf::Drawable{
         // follow it and position itself some pixels above depending on the offset
         void setPosition(double x, double y);
         void setPosition(sf::Vector2f position);
-        
+
         // Sets the action to be performed when the button is pressed
         void setPressedButtonAction(std::function<void()> pressedButtonAction);
 
@@ -62,6 +62,9 @@ class Button : public sf::Drawable{
 
         // Sets the color for the text
         void setTextColor(sf::Color textColor);
+
+        // Sets the color for the button
+        void setButtonColor(sf::Color color);
 
         // Update the position of the top part of the button
         void update();

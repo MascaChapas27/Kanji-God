@@ -22,6 +22,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
+					<Add option="-std=c++14" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -41,6 +42,13 @@
 		</Linker>
 		<Unit filename="Button.cpp" />
 		<Unit filename="Button.hpp" />
+		<Unit filename="Enums.hpp" />
+		<Unit filename="MainWindow.cpp" />
+		<Unit filename="MainWindow.hpp" />
+		<Unit filename="ResourceHolder.hpp" />
+		<Unit filename="ResourceHolder.tpp" />
+		<Unit filename="Sign.cpp" />
+		<Unit filename="Sign.hpp" />
 		<Unit filename="Utilities.cpp" />
 		<Unit filename="Utilities.hpp" />
 		<Unit filename="main.cpp" />
