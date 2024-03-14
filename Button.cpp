@@ -1,10 +1,15 @@
 #include "Button.hpp"
 #include "Utilities.hpp"
+#include "ResourceHolder.hpp"
+#include "Enums.hpp"
 #include <iostream>
 
 Button::Button(){
+    text.setFont(FontHolder::getFontInstance()->get(FontID::MoboFont));
     topOffset = MAX_BUTTON_TOP_OFFSET;
     pressed = false;
+    pressedButtonAction = [](){};
+    releasedButtonAction = [](){};
 }
 
 void Button::setBottomTexture(sf::Texture &texture)
@@ -30,15 +35,16 @@ void Button::setPosition(sf::Vector2f position)
     this->setPosition(position.x,position.y);
 }
 
+void Button::setPressedButtonAction(std::function<void()> pressedButtonAction){
+    this->pressedButtonAction = pressedButtonAction;
+}
+
+void Button::setReleasedButtonAction(std::function<void()> releasedButtonAction){
+    this->releasedButtonAction = releasedButtonAction;
+}
+
 void Button::setText(sf::String textString)
 {
-    if(!font.loadFromFile("fonts/MOBO-Bold.otf"))
-    {
-        exit(EXIT_FAILURE);
-    }
-
-    text.setFont(font);
-
     text.setString(textString);
     text.setCharacterSize(INITIAL_FONT_SIZE);
 
@@ -80,6 +86,7 @@ void Button::notify(sf::Event &event)
             topSprite.setPosition(bottomSprite.getPosition());
             topOffset = MIN_BUTTON_TOP_OFFSET;
             pressed = true;
+            pressedButtonAction();
         }
     } else if (pressed && event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left){
 
@@ -90,6 +97,7 @@ void Button::notify(sf::Event &event)
         }
 
         pressed = false;
+        releasedButtonAction();
     }
 }
 

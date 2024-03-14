@@ -2,6 +2,7 @@
 #define __BUTTON_HPP__
 
 #include <SFML/Graphics.hpp>
+#include <functional>
 
 /*
     This class defines a button formed by a top part and a bottom
@@ -29,7 +30,13 @@ class Button : public sf::Drawable{
 
         // Text to be displayed on the button
         sf::Text text;
-    
+
+        // Action to be performed when the button is pressed
+        std::function<void()> pressedButtonAction;
+
+        // Action to be performed when the button is released
+        std::function<void()> releasedButtonAction;
+
     public:
         Button();
 
@@ -43,6 +50,12 @@ class Button : public sf::Drawable{
         // follow it and position itself some pixels above depending on the offset
         void setPosition(double x, double y);
         void setPosition(sf::Vector2f position);
+        
+        // Sets the action to be performed when the button is pressed
+        void setPressedButtonAction(std::function<void()> pressedButtonAction);
+
+        // Sets the action to be performed when the button is released
+        void setReleasedButtonAction(std::function<void()> releasedButtonAction);
 
         // Sets the text to be displayed on the button
         void setText(sf::String text);

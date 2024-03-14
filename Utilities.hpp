@@ -4,9 +4,20 @@
 #include <SFML/Graphics.hpp>
 
 /*
-    This file contains constants and other important stuff that needs to
+    This file contains constants and other important stuff that need to
     be global
 */
+
+// Size for the main window
+const int WINDOW_WIDTH = 800;
+const int WINDOW_HEIGHT = 600;
+
+// Title for the main window
+const std::string WINDOW_TITLE = "amai";
+
+// Position for the title
+const int TITLE_X = 30;
+const int TITLE_Y = 30;
 
 // Maximum offset for a button, used when the button is not being used
 // and just exists there

@@ -1,31 +1,51 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include "Button.hpp"
+#include "Sign.hpp"
 #include "Utilities.hpp"
+#include "ResourceHolder.hpp"
+#include "MainWindow.hpp"
 
 int main(){
-    sf::RenderWindow window(sf::VideoMode(400,300),"amai",sf::Style::Close);
-    window.setFramerateLimit(FPS);
 
+    // Load all fonts
+    FontHolder::getFontInstance()->loadAllFonts();
+
+    // Load all textures
+    TextureHolder::getTextureInstance()->loadAllTextures();
+
+    // Load all sounds
+    SoundHolder::getSoundInstance()->loadAllSounds();
+
+    MainWindow mainWindow;
+    
+    mainWindow.start();
+
+    /*
     sf::Texture bottomTexture;
     bottomTexture.loadFromFile("sprites/button_bottom.png");
 
     sf::Texture topTexture;
     topTexture.loadFromFile("sprites/button_top.png");
 
-    Button button1;
-    button1.setBottomTexture(bottomTexture);
-    button1.setTopTexture(topTexture);
-    button1.setPosition(125,150);
-    button1.setText(L"あ");
-    button1.setTextColor(FONT_COLOR);
+    Button button;
+    button.setBottomTexture(bottomTexture);
+    button.setTopTexture(topTexture);
+    button.setPosition(125,150);
+    button.setText(L"あ");
+    button.setTextColor(FONT_COLOR);
+    button.setPressedButtonAction([&button](){
+        button.setText(L"amai");
+    });
+    button.setReleasedButtonAction([&button](){
+        button.setText(L"あ");
+    });
 
-    Button button2;
-    button2.setBottomTexture(bottomTexture);
-    button2.setTopTexture(topTexture);
-    button2.setPosition(275,150);
-    button2.setText(L"Me pican\nlos CoCo\naaaAY");
-    button2.setTextColor(FONT_COLOR);
+    Sign sign;
+    sign.setSignTexture(topTexture);
+    sign.setPosition(275,150);
+    sign.setText(L"Me pican\nlos CoCo\naaaAY");
+    sign.setTextColor(FONT_COLOR);
 
     while(window.isOpen()){
         
@@ -35,18 +55,16 @@ int main(){
                 window.close();
                 exit(EXIT_SUCCESS);
             } else {
-                button1.notify(event);
-                button2.notify(event);
+                button.notify(event);
             }
         }
 
-        button1.update();
-        button2.update();
+        button.update();
 
         window.clear();
-        window.draw(button1);
-        window.draw(button2);
+        window.draw(button);
+        window.draw(sign);
         window.display();
     }
-    
+    */
 }
