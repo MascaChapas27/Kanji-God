@@ -29,7 +29,7 @@ class Exercise {
         std::wstring question;
 
         // List of possible answers (only if it's a question)
-        std::list<std::wstring> answers
+        std::list<std::wstring> answers;
 
         // List of kunyomi and onyomi pronunciations (only if it's a kanji tutor)
         std::list<std::wstring> kunyomiPronunciations;

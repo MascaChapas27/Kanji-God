@@ -26,6 +26,10 @@ class MainWindow {
         // Current state of the program, determines what happens
         ProgramState programState;
 
+        // Grade shown in the kanji and word buttons
+        int kanjiGrade;
+        int wordGrade;
+
         // Buttons that show when you open the program
         // and it lets you choose the exercise
         std::list<Button> menuButtons;

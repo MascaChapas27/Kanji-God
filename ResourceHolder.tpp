@@ -67,8 +67,12 @@ void ResourceHolder<Resource,Identifier>::loadAllTextures()
     load(TextureID::Title,"sprites/title.png");
     load(TextureID::Background,"sprites/background.png");
 
-    load(TextureID::SmallMenuButtonBottom,"sprites/small_menu_button_bottom.png");
-    load(TextureID::SmallMenuButtonTop,"sprites/small_menu_button_top.png");
+    load(TextureID::BigMenuButtonBottom,"sprites/big_menu_button_bottom.png");
+    load(TextureID::BigMenuButtonTop,"sprites/big_menu_button_top.png");
+    load(TextureID::MenuArrowLeftBottom,"sprites/menu_arrow_left_bottom.png");
+    load(TextureID::MenuArrowLeftTop,"sprites/menu_arrow_left_top.png");
+    load(TextureID::MenuArrowRightBottom,"sprites/menu_arrow_right_bottom.png");
+    load(TextureID::MenuArrowRightTop,"sprites/menu_arrow_right_top.png");
 }
 
 template <class Resource, class Identifier>

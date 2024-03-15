@@ -3,71 +3,66 @@
 
 void MainWindow::start(){
 
+    kanjiGrade = 1;
+    wordGrade = 1;
+
     programState = ProgramState::TitleScreen;
+
+    TextureHolder * textureHolder = TextureHolder::getTextureInstance();
 
     window.create(sf::VideoMode(WINDOW_WIDTH,WINDOW_HEIGHT),WINDOW_TITLE,sf::Style::Close);
     window.setFramerateLimit(FPS);
 
-    background.setTexture(TextureHolder::getTextureInstance()->get(TextureID::Background));
+    background.setTexture(textureHolder->get(TextureID::Background));
     background.setScale(2.0, 2.0);
-    title.setTexture(TextureHolder::getTextureInstance()->get(TextureID::Title));
+    title.setTexture(textureHolder->get(TextureID::Title));
 
     title.setPosition(TITLE_X, TITLE_Y);
 
-    Button menuButtonKanjiGrade1;
-    menuButtonKanjiGrade1.setBottomTexture(TextureHolder::getTextureInstance()->get(TextureID::SmallMenuButtonBottom));
-    menuButtonKanjiGrade1.setTopTexture(TextureHolder::getTextureInstance()->get(TextureID::SmallMenuButtonTop));
-    menuButtonKanjiGrade1.setPosition(GRADE_1_KANJI_X,GRADE_1_KANJI_Y);
-    menuButtonKanjiGrade1.setText("Grade 1 Kanji");
-    menuButtonKanjiGrade1.setTextColor(TEXT_COLOR);
-    menuButtonKanjiGrade1.setButtonColor(GRADE_1_COLOR);
+    Button kanjiGradeSelector;
+    kanjiGradeSelector.setBottomTexture(textureHolder->get(TextureID::BigMenuButtonBottom));
+    kanjiGradeSelector.setTopTexture(textureHolder->get(TextureID::BigMenuButtonTop));
+    kanjiGradeSelector.setPosition(KANJI_MENU_BUTTON_X,KANJI_MENU_BUTTON_Y);
+    kanjiGradeSelector.setText(L"Kanji\nGrade 1");
+    kanjiGradeSelector.setButtonColor(BUTTON_COLOR_NORMAL);
 
-    Button menuButtonKanjiGrade2;
-    menuButtonKanjiGrade2.setBottomTexture(TextureHolder::getTextureInstance()->get(TextureID::SmallMenuButtonBottom));
-    menuButtonKanjiGrade2.setTopTexture(TextureHolder::getTextureInstance()->get(TextureID::SmallMenuButtonTop));
-    menuButtonKanjiGrade2.setPosition(GRADE_2_KANJI_X,GRADE_2_KANJI_Y);
-    menuButtonKanjiGrade2.setText("Grade 2 Kanji");
-    menuButtonKanjiGrade2.setTextColor(TEXT_COLOR);
-    menuButtonKanjiGrade2.setButtonColor(GRADE_2_COLOR);
+    Button leftArrowKanji;
+    leftArrowKanji.setBottomTexture(textureHolder->get(TextureID::MenuArrowLeftBottom));
+    leftArrowKanji.setTopTexture(textureHolder->get(TextureID::MenuArrowLeftTop));
+    leftArrowKanji.setPosition(KANJI_MENU_ARROW_LEFT_X,KANJI_MENU_ARROW_LEFT_Y);
+    leftArrowKanji.setButtonColor(BUTTON_COLOR_NORMAL);
 
-    Button menuButtonKanjiGrade3;
-    menuButtonKanjiGrade3.setBottomTexture(TextureHolder::getTextureInstance()->get(TextureID::SmallMenuButtonBottom));
-    menuButtonKanjiGrade3.setTopTexture(TextureHolder::getTextureInstance()->get(TextureID::SmallMenuButtonTop));
-    menuButtonKanjiGrade3.setPosition(GRADE_3_KANJI_X,GRADE_3_KANJI_Y);
-    menuButtonKanjiGrade3.setText("Grade 3 Kanji");
-    menuButtonKanjiGrade3.setTextColor(TEXT_COLOR);
-    menuButtonKanjiGrade3.setButtonColor(GRADE_3_COLOR);
+    Button rightArrowKanji;
+    rightArrowKanji.setBottomTexture(textureHolder->get(TextureID::MenuArrowRightBottom));
+    rightArrowKanji.setTopTexture(textureHolder->get(TextureID::MenuArrowRightTop));
+    rightArrowKanji.setPosition(KANJI_MENU_ARROW_RIGHT_X,KANJI_MENU_ARROW_RIGHT_Y);
+    rightArrowKanji.setButtonColor(BUTTON_COLOR_NORMAL);
 
-    Button menuButtonKanjiGrade4;
-    menuButtonKanjiGrade4.setBottomTexture(TextureHolder::getTextureInstance()->get(TextureID::SmallMenuButtonBottom));
-    menuButtonKanjiGrade4.setTopTexture(TextureHolder::getTextureInstance()->get(TextureID::SmallMenuButtonTop));
-    menuButtonKanjiGrade4.setPosition(GRADE_4_KANJI_X,GRADE_4_KANJI_Y);
-    menuButtonKanjiGrade4.setText("Grade 4 Kanji");
-    menuButtonKanjiGrade4.setTextColor(TEXT_COLOR);
-    menuButtonKanjiGrade4.setButtonColor(GRADE_4_COLOR);
+    Button wordGradeSelector;
+    wordGradeSelector.setBottomTexture(textureHolder->get(TextureID::BigMenuButtonBottom));
+    wordGradeSelector.setTopTexture(textureHolder->get(TextureID::BigMenuButtonTop));
+    wordGradeSelector.setPosition(WORD_MENU_BUTTON_X,WORD_MENU_BUTTON_Y);
+    wordGradeSelector.setText(L"Words\nGrade 1");
+    wordGradeSelector.setButtonColor(BUTTON_COLOR_NORMAL);
 
-    Button menuButtonKanjiGrade5;
-    menuButtonKanjiGrade5.setBottomTexture(TextureHolder::getTextureInstance()->get(TextureID::SmallMenuButtonBottom));
-    menuButtonKanjiGrade5.setTopTexture(TextureHolder::getTextureInstance()->get(TextureID::SmallMenuButtonTop));
-    menuButtonKanjiGrade5.setPosition(GRADE_5_KANJI_X,GRADE_5_KANJI_Y);
-    menuButtonKanjiGrade5.setText("Grade 5 Kanji");
-    menuButtonKanjiGrade5.setTextColor(TEXT_COLOR);
-    menuButtonKanjiGrade5.setButtonColor(GRADE_5_COLOR);
+    Button leftArrowWord;
+    leftArrowWord.setBottomTexture(textureHolder->get(TextureID::MenuArrowLeftBottom));
+    leftArrowWord.setTopTexture(textureHolder->get(TextureID::MenuArrowLeftTop));
+    leftArrowWord.setPosition(WORD_MENU_ARROW_LEFT_X,WORD_MENU_ARROW_LEFT_Y);
+    leftArrowWord.setButtonColor(BUTTON_COLOR_NORMAL);
 
-    Button menuButtonKanjiGrade6;
-    menuButtonKanjiGrade6.setBottomTexture(TextureHolder::getTextureInstance()->get(TextureID::SmallMenuButtonBottom));
-    menuButtonKanjiGrade6.setTopTexture(TextureHolder::getTextureInstance()->get(TextureID::SmallMenuButtonTop));
-    menuButtonKanjiGrade6.setPosition(GRADE_6_KANJI_X,GRADE_6_KANJI_Y);
-    menuButtonKanjiGrade6.setText("Grade 6 Kanji");
-    menuButtonKanjiGrade6.setTextColor(TEXT_COLOR);
-    menuButtonKanjiGrade6.setButtonColor(GRADE_6_COLOR);
+    Button rightArrowWord;
+    rightArrowWord.setBottomTexture(textureHolder->get(TextureID::MenuArrowRightBottom));
+    rightArrowWord.setTopTexture(textureHolder->get(TextureID::MenuArrowRightTop));
+    rightArrowWord.setPosition(WORD_MENU_ARROW_RIGHT_X,WORD_MENU_ARROW_RIGHT_Y);
+    rightArrowWord.setButtonColor(BUTTON_COLOR_NORMAL);
 
-    menuButtons.push_front(menuButtonKanjiGrade1);
-    menuButtons.push_front(menuButtonKanjiGrade2);
-    menuButtons.push_front(menuButtonKanjiGrade3);
-    menuButtons.push_front(menuButtonKanjiGrade4);
-    menuButtons.push_front(menuButtonKanjiGrade5);
-    menuButtons.push_front(menuButtonKanjiGrade6);
+    menuButtons.push_back(leftArrowKanji);
+    menuButtons.push_back(rightArrowKanji);
+    menuButtons.push_back(kanjiGradeSelector);
+    menuButtons.push_back(leftArrowWord);
+    menuButtons.push_back(rightArrowWord);
+    menuButtons.push_back(wordGradeSelector);
 
     while(window.isOpen()){
 

@@ -1,6 +1,8 @@
 #ifndef __CONTROLLER_HPP__
 #define __CONTROLLER_HPP__
 
+#include "Exercise.hpp"
+
 /*
     For a model-view-controller architecture, the controller
     is the central part. Whenever the view (buttons or the main window)

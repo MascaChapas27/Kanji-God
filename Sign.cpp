@@ -24,7 +24,8 @@ void Sign::setText(sf::String textString){
     text.setString(textString);
     text.setCharacterSize(INITIAL_FONT_SIZE);
 
-    while(text.getGlobalBounds().width > signSprite.getTextureRect().width*0.6){
+    while(text.getGlobalBounds().width > signSprite.getTextureRect().width*TEXT_IN_BUTTON_MAX_RATIO ||
+          text.getGlobalBounds().height > signSprite.getTextureRect().height*TEXT_IN_BUTTON_MAX_RATIO){
         text.setCharacterSize(text.getCharacterSize()-1);
     }
 

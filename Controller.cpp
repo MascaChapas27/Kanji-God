@@ -1,7 +1,9 @@
 #include "Controller.hpp"
 
-static Controller * Controller::getInstance(){
-    if(this->controller == nullptr) controller = new Controller;
+Controller * Controller::controller = nullptr;
+
+Controller * Controller::getInstance(){
+    if(controller == nullptr) controller = new Controller();
     return controller;
 }
 
@@ -11,7 +13,7 @@ void Controller::setGradeAndMode(int selectedGrade, bool kanjiMode){
 }
 
 void Controller::setGodMode(bool godMode){
-    this->godMode == godMode;
+    this->godMode = godMode;
 }
 
 // Returns exercise

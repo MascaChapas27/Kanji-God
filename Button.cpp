@@ -53,6 +53,8 @@ void Button::setText(sf::String textString)
         text.setCharacterSize(text.getCharacterSize()-1);
     }
 
+    std::cout << "Size for " << textString.toAnsiString() << ": " << text.getCharacterSize() << std::endl;
+
     sf::Vector2f center(text.getGlobalBounds().width / 2.0, text.getGlobalBounds().height / 2.0);
     sf::Vector2f localBounds(center.x + text.getLocalBounds().left, center.y + text.getLocalBounds().top);
     text.setOrigin(localBounds);

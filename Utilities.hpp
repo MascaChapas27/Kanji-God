@@ -49,62 +49,31 @@ const double TEXT_IN_BUTTON_MAX_RATIO = 0.8;
 // Color for the font used in buttons and signs
 const sf::Color TEXT_COLOR = sf::Color(200,200,200);
 
-// Color for the grade 1 buttons
-const sf::Color GRADE_1_COLOR = sf::Color(80,80,80);
-
-// Color for the grade 2 buttons
-const sf::Color GRADE_2_COLOR = sf::Color(75,75,75);
-
-// Color for the grade 3 buttons
-const sf::Color GRADE_3_COLOR = sf::Color(70,70,70);
-
-// Color for the grade 4 buttons
-const sf::Color GRADE_4_COLOR = sf::Color(65,65,65);
-
-// Color for the grade 5 buttons
-const sf::Color GRADE_5_COLOR = sf::Color(60,60,60);
-
-// Color for the grade 6 buttons
-const sf::Color GRADE_6_COLOR = sf::Color(55,55,55);
+// Base color for the buttons
+const sf::Color BUTTON_COLOR_NORMAL = sf::Color(150,150,150);
 
 // In the title screen, distance between buttons vertically
 const int TITLE_BUTTONS_VERTICAL_DISTANCE = 60;
 
-// Position for the grade 1 buttons
-const int GRADE_1_KANJI_X = 150;
-const int GRADE_1_KANJI_Y = 260;
-const int GRADE_1_WORD_X = 300;
-const int GRADE_1_WORD_Y = GRADE_1_KANJI_Y;
+// Position of the kanji button in the main menu
+const int KANJI_MENU_BUTTON_X = WINDOW_WIDTH/4;
+const int KANJI_MENU_BUTTON_Y = 400;
 
-// Position for the grade 2 buttons
-const int GRADE_2_KANJI_X = GRADE_1_KANJI_X;
-const int GRADE_2_KANJI_Y = GRADE_1_KANJI_Y + TITLE_BUTTONS_VERTICAL_DISTANCE;
-const int GRADE_2_WORD_X = GRADE_1_WORD_X;
-const int GRADE_2_WORD_Y = GRADE_2_KANJI_Y;
+// Position of the word button in the main menu
+const int WORD_MENU_BUTTON_X = WINDOW_WIDTH/2;
+const int WORD_MENU_BUTTON_Y = KANJI_MENU_BUTTON_Y;
 
-// Position for the grade 3 buttons
-const int GRADE_3_KANJI_X = GRADE_1_KANJI_X;
-const int GRADE_3_KANJI_Y = GRADE_2_KANJI_Y + TITLE_BUTTONS_VERTICAL_DISTANCE;
-const int GRADE_3_WORD_X = GRADE_1_WORD_X;
-const int GRADE_3_WORD_Y = GRADE_1_KANJI_Y;
+// Position of the arrows for the kanji button in the main menu
+const int KANJI_MENU_ARROW_LEFT_X = KANJI_MENU_BUTTON_X - 50;
+const int KANJI_MENU_ARROW_LEFT_Y = KANJI_MENU_BUTTON_Y + 120;
+const int KANJI_MENU_ARROW_RIGHT_X = KANJI_MENU_BUTTON_X + 50;
+const int KANJI_MENU_ARROW_RIGHT_Y = KANJI_MENU_ARROW_LEFT_Y;
 
-// Position for the grade 4 buttons
-const int GRADE_4_KANJI_X = GRADE_1_KANJI_X;
-const int GRADE_4_KANJI_Y = GRADE_3_KANJI_Y + TITLE_BUTTONS_VERTICAL_DISTANCE;
-const int GRADE_4_WORD_X = GRADE_1_WORD_X;
-const int GRADE_4_WORD_Y = GRADE_1_KANJI_Y;
-
-// Position for the grade 5 buttons
-const int GRADE_5_KANJI_X = GRADE_1_KANJI_X;
-const int GRADE_5_KANJI_Y = GRADE_4_KANJI_Y + TITLE_BUTTONS_VERTICAL_DISTANCE;
-const int GRADE_5_WORD_X = GRADE_1_WORD_X;
-const int GRADE_5_WORD_Y = GRADE_1_KANJI_Y;
-
-// Position for the grade 6 buttons
-const int GRADE_6_KANJI_X = GRADE_1_KANJI_X;
-const int GRADE_6_KANJI_Y = GRADE_5_KANJI_Y + TITLE_BUTTONS_VERTICAL_DISTANCE;
-const int GRADE_6_WORD_X = GRADE_1_WORD_X;
-const int GRADE_6_WORD_Y = GRADE_1_KANJI_Y;
+// Position of the arrows for the word button in the main menu
+const int WORD_MENU_ARROW_LEFT_X = WORD_MENU_BUTTON_X - 50;
+const int WORD_MENU_ARROW_LEFT_Y = KANJI_MENU_ARROW_LEFT_Y;
+const int WORD_MENU_ARROW_RIGHT_X = WORD_MENU_BUTTON_X + 50;
+const int WORD_MENU_ARROW_RIGHT_Y = KANJI_MENU_ARROW_LEFT_Y;
 
 namespace util {
     // Calculates whether a point is in a rectangle
