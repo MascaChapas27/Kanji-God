@@ -32,15 +32,15 @@ class MainWindow {
 
         // Buttons that show when you open the program
         // and it lets you choose the exercise
-        std::list<Button> menuButtons;
+        std::list<Button*> menuButtons;
 
         // Buttons that let you answer when the answer is short
         // (kunyomi and onyomi for one kanji)
-        std::list<Button> shortExerciseButtons;
+        std::list<Button*> shortExerciseButtons;
 
         // Buttons that let you answer when the answer is long
         // (meaning for kanjis and words and pronunciation for words)
-        std::list<Button> longExerciseButtons;
+        std::list<Button*> longExerciseButtons;
 
         // Progress for the current kanji
         // ProgressSign progressKanji;
