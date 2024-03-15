@@ -1,4 +1,6 @@
 #include "Controller.hpp"
+#include "SFML/System.hpp"
+#include <iostream>
 
 Controller * Controller::controller = nullptr;
 
@@ -21,8 +23,30 @@ Exercise Controller::getExercise(){
 
     Exercise exercise;
 
-    exercise.setExerciseType(ProgramState::KanjiKun);
-    exercise.setQuestion(rand()%2 ? L"音楽" : L"寿");
+    if(kanjiMode){
+        exercise.setExerciseType(ProgramState::KanjiKun);
+        exercise.setQuestion(L"音楽");
+
+        std::list<std::wstring> answers;
+
+        answers.push_back(L"あ");
+        answers.push_back(L"おのおの");
+        answers.push_back(L"しらべ");
+        answers.push_back(L"くすり");
+        answers.push_back(L"おとおと");
+        answers.push_back(L"みずうみ");
+        answers.push_back(L"つる");
+        answers.push_back(L"おと");
+        answers.push_back(L"ね");
+
+        exercise.setAnswers(answers);
+
+        exercise.setHelp(L"Choose the correct\nkunyomi readings for\nthe kanji shown");
+    }
 
     return exercise;
+}
+
+bool Controller::checkAnswer(std::wstring answer){
+    return answer == L"おと" || answer == L"ね";
 }

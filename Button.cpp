@@ -61,6 +61,10 @@ void Button::setText(sf::String textString, bool keepSize)
     text.setPosition(topSprite.getPosition());
 }
 
+std::wstring Button::getText(){
+    return text.getString().toWideString();
+}
+
 void Button::setTextColor(sf::Color textColor)
 {
     text.setFillColor(textColor);

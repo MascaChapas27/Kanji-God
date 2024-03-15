@@ -60,6 +60,9 @@ class Button : public sf::Drawable{
         // Sets the text to be displayed on the button
         void setText(sf::String text, bool keepSize = false);
 
+        // Returns the text
+        std::wstring getText();
+
         // Sets the color for the text
         void setTextColor(sf::Color textColor);
 

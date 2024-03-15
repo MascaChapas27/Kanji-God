@@ -52,6 +52,12 @@ const sf::Color TEXT_COLOR = sf::Color(200,200,200);
 // Base color for the buttons
 const sf::Color BUTTON_COLOR_NORMAL = sf::Color(150,150,150);
 
+// Color for correct answer
+const sf::Color BUTTON_COLOR_CORRECT = sf::Color(0,150,0);
+
+// Color for incorrect answer
+const sf::Color BUTTON_COLOR_INCORRECT = sf::Color(150,0,0);
+
 // In the title screen, distance between buttons vertically
 const int TITLE_BUTTONS_VERTICAL_DISTANCE = 60;
 
@@ -78,6 +84,10 @@ const int WORD_MENU_ARROW_RIGHT_Y = KANJI_MENU_ARROW_LEFT_Y;
 // Position for the sign that has the kanji/word that is currently being asked/taught
 const int KANJI_WORD_SIGN_X = 3*WINDOW_WIDTH/4;
 const int KANJI_WORD_SIGN_Y = WINDOW_HEIGHT/2;
+
+// Position for the short buttons used when asking for kunyomi and onyomi for a single kanji
+const int SHORT_EXERCISE_BUTTON_X[9] = {100,200,300,100,200,300,100,200,300};
+const int SHORT_EXERCISE_BUTTON_Y[9] = {100,100,100,200,200,200,300,300,300};
 
 namespace util {
     // Calculates whether a point is in a rectangle

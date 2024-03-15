@@ -37,7 +37,7 @@ void MainWindow::start(){
     kanjiGradeSelector.setBottomTexture(textureHolder->get(TextureID::BigMenuButtonBottom));
     kanjiGradeSelector.setTopTexture(textureHolder->get(TextureID::BigMenuButtonTop));
     kanjiGradeSelector.setPosition(KANJI_MENU_BUTTON_X,KANJI_MENU_BUTTON_Y);
-    kanjiGradeSelector.setText("Kanji\nGrade 1");
+    kanjiGradeSelector.setText(L"Kanji\nGrade 1");
     kanjiGradeSelector.setButtonColor(BUTTON_COLOR_NORMAL);
 
     Button leftArrowKanji;
@@ -98,6 +98,25 @@ void MainWindow::start(){
     menuButtons.push_back(&rightArrowWord);
     menuButtons.push_back(&wordGradeSelector);
 
+    // Short answer buttons
+    Button shortAnswerButtons[9];
+    
+    for(int i=0;i<9;i++){
+        shortAnswerButtons[i].setBottomTexture(textureHolder->get(TextureID::ShortExerciseButtonBottom));
+        shortAnswerButtons[i].setBottomTexture(textureHolder->get(TextureID::ShortExerciseButtonTop));
+        shortAnswerButtons[i].setTextColor(TEXT_COLOR);
+        shortAnswerButtons[i].setButtonColor(BUTTON_COLOR_NORMAL);
+        shortAnswerButtons[i].setPosition(SHORT_EXERCISE_BUTTON_X[i],SHORT_EXERCISE_BUTTON_Y[i]);
+        shortAnswerButtons[i].setPressedButtonAction([&shortAnswerButtons,i](){
+            if(Controller::getInstance()->checkAnswer(shortAnswerButtons[i].getText())){
+                shortAnswerButtons[i].setButtonColor(BUTTON_COLOR_CORRECT);
+            } else {
+                shortAnswerButtons[i].setButtonColor(BUTTON_COLOR_INCORRECT);
+            }
+        });
+        shortExerciseButtons.push_back(shortAnswerButtons[i]);
+    }
+
     // Sign for the kanji/word that is being asked/taught
     kanjiWordSign.setSignTexture(textureHolder->get(TextureID::BigMenuButtonTop));
     kanjiWordSign.setPosition(KANJI_WORD_SIGN_X, KANJI_WORD_SIGN_Y);
@@ -106,16 +125,37 @@ void MainWindow::start(){
     
     // Function used to get an exercise (can be a tutorial for a new kanji/word)
     getExercise = [this](){
+        std::cerr << "Getting" << std::endl;
         Exercise exercise = Controller::getInstance()->getExercise();
         
         this->programState = exercise.getExerciseType();
 
         switch(exercise.getExerciseType()){
         case ProgramState::KanjiKun:
+        case ProgramState::KanjiOn:
             kanjiWordSign.setText(exercise.getQuestion());
+            std::list<std::wstring> answers = exercise.getAnswers();
+            std::list<std::wstring>::iterator iterAns = answers.begin();
+            std::list<Button>::iterator iterBut = shortExerciseButtons.begin();
+
+            while(iterBut != shortExerciseButtons.end() && iterAns != answers.end()){
+                iterBut->setText(*iterAns);
+
+                iterBut++;
+                iterAns++;
+            }
+
             break;
         }
     };
+
+    kanjiGradeSelector.setPressedButtonAction([this](){
+        Controller::getInstance()->setGradeAndMode(kanjiGrade,true);
+    });
+
+    wordGradeSelector.setPressedButtonAction([this](){
+        Controller::getInstance()->setGradeAndMode(wordGrade,false);
+    });
 
     kanjiGradeSelector.setReleasedButtonAction(getExercise);
     wordGradeSelector.setReleasedButtonAction(getExercise);
@@ -134,6 +174,7 @@ void MainWindow::start(){
                     for(Button * button : menuButtons) button->notify(event);
                     break;
                 case ProgramState::KanjiKun:
+                    for(Button &button : shortExerciseButtons) button.notify(event);
                     break;
                 }
             }
@@ -144,6 +185,8 @@ void MainWindow::start(){
         case ProgramState::TitleScreen:
             for(Button * button : menuButtons) button->update();
             break;
+        case ProgramState::KanjiKun:
+            for(Button &button : shortExerciseButtons) button.update();
         }
 
         // Drawing phase
@@ -158,6 +201,7 @@ void MainWindow::start(){
             break;
         case ProgramState::KanjiKun:
             window.draw(kanjiWordSign);
+            for(Button &button : shortExerciseButtons) window.draw(button);
             break;
         }
 

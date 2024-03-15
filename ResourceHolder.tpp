@@ -73,6 +73,9 @@ void ResourceHolder<Resource,Identifier>::loadAllTextures()
     load(TextureID::MenuArrowLeftTop,"sprites/menu_arrow_left_top.png");
     load(TextureID::MenuArrowRightBottom,"sprites/menu_arrow_right_bottom.png");
     load(TextureID::MenuArrowRightTop,"sprites/menu_arrow_right_top.png");
+
+    load(TextureID::ShortExerciseButtonBottom,"sprites/short_exercise_button_bottom.png");
+    load(TextureID::ShortExerciseButtonTop,"sprites/short_exercise_button_top.png");
 }
 
 template <class Resource, class Identifier>

@@ -8,7 +8,9 @@
 // Type of texture for the sprites
 enum class TextureID{
     Title, Background,
-    MenuArrowLeftBottom, MenuArrowLeftTop, MenuArrowRightBottom, MenuArrowRightTop, BigMenuButtonBottom, BigMenuButtonTop
+    MenuArrowLeftBottom, MenuArrowLeftTop, MenuArrowRightBottom, MenuArrowRightTop, BigMenuButtonBottom, BigMenuButtonTop,
+    ShortExerciseButtonBottom, ShortExerciseButtonTop,
+
 };
 
 // Type of font for the text

@@ -29,6 +29,9 @@ class Controller {
         // word mode (ignored if godMode is true)
         bool kanjiMode;
 
+        // Current exercise
+        Exercise currentExercise;
+
     public:
         // NEVER CLONE A SINGLETON
         Controller(Controller &other) = delete;
@@ -47,6 +50,9 @@ class Controller {
 
         // Returns exercise
         Exercise getExercise();
+
+        // Checks if the answer is correct given the current kanji
+        bool checkAnswer(std::wstring answer);
 };
 
 #endif
