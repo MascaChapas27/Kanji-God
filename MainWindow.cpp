@@ -1,26 +1,38 @@
 #include "MainWindow.hpp"
 #include "ResourceHolder.hpp"
+#include "Controller.hpp"
 #include <string>
 #include <iostream>
 
-void MainWindow::start(){
+MainWindow::MainWindow(){
 
+    // Initial kanji and word grades are 1
     kanjiGrade = 1;
     wordGrade = 1;
 
-    programState = ProgramState::TitleScreen;
-
+    // Put it in a pointer so that it's easier to use
     TextureHolder * textureHolder = TextureHolder::getTextureInstance();
 
+    // Initial state is Title Screen
+    programState = ProgramState::TitleScreen;
+
+    // Create the window
     window.create(sf::VideoMode(WINDOW_WIDTH,WINDOW_HEIGHT),WINDOW_TITLE,sf::Style::Close);
     window.setFramerateLimit(FPS);
 
+    // Background and title for the title screen
     background.setTexture(textureHolder->get(TextureID::Background));
     background.setScale(2.0, 2.0);
     title.setTexture(textureHolder->get(TextureID::Title));
-
     title.setPosition(TITLE_X, TITLE_Y);
+}
 
+void MainWindow::start(){
+
+    // Put it in a pointer so that it's easier to use
+    TextureHolder * textureHolder = TextureHolder::getTextureInstance();
+
+    // Menu buttons
     Button kanjiGradeSelector;
     kanjiGradeSelector.setBottomTexture(textureHolder->get(TextureID::BigMenuButtonBottom));
     kanjiGradeSelector.setTopTexture(textureHolder->get(TextureID::BigMenuButtonTop));
@@ -36,7 +48,7 @@ void MainWindow::start(){
     leftArrowKanji.setPressedButtonAction([this, &kanjiGradeSelector](){
         kanjiGrade--;
         if(kanjiGrade == 0) kanjiGrade = 6;
-        kanjiGradeSelector.setText("Kanji\nGrade " + std::to_string(kanjiGrade));
+        kanjiGradeSelector.setText("Kanji\nGrade " + std::to_string(kanjiGrade),true);
     });
 
     Button rightArrowKanji;
@@ -47,7 +59,7 @@ void MainWindow::start(){
     rightArrowKanji.setPressedButtonAction([this, &kanjiGradeSelector](){
         kanjiGrade++;
         if(kanjiGrade == 7) kanjiGrade = 1;
-        kanjiGradeSelector.setText("Kanji\nGrade " + std::to_string(kanjiGrade));
+        kanjiGradeSelector.setText("Kanji\nGrade " + std::to_string(kanjiGrade), true);
     });
 
     Button wordGradeSelector;
@@ -65,7 +77,7 @@ void MainWindow::start(){
     leftArrowWord.setPressedButtonAction([this, &wordGradeSelector](){
         wordGrade--;
         if(wordGrade == 0) wordGrade = 6;
-        wordGradeSelector.setText("Words\nGrade " + std::to_string(wordGrade));
+        wordGradeSelector.setText("Words\nGrade " + std::to_string(wordGrade), true);
     });
 
     Button rightArrowWord;
@@ -76,7 +88,7 @@ void MainWindow::start(){
     rightArrowWord.setPressedButtonAction([this, &wordGradeSelector](){
         wordGrade++;
         if(wordGrade == 7) wordGrade = 1;
-        wordGradeSelector.setText("Words\nGrade " + std::to_string(wordGrade));
+        wordGradeSelector.setText("Words\nGrade " + std::to_string(wordGrade), true);
     });
 
     menuButtons.push_back(&leftArrowKanji);
@@ -85,6 +97,28 @@ void MainWindow::start(){
     menuButtons.push_back(&leftArrowWord);
     menuButtons.push_back(&rightArrowWord);
     menuButtons.push_back(&wordGradeSelector);
+
+    // Sign for the kanji/word that is being asked/taught
+    kanjiWordSign.setSignTexture(textureHolder->get(TextureID::BigMenuButtonTop));
+    kanjiWordSign.setPosition(KANJI_WORD_SIGN_X, KANJI_WORD_SIGN_Y);
+    kanjiWordSign.setTextColor(TEXT_COLOR);
+    kanjiWordSign.setSignColor(BUTTON_COLOR_NORMAL);
+    
+    // Function used to get an exercise (can be a tutorial for a new kanji/word)
+    getExercise = [this](){
+        Exercise exercise = Controller::getInstance()->getExercise();
+        
+        this->programState = exercise.getExerciseType();
+
+        switch(exercise.getExerciseType()){
+        case ProgramState::KanjiKun:
+            kanjiWordSign.setText(exercise.getQuestion());
+            break;
+        }
+    };
+
+    kanjiGradeSelector.setReleasedButtonAction(getExercise);
+    wordGradeSelector.setReleasedButtonAction(getExercise);
 
     while(window.isOpen()){
 
@@ -98,6 +132,8 @@ void MainWindow::start(){
                 switch(programState){
                 case ProgramState::TitleScreen:
                     for(Button * button : menuButtons) button->notify(event);
+                    break;
+                case ProgramState::KanjiKun:
                     break;
                 }
             }
@@ -119,6 +155,9 @@ void MainWindow::start(){
         case ProgramState::TitleScreen:
             window.draw(title);
             for(Button * button : menuButtons) window.draw(*button);
+            break;
+        case ProgramState::KanjiKun:
+            window.draw(kanjiWordSign);
             break;
         }
 

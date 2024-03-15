@@ -20,14 +20,18 @@ void Sign::setPosition(sf::Vector2f position){
     this->setPosition(position.x, position.y);
 }
 
-void Sign::setText(sf::String textString){
+void Sign::setText(sf::String textString, bool keepSize){
     text.setString(textString);
-    text.setCharacterSize(INITIAL_FONT_SIZE);
 
-    while(text.getGlobalBounds().width > signSprite.getTextureRect().width*TEXT_IN_BUTTON_MAX_RATIO ||
-          text.getGlobalBounds().height > signSprite.getTextureRect().height*TEXT_IN_BUTTON_MAX_RATIO){
-        text.setCharacterSize(text.getCharacterSize()-1);
+    if(!keepSize){
+        text.setCharacterSize(INITIAL_FONT_SIZE);
+
+        while(text.getGlobalBounds().width > signSprite.getTextureRect().width*TEXT_IN_BUTTON_MAX_RATIO ||
+            text.getGlobalBounds().height > signSprite.getTextureRect().height*TEXT_IN_BUTTON_MAX_RATIO){
+            text.setCharacterSize(text.getCharacterSize()-1);
+        }
     }
+
 
     sf::Vector2f center(text.getGlobalBounds().width / 2.0, text.getGlobalBounds().height / 2.0);
     sf::Vector2f localBounds(center.x + text.getLocalBounds().left, center.y + text.getLocalBounds().top);
@@ -37,6 +41,10 @@ void Sign::setText(sf::String textString){
 
 void Sign::setTextColor(sf::Color textColor){
     text.setFillColor(textColor);
+}
+
+void Sign::setSignColor(sf::Color color){
+    signSprite.setColor(color);
 }
 
 void Sign::draw(sf::RenderTarget& target, sf::RenderStates states) const{

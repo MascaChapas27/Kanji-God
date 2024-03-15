@@ -3,6 +3,7 @@
 
 #include "Button.hpp"
 #include "Enums.hpp"
+#include "Sign.hpp"
 #include <SFML/Graphics.hpp>
 #include <list>
 
@@ -30,6 +31,9 @@ class MainWindow {
         int kanjiGrade;
         int wordGrade;
 
+        // Function that gets an exercise from the Controller and parses it and stuff
+        std::function<void()> getExercise;
+
         // Buttons that show when you open the program
         // and it lets you choose the exercise
         std::list<Button*> menuButtons;
@@ -49,25 +53,27 @@ class MainWindow {
         // ProgressSign progressWord;
 
         // Sign for the current kanji/word
-        // Sign kanjiWordSign;
+        Sign kanjiWordSign;
 
         // Sign for the instructions of the current exercise
-        // Sign instructions;
+        Sign instructions;
 
         // Sign for the meaning of the current kanji/word for
         // the tutorial
-        // Sign tutorialMeaning;
+        Sign tutorialMeaning;
 
         // Sign for the pronunciation of the current word tutorial
-        // Sign tutorialPronunciation;
+        Sign tutorialPronunciation;
 
         // Signs for the kunyomi of the current kanji tutorial
-        // std::list<Sign> tutorialKunyomis;
+        std::list<Sign> tutorialKunyomis;
 
         // Signs for the onyomi of the current kanji tutorial
-        // std::list<Sign> tutorialOnyomis;
+        std::list<Sign> tutorialOnyomis;
 
     public:
+
+        MainWindow();
 
         // Makes the window start working
         void start();

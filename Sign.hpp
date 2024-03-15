@@ -29,10 +29,13 @@ class Sign : public sf::Drawable{
         void setPosition(sf::Vector2f position);
 
         // Sets the text to be displayed on the sign
-        void setText(sf::String textString);
+        void setText(sf::String textString, bool keepSize = false);
 
         // Sets the color for the text
         void setTextColor(sf::Color textColor);
+
+        // Sets the color for the sign
+        void setSignColor(sf::Color color);
 
         // Draws the button
         virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;

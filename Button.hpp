@@ -58,7 +58,7 @@ class Button : public sf::Drawable{
         void setReleasedButtonAction(std::function<void()> releasedButtonAction);
 
         // Sets the text to be displayed on the button
-        void setText(sf::String text);
+        void setText(sf::String text, bool keepSize = false);
 
         // Sets the color for the text
         void setTextColor(sf::Color textColor);

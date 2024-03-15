@@ -75,6 +75,10 @@ const int WORD_MENU_ARROW_LEFT_Y = KANJI_MENU_ARROW_LEFT_Y;
 const int WORD_MENU_ARROW_RIGHT_X = WORD_MENU_BUTTON_X + 50;
 const int WORD_MENU_ARROW_RIGHT_Y = KANJI_MENU_ARROW_LEFT_Y;
 
+// Position for the sign that has the kanji/word that is currently being asked/taught
+const int KANJI_WORD_SIGN_X = 3*WINDOW_WIDTH/4;
+const int KANJI_WORD_SIGN_Y = WINDOW_HEIGHT/2;
+
 namespace util {
     // Calculates whether a point is in a rectangle
     bool isInRectangle(int x, int y, int rectX, int rectY, int rectWidth, int rectHeight);

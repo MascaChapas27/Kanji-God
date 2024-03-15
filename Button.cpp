@@ -43,17 +43,17 @@ void Button::setReleasedButtonAction(std::function<void()> releasedButtonAction)
     this->releasedButtonAction = releasedButtonAction;
 }
 
-void Button::setText(sf::String textString)
+void Button::setText(sf::String textString, bool keepSize)
 {
     text.setString(textString);
-    text.setCharacterSize(INITIAL_FONT_SIZE);
+    if(!keepSize){
+        text.setCharacterSize(INITIAL_FONT_SIZE);
 
-    while(text.getGlobalBounds().width > topSprite.getTextureRect().width*TEXT_IN_BUTTON_MAX_RATIO ||
-          text.getGlobalBounds().height > topSprite.getTextureRect().height*TEXT_IN_BUTTON_MAX_RATIO){
-        text.setCharacterSize(text.getCharacterSize()-1);
+        while(text.getGlobalBounds().width > topSprite.getTextureRect().width*TEXT_IN_BUTTON_MAX_RATIO ||
+            text.getGlobalBounds().height > topSprite.getTextureRect().height*TEXT_IN_BUTTON_MAX_RATIO){
+            text.setCharacterSize(text.getCharacterSize()-1);
+        }
     }
-
-    std::cout << "Size for " << textString.toAnsiString() << ": " << text.getCharacterSize() << std::endl;
 
     sf::Vector2f center(text.getGlobalBounds().width / 2.0, text.getGlobalBounds().height / 2.0);
     sf::Vector2f localBounds(center.x + text.getLocalBounds().left, center.y + text.getLocalBounds().top);

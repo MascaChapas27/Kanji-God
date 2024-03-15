@@ -21,7 +21,8 @@ Exercise Controller::getExercise(){
 
     Exercise exercise;
 
-    // stuff
+    exercise.setExerciseType(ProgramState::KanjiKun);
+    exercise.setQuestion(rand()%2 ? L"音楽" : L"寿");
 
     return exercise;
 }
