@@ -32,10 +32,10 @@ class Button : public sf::Drawable{
         sf::Text text;
 
         // Action to be performed when the button is pressed
-        std::function<void()> pressedButtonAction;
+        std::function<void(Button&)> pressedButtonAction;
 
         // Action to be performed when the button is released
-        std::function<void()> releasedButtonAction;
+        std::function<void(Button&)> releasedButtonAction;
 
     public:
         Button();
@@ -52,10 +52,10 @@ class Button : public sf::Drawable{
         void setPosition(sf::Vector2f position);
 
         // Sets the action to be performed when the button is pressed
-        void setPressedButtonAction(std::function<void()> pressedButtonAction);
+        void setPressedButtonAction(std::function<void(Button&)> pressedButtonAction);
 
         // Sets the action to be performed when the button is released
-        void setReleasedButtonAction(std::function<void()> releasedButtonAction);
+        void setReleasedButtonAction(std::function<void(Button&)> releasedButtonAction);
 
         // Sets the text to be displayed on the button
         void setText(sf::String text, bool keepSize = false);

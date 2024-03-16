@@ -2,6 +2,7 @@
 #define __CONTROLLER_HPP__
 
 #include "Exercise.hpp"
+#include <set>
 
 /*
     For a model-view-controller architecture, the controller
@@ -32,6 +33,9 @@ class Controller {
         // Current exercise
         Exercise currentExercise;
 
+        // Sets of answers that were sent and were correct
+        std::set<std::wstring> correctAnswers;
+
     public:
         // NEVER CLONE A SINGLETON
         Controller(Controller &other) = delete;
@@ -53,6 +57,9 @@ class Controller {
 
         // Checks if the answer is correct given the current kanji
         bool checkAnswer(std::wstring answer);
+
+        // True if all correct answers for the current exercise were selected
+        bool allAnswered();
 };
 
 #endif

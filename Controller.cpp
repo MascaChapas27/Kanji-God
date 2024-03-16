@@ -21,6 +21,8 @@ void Controller::setGodMode(bool godMode){
 // Returns exercise
 Exercise Controller::getExercise(){
 
+    correctAnswers.clear();
+
     Exercise exercise;
 
     if(kanjiMode){
@@ -48,5 +50,12 @@ Exercise Controller::getExercise(){
 }
 
 bool Controller::checkAnswer(std::wstring answer){
-    return answer == L"おと" || answer == L"ね";
+    bool correct = answer == L"おと" || answer == L"ね";
+    if(correct && !correctAnswers.count(answer))
+        correctAnswers.insert(answer);
+    return correct;
+}
+
+bool Controller::allAnswered(){
+    return correctAnswers.size() == 2;
 }

@@ -32,7 +32,7 @@ class MainWindow {
         int wordGrade;
 
         // Function that gets an exercise from the Controller and parses it and stuff
-        std::function<void()> getExercise;
+        std::function<void(Button&)> getExercise;
 
         // Buttons that show when you open the program
         // and it lets you choose the exercise

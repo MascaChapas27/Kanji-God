@@ -71,7 +71,7 @@ void Exercise::setQuestion(std::wstring question){
 }
 
 void Exercise::setAnswers(std::list<std::wstring> answers){
-    this->answers = answers;
+    this->answers = std::list<std::wstring>(answers);
 }
 
 void Exercise::setKunyomiPronunciations(std::list<std::wstring> kunyomiPronunciations){

@@ -38,6 +38,7 @@ void MainWindow::start(){
     kanjiGradeSelector.setTopTexture(textureHolder->get(TextureID::BigMenuButtonTop));
     kanjiGradeSelector.setPosition(KANJI_MENU_BUTTON_X,KANJI_MENU_BUTTON_Y);
     kanjiGradeSelector.setText(L"Kanji\nGrade 1");
+    kanjiGradeSelector.setTextColor(TEXT_COLOR);
     kanjiGradeSelector.setButtonColor(BUTTON_COLOR_NORMAL);
 
     Button leftArrowKanji;
@@ -45,7 +46,7 @@ void MainWindow::start(){
     leftArrowKanji.setTopTexture(textureHolder->get(TextureID::MenuArrowLeftTop));
     leftArrowKanji.setPosition(KANJI_MENU_ARROW_LEFT_X,KANJI_MENU_ARROW_LEFT_Y);
     leftArrowKanji.setButtonColor(BUTTON_COLOR_NORMAL);
-    leftArrowKanji.setPressedButtonAction([this, &kanjiGradeSelector](){
+    leftArrowKanji.setPressedButtonAction([this, &kanjiGradeSelector](Button &button){
         kanjiGrade--;
         if(kanjiGrade == 0) kanjiGrade = 6;
         kanjiGradeSelector.setText("Kanji\nGrade " + std::to_string(kanjiGrade),true);
@@ -56,7 +57,7 @@ void MainWindow::start(){
     rightArrowKanji.setTopTexture(textureHolder->get(TextureID::MenuArrowRightTop));
     rightArrowKanji.setPosition(KANJI_MENU_ARROW_RIGHT_X,KANJI_MENU_ARROW_RIGHT_Y);
     rightArrowKanji.setButtonColor(BUTTON_COLOR_NORMAL);
-    rightArrowKanji.setPressedButtonAction([this, &kanjiGradeSelector](){
+    rightArrowKanji.setPressedButtonAction([this, &kanjiGradeSelector](Button &button){
         kanjiGrade++;
         if(kanjiGrade == 7) kanjiGrade = 1;
         kanjiGradeSelector.setText("Kanji\nGrade " + std::to_string(kanjiGrade), true);
@@ -67,6 +68,7 @@ void MainWindow::start(){
     wordGradeSelector.setTopTexture(textureHolder->get(TextureID::BigMenuButtonTop));
     wordGradeSelector.setPosition(WORD_MENU_BUTTON_X,WORD_MENU_BUTTON_Y);
     wordGradeSelector.setText("Words\nGrade 1");
+    wordGradeSelector.setTextColor(TEXT_COLOR);
     wordGradeSelector.setButtonColor(BUTTON_COLOR_NORMAL);
 
     Button leftArrowWord;
@@ -74,7 +76,7 @@ void MainWindow::start(){
     leftArrowWord.setTopTexture(textureHolder->get(TextureID::MenuArrowLeftTop));
     leftArrowWord.setPosition(WORD_MENU_ARROW_LEFT_X,WORD_MENU_ARROW_LEFT_Y);
     leftArrowWord.setButtonColor(BUTTON_COLOR_NORMAL);
-    leftArrowWord.setPressedButtonAction([this, &wordGradeSelector](){
+    leftArrowWord.setPressedButtonAction([this, &wordGradeSelector](Button &button){
         wordGrade--;
         if(wordGrade == 0) wordGrade = 6;
         wordGradeSelector.setText("Words\nGrade " + std::to_string(wordGrade), true);
@@ -85,7 +87,7 @@ void MainWindow::start(){
     rightArrowWord.setTopTexture(textureHolder->get(TextureID::MenuArrowRightTop));
     rightArrowWord.setPosition(WORD_MENU_ARROW_RIGHT_X,WORD_MENU_ARROW_RIGHT_Y);
     rightArrowWord.setButtonColor(BUTTON_COLOR_NORMAL);
-    rightArrowWord.setPressedButtonAction([this, &wordGradeSelector](){
+    rightArrowWord.setPressedButtonAction([this, &wordGradeSelector](Button &button){
         wordGrade++;
         if(wordGrade == 7) wordGrade = 1;
         wordGradeSelector.setText("Words\nGrade " + std::to_string(wordGrade), true);
@@ -99,22 +101,28 @@ void MainWindow::start(){
     menuButtons.push_back(&wordGradeSelector);
 
     // Short answer buttons
-    Button shortAnswerButtons[9];
+    Button shortAnswerButton;
+    shortAnswerButton.setBottomTexture(textureHolder->get(TextureID::ShortExerciseButtonBottom));
+    shortAnswerButton.setTopTexture(textureHolder->get(TextureID::ShortExerciseButtonTop));
+    shortAnswerButton.setTextColor(TEXT_COLOR);
+    shortAnswerButton.setButtonColor(BUTTON_COLOR_NORMAL);
+    shortAnswerButton.setPressedButtonAction([](Button &thisButton){
+        if(Controller::getInstance()->checkAnswer(thisButton.getText())){
+            thisButton.setButtonColor(BUTTON_COLOR_CORRECT);
+        } else {
+            thisButton.setButtonColor(BUTTON_COLOR_INCORRECT);
+        }
+    });
+    shortAnswerButton.setReleasedButtonAction([this](Button &thisButton){
+        if(Controller::getInstance()->allAnswered()){
+            getExercise(thisButton);
+        }
+    });
     
     for(int i=0;i<9;i++){
-        shortAnswerButtons[i].setBottomTexture(textureHolder->get(TextureID::ShortExerciseButtonBottom));
-        shortAnswerButtons[i].setBottomTexture(textureHolder->get(TextureID::ShortExerciseButtonTop));
-        shortAnswerButtons[i].setTextColor(TEXT_COLOR);
-        shortAnswerButtons[i].setButtonColor(BUTTON_COLOR_NORMAL);
-        shortAnswerButtons[i].setPosition(SHORT_EXERCISE_BUTTON_X[i],SHORT_EXERCISE_BUTTON_Y[i]);
-        shortAnswerButtons[i].setPressedButtonAction([&shortAnswerButtons,i](){
-            if(Controller::getInstance()->checkAnswer(shortAnswerButtons[i].getText())){
-                shortAnswerButtons[i].setButtonColor(BUTTON_COLOR_CORRECT);
-            } else {
-                shortAnswerButtons[i].setButtonColor(BUTTON_COLOR_INCORRECT);
-            }
-        });
-        shortExerciseButtons.push_back(shortAnswerButtons[i]);
+        shortAnswerButton.setPosition(SHORT_EXERCISE_BUTTON_X[i],SHORT_EXERCISE_BUTTON_Y[i]);
+        
+        shortExerciseButtons.push_back(shortAnswerButton);
     }
 
     // Sign for the kanji/word that is being asked/taught
@@ -124,8 +132,7 @@ void MainWindow::start(){
     kanjiWordSign.setSignColor(BUTTON_COLOR_NORMAL);
     
     // Function used to get an exercise (can be a tutorial for a new kanji/word)
-    getExercise = [this](){
-        std::cerr << "Getting" << std::endl;
+    getExercise = [this](Button& button){
         Exercise exercise = Controller::getInstance()->getExercise();
         
         this->programState = exercise.getExerciseType();
@@ -137,23 +144,25 @@ void MainWindow::start(){
             std::list<std::wstring> answers = exercise.getAnswers();
             std::list<std::wstring>::iterator iterAns = answers.begin();
             std::list<Button>::iterator iterBut = shortExerciseButtons.begin();
-
+            
             while(iterBut != shortExerciseButtons.end() && iterAns != answers.end()){
                 iterBut->setText(*iterAns);
+                iterBut->setButtonColor(BUTTON_COLOR_NORMAL);
 
                 iterBut++;
                 iterAns++;
             }
+            
 
             break;
         }
     };
 
-    kanjiGradeSelector.setPressedButtonAction([this](){
+    kanjiGradeSelector.setPressedButtonAction([this](Button &button){
         Controller::getInstance()->setGradeAndMode(kanjiGrade,true);
     });
 
-    wordGradeSelector.setPressedButtonAction([this](){
+    wordGradeSelector.setPressedButtonAction([this](Button &button){
         Controller::getInstance()->setGradeAndMode(wordGrade,false);
     });
 
@@ -187,6 +196,7 @@ void MainWindow::start(){
             break;
         case ProgramState::KanjiKun:
             for(Button &button : shortExerciseButtons) button.update();
+            break;
         }
 
         // Drawing phase

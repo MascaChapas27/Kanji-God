@@ -5,9 +5,9 @@
 #include "Utilities.hpp"
 #include "ResourceHolder.hpp"
 #include "MainWindow.hpp"
+#include <iostream>
 
 int main(){
-
     // Load all fonts
     FontHolder::getFontInstance()->loadAllFonts();
 

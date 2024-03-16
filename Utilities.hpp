@@ -44,10 +44,10 @@ const int INITIAL_FONT_SIZE = 100;
 // the button should the text have. For example, 1.0 means that the text will fit so
 // that its bigger dimension (width or leight) is exactly the same as the button's
 // (maybe a bit less)
-const double TEXT_IN_BUTTON_MAX_RATIO = 0.8;
+const double TEXT_IN_BUTTON_MAX_RATIO = 0.7;
 
 // Color for the font used in buttons and signs
-const sf::Color TEXT_COLOR = sf::Color(200,200,200);
+const sf::Color TEXT_COLOR = sf::Color(255,255,255);
 
 // Base color for the buttons
 const sf::Color BUTTON_COLOR_NORMAL = sf::Color(150,150,150);
@@ -86,8 +86,12 @@ const int KANJI_WORD_SIGN_X = 3*WINDOW_WIDTH/4;
 const int KANJI_WORD_SIGN_Y = WINDOW_HEIGHT/2;
 
 // Position for the short buttons used when asking for kunyomi and onyomi for a single kanji
-const int SHORT_EXERCISE_BUTTON_X[9] = {100,200,300,100,200,300,100,200,300};
-const int SHORT_EXERCISE_BUTTON_Y[9] = {100,100,100,200,200,200,300,300,300};
+const int SHORT_EXERCISE_BUTTON_X[9] = {100,250,400,
+                                        100,250,400,
+                                        100,250,400};
+const int SHORT_EXERCISE_BUTTON_Y[9] = {WINDOW_HEIGHT/4,WINDOW_HEIGHT/4,WINDOW_HEIGHT/4,
+                                        WINDOW_HEIGHT/2,WINDOW_HEIGHT/2,WINDOW_HEIGHT/2,
+                                        3*WINDOW_HEIGHT/4,3*WINDOW_HEIGHT/4,3*WINDOW_HEIGHT/4};
 
 namespace util {
     // Calculates whether a point is in a rectangle

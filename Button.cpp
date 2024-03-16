@@ -8,8 +8,8 @@ Button::Button(){
     text.setFont(FontHolder::getFontInstance()->get(FontID::MoboFont));
     topOffset = MAX_BUTTON_TOP_OFFSET;
     pressed = false;
-    pressedButtonAction = [](){};
-    releasedButtonAction = [](){};
+    pressedButtonAction = [](Button &button){};
+    releasedButtonAction = [](Button &button){};
 }
 
 void Button::setBottomTexture(sf::Texture &texture)
@@ -35,11 +35,11 @@ void Button::setPosition(sf::Vector2f position)
     this->setPosition(position.x,position.y);
 }
 
-void Button::setPressedButtonAction(std::function<void()> pressedButtonAction){
+void Button::setPressedButtonAction(std::function<void(Button&)> pressedButtonAction){
     this->pressedButtonAction = pressedButtonAction;
 }
 
-void Button::setReleasedButtonAction(std::function<void()> releasedButtonAction){
+void Button::setReleasedButtonAction(std::function<void(Button&)> releasedButtonAction){
     this->releasedButtonAction = releasedButtonAction;
 }
 
@@ -99,7 +99,7 @@ void Button::notify(sf::Event &event)
             topSprite.setPosition(bottomSprite.getPosition());
             topOffset = MIN_BUTTON_TOP_OFFSET;
             pressed = true;
-            pressedButtonAction();
+            pressedButtonAction(*this);
         }
     } else if (pressed && event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left){
 
@@ -110,7 +110,7 @@ void Button::notify(sf::Event &event)
         }
 
         pressed = false;
-        releasedButtonAction();
+        releasedButtonAction(*this);
     }
 }
 
