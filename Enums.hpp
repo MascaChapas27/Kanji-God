@@ -9,7 +9,7 @@
 enum class TextureID{
     Title, Background,
     MenuArrowLeftBottom, MenuArrowLeftTop, MenuArrowRightBottom, MenuArrowRightTop, BigMenuButtonBottom, BigMenuButtonTop,
-    ShortExerciseButtonBottom, ShortExerciseButtonTop,
+    ShortExerciseButtonBottom, ShortExerciseButtonTop, QuestionSign, InstructionsSign
 
 };
 

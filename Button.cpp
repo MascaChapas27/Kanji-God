@@ -22,6 +22,7 @@ void Button::setTopTexture(sf::Texture &texture)
 {
     topSprite.setTexture(texture);
     topSprite.setOrigin(bottomSprite.getTextureRect().width/2,bottomSprite.getTextureRect().height/2);
+    textButtonRatio = (topSprite.getTextureRect().width - BUTTON_TEXT_MARGIN) / topSprite.getTextureRect().width;
 }
 
 void Button::setPosition(double x, double y)
@@ -49,8 +50,8 @@ void Button::setText(sf::String textString, bool keepSize)
     if(!keepSize){
         text.setCharacterSize(INITIAL_FONT_SIZE);
 
-        while(text.getGlobalBounds().width > topSprite.getTextureRect().width*TEXT_IN_BUTTON_MAX_RATIO ||
-            text.getGlobalBounds().height > topSprite.getTextureRect().height*TEXT_IN_BUTTON_MAX_RATIO){
+        while(text.getGlobalBounds().width > topSprite.getTextureRect().width*textButtonRatio ||
+            text.getGlobalBounds().height > topSprite.getTextureRect().height*textButtonRatio){
             text.setCharacterSize(text.getCharacterSize()-1);
         }
     }

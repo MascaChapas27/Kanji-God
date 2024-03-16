@@ -40,11 +40,8 @@ const int FPS = 60;
 // Font size all fonts start at. It then gets smaller to fit in the button or label
 const int INITIAL_FONT_SIZE = 100;
 
-// When deciding if a font is too bug, what percentage of the length and width of
-// the button should the text have. For example, 1.0 means that the text will fit so
-// that its bigger dimension (width or leight) is exactly the same as the button's
-// (maybe a bit less)
-const double TEXT_IN_BUTTON_MAX_RATIO = 0.7;
+// Size in pixels of the margin that a text leaves in a button or sign
+const double BUTTON_TEXT_MARGIN = 40;
 
 // Color for the font used in buttons and signs
 const sf::Color TEXT_COLOR = sf::Color(255,255,255);
@@ -82,8 +79,16 @@ const int WORD_MENU_ARROW_RIGHT_X = WORD_MENU_BUTTON_X + 50;
 const int WORD_MENU_ARROW_RIGHT_Y = KANJI_MENU_ARROW_LEFT_Y;
 
 // Position for the sign that has the kanji/word that is currently being asked/taught
-const int KANJI_WORD_SIGN_X = 3*WINDOW_WIDTH/4;
+const int KANJI_WORD_SIGN_X = 8*WINDOW_WIDTH/10;
 const int KANJI_WORD_SIGN_Y = WINDOW_HEIGHT/2;
+
+// Position for the sign that shows the progress for learning a kanji/word
+const int PROGRESS_SIGN_X = KANJI_WORD_SIGN_X;
+const int PROGRESS_SIGN_Y = WINDOW_HEIGHT/6;
+
+// Position for the sign that shows the instructions for the current exercise
+const int INSTRUCTIONS_SIGN_X = KANJI_WORD_SIGN_X;
+const int INSTRUCTIONS_SIGN_Y = 5*WINDOW_HEIGHT/6;
 
 // Position for the short buttons used when asking for kunyomi and onyomi for a single kanji
 const int SHORT_EXERCISE_BUTTON_X[9] = {100,250,400,
@@ -96,6 +101,9 @@ const int SHORT_EXERCISE_BUTTON_Y[9] = {WINDOW_HEIGHT/4,WINDOW_HEIGHT/4,WINDOW_H
 namespace util {
     // Calculates whether a point is in a rectangle
     bool isInRectangle(int x, int y, int rectX, int rectY, int rectWidth, int rectHeight);
+
+    // Tells if you should learn a new kanji or practice an existing one
+    bool shouldLearnNewKanji(int newKanji);
 }
 
 #endif

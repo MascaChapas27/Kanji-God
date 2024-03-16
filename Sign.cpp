@@ -10,6 +10,7 @@ Sign::Sign(){
 void Sign::setSignTexture(sf::Texture &texture){
     signSprite.setTexture(texture);
     signSprite.setOrigin(signSprite.getTextureRect().width/2,signSprite.getTextureRect().height/2);
+    textSignRatio = (signSprite.getTextureRect().width - BUTTON_TEXT_MARGIN) / signSprite.getTextureRect().width;
 }
 
 void Sign::setPosition(double x, double y){
@@ -26,12 +27,11 @@ void Sign::setText(sf::String textString, bool keepSize){
     if(!keepSize){
         text.setCharacterSize(INITIAL_FONT_SIZE);
 
-        while(text.getGlobalBounds().width > signSprite.getTextureRect().width*TEXT_IN_BUTTON_MAX_RATIO ||
-            text.getGlobalBounds().height > signSprite.getTextureRect().height*TEXT_IN_BUTTON_MAX_RATIO){
+        while(text.getGlobalBounds().width > signSprite.getTextureRect().width*textSignRatio ||
+            text.getGlobalBounds().height > signSprite.getTextureRect().height*textSignRatio){
             text.setCharacterSize(text.getCharacterSize()-1);
         }
     }
-
 
     sf::Vector2f center(text.getGlobalBounds().width / 2.0, text.getGlobalBounds().height / 2.0);
     sf::Vector2f localBounds(center.x + text.getLocalBounds().left, center.y + text.getLocalBounds().top);

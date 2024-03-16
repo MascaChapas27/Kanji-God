@@ -12,15 +12,16 @@ class Sign : public sf::Drawable{
         // Sprite for the sign
         sf::Sprite signSprite;
 
-        sf::Font font; // TODO get rid of this
-
         // Text to be displayed on the sign
         sf::Text text;
-    
+
+        //
+        double textSignRatio;
+
     public:
 
         Sign();
-        
+
         // Sets the texture for the sign
         void setSignTexture(sf::Texture &texture);
 

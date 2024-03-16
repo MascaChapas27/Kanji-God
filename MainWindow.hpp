@@ -46,17 +46,14 @@ class MainWindow {
         // (meaning for kanjis and words and pronunciation for words)
         std::list<Button> longExerciseButtons;
 
-        // Progress for the current kanji
-        // ProgressSign progressKanji;
-
-        // Progress for the current word
-        // ProgressSign progressWord;
+        // Progress for the current kanji/word
+        Sign progressSign;
 
         // Sign for the current kanji/word
         Sign kanjiWordSign;
 
         // Sign for the instructions of the current exercise
-        Sign instructions;
+        Sign instructionsSign;
 
         // Sign for the meaning of the current kanji/word for
         // the tutorial

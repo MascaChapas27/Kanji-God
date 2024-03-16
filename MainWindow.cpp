@@ -118,33 +118,54 @@ void MainWindow::start(){
             getExercise(thisButton);
         }
     });
-    
+
     for(int i=0;i<9;i++){
         shortAnswerButton.setPosition(SHORT_EXERCISE_BUTTON_X[i],SHORT_EXERCISE_BUTTON_Y[i]);
-        
         shortExerciseButtons.push_back(shortAnswerButton);
     }
 
     // Sign for the kanji/word that is being asked/taught
-    kanjiWordSign.setSignTexture(textureHolder->get(TextureID::BigMenuButtonTop));
+    kanjiWordSign.setSignTexture(textureHolder->get(TextureID::QuestionSign));
     kanjiWordSign.setPosition(KANJI_WORD_SIGN_X, KANJI_WORD_SIGN_Y);
     kanjiWordSign.setTextColor(TEXT_COLOR);
     kanjiWordSign.setSignColor(BUTTON_COLOR_NORMAL);
-    
+
+    // Sign for the current progress of the kanji/word
+    progressSign.setSignTexture(textureHolder->get(TextureID::InstructionsSign));
+    progressSign.setPosition(PROGRESS_SIGN_X,PROGRESS_SIGN_Y);
+    progressSign.setTextColor(TEXT_COLOR);
+    progressSign.setSignColor(BUTTON_COLOR_NORMAL);
+
+    // Sign for the instructions for the current exercise
+    instructionsSign.setSignTexture(textureHolder->get(TextureID::InstructionsSign));
+    instructionsSign.setPosition(INSTRUCTIONS_SIGN_X,INSTRUCTIONS_SIGN_Y);
+    instructionsSign.setTextColor(TEXT_COLOR);
+    instructionsSign.setSignColor(BUTTON_COLOR_NORMAL);
+
     // Function used to get an exercise (can be a tutorial for a new kanji/word)
     getExercise = [this](Button& button){
         Exercise exercise = Controller::getInstance()->getExercise();
-        
+
+        // Set program state
         this->programState = exercise.getExerciseType();
 
-        switch(exercise.getExerciseType()){
+        // Set sign with question
+        kanjiWordSign.setText(exercise.getQuestion());
+
+        // Set sign with instructions
+        instructionsSign.setText(exercise.getHelp());
+
+        // Set sign with progress
+        progressSign.setText("Meaning: " + std::to_string(exercise.getMeaningProgress()) + "%\n\nKunyomi: " + std::to_string(exercise.getKunyomiProgress()) + "%\n\nOnyomi: " + std::to_string(exercise.getOnyomiProgress()) + "%");
+
+        // Fill answer buttons depending on the exercise type
+        switch(programState){
         case ProgramState::KanjiKun:
         case ProgramState::KanjiOn:
-            kanjiWordSign.setText(exercise.getQuestion());
             std::list<std::wstring> answers = exercise.getAnswers();
             std::list<std::wstring>::iterator iterAns = answers.begin();
             std::list<Button>::iterator iterBut = shortExerciseButtons.begin();
-            
+
             while(iterBut != shortExerciseButtons.end() && iterAns != answers.end()){
                 iterBut->setText(*iterAns);
                 iterBut->setButtonColor(BUTTON_COLOR_NORMAL);
@@ -152,8 +173,6 @@ void MainWindow::start(){
                 iterBut++;
                 iterAns++;
             }
-            
-
             break;
         }
     };
@@ -183,6 +202,7 @@ void MainWindow::start(){
                     for(Button * button : menuButtons) button->notify(event);
                     break;
                 case ProgramState::KanjiKun:
+                case ProgramState::KanjiOn:
                     for(Button &button : shortExerciseButtons) button.notify(event);
                     break;
                 }
@@ -195,6 +215,7 @@ void MainWindow::start(){
             for(Button * button : menuButtons) button->update();
             break;
         case ProgramState::KanjiKun:
+        case ProgramState::KanjiOn:
             for(Button &button : shortExerciseButtons) button.update();
             break;
         }
@@ -210,7 +231,10 @@ void MainWindow::start(){
             for(Button * button : menuButtons) window.draw(*button);
             break;
         case ProgramState::KanjiKun:
+        case ProgramState::KanjiOn:
             window.draw(kanjiWordSign);
+            window.draw(instructionsSign);
+            window.draw(progressSign);
             for(Button &button : shortExerciseButtons) window.draw(button);
             break;
         }

@@ -1,7 +1,8 @@
 #ifndef __KANJI_REPOSITORY_HPP__
-#ifndef __KANJI_REPOSITORY_HPP__
+#define __KANJI_REPOSITORY_HPP__
 
 #include "Kanji.hpp"
+#include "Exercise.hpp"
 #include <map>
 #include <list>
 
@@ -44,7 +45,7 @@ class KanjiRepository{
 
         // Singleton-specific method to get the one and only instance
         static KanjiRepository * getInstance();
-        
+
         // Operation that loads all kanji and progress for kanji in one file
         void loadAllKanjis();
 
@@ -54,6 +55,6 @@ class KanjiRepository{
         // Updates the progress for a kanji
         void updateKanji(std::wstring kanji, int meaning, int kunyomi, int onyomi);
 
-}
+};
 
 #endif

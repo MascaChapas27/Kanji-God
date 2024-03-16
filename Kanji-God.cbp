@@ -45,8 +45,10 @@
 		<Unit filename="Controller.cpp" />
 		<Unit filename="Controller.hpp" />
 		<Unit filename="Enums.hpp" />
+		<Unit filename="Exercise.cpp" />
 		<Unit filename="Exercise.hpp" />
 		<Unit filename="Kanji.hpp" />
+		<Unit filename="KanjiRepository.cpp" />
 		<Unit filename="KanjiRepository.hpp" />
 		<Unit filename="MainWindow.cpp" />
 		<Unit filename="MainWindow.hpp" />

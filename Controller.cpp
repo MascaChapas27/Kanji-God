@@ -1,4 +1,5 @@
 #include "Controller.hpp"
+#include "KanjiRepository.hpp"
 #include "SFML/System.hpp"
 #include <iostream>
 
@@ -26,24 +27,7 @@ Exercise Controller::getExercise(){
     Exercise exercise;
 
     if(kanjiMode){
-        exercise.setExerciseType(ProgramState::KanjiKun);
-        exercise.setQuestion(L"音楽");
-
-        std::list<std::wstring> answers;
-
-        answers.push_back(L"あ");
-        answers.push_back(L"おのおの");
-        answers.push_back(L"しらべ");
-        answers.push_back(L"くすり");
-        answers.push_back(L"おとおと");
-        answers.push_back(L"みずうみ");
-        answers.push_back(L"つる");
-        answers.push_back(L"おと");
-        answers.push_back(L"ね");
-
-        exercise.setAnswers(answers);
-
-        exercise.setHelp(L"Choose the correct\nkunyomi readings for\nthe kanji shown");
+        exercise = KanjiRepository::getInstance()->getExercise(selectedGrade);
     }
 
     return exercise;

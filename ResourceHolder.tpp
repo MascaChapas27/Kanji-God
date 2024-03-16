@@ -76,6 +76,8 @@ void ResourceHolder<Resource,Identifier>::loadAllTextures()
 
     load(TextureID::ShortExerciseButtonBottom,"sprites/short_exercise_button_bottom.png");
     load(TextureID::ShortExerciseButtonTop,"sprites/short_exercise_button_top.png");
+    load(TextureID::QuestionSign,"sprites/question_sign.png");
+    load(TextureID::InstructionsSign,"sprites/instructions_sign.png");
 }
 
 template <class Resource, class Identifier>

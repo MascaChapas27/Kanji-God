@@ -26,7 +26,11 @@ class Button : public sf::Drawable{
         // Indicates if the button is currently being pressed
         bool pressed;
 
-        sf::Font font; // TODO get rid of this
+        // When deciding if a font is too bug, what percentage of the length and width of
+        // the button should the text have. For example, 1.0 means that the text will fit so
+        // that its bigger dimension (width or leight) is exactly the same as the button's
+        // (maybe a bit less)
+        double textButtonRatio;
 
         // Text to be displayed on the button
         sf::Text text;
