@@ -3,7 +3,7 @@
 
 #include "Enums.hpp"
 #include <string>
-#include <list>
+#include <vector>
 
 /*
     This class defines exercises and tutorials that are passed from the
@@ -28,12 +28,12 @@ class Exercise {
         // Kanji or word that is being asked or taught
         std::wstring question;
 
-        // List of possible answers (only if it's a question)
-        std::list<std::wstring> answers;
+        // Vector of possible answers (only if it's a question)
+        std::vector<std::wstring> answers;
 
-        // List of kunyomi and onyomi pronunciations (only if it's a kanji tutor)
-        std::list<std::wstring> kunyomiPronunciations;
-        std::list<std::wstring> onyomiPronunciations;
+        // Vectors of kunyomi and onyomi pronunciations (only if it's a kanji tutor)
+        std::vector<std::wstring> kunyomiPronunciations;
+        std::vector<std::wstring> onyomiPronunciations;
 
         // Pronunciation for the word (only if it's a word tutor)
         std::wstring wordPronunciation;
@@ -49,9 +49,9 @@ class Exercise {
         int getOnyomiProgress();
         int getPronunciationProgress();
         std::wstring getQuestion();
-        std::list<std::wstring> getAnswers();
-        std::list<std::wstring> getKunyomiPronunciations();
-        std::list<std::wstring> getOnyomiPronunciations();
+        std::vector<std::wstring> getAnswers();
+        std::vector<std::wstring> getKunyomiPronunciations();
+        std::vector<std::wstring> getOnyomiPronunciations();
         std::wstring getWordPronunciation();
         std::wstring getHelp();
 
@@ -62,9 +62,9 @@ class Exercise {
         void setOnyomiProgress(int onyomiProgress);
         void setPronunciationProgress(int pronunciationProgress);
         void setQuestion(std::wstring question);
-        void setAnswers(std::list<std::wstring> answers);
-        void setKunyomiPronunciations(std::list<std::wstring> kunyomiPronunciations);
-        void setOnyomiPronunciations(std::list<std::wstring> onyomiPronunciations);
+        void setAnswers(std::vector<std::wstring> answers);
+        void setKunyomiPronunciations(std::vector<std::wstring> kunyomiPronunciations);
+        void setOnyomiPronunciations(std::vector<std::wstring> onyomiPronunciations);
         void setWordPronunciation(std::wstring wordPronunciation);
         void setHelp(std::wstring help);
 };

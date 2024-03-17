@@ -4,7 +4,7 @@
 #include "Kanji.hpp"
 #include "Exercise.hpp"
 #include <map>
-#include <list>
+#include <vector>
 
 /*
     This class contains all kanjis and their progress, meaning
@@ -24,17 +24,17 @@ class KanjiRepository{
         // This map is the main container for kanjis, it stores real objects
         std::map<std::wstring,Kanji> kanjis;
 
-        // Lists that store information about kanjis that were never learnt. They only
-        // store pointers to the kanjis stored in the main map
-        std::map<int,std::list<Kanji*>> newKanjis;
+        // Vectors that store information about kanjis that were never learnt. They only
+        // store the wstring for that kanji
+        std::map<int,std::vector<std::wstring>> newKanjis;
 
-        // Lists that store information about kanjis that are being practiced. They only
-        // store pointers to the kanjis stored in the main map
-        std::map<int,std::list<Kanji*>> practicingKanjis;
+        // Vectors that store information about kanjis that are being practiced. They only
+        // store the wstring for that kanji
+        std::map<int,std::vector<std::wstring>> practicingKanjis;
 
-        // Lists that store information about kanjis that were mastered. They only
-        // store pointers to the kanjis stored in the main map
-        std::map<int,std::list<Kanji*>> masteredKanjis;
+        // Vectors that store information about kanjis that were mastered. They only
+        // store the wstring for that kanji
+        std::map<int,std::vector<std::wstring>> masteredKanjis;
 
     public:
         // NEVER CLONE A SINGLETON

@@ -164,8 +164,8 @@ void MainWindow::start(){
         switch(programState){
         case ProgramState::KanjiKun:
         case ProgramState::KanjiOn:
-            std::list<std::wstring> answers = exercise.getAnswers();
-            std::list<std::wstring>::iterator iterAns = answers.begin();
+            std::vector<std::wstring> answers = exercise.getAnswers();
+            std::vector<std::wstring>::iterator iterAns = answers.begin();
             std::list<Button>::iterator iterBut = shortExerciseButtons.begin();
 
             while(iterBut != shortExerciseButtons.end() && iterAns != answers.end()){

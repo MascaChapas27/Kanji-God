@@ -24,15 +24,15 @@ std::wstring Exercise::getQuestion(){
     return question;
 }
 
-std::list<std::wstring> Exercise::getAnswers(){
+std::vector<std::wstring> Exercise::getAnswers(){
     return answers;
 }
 
-std::list<std::wstring> Exercise::getKunyomiPronunciations(){
+std::vector<std::wstring> Exercise::getKunyomiPronunciations(){
     return kunyomiPronunciations;
 }
 
-std::list<std::wstring> Exercise::getOnyomiPronunciations(){
+std::vector<std::wstring> Exercise::getOnyomiPronunciations(){
     return onyomiPronunciations;
 }
 
@@ -70,15 +70,15 @@ void Exercise::setQuestion(std::wstring question){
     this->question = question;
 }
 
-void Exercise::setAnswers(std::list<std::wstring> answers){
-    this->answers = std::list<std::wstring>(answers);
+void Exercise::setAnswers(std::vector<std::wstring> answers){
+    this->answers = std::vector<std::wstring>(answers);
 }
 
-void Exercise::setKunyomiPronunciations(std::list<std::wstring> kunyomiPronunciations){
+void Exercise::setKunyomiPronunciations(std::vector<std::wstring> kunyomiPronunciations){
     this->kunyomiPronunciations = kunyomiPronunciations;
 }
 
-void Exercise::setOnyomiPronunciations(std::list<std::wstring> onyomiPronunciations){
+void Exercise::setOnyomiPronunciations(std::vector<std::wstring> onyomiPronunciations){
     this->onyomiPronunciations = onyomiPronunciations;
 }
 
