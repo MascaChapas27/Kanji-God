@@ -1,5 +1,4 @@
 #include "Utilities.hpp"
-#include <iostream>
 
 bool util::isInRectangle(int x, int y, int rectX, int rectY, int rectWidth, int rectHeight)
 {
@@ -11,6 +10,7 @@ bool util::isInRectangle(int x, int y, int rectX, int rectY, int rectWidth, int 
 
 bool util::shouldLearnNewKanji(int practicingKanji)
 {
+    return false;
     return practicingKanji == 0 || rand()%(practicingKanji*3) == 0;
 
 }

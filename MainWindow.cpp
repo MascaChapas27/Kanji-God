@@ -2,7 +2,6 @@
 #include "ResourceHolder.hpp"
 #include "Controller.hpp"
 #include <string>
-#include <iostream>
 
 MainWindow::MainWindow(){
 
@@ -164,16 +163,19 @@ void MainWindow::start(){
         switch(programState){
         case ProgramState::KanjiKun:
         case ProgramState::KanjiOn:
-            std::vector<std::wstring> answers = exercise.getAnswers();
-            std::vector<std::wstring>::iterator iterAns = answers.begin();
+            std::set<std::wstring> answers = exercise.getAnswers();
+            std::set<std::wstring>::iterator iterAns = answers.begin();
+            // Sets can be very predictable so let's randomly advance the iterator
+            std::advance(iterAns,rand()%9);
             std::list<Button>::iterator iterBut = shortExerciseButtons.begin();
 
-            while(iterBut != shortExerciseButtons.end() && iterAns != answers.end()){
+            while(iterBut != shortExerciseButtons.end()){
                 iterBut->setText(*iterAns);
                 iterBut->setButtonColor(BUTTON_COLOR_NORMAL);
 
                 iterBut++;
                 iterAns++;
+                if(iterAns == answers.end()) iterAns = answers.begin();
             }
             break;
         }

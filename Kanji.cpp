@@ -4,11 +4,15 @@ std::wstring Kanji::getKanji(){
     return kanji;
 }
 
-std::vector<std::wstring> Kanji::getKunyomiReadings(){
+int Kanji::getGrade(){
+    return grade;
+}
+
+std::set<std::wstring> Kanji::getKunyomiReadings(){
     return kunyomiReadings;
 }
 
-std::vector<std::wstring> Kanji::getOnyomiReadings(){
+std::set<std::wstring> Kanji::getOnyomiReadings(){
     return onyomiReadings;
 }
 
@@ -28,21 +32,23 @@ int Kanji::getOnyomiProgress(){
     return onyomiProgress;
 }
 
-
-// SETTERS
 void Kanji::setKanji(std::wstring kanji){
     this->kanji = kanji;
 }
 
-void Kanji::setKunyomiReadings(std::vector<std::wstring> kunyomiReadings){
+void Kanji::setGrade(int grade){
+    this->grade = grade;
+}
+
+void Kanji::setKunyomiReadings(std::set<std::wstring> kunyomiReadings){
     this->kunyomiReadings = kunyomiReadings;
 }
 
-void Kanji::setOnyomiReadings(std::vector<std::wstring> onyomiReadings){
+void Kanji::setOnyomiReadings(std::set<std::wstring> onyomiReadings){
     this->onyomiReadings = onyomiReadings;
 }
 
-void Kanji::getMeaning(std::wstring meaning){
+void Kanji::setMeaning(std::wstring meaning){
     this->meaning = meaning;
 }
 

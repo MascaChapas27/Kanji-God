@@ -98,6 +98,15 @@ const int SHORT_EXERCISE_BUTTON_Y[9] = {WINDOW_HEIGHT/4,WINDOW_HEIGHT/4,WINDOW_H
                                         WINDOW_HEIGHT/2,WINDOW_HEIGHT/2,WINDOW_HEIGHT/2,
                                         3*WINDOW_HEIGHT/4,3*WINDOW_HEIGHT/4,3*WINDOW_HEIGHT/4};
 
+// Placeholder progress for something not yet taught
+const int NO_PROGRESS = -1;
+
+// Minimum progress for an exercise (that has been already taught)
+const int MIN_PROGRESS = 0;
+
+// Maximum progress for an exercise
+const int MAX_PROGRESS = 100;
+
 namespace util {
     // Calculates whether a point is in a rectangle
     bool isInRectangle(int x, int y, int rectX, int rectY, int rectWidth, int rectHeight);

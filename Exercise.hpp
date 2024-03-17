@@ -3,7 +3,7 @@
 
 #include "Enums.hpp"
 #include <string>
-#include <vector>
+#include <set>
 
 /*
     This class defines exercises and tutorials that are passed from the
@@ -29,11 +29,11 @@ class Exercise {
         std::wstring question;
 
         // Vector of possible answers (only if it's a question)
-        std::vector<std::wstring> answers;
+        std::set<std::wstring> answers;
 
         // Vectors of kunyomi and onyomi pronunciations (only if it's a kanji tutor)
-        std::vector<std::wstring> kunyomiPronunciations;
-        std::vector<std::wstring> onyomiPronunciations;
+        std::set<std::wstring> kunyomiPronunciations;
+        std::set<std::wstring> onyomiPronunciations;
 
         // Pronunciation for the word (only if it's a word tutor)
         std::wstring wordPronunciation;
@@ -49,9 +49,9 @@ class Exercise {
         int getOnyomiProgress();
         int getPronunciationProgress();
         std::wstring getQuestion();
-        std::vector<std::wstring> getAnswers();
-        std::vector<std::wstring> getKunyomiPronunciations();
-        std::vector<std::wstring> getOnyomiPronunciations();
+        std::set<std::wstring> getAnswers();
+        std::set<std::wstring> getKunyomiPronunciations();
+        std::set<std::wstring> getOnyomiPronunciations();
         std::wstring getWordPronunciation();
         std::wstring getHelp();
 
@@ -62,9 +62,9 @@ class Exercise {
         void setOnyomiProgress(int onyomiProgress);
         void setPronunciationProgress(int pronunciationProgress);
         void setQuestion(std::wstring question);
-        void setAnswers(std::vector<std::wstring> answers);
-        void setKunyomiPronunciations(std::vector<std::wstring> kunyomiPronunciations);
-        void setOnyomiPronunciations(std::vector<std::wstring> onyomiPronunciations);
+        void setAnswers(std::set<std::wstring> answers);
+        void setKunyomiPronunciations(std::set<std::wstring> kunyomiPronunciations);
+        void setOnyomiPronunciations(std::set<std::wstring> onyomiPronunciations);
         void setWordPronunciation(std::wstring wordPronunciation);
         void setHelp(std::wstring help);
 };

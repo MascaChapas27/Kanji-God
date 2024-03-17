@@ -2,7 +2,7 @@
 #define __KANJI_HPP__
 
 #include <string>
-#include <vector>
+#include <set>
 
 /*
     This class contains information for one kanji
@@ -12,11 +12,14 @@ class Kanji{
         // The kanji itself represented by a wstring
         std::wstring kanji;
 
-        // Vector of kunyomi readings
-        std::vector<std::wstring> kunyomiReadings;
+        // Grade that this kanji is taught on
+        int grade;
 
-        // Vector of onyomi readings
-        std::vector<std::wstring> onyomiReadings;
+        // Set of kunyomi readings
+        std::set<std::wstring> kunyomiReadings;
+
+        // Set of onyomi readings
+        std::set<std::wstring> onyomiReadings;
 
         // Meaning of the kanji
         std::wstring meaning;
@@ -34,8 +37,9 @@ class Kanji{
 
         // GETTERS
         std::wstring getKanji();
-        std::vector<std::wstring> getKunyomiReadings();
-        std::vector<std::wstring> getOnyomiReadings();
+        int getGrade();
+        std::set<std::wstring> getKunyomiReadings();
+        std::set<std::wstring> getOnyomiReadings();
         std::wstring getMeaning();
         int getMeaningProgress();
         int getKunyomiProgress();
@@ -43,9 +47,10 @@ class Kanji{
 
         // SETTERS
         void setKanji(std::wstring kanji);
-        void setKunyomiReadings(std::vector<std::wstring> kunyomiReadings);
-        void setOnyomiReadings(std::vector<std::wstring> onyomiReadings);
-        void getMeaning(std::wstring meaning);
+        void setGrade(int grade);
+        void setKunyomiReadings(std::set<std::wstring> kunyomiReadings);
+        void setOnyomiReadings(std::set<std::wstring> onyomiReadings);
+        void setMeaning(std::wstring meaning);
         void setMeaningProgress(int meaningProgress);
         void setKunyomiProgress(int kunyomiProgress);
         void setOnyomiProgress(int onyomiProgress);

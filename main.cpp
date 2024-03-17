@@ -5,7 +5,8 @@
 #include "Utilities.hpp"
 #include "ResourceHolder.hpp"
 #include "MainWindow.hpp"
-#include <iostream>
+#include "KanjiRepository.hpp"
+#include <ctime>
 
 int main(){
     // Load all fonts
@@ -16,6 +17,11 @@ int main(){
 
     // Load all sounds
     SoundHolder::getSoundInstance()->loadAllSounds();
+
+    // Load all kanjis
+    KanjiRepository::getInstance()->loadAllKanjis();
+
+    srand(time(NULL));
 
     MainWindow mainWindow;
     

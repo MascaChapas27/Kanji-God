@@ -1,7 +1,7 @@
 #include "Controller.hpp"
 #include "KanjiRepository.hpp"
+#include "Utilities.hpp"
 #include "SFML/System.hpp"
-#include <iostream>
 
 Controller * Controller::controller = nullptr;
 
@@ -30,16 +30,54 @@ Exercise Controller::getExercise(){
         exercise = KanjiRepository::getInstance()->getExercise(selectedGrade);
     }
 
+    currentExercise = exercise;
     return exercise;
 }
 
 bool Controller::checkAnswer(std::wstring answer){
-    bool correct = answer == L"おと" || answer == L"ね";
-    if(correct && !correctAnswers.count(answer))
-        correctAnswers.insert(answer);
+
+    // That answer was already answered
+    if(correctAnswers.count(answer)) return true;
+
+    bool correct = false;
+
+    switch(currentExercise.getExerciseType()){
+    case ProgramState::KanjiKun:
+    case ProgramState::KanjiOn:
+    case ProgramState::KanjiMean:
+        
+        correct = KanjiRepository::getInstance()->checkAnswer(currentExercise, answer);
+        break;
+    
+    case ProgramState::WordMean:
+    case ProgramState::WordPron:
+        // correct = WordRepository::...
+        break;
+    default:
+        break;
+    }
+    
+    // bool correct = answer == L"おと" || answer == L"ね";
+    if(correct) correctAnswers.insert(answer);
     return correct;
 }
 
 bool Controller::allAnswered(){
-    return correctAnswers.size() == 2;
+    
+    switch(currentExercise.getExerciseType()){
+    case ProgramState::KanjiKun:
+    case ProgramState::KanjiOn:
+    case ProgramState::KanjiMean:
+        
+        return KanjiRepository::getInstance()->allAnswered(currentExercise, correctAnswers.size());
+        break;
+    
+    case ProgramState::WordMean:
+    case ProgramState::WordPron:
+        return false;
+        break;
+    default:
+        return false;
+        break;
+    }
 }

@@ -2,7 +2,6 @@
 #include "Utilities.hpp"
 #include "ResourceHolder.hpp"
 #include "Enums.hpp"
-#include <iostream>
 
 Button::Button(){
     text.setFont(FontHolder::getFontInstance()->get(FontID::MoboFont));
