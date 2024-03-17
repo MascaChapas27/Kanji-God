@@ -35,6 +35,9 @@ class Button : public sf::Drawable{
         // Text to be displayed on the button
         sf::Text text;
 
+        // The button can change its color gradually until it is this color
+        sf::Color finalColor;
+
         // Action to be performed when the button is pressed
         std::function<void(Button&)> pressedButtonAction;
 
@@ -72,6 +75,10 @@ class Button : public sf::Drawable{
 
         // Sets the color for the button
         void setButtonColor(sf::Color color);
+
+        // Sets the final color for the button (ALWAYS CALL IT AFTER setButtonColor
+        // OR THE EFFECT WILL DISAPPEAR)
+        void setFinalColor(sf::Color finalColor);
 
         // Update the position of the top part of the button
         void update();

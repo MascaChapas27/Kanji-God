@@ -108,9 +108,11 @@ void MainWindow::start(){
     shortAnswerButton.setButtonColor(BUTTON_COLOR_NORMAL);
     shortAnswerButton.setPressedButtonAction([](Button &thisButton){
         if(Controller::getInstance()->checkAnswer(thisButton.getText())){
-            thisButton.setButtonColor(BUTTON_COLOR_CORRECT);
+            thisButton.setButtonColor(sf::Color::White);
+            thisButton.setFinalColor(BUTTON_COLOR_CORRECT);
         } else {
-            thisButton.setButtonColor(BUTTON_COLOR_INCORRECT);
+            thisButton.setButtonColor(sf::Color::Black);
+            thisButton.setFinalColor(BUTTON_COLOR_INCORRECT);
         }
     });
     shortAnswerButton.setReleasedButtonAction([this](Button &thisButton){

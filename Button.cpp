@@ -75,6 +75,12 @@ void Button::setButtonColor(sf::Color color)
 {
     topSprite.setColor(color);
     bottomSprite.setColor(color);
+    setFinalColor(color);
+}
+
+void Button::setFinalColor(sf::Color finalColor)
+{
+    this->finalColor = finalColor;
 }
 
 void Button::update()
@@ -85,6 +91,17 @@ void Button::update()
 
     topSprite.setPosition(bottomSprite.getPosition().x, bottomSprite.getPosition().y-newOffset);
     text.setPosition(topSprite.getPosition());
+
+    sf::Color currentColor = topSprite.getColor();
+
+    if(currentColor != finalColor){
+        currentColor.r += (finalColor.r - currentColor.r) / 10;
+        currentColor.g += (finalColor.g - currentColor.g) / 10;
+        currentColor.b += (finalColor.b - currentColor.b) / 10;
+        currentColor.a += (finalColor.a - currentColor.a) / 10;
+        topSprite.setColor(currentColor);
+        bottomSprite.setColor(currentColor);
+    }
 }
 
 void Button::notify(sf::Event &event)
