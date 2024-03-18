@@ -112,6 +112,5 @@
     "streambuf": "cpp",
     "cinttypes": "cpp",
     "typeinfo": "cpp"
-  },
-  "cmake.sourceDirectory": "/home/angel/Escritorio/Kanji-God/windows-SFML-2.5.1"
+  }
 }

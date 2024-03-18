@@ -1,6 +1,7 @@
 #include "KanjiRepository.hpp"
 #include "Exercise.hpp"
 #include "Utilities.hpp"
+#include <fstream>
 
 KanjiRepository * KanjiRepository::kanjiRepository = nullptr;
 
@@ -51,11 +52,60 @@ void KanjiRepository::loadAllKanjis(){
     kanjis.insert(std::pair<std::wstring,Kanji>(L"下",kanji));
     practicingKanjis[1].push_back(kanji.getKanji());
 
-    // For each grade
+    for(int i=1;i<2;i++){
+        // Open the readings/meanings file
+        std::wfstream file("files/grade" + std::to_string(i) + "kanji.txt");
 
-        // Open the file
-        
-        // Read kanjis individually
+        std::wstring data;
+        // First line "----"
+        getline(file,data);
+
+        // Line that should be something (or "#")
+        getline(file,data);
+
+        while(data != L"#"){
+            Kanji k;
+
+            // Read the kanji symbol
+            getline(file,data);
+
+            k.setKanji(data);
+
+            // Read the meaning
+            getline(file,data);
+
+            k.setMeaning(data);
+            
+            std::set<std::wstring> onyomi;
+            // Read the onyomi readings
+            getline(file,data);
+            while( data != L""){
+                for(int i=0;i<data.size();i++){
+                    std::wcout << int(data[i]);
+                }
+                std::wcout << endl;
+                onyomi.insert(data);
+                getline(file,data);
+            }
+
+            k.setOnyomiReadings(onyomi);
+
+            std::set<std::wstring> kunyomi;
+            // Read the onyomi readings
+            getline(file,data);
+            while(data != L"ーーーー"){
+                kunyomi.insert(data);
+                getline(file,data);
+            }
+
+            k.setKunyomiReadings(kunyomi);
+
+            kanjis[k.getKanji()] = k;
+            
+            getline(file,data);
+        }
+
+    }
 
         // For each kanji read
 
