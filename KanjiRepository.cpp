@@ -14,60 +14,25 @@ KanjiRepository * KanjiRepository::getInstance()
 // Operation that loads all kanji and progress for kanji in one file
 void KanjiRepository::loadAllKanjis(){
 
-    Kanji kanji;
-
-    kanji.setKanji(L"音");
-    kanji.setGrade(1);
-    kanji.setKunyomiReadings(std::set<std::wstring>{L"おと", L"ね"});
-    kanji.setOnyomiReadings(std::set<std::wstring>{L"イン", L"オン"});
-    kanji.setMeaning(L"Sound");
-    kanji.setKunyomiProgress(20);
-    kanji.setOnyomiProgress(30);
-    kanji.setMeaningProgress(10);
-
-    kanjis.insert(std::pair<std::wstring,Kanji>(L"音",kanji));
-    practicingKanjis[1].push_back(kanji.getKanji());
-
-    kanji.setKanji(L"一");
-    kanji.setKunyomiReadings(std::set<std::wstring>{L"ひと"});
-    kanji.setOnyomiReadings(std::set<std::wstring>{L"イチ", L"イツ"});
-    kanji.setMeaning(L"One");
-
-    kanjis.insert(std::pair<std::wstring,Kanji>(L"一",kanji));
-    practicingKanjis[1].push_back(kanji.getKanji());
-
-    kanji.setKanji(L"力");
-    kanji.setKunyomiReadings(std::set<std::wstring>{L"ちから"});
-    kanji.setOnyomiReadings(std::set<std::wstring>{L"リョク", L"リキ"});
-    kanji.setMeaning(L"Power");
-
-    kanjis.insert(std::pair<std::wstring,Kanji>(L"力",kanji));
-    practicingKanjis[1].push_back(kanji.getKanji());
-
-    kanji.setKanji(L"下");
-    kanji.setKunyomiReadings(std::set<std::wstring>{L"した", L"しも", L"さ", L"もと", L"くだ", L"お"});
-    kanji.setOnyomiReadings(std::set<std::wstring>{L"カ", L"ゲ"});
-    kanji.setMeaning(L"Below");
-
-    kanjis.insert(std::pair<std::wstring,Kanji>(L"下",kanji));
-    practicingKanjis[1].push_back(kanji.getKanji());
-
     for(int i=1;i<2;i++){
         // Open the readings/meanings file
         std::wfstream file("files/grade" + std::to_string(i) + "kanji.txt");
 
+        if(!file.is_open()){
+            exit(EXIT_FAILURE);
+        }
+
+        file.imbue(std::locale("C.UTF-8"));
+
         std::wstring data;
-        // First line "----"
+
+        // Line that should be a kanji symbol (or "#")
         getline(file,data);
 
-        // Line that should be something (or "#")
-        getline(file,data);
+        std::vector<std::wstring> amai;
 
         while(data != L"#"){
             Kanji k;
-
-            // Read the kanji symbol
-            getline(file,data);
 
             k.setKanji(data);
 
@@ -79,11 +44,8 @@ void KanjiRepository::loadAllKanjis(){
             std::set<std::wstring> onyomi;
             // Read the onyomi readings
             getline(file,data);
+            
             while( data != L""){
-                for(int i=0;i<data.size();i++){
-                    std::wcout << int(data[i]);
-                }
-                std::wcout << endl;
                 onyomi.insert(data);
                 getline(file,data);
             }
@@ -102,8 +64,13 @@ void KanjiRepository::loadAllKanjis(){
 
             kanjis[k.getKanji()] = k;
             
+            // Kanji symbol or "#"
             getline(file,data);
+
+            amai.push_back(k.getKanji());
         }
+
+        practicingKanjis[1] = amai;
 
     }
 
