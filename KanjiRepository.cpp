@@ -15,6 +15,9 @@ KanjiRepository * KanjiRepository::getInstance()
 void KanjiRepository::loadAllKanjis(){
 
     for(int i=1;i<2;i++){
+
+        std::vector<std::wstring> classifiedKanjis;
+
         // Open the readings/meanings file
         std::wfstream file("files/grade" + std::to_string(i) + "kanji.txt");
 
@@ -28,8 +31,6 @@ void KanjiRepository::loadAllKanjis(){
 
         // Line that should be a kanji symbol (or "#")
         getline(file,data);
-
-        std::vector<std::wstring> amai;
 
         while(data != L"#"){
             Kanji k;
@@ -67,11 +68,66 @@ void KanjiRepository::loadAllKanjis(){
             // Kanji symbol or "#"
             getline(file,data);
 
-            amai.push_back(k.getKanji());
+            classifiedKanjis.push_back(k.getKanji());
         }
 
-        practicingKanjis[1] = amai;
+        file.close();
 
+        // Open the progress file
+        file.open("files/grade" + std::to_string(i) + "kanjiprogress.txt");
+
+        if(!file.is_open()){
+            // The file doesn't exist: let's create it
+            file.open("files/grade" + std::to_string(i) + "kanjiprogress.txt",std::wfstream::out);
+
+            file.imbue(std::locale("C.UTF-8"));
+
+            for(std::wstring kanjiName : classifiedKanjis){
+                file << kanjiName << L"\n-1\n-1\n-1\n";
+            }
+
+            file << L"#";
+
+            newKanjis[i] = classifiedKanjis;
+        } else {
+            file.imbue(std::locale("C.UTF-8"));
+
+            // First line, can be a "#" or a kanji name
+            getline(file,data);
+
+            while(data != L"#"){
+                
+                // Get the kanji and assign it the progress numbers
+                Kanji &k = kanjis[data];
+
+                getline(file,data);
+                int meaningProgress = std::stoi(data);
+
+                getline(file,data);
+                int kunyomiProgress = std::stoi(data);
+
+                getline(file,data);
+                int onyomiProgress = std::stoi(data);
+
+                k.setMeaningProgress(meaningProgress);
+                k.setKunyomiProgress(kunyomiProgress);
+                k.setOnyomiProgress(onyomiProgress);
+
+                // Classify the kanji depending on the progress numbers
+                if(meaningProgress == NO_PROGRESS && kunyomiProgress == NO_PROGRESS && onyomiProgress == NO_PROGRESS){
+                    practicingKanjis[i].push_back(k.getKanji());
+                } else if (meaningProgress == MAX_PROGRESS && kunyomiProgress == MAX_PROGRESS && onyomiProgress == MAX_PROGRESS){
+                    masteredKanjis[i].push_back(k.getKanji());
+                } else {
+                    practicingKanjis[i].push_back(k.getKanji());
+                }
+
+                // Get the next line, which can be a kanji name or a "#"
+                getline(file,data);
+            }
+        }
+
+        file.close();
     }
 
         // For each kanji read
