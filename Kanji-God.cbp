@@ -47,6 +47,9 @@
 		<Unit filename="Enums.hpp" />
 		<Unit filename="Exercise.cpp" />
 		<Unit filename="Exercise.hpp" />
+		<Unit filename="FuckWindows.cpp" />
+		<Unit filename="FuckWindows.hpp" />
+		<Unit filename="Kanji.cpp" />
 		<Unit filename="Kanji.hpp" />
 		<Unit filename="KanjiRepository.cpp" />
 		<Unit filename="KanjiRepository.hpp" />

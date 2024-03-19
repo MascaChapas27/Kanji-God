@@ -21,7 +21,7 @@ void KanjiRepository::loadAllKanjis(){
         std::vector<std::wstring> classifiedKanjis;
 
         // Open the readings/meanings file
-        #ifdef w__linux__
+        #ifdef __linux__
         std::wfstream file("files/grade" + std::to_string(i) + "kanji.txt");
 
         if(!file.is_open()){
@@ -46,11 +46,11 @@ void KanjiRepository::loadAllKanjis(){
             getline(file,data);
 
             k.setMeaning(data);
-            
+
             std::set<std::wstring> onyomi;
             // Read the onyomi readings
             getline(file,data);
-            
+
             while( data != L""){
                 onyomi.insert(data);
                 getline(file,data);
@@ -69,7 +69,7 @@ void KanjiRepository::loadAllKanjis(){
             k.setKunyomiReadings(kunyomi);
 
             kanjis[k.getMeaning()] = k;
-            
+
             // Kanji symbol or "#"
             getline(file,data);
 
@@ -100,7 +100,7 @@ void KanjiRepository::loadAllKanjis(){
             getline(fileprogress,data);
 
             while(data != L"#"){
-                
+
                 // Get the kanji and assign it the progress numbers
                 Kanji &k = kanjis[data];
 
@@ -137,9 +137,9 @@ void KanjiRepository::loadAllKanjis(){
         // For each kanji read
 
             // Create the corresponding Kanji object and put it in the map
-            
+
             // Check the progress and put its wstring in the corresponding vector
-        
+
         // Close the file
 }
 
@@ -189,7 +189,7 @@ Exercise KanjiRepository::getExercise(int grade)
                     exerciseType=(exerciseType+1)%3;
                 else decided = true;
                 break;
-            
+
             case 2:
                 if(chosenKanji.getOnyomiProgress()==MAX_PROGRESS)
                     exerciseType=(exerciseType+1)%3;
@@ -229,7 +229,7 @@ Exercise KanjiRepository::getExercise(int grade)
             exercise.setExerciseType(ProgramState::KanjiKun);
             for(std::wstring answer : chosenKanji.getKunyomiReadings())
                 exerciseAnswers.insert(answer);
-            
+
             int index = rand()%wrongAnswerKanjis.size();
 
             while(exerciseAnswers.size() < 9) {
@@ -248,7 +248,7 @@ Exercise KanjiRepository::getExercise(int grade)
             exercise.setExerciseType(ProgramState::KanjiOn);
             break;
         }
-        
+
         exercise.setQuestion(chosenKanji.getKanji());
         exercise.setId(chosenKanji.getMeaning());
 
