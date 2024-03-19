@@ -119,7 +119,7 @@ void KanjiRepository::loadAllKanjis(){
 
                 // Classify the kanji depending on the progress numbers
                 if(meaningProgress == NO_PROGRESS && kunyomiProgress == NO_PROGRESS && onyomiProgress == NO_PROGRESS){
-                    practicingKanjis[i].push_back(k.getMeaning());
+                    newKanjis[i].push_back(k.getMeaning());
                 } else if (meaningProgress == MAX_PROGRESS && kunyomiProgress == MAX_PROGRESS && onyomiProgress == MAX_PROGRESS){
                     masteredKanjis[i].push_back(k.getMeaning());
                 } else {
@@ -160,15 +160,30 @@ void KanjiRepository::updateKanji(std::wstring kanji, int meaning, int kunyomi, 
 Exercise KanjiRepository::getExercise(int grade)
 {
     Exercise exercise;
-/*
-    if(util::shouldLearnNewKanji(newKanjis[grade].size())){
+
+    if(newKanjis[grade].size() > 0 && util::shouldLearnNewKanji(practicingKanjis[grade].size())){
 
         exercise.setExerciseType(ProgramState::KanjiTutor);
 
-    } else {*/
+        // Choose the kanji
+        Kanji &chosenKanji = kanjis[newKanjis[grade][rand()%practicingKanjis[grade].size()]];
+
+        exercise.setHelp(L"Memorize the\ninformation\nabout the\nnew kanji");
+
+        exercise.setId(chosenKanji.getMeaning());
+
+        exercise.setKunyomiPronunciations(chosenKanji.getKunyomiReadings());
+
+        exercise.setOnyomiPronunciations(chosenKanji.getOnyomiReadings());
+
+        exercise.setQuestion(chosenKanji.getKanji());
+
+    } else {
 
         // Choose the kanji
         Kanji &chosenKanji = kanjis[practicingKanjis[grade][rand()%practicingKanjis[grade].size()]];
+
+        exercise.setId(chosenKanji.getMeaning());
 
         // Choose the type of question
         //int exerciseType = rand()%3;
@@ -275,7 +290,7 @@ Exercise KanjiRepository::getExercise(int grade)
             exercise.setHelp(L"Choose the\ncorrect kunyomi\nreadings for\nthe kanji shown");
             break;
         }
-    //}
+    }
 
     return exercise;
 }

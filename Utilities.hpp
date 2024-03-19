@@ -98,6 +98,14 @@ const int SHORT_EXERCISE_BUTTON_Y[9] = {WINDOW_HEIGHT/4,WINDOW_HEIGHT/4,WINDOW_H
                                         WINDOW_HEIGHT/2,WINDOW_HEIGHT/2,WINDOW_HEIGHT/2,
                                         3*WINDOW_HEIGHT/4,3*WINDOW_HEIGHT/4,3*WINDOW_HEIGHT/4};
 
+// Position for the tutorial sign that contains the meaning for the word or kanji
+const int MEANING_SIGN_X = 100;
+const int MEANING_SIGN_Y = 100;
+
+// Position for the button that allows you to continue in a tutorial
+const int CONTINUE_BUTTON_X = 300;
+const int CONTINUE_BUTTON_Y = 400;
+
 // Placeholder progress for something not yet taught
 const int NO_PROGRESS = -1;
 

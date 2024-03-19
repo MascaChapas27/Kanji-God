@@ -9,8 +9,8 @@
 enum class TextureID{
     Title, Background,
     MenuArrowLeftBottom, MenuArrowLeftTop, MenuArrowRightBottom, MenuArrowRightTop, BigMenuButtonBottom, BigMenuButtonTop,
-    ShortExerciseButtonBottom, ShortExerciseButtonTop, QuestionSign, InstructionsSign
-
+    ShortExerciseButtonBottom, ShortExerciseButtonTop, QuestionSign, InstructionsSign,
+    MeaningSign, KunOnSign, ReadingSign
 };
 
 // Type of font for the text

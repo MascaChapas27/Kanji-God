@@ -143,6 +143,26 @@ void MainWindow::start(){
     instructionsSign.setTextColor(TEXT_COLOR);
     instructionsSign.setSignColor(BUTTON_COLOR_NORMAL);
 
+    // Sign for the meaning in the tutorial
+    tutorialMeaning.setSignTexture(textureHolder->get(TextureID::MeaningSign));
+    tutorialMeaning.setPosition(MEANING_SIGN_X,MEANING_SIGN_Y);
+    tutorialMeaning.setTextColor(TEXT_COLOR);
+    tutorialMeaning.setSignColor(BUTTON_COLOR_NORMAL);
+
+    // Sign that says "Kunyomi"
+
+    // Sign that says "Onyomi"
+
+    // Buttons for the Kunyomi readings
+
+    // Buttons for the Onyomi readings
+
+    // Button to continue in the tutorial
+    continueButton = rightArrowKanji;
+    continueButton.setPosition(CONTINUE_BUTTON_X,CONTINUE_BUTTON_Y);
+    continueButton.setPressedButtonAction([](Button &button){});
+    continueButton.setReleasedButtonAction(getExercise);
+
     // Function used to get an exercise (can be a tutorial for a new kanji/word)
     getExercise = [this](Button& button){
         Exercise exercise = Controller::getInstance()->getExercise();
@@ -156,13 +176,14 @@ void MainWindow::start(){
         // Set sign with instructions
         instructionsSign.setText(exercise.getHelp());
 
-        // Set sign with progress
-        progressSign.setText("Meaning: " + std::to_string(exercise.getMeaningProgress()) + "%\n\nKunyomi: " + std::to_string(exercise.getKunyomiProgress()) + "%\n\nOnyomi: " + std::to_string(exercise.getOnyomiProgress()) + "%");
-
         // Fill answer buttons depending on the exercise type
         switch(programState){
         case ProgramState::KanjiKun:
         case ProgramState::KanjiOn:
+        {
+            // Set sign with progress
+            progressSign.setText("Meaning: " + std::to_string(exercise.getMeaningProgress()) + "%\n\nKunyomi: " + std::to_string(exercise.getKunyomiProgress()) + "%\n\nOnyomi: " + std::to_string(exercise.getOnyomiProgress()) + "%");
+
             std::set<std::wstring> answers = exercise.getAnswers();
             std::set<std::wstring>::iterator iterAns = answers.begin();
             // Sets can be very predictable so let's randomly advance the iterator
@@ -177,6 +198,10 @@ void MainWindow::start(){
                 iterAns++;
                 if(iterAns == answers.end()) iterAns = answers.begin();
             }
+        }
+            break;
+        case ProgramState::KanjiTutor:
+            tutorialMeaning.setText(L"Meaning: " + exercise.getId());
             break;
         }
     };
@@ -209,6 +234,9 @@ void MainWindow::start(){
                 case ProgramState::KanjiOn:
                     for(Button &button : shortExerciseButtons) button.notify(event);
                     break;
+                case ProgramState::KanjiTutor:
+                    continueButton.notify(event);
+                    break;
                 }
             }
         }
@@ -221,6 +249,9 @@ void MainWindow::start(){
         case ProgramState::KanjiKun:
         case ProgramState::KanjiOn:
             for(Button &button : shortExerciseButtons) button.update();
+            break;
+        case ProgramState::KanjiTutor:
+            continueButton.update();
             break;
         }
 
@@ -240,6 +271,12 @@ void MainWindow::start(){
             window.draw(instructionsSign);
             window.draw(progressSign);
             for(Button &button : shortExerciseButtons) window.draw(button);
+            break;
+        case ProgramState::KanjiTutor:
+            window.draw(kanjiWordSign);
+            window.draw(instructionsSign);
+            window.draw(tutorialMeaning);
+            window.draw(continueButton);
             break;
         }
 

@@ -78,6 +78,10 @@ void ResourceHolder<Resource,Identifier>::loadAllTextures()
     load(TextureID::ShortExerciseButtonTop,"sprites/short_exercise_button_top.png");
     load(TextureID::QuestionSign,"sprites/question_sign.png");
     load(TextureID::InstructionsSign,"sprites/instructions_sign.png");
+
+    load(TextureID::MeaningSign,"sprites/meaning_sign.png");
+    load(TextureID::KunOnSign,"sprites/kun_on_sign.png");
+    load(TextureID::ReadingSign,"sprites/reading_sign.png");
 }
 
 template <class Resource, class Identifier>

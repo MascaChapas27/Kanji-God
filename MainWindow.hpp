@@ -68,6 +68,15 @@ class MainWindow {
         // Signs for the onyomi of the current kanji tutorial
         std::list<Sign> tutorialOnyomis;
 
+        // Sign that shows "Kunyomi" on top of the kunyomi readings
+        Sign kunyomiSign;
+
+        // Sign that shows "Onyomi" on top of the kunyomi readings
+        Sign onyomiSign;
+
+        // Button to continue when the tutorial has been completed
+        Button continueButton;
+
     public:
 
         MainWindow();
