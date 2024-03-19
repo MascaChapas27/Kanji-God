@@ -55,6 +55,9 @@ const sf::Color BUTTON_COLOR_CORRECT = sf::Color(0,150,0);
 // Color for incorrect answer
 const sf::Color BUTTON_COLOR_INCORRECT = sf::Color(150,0,0);
 
+// Color for the continue button
+const sf::Color CONTINUE_COLOR = sf::Color(70,70,150);
+
 // In the title screen, distance between buttons vertically
 const int TITLE_BUTTONS_VERTICAL_DISTANCE = 60;
 
@@ -99,12 +102,32 @@ const int SHORT_EXERCISE_BUTTON_Y[9] = {WINDOW_HEIGHT/4,WINDOW_HEIGHT/4,WINDOW_H
                                         3*WINDOW_HEIGHT/4,3*WINDOW_HEIGHT/4,3*WINDOW_HEIGHT/4};
 
 // Position for the tutorial sign that contains the meaning for the word or kanji
-const int MEANING_SIGN_X = 100;
-const int MEANING_SIGN_Y = 100;
+const int MEANING_SIGN_X = 7*WINDOW_WIDTH/20;
+const int MEANING_SIGN_Y = WINDOW_HEIGHT/8;
 
-// Position for the button that allows you to continue in a tutorial
-const int CONTINUE_BUTTON_X = 300;
-const int CONTINUE_BUTTON_Y = 400;
+// Position for the tutorial sign that says "Kunyomi"
+const int KUNYOMI_SIGN_X = MEANING_SIGN_X-125;
+const int KUNYOMI_SIGN_Y = MEANING_SIGN_Y+110;
+
+// Position for the tutorial sign that says "Onyomi"
+const int ONYOMI_SIGN_X = MEANING_SIGN_X+125;
+const int ONYOMI_SIGN_Y = KUNYOMI_SIGN_Y;
+
+// Position for the signs that contain the kunyomi readings in the tutorial
+const int KUN_READING_X[6] = {KUNYOMI_SIGN_X-60,KUNYOMI_SIGN_X+60,
+                              KUNYOMI_SIGN_X-60,KUNYOMI_SIGN_X+60,
+                              KUNYOMI_SIGN_X-60,KUNYOMI_SIGN_X+60};
+const int KUN_READING_Y[6] = {KUNYOMI_SIGN_Y+110,KUNYOMI_SIGN_Y+110,
+                              KUNYOMI_SIGN_Y+220,KUNYOMI_SIGN_Y+220,
+                              KUNYOMI_SIGN_Y+330,KUNYOMI_SIGN_Y+330};
+
+// Position for the signs that contain the onyomi readings in the tutorial
+const int ON_READING_X[6] = {ONYOMI_SIGN_X-60,ONYOMI_SIGN_X+60,
+                             ONYOMI_SIGN_X-60,ONYOMI_SIGN_X+60,
+                             ONYOMI_SIGN_X-60,ONYOMI_SIGN_X+60};
+const int ON_READING_Y[6] = {ONYOMI_SIGN_Y+110,ONYOMI_SIGN_Y+110,
+                             ONYOMI_SIGN_Y+220,ONYOMI_SIGN_Y+220,
+                             ONYOMI_SIGN_Y+330,ONYOMI_SIGN_Y+330};
 
 // Placeholder progress for something not yet taught
 const int NO_PROGRESS = -1;

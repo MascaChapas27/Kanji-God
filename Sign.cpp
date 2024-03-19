@@ -47,6 +47,10 @@ void Sign::setSignColor(sf::Color color){
     signSprite.setColor(color);
 }
 
+sf::String Sign::getText(){
+    return text.getString().toWideString();
+}
+
 void Sign::draw(sf::RenderTarget& target, sf::RenderStates states) const{
     target.draw(signSprite);
     target.draw(text);

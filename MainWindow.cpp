@@ -2,6 +2,7 @@
 #include "ResourceHolder.hpp"
 #include "Controller.hpp"
 #include <string>
+#include <iostream>
 
 MainWindow::MainWindow(){
 
@@ -150,18 +151,43 @@ void MainWindow::start(){
     tutorialMeaning.setSignColor(BUTTON_COLOR_NORMAL);
 
     // Sign that says "Kunyomi"
+    kunyomiSign.setSignTexture(textureHolder->get(TextureID::KunOnSign));
+    kunyomiSign.setPosition(KUNYOMI_SIGN_X,KUNYOMI_SIGN_Y);
+    kunyomiSign.setTextColor(TEXT_COLOR);
+    kunyomiSign.setSignColor(BUTTON_COLOR_NORMAL);
+    kunyomiSign.setText(L"Kunyomi\nreadings:");
 
     // Sign that says "Onyomi"
+    onyomiSign.setSignTexture(textureHolder->get(TextureID::KunOnSign));
+    onyomiSign.setPosition(ONYOMI_SIGN_X,ONYOMI_SIGN_Y);
+    onyomiSign.setTextColor(TEXT_COLOR);
+    onyomiSign.setSignColor(BUTTON_COLOR_NORMAL);
+    onyomiSign.setText(L"Onyomi\nreadings:");
 
-    // Buttons for the Kunyomi readings
+    // Signs for the Kunyomi readings
+    Sign readingSign;
+    readingSign.setSignTexture(textureHolder->get(TextureID::ReadingSign));
+    readingSign.setTextColor(TEXT_COLOR);
+    readingSign.setSignColor(BUTTON_COLOR_NORMAL);
+
+    for(int i=0;i<6;i++){
+        readingSign.setPosition(KUN_READING_X[i],KUN_READING_Y[i]);
+        tutorialKunyomis.push_back(readingSign);
+    }
 
     // Buttons for the Onyomi readings
+    for(int i=0;i<6;i++){
+        readingSign.setPosition(ON_READING_X[i],ON_READING_Y[i]);
+        tutorialOnyomis.push_back(readingSign);
+    }
 
     // Button to continue in the tutorial
-    continueButton = rightArrowKanji;
-    continueButton.setPosition(CONTINUE_BUTTON_X,CONTINUE_BUTTON_Y);
+    continueButton.setBottomTexture(textureHolder->get(TextureID::ShortExerciseButtonBottom));
+    continueButton.setTopTexture(textureHolder->get(TextureID::ShortExerciseButtonTop));
+    continueButton.setPosition(PROGRESS_SIGN_X,PROGRESS_SIGN_Y);
+    continueButton.setText(L"Continue");
+    continueButton.setButtonColor(CONTINUE_COLOR);
     continueButton.setPressedButtonAction([](Button &button){});
-    continueButton.setReleasedButtonAction(getExercise);
 
     // Function used to get an exercise (can be a tutorial for a new kanji/word)
     getExercise = [this](Button& button){
@@ -202,6 +228,25 @@ void MainWindow::start(){
             break;
         case ProgramState::KanjiTutor:
             tutorialMeaning.setText(L"Meaning: " + exercise.getId());
+
+            int index = 0;
+            for(std::wstring kunReading : exercise.getKunyomiPronunciations()){
+                tutorialKunyomis[index].setText(kunReading);
+                index++;
+            }
+            for(int i=index;i<6;i++){
+                tutorialKunyomis[index].setText(L"");
+            }
+
+            index = 0;
+            
+            for(std::wstring onReading : exercise.getOnyomiPronunciations()){
+                tutorialOnyomis[index].setText(onReading);
+                index++;
+            }
+            for(int i=index;i<6;i++){
+                tutorialOnyomis[index].setText(L"");
+            }
             break;
         }
     };
@@ -216,6 +261,7 @@ void MainWindow::start(){
 
     kanjiGradeSelector.setReleasedButtonAction(getExercise);
     wordGradeSelector.setReleasedButtonAction(getExercise);
+    continueButton.setReleasedButtonAction(getExercise);
 
     while(window.isOpen()){
 
@@ -276,6 +322,10 @@ void MainWindow::start(){
             window.draw(kanjiWordSign);
             window.draw(instructionsSign);
             window.draw(tutorialMeaning);
+            window.draw(kunyomiSign);
+            window.draw(onyomiSign);
+            for(Sign s : tutorialKunyomis) if(s.getText() != L"") window.draw(s);
+            for(Sign s : tutorialOnyomis) if(s.getText() != L"") window.draw(s);
             window.draw(continueButton);
             break;
         }

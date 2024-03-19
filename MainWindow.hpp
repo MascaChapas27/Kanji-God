@@ -63,10 +63,10 @@ class MainWindow {
         Sign tutorialPronunciation;
 
         // Signs for the kunyomi of the current kanji tutorial
-        std::list<Sign> tutorialKunyomis;
+        std::vector<Sign> tutorialKunyomis;
 
         // Signs for the onyomi of the current kanji tutorial
-        std::list<Sign> tutorialOnyomis;
+        std::vector<Sign> tutorialOnyomis;
 
         // Sign that shows "Kunyomi" on top of the kunyomi readings
         Sign kunyomiSign;

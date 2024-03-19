@@ -4,3 +4,10 @@ KanjiGod:
 
 run:
 	LD_LIBRARY_PATH=linux-SFML-2.6.1/lib ./KanjiGod
+
+rerun:
+	make -B
+	make run
+
+debug:
+	LD_LIBRARY_PATH=linux-SFML-2.6.1/lib gdb ./KanjiGod

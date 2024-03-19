@@ -38,6 +38,9 @@ class Sign : public sf::Drawable{
         // Sets the color for the sign
         void setSignColor(sf::Color color);
 
+        // Get the text that the sign contains
+        sf::String getText();
+
         // Draws the button
         virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 };

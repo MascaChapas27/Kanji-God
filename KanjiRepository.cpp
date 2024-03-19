@@ -4,6 +4,7 @@
 #include "FuckWindows.hpp"
 #include <fstream>
 #include <sstream>
+#include <iostream>
 
 KanjiRepository * KanjiRepository::kanjiRepository = nullptr;
 
@@ -76,7 +77,7 @@ void KanjiRepository::loadAllKanjis(){
             classifiedKanjis.push_back(k.getMeaning());
         }
 
-        #ifdef w__linux__
+        #ifdef __linux__
         file.close();
         #endif
 
@@ -166,7 +167,7 @@ Exercise KanjiRepository::getExercise(int grade)
         exercise.setExerciseType(ProgramState::KanjiTutor);
 
         // Choose the kanji
-        Kanji &chosenKanji = kanjis[newKanjis[grade][rand()%practicingKanjis[grade].size()]];
+        Kanji &chosenKanji = kanjis[newKanjis[grade].back()];
 
         exercise.setHelp(L"Memorize the\ninformation\nabout the\nnew kanji");
 
@@ -177,6 +178,13 @@ Exercise KanjiRepository::getExercise(int grade)
         exercise.setOnyomiPronunciations(chosenKanji.getOnyomiReadings());
 
         exercise.setQuestion(chosenKanji.getKanji());
+
+        chosenKanji.setKunyomiProgress(chosenKanji.getKunyomiReadings().empty() ? 100 : 0);
+        chosenKanji.setOnyomiProgress(chosenKanji.getOnyomiReadings().empty() ? 100 : 0);
+        chosenKanji.setMeaningProgress(0);
+
+        newKanjis[grade].pop_back();
+        practicingKanjis[grade].push_back(chosenKanji.getMeaning());
 
     } else {
 
@@ -212,7 +220,6 @@ Exercise KanjiRepository::getExercise(int grade)
                 break;
             }
         }
-
 
         // Set for the answers that the exercise will have
         std::set<std::wstring> exerciseAnswers;
