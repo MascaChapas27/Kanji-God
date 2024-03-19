@@ -15,6 +15,9 @@ class Exercise {
         // Type of the exercise
         ProgramState exerciseType;
 
+        // Identifier for the exercise (meaning)
+        std::wstring id;
+
         // Progress for the meaning
         int meaningProgress;
 
@@ -44,6 +47,7 @@ class Exercise {
     public:
         // GETTERS
         ProgramState getExerciseType();
+        std::wstring getId();
         int getMeaningProgress();
         int getKunyomiProgress();
         int getOnyomiProgress();
@@ -57,6 +61,7 @@ class Exercise {
 
         // SETTERS
         void setExerciseType(ProgramState exerciseType);
+        void setId(std::wstring id);
         void setMeaningProgress(int meaningProgress);
         void setKunyomiProgress(int kunyomiProgress);
         void setOnyomiProgress(int onyomiProgress);

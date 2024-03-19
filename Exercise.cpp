@@ -4,6 +4,10 @@ ProgramState Exercise::getExerciseType(){
     return exerciseType;
 }
 
+std::wstring Exercise::getId(){
+    return id;
+}
+
 int Exercise::getMeaningProgress(){
     return meaningProgress;
 }
@@ -48,6 +52,10 @@ std::wstring Exercise::getHelp(){
 // SETTERS
 void Exercise::setExerciseType(ProgramState exerciseType){
     this->exerciseType = exerciseType;
+}
+
+void Exercise::setId(std::wstring id){
+    this->id = id;
 }
 
 void Exercise::setMeaningProgress(int meaningProgress){
