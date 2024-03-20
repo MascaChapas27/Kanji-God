@@ -26,6 +26,7 @@ void KanjiRepository::loadAllKanjis(){
         std::wfstream file("files/grade" + std::to_string(i) + "kanji.txt");
 
         if(!file.is_open()){
+            std::cerr << "ERROR: file " << "files/grade" << std::to_string(i) << "kanji.txt" <<" not found" << std::endl;
             exit(EXIT_FAILURE);
         }
 
@@ -40,6 +41,8 @@ void KanjiRepository::loadAllKanjis(){
 
         while(data != L"#"){
             Kanji k;
+
+            k.setGrade(i);
 
             k.setKanji(data);
 
@@ -337,24 +340,30 @@ bool KanjiRepository::checkAnswer(Exercise &exercise, std::wstring answer)
         correct = kanji.getKunyomiReadings().count(answer);
         if(correct) {
             exercise.setKunyomiProgress(exercise.getKunyomiProgress() + 1);
+            if(exercise.getKunyomiProgress() > MAX_PROGRESS) exercise.setKunyomiProgress(MAX_PROGRESS);
         } else {
             exercise.setKunyomiProgress(exercise.getKunyomiProgress() - 2);
+            if(exercise.getKunyomiProgress() < MIN_PROGRESS) exercise.setKunyomiProgress(MIN_PROGRESS);
         }
         break;
     case ProgramState::KanjiOn:
         correct = kanji.getOnyomiReadings().count(answer);
         if(correct) {
             exercise.setOnyomiProgress(exercise.getOnyomiProgress() + 1);
+            if(exercise.getOnyomiProgress() > MAX_PROGRESS) exercise.setOnyomiProgress(MAX_PROGRESS);
         } else {
             exercise.setOnyomiProgress(exercise.getOnyomiProgress() - 2);
+            if(exercise.getOnyomiProgress() < MIN_PROGRESS) exercise.setOnyomiProgress(MIN_PROGRESS);
         }
         break;
     case ProgramState::KanjiMean:
         correct = kanji.getMeaning() == answer;
         if(correct) {
             exercise.setMeaningProgress(exercise.getMeaningProgress() + 3);
+            if(exercise.getMeaningProgress() > MAX_PROGRESS) exercise.setMeaningProgress(MAX_PROGRESS);
         } else {
             exercise.setMeaningProgress(exercise.getMeaningProgress() - 5);
+            if(exercise.getMeaningProgress() < MIN_PROGRESS) exercise.setMeaningProgress(MIN_PROGRESS);
         }
         break;
     default:
@@ -378,7 +387,7 @@ bool KanjiRepository::allAnswered(Exercise &exercise, int answers)
         completed = kanji.getOnyomiReadings().size() == answers;
         break;
     case ProgramState::KanjiMean:
-        completed = true;
+        completed = answers == 1;
         break;
     default:
         return false;
@@ -407,4 +416,26 @@ bool KanjiRepository::allAnswered(Exercise &exercise, int answers)
     }
 
     return completed;
+}
+
+void KanjiRepository::save(){
+
+    std::cerr << "saving..." << std::endl;
+
+    std::map<int,std::wfstream> files;
+
+    files[1] = std::wfstream("files/grade1kanjiprogress.txt",std::wfstream::trunc | std::wfstream::out);
+
+    for(auto &pair : kanjis){
+        switch(pair.second.getGrade()){
+        case 1:
+            files[1] << pair.second.getMeaning() << L"\n" << pair.second.getMeaningProgress() << L"\n" << pair.second.getKunyomiProgress() << L"\n" << pair.second.getOnyomiProgress() << L"\n";
+            break;
+        }
+    }
+
+    for(auto &pair : files){
+        pair.second << L"#";
+        pair.second.close();
+    }
 }

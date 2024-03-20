@@ -274,7 +274,7 @@ void MainWindow::start(){
         while(window.pollEvent(event)){
             if(event.type == sf::Event::Closed){
                 window.close();
-                exit(EXIT_SUCCESS);
+                Controller::getInstance()->saveAndExit();
             } else {
                 switch(programState){
                 case ProgramState::TitleScreen:

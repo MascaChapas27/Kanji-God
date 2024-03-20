@@ -1,4 +1,5 @@
 #include <assert.h>
+#include <iostream>
 
 // Singleton static variables are initialized as null
 template <class Resource, class Identifier>
@@ -18,6 +19,7 @@ void ResourceHolder<Resource,Identifier>::load(Identifier id, const std::string&
 
     // We try to load the resource. If there is an error, we die horribly
     if(!resource->loadFromFile(fileName)){
+        std::cerr << "ERROR: file " << fileName << " not found" << std::endl;
         exit(EXIT_FAILURE);
     }
 

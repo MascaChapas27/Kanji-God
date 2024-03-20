@@ -83,3 +83,8 @@ bool Controller::allAnswered(){
         break;
     }
 }
+
+void Controller::saveAndExit(){
+    KanjiRepository::getInstance()->save();
+    exit(EXIT_SUCCESS);
+}

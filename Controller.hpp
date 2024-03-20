@@ -60,6 +60,9 @@ class Controller {
 
         // True if all correct answers for the current exercise were selected
         bool allAnswered();
+
+        // Saves the progress and exit
+        void saveAndExit();
 };
 
 #endif

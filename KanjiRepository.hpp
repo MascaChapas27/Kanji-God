@@ -61,6 +61,9 @@ class KanjiRepository{
         // Checks if all answeres were answered for a kanji
         bool allAnswered(Exercise &exercise, int answers);
 
+        // Saves all data
+        void save();
+
 };
 
 #endif
