@@ -56,10 +56,10 @@ class KanjiRepository{
         void updateKanji(std::wstring kanji, int meaning, int kunyomi, int onyomi);
 
         // Checks if the given answer is valid for the current exercise
-        bool checkAnswer(Exercise exercise, std::wstring answer);
+        bool checkAnswer(Exercise &exercise, std::wstring answer);
 
         // Checks if all answeres were answered for a kanji
-        bool allAnswered(Exercise exercise, int answers);
+        bool allAnswered(Exercise &exercise, int answers);
 
 };
 

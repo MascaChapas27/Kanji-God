@@ -55,8 +55,8 @@ class Controller {
         // Returns exercise
         Exercise getExercise();
 
-        // Checks if the answer is correct given the current kanji
-        bool checkAnswer(std::wstring answer);
+        // Checks if the answer is correct and returns the progress
+        bool checkAnswer(std::wstring answer, int &meanProgress, int &kunProgress, int &onProgress);
 
         // True if all correct answers for the current exercise were selected
         bool allAnswered();

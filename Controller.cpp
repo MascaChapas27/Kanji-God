@@ -34,7 +34,7 @@ Exercise Controller::getExercise(){
     return exercise;
 }
 
-bool Controller::checkAnswer(std::wstring answer){
+bool Controller::checkAnswer(std::wstring answer, int &meanProgress, int &kunProgress, int &onProgress){
 
     // That answer was already answered
     if(correctAnswers.count(answer)) return true;
@@ -45,8 +45,10 @@ bool Controller::checkAnswer(std::wstring answer){
     case ProgramState::KanjiKun:
     case ProgramState::KanjiOn:
     case ProgramState::KanjiMean:
-        
         correct = KanjiRepository::getInstance()->checkAnswer(currentExercise, answer);
+        meanProgress = currentExercise.getMeaningProgress();
+        kunProgress = currentExercise.getKunyomiProgress();
+        onProgress = currentExercise.getOnyomiProgress();
         break;
     
     case ProgramState::WordMean:

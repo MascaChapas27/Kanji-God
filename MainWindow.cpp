@@ -106,14 +106,16 @@ void MainWindow::start(){
     shortAnswerButton.setTopTexture(textureHolder->get(TextureID::ShortExerciseButtonTop));
     shortAnswerButton.setTextColor(TEXT_COLOR);
     shortAnswerButton.setButtonColor(BUTTON_COLOR_NORMAL);
-    shortAnswerButton.setPressedButtonAction([](Button &thisButton){
-        if(Controller::getInstance()->checkAnswer(thisButton.getText())){
+    shortAnswerButton.setPressedButtonAction([this](Button &thisButton){
+        int meanProgress,kunProgress,onProgress;
+        if(Controller::getInstance()->checkAnswer(thisButton.getText(),meanProgress,kunProgress,onProgress)){
             thisButton.setButtonColor(sf::Color::White);
             thisButton.setFinalColor(BUTTON_COLOR_CORRECT);
         } else {
             thisButton.setButtonColor(sf::Color::Black);
             thisButton.setFinalColor(BUTTON_COLOR_INCORRECT);
         }
+        this->progressSign.setText("Meaning: " + std::to_string(meanProgress) + "%\n\nKunyomi: " + std::to_string(kunProgress) + "%\n\nOnyomi: " + std::to_string(onProgress) + "%");
     });
     shortAnswerButton.setReleasedButtonAction([this](Button &thisButton){
         if(Controller::getInstance()->allAnswered()){
@@ -191,6 +193,7 @@ void MainWindow::start(){
 
     // Function used to get an exercise (can be a tutorial for a new kanji/word)
     getExercise = [this](Button& button){
+        
         Exercise exercise = Controller::getInstance()->getExercise();
 
         // Set program state
@@ -206,6 +209,7 @@ void MainWindow::start(){
         switch(programState){
         case ProgramState::KanjiKun:
         case ProgramState::KanjiOn:
+        case ProgramState::KanjiMean:
         {
             // Set sign with progress
             progressSign.setText("Meaning: " + std::to_string(exercise.getMeaningProgress()) + "%\n\nKunyomi: " + std::to_string(exercise.getKunyomiProgress()) + "%\n\nOnyomi: " + std::to_string(exercise.getOnyomiProgress()) + "%");
@@ -278,6 +282,7 @@ void MainWindow::start(){
                     break;
                 case ProgramState::KanjiKun:
                 case ProgramState::KanjiOn:
+                case ProgramState::KanjiMean:
                     for(Button &button : shortExerciseButtons) button.notify(event);
                     break;
                 case ProgramState::KanjiTutor:
@@ -294,6 +299,7 @@ void MainWindow::start(){
             break;
         case ProgramState::KanjiKun:
         case ProgramState::KanjiOn:
+        case ProgramState::KanjiMean:
             for(Button &button : shortExerciseButtons) button.update();
             break;
         case ProgramState::KanjiTutor:
@@ -313,6 +319,7 @@ void MainWindow::start(){
             break;
         case ProgramState::KanjiKun:
         case ProgramState::KanjiOn:
+        case ProgramState::KanjiMean:
             window.draw(kanjiWordSign);
             window.draw(instructionsSign);
             window.draw(progressSign);
