@@ -5,6 +5,7 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
+#include <random>
 
 KanjiRepository * KanjiRepository::kanjiRepository = nullptr;
 
@@ -136,6 +137,13 @@ void KanjiRepository::loadAllKanjis(){
         }
 
         fileprogress.close();
+
+        // Shuffle the vectors to make them more unpredictable
+        auto rng = std::default_random_engine {};
+        std::shuffle(std::begin(newKanjis[i]), std::end(newKanjis[i]), rng);
+        std::shuffle(std::begin(practicingKanjis[i]), std::end(practicingKanjis[i]), rng);
+        std::shuffle(std::begin(masteredKanjis[i]), std::end(masteredKanjis[i]), rng);
+        
     }
 
         // For each kanji read
