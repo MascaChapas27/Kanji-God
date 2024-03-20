@@ -83,6 +83,9 @@ class Button : public sf::Drawable{
         // Update the position of the top part of the button
         void update();
 
+        // Resets the position of the top part of the button to the initial position
+        void resetPosition();
+
         // Reacts to an event that happened
         void notify(sf::Event &event);
 

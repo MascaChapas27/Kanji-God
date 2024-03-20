@@ -195,6 +195,8 @@ void MainWindow::start(){
     getExercise = [this](Button& button){
         
         Exercise exercise = Controller::getInstance()->getExercise();
+        
+        ProgramState oldState = this->programState;
 
         // Set program state
         this->programState = exercise.getExerciseType();
@@ -211,6 +213,17 @@ void MainWindow::start(){
         case ProgramState::KanjiOn:
         case ProgramState::KanjiMean:
         {
+            // Reset the buttons
+            if(oldState != ProgramState::KanjiKun &&
+               oldState != ProgramState::KanjiOn &&
+               oldState != ProgramState::KanjiMean){
+                
+                for(Button &b : shortExerciseButtons){
+                    b.setButtonColor(BUTTON_COLOR_NORMAL);
+                    b.resetPosition();
+                }
+            }
+
             // Set sign with progress
             progressSign.setText("Meaning: " + std::to_string(exercise.getMeaningProgress()) + "%\n\nKunyomi: " + std::to_string(exercise.getKunyomiProgress()) + "%\n\nOnyomi: " + std::to_string(exercise.getOnyomiProgress()) + "%");
 
@@ -231,6 +244,13 @@ void MainWindow::start(){
         }
             break;
         case ProgramState::KanjiTutor:
+
+            if(oldState != ProgramState::KanjiTutor){
+                for(Button &b : shortExerciseButtons){
+                    b.resetPosition();
+                }
+            }
+
             tutorialMeaning.setText(L"Meaning: " + exercise.getId());
 
             int index = 0;
@@ -239,7 +259,7 @@ void MainWindow::start(){
                 index++;
             }
             for(int i=index;i<6;i++){
-                tutorialKunyomis[index].setText(L"");
+                tutorialKunyomis[i].setText(L"");
             }
 
             index = 0;
@@ -249,7 +269,7 @@ void MainWindow::start(){
                 index++;
             }
             for(int i=index;i<6;i++){
-                tutorialOnyomis[index].setText(L"");
+                tutorialOnyomis[i].setText(L"");
             }
             break;
         }
@@ -331,8 +351,8 @@ void MainWindow::start(){
             window.draw(tutorialMeaning);
             window.draw(kunyomiSign);
             window.draw(onyomiSign);
-            for(Sign s : tutorialKunyomis) if(s.getText() != L"") window.draw(s);
-            for(Sign s : tutorialOnyomis) if(s.getText() != L"") window.draw(s);
+            for(Sign s : tutorialKunyomis) if(s.getText().toWideString() != L"") window.draw(s);
+            for(Sign s : tutorialOnyomis) if(s.getText().toWideString() != L"") window.draw(s);
             window.draw(continueButton);
             break;
         }

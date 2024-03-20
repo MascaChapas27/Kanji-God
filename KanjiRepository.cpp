@@ -6,6 +6,7 @@
 #include <sstream>
 #include <iostream>
 #include <random>
+#include <chrono>
 
 KanjiRepository * KanjiRepository::kanjiRepository = nullptr;
 
@@ -94,6 +95,9 @@ void KanjiRepository::loadAllKanjis(){
 
             for(std::wstring kanjiMeaning : classifiedKanjis){
                 fileprogress << kanjiMeaning << "\n-1\n-1\n-1\n";
+                kanjis[kanjiMeaning].setMeaningProgress(-1);
+                kanjis[kanjiMeaning].setKunyomiProgress(-1);
+                kanjis[kanjiMeaning].setOnyomiProgress(-1);
             }
 
             fileprogress << "#";
@@ -140,6 +144,7 @@ void KanjiRepository::loadAllKanjis(){
 
         // Shuffle the vectors to make them more unpredictable
         auto rng = std::default_random_engine {};
+        rng.seed(std::chrono::system_clock::now().time_since_epoch().count());
         std::shuffle(std::begin(newKanjis[i]), std::end(newKanjis[i]), rng);
         std::shuffle(std::begin(practicingKanjis[i]), std::end(practicingKanjis[i]), rng);
         std::shuffle(std::begin(masteredKanjis[i]), std::end(masteredKanjis[i]), rng);
@@ -427,8 +432,6 @@ bool KanjiRepository::allAnswered(Exercise &exercise, int answers)
 }
 
 void KanjiRepository::save(){
-
-    std::cerr << "saving..." << std::endl;
 
     std::map<int,std::wfstream> files;
 

@@ -103,6 +103,10 @@ void Button::update()
     }
 }
 
+void Button::resetPosition(){
+    topSprite.setPosition(bottomSprite.getPosition().x,bottomSprite.getPosition().y-topOffset);
+}
+
 void Button::notify(sf::Event &event)
 {
     if(!pressed && event.type == sf::Event::MouseMoved){
