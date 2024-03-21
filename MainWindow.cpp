@@ -246,9 +246,7 @@ void MainWindow::start(){
         case ProgramState::KanjiTutor:
 
             if(oldState != ProgramState::KanjiTutor){
-                for(Button &b : shortExerciseButtons){
-                    b.resetPosition();
-                }
+                continueButton.resetPosition();
             }
 
             tutorialMeaning.setText(L"Meaning: " + exercise.getId());

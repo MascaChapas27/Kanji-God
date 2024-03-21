@@ -104,6 +104,7 @@ void Button::update()
 }
 
 void Button::resetPosition(){
+    topOffset = MAX_BUTTON_TOP_OFFSET;
     topSprite.setPosition(bottomSprite.getPosition().x,bottomSprite.getPosition().y-topOffset);
 }
 

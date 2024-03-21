@@ -10,6 +10,5 @@ bool util::isInRectangle(int x, int y, int rectX, int rectY, int rectWidth, int 
 
 bool util::shouldLearnNewKanji(int practicingKanji)
 {
-    return true;
     return practicingKanji == 0 || rand()%(practicingKanji*3) == 0;
 }
