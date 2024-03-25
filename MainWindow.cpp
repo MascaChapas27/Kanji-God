@@ -191,6 +191,17 @@ void MainWindow::start(){
     continueButton.setButtonColor(CONTINUE_COLOR);
     continueButton.setPressedButtonAction([](Button &button){});
 
+    // Button to go back to the main menu
+    mainMenuButton.setBottomTexture(textureHolder->get(TextureID::MenuArrowLeftBottom));
+    mainMenuButton.setTopTexture(textureHolder->get(TextureID::MenuArrowLeftTop));
+    mainMenuButton.setPosition(BACK_MENU_BUTTON_X, BACK_MENU_BUTTON_Y);
+    mainMenuButton.setButtonColor(BUTTON_COLOR_NORMAL);
+    mainMenuButton.setPressedButtonAction([](Button &button){});
+    mainMenuButton.setReleasedButtonAction([this](Button &button){
+        this->programState = ProgramState::TitleScreen;
+        for(Button * button : menuButtons) button->resetPosition();
+    });
+
     // Function used to get an exercise (can be a tutorial for a new kanji/word)
     getExercise = [this](Button& button){
         
@@ -275,10 +286,12 @@ void MainWindow::start(){
 
     kanjiGradeSelector.setPressedButtonAction([this](Button &button){
         Controller::getInstance()->setGradeAndMode(kanjiGrade,true);
+        mainMenuButton.resetPosition();
     });
 
     wordGradeSelector.setPressedButtonAction([this](Button &button){
         Controller::getInstance()->setGradeAndMode(wordGrade,false);
+        mainMenuButton.resetPosition();
     });
 
     kanjiGradeSelector.setReleasedButtonAction(getExercise);
@@ -302,6 +315,7 @@ void MainWindow::start(){
                 case ProgramState::KanjiOn:
                 case ProgramState::KanjiMean:
                     for(Button &button : shortExerciseButtons) button.notify(event);
+                    mainMenuButton.notify(event);
                     break;
                 case ProgramState::KanjiTutor:
                     continueButton.notify(event);
@@ -319,6 +333,7 @@ void MainWindow::start(){
         case ProgramState::KanjiOn:
         case ProgramState::KanjiMean:
             for(Button &button : shortExerciseButtons) button.update();
+            mainMenuButton.update();
             break;
         case ProgramState::KanjiTutor:
             continueButton.update();
@@ -342,6 +357,7 @@ void MainWindow::start(){
             window.draw(instructionsSign);
             window.draw(progressSign);
             for(Button &button : shortExerciseButtons) window.draw(button);
+            window.draw(mainMenuButton);
             break;
         case ProgramState::KanjiTutor:
             window.draw(kanjiWordSign);

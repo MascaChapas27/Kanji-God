@@ -77,6 +77,9 @@ class MainWindow {
         // Button to continue when the tutorial has been completed
         Button continueButton;
 
+        // Button that allows you to go back to the main menu
+        Button mainMenuButton;
+
     public:
 
         MainWindow();

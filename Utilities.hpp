@@ -97,9 +97,9 @@ const int INSTRUCTIONS_SIGN_Y = 5*WINDOW_HEIGHT/6;
 const int SHORT_EXERCISE_BUTTON_X[9] = {100,250,400,
                                         100,250,400,
                                         100,250,400};
-const int SHORT_EXERCISE_BUTTON_Y[9] = {WINDOW_HEIGHT/4,WINDOW_HEIGHT/4,WINDOW_HEIGHT/4,
-                                        WINDOW_HEIGHT/2,WINDOW_HEIGHT/2,WINDOW_HEIGHT/2,
-                                        3*WINDOW_HEIGHT/4,3*WINDOW_HEIGHT/4,3*WINDOW_HEIGHT/4};
+const int SHORT_EXERCISE_BUTTON_Y[9] = {30+WINDOW_HEIGHT/4,30+WINDOW_HEIGHT/4,30+WINDOW_HEIGHT/4,
+                                        30+WINDOW_HEIGHT/2,30+WINDOW_HEIGHT/2,30+WINDOW_HEIGHT/2,
+                                        30+3*WINDOW_HEIGHT/4,30+3*WINDOW_HEIGHT/4,30+3*WINDOW_HEIGHT/4};
 
 // Position for the tutorial sign that contains the meaning for the word or kanji
 const int MEANING_SIGN_X = 7*WINDOW_WIDTH/20;
@@ -128,6 +128,10 @@ const int ON_READING_X[6] = {ONYOMI_SIGN_X-60,ONYOMI_SIGN_X+60,
 const int ON_READING_Y[6] = {ONYOMI_SIGN_Y+110,ONYOMI_SIGN_Y+110,
                              ONYOMI_SIGN_Y+220,ONYOMI_SIGN_Y+220,
                              ONYOMI_SIGN_Y+330,ONYOMI_SIGN_Y+330};
+
+//Position for the button that takes you to the main menu
+const int BACK_MENU_BUTTON_X = 60;
+const int BACK_MENU_BUTTON_Y = 60;
 
 // Placeholder progress for something not yet taught
 const int NO_PROGRESS = -1;
