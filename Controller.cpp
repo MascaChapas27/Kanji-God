@@ -13,6 +13,7 @@ Controller * Controller::getInstance(){
 void Controller::setGradeAndMode(int selectedGrade, bool kanjiMode){
     this->selectedGrade = selectedGrade;
     this->kanjiMode = kanjiMode;
+    this->godMode = false;
 }
 
 void Controller::setGodMode(bool godMode){
@@ -26,7 +27,9 @@ Exercise Controller::getExercise(){
 
     Exercise exercise;
 
-    if(kanjiMode){
+    if(godMode){
+        exercise = KanjiRepository::getInstance()->getMasteredExercise();
+    } else if(kanjiMode){
         exercise = KanjiRepository::getInstance()->getExercise(selectedGrade);
     }
 

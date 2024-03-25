@@ -49,8 +49,12 @@ class KanjiRepository{
         // Operation that loads all kanji and progress for kanji in one file
         void loadAllKanjis();
 
-        // Returns an exercise with a kanji of the given grade
-        Exercise getExercise(int grade);
+        // Returns an exercise with a kanji of the given grade. It defaults to a non-mastered
+        // exercise but can return a mastered exercise
+        Exercise getExercise(int grade, bool mastered = false);
+
+        // Returns an exercise with a kanji that has been mastered (all stats reached 100%)
+        Exercise getMasteredExercise();
 
         // Updates the progress for a kanji
         void updateKanji(std::wstring kanji, int meaning, int kunyomi, int onyomi);

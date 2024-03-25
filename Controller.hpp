@@ -49,7 +49,7 @@ class Controller {
         // Sets the current grade and mode to be practiced
         void setGradeAndMode(int selectedGrade, bool kanjiMode);
 
-        // Sets God Mode
+        // Sets God Mode to the given value
         void setGodMode(bool godMode);
 
         // Returns exercise

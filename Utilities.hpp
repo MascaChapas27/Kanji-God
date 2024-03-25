@@ -75,6 +75,10 @@ const int KANJI_MENU_BUTTON_Y = 400;
 const int WORD_MENU_BUTTON_X = WINDOW_WIDTH/2;
 const int WORD_MENU_BUTTON_Y = KANJI_MENU_BUTTON_Y;
 
+// Position of the god mode button in the main menu
+const int GODMODE_MENU_BUTTON_X = 3*WINDOW_WIDTH/4;
+const int GODMODE_MENU_BUTTON_Y = KANJI_MENU_BUTTON_Y;
+
 // Position of the arrows for the kanji button in the main menu
 const int KANJI_MENU_ARROW_LEFT_X = KANJI_MENU_BUTTON_X - 50;
 const int KANJI_MENU_ARROW_LEFT_Y = KANJI_MENU_BUTTON_Y + 120;

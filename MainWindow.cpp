@@ -93,12 +93,21 @@ void MainWindow::start(){
         wordGradeSelector.setText("Words\nGrade " + std::to_string(wordGrade), true);
     });
 
+    Button godModeSelector;
+    godModeSelector.setBottomTexture(textureHolder->get(TextureID::BigMenuButtonBottom));
+    godModeSelector.setTopTexture(textureHolder->get(TextureID::BigMenuButtonTop));
+    godModeSelector.setPosition(GODMODE_MENU_BUTTON_X,GODMODE_MENU_BUTTON_Y);
+    godModeSelector.setText("God Mode");
+    godModeSelector.setTextColor(TEXT_COLOR);
+    godModeSelector.setButtonColor(BUTTON_COLOR_NORMAL);
+
     menuButtons.push_back(&leftArrowKanji);
     menuButtons.push_back(&rightArrowKanji);
     menuButtons.push_back(&kanjiGradeSelector);
     menuButtons.push_back(&leftArrowWord);
     menuButtons.push_back(&rightArrowWord);
     menuButtons.push_back(&wordGradeSelector);
+    menuButtons.push_back(&godModeSelector);
 
     // Short answer buttons
     Button shortAnswerButton;
@@ -309,8 +318,15 @@ void MainWindow::start(){
         saveButton.resetPosition();
     });
 
+    godModeSelector.setPressedButtonAction([this](Button &button){
+        Controller::getInstance()->setGodMode(true);
+        mainMenuButton.resetPosition();
+        saveButton.resetPosition();
+    });
+
     kanjiGradeSelector.setReleasedButtonAction(getExercise);
     wordGradeSelector.setReleasedButtonAction(getExercise);
+    godModeSelector.setReleasedButtonAction(getExercise);
     continueButton.setReleasedButtonAction(getExercise);
 
     while(window.isOpen()){

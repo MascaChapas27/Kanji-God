@@ -174,11 +174,11 @@ void KanjiRepository::updateKanji(std::wstring kanji, int meaning, int kunyomi, 
     // Finally change the kanji data in the map
 }
 
-Exercise KanjiRepository::getExercise(int grade)
+Exercise KanjiRepository::getExercise(int grade, bool mastered)
 {
     Exercise exercise;
 
-    if(newKanjis[grade].size() > 0 && util::shouldLearnNewKanji(practicingKanjis[grade].size())){
+    if(!mastered && newKanjis[grade].size() > 0 && util::shouldLearnNewKanji(practicingKanjis[grade].size())){
 
         exercise.setExerciseType(ProgramState::KanjiTutor);
 
@@ -205,7 +205,11 @@ Exercise KanjiRepository::getExercise(int grade)
     } else {
 
         // Choose the kanji
-        Kanji &chosenKanji = kanjis[practicingKanjis[grade][rand()%practicingKanjis[grade].size()]];
+        Kanji &chosenKanji = kanjis[mastered
+                                    ?
+                                    masteredKanjis[grade][rand()%masteredKanjis[grade].size()]
+                                    :
+                                    practicingKanjis[grade][rand()%practicingKanjis[grade].size()]];
 
         exercise.setId(chosenKanji.getMeaning());
 
@@ -217,19 +221,19 @@ Exercise KanjiRepository::getExercise(int grade)
         while(!decided){
             switch(exerciseType){
             case 0:
-                if(chosenKanji.getMeaningProgress()==MAX_PROGRESS)
+                if(!mastered && chosenKanji.getMeaningProgress()==MAX_PROGRESS)
                     exerciseType=(exerciseType+1)%3;
                 else decided = true;
                 break;
 
             case 1:
-                if(chosenKanji.getKunyomiProgress()==MAX_PROGRESS)
+                if(!mastered && chosenKanji.getKunyomiProgress()==MAX_PROGRESS)
                     exerciseType=(exerciseType+1)%3;
                 else decided = true;
                 break;
 
             case 2:
-                if(chosenKanji.getOnyomiProgress()==MAX_PROGRESS)
+                if(!mastered && chosenKanji.getOnyomiProgress()==MAX_PROGRESS)
                     exerciseType=(exerciseType+1)%3;
                 else decided = true;
                 break;
@@ -342,6 +346,29 @@ Exercise KanjiRepository::getExercise(int grade)
     return exercise;
 }
 
+Exercise KanjiRepository::getMasteredExercise()
+{
+    // int grade = 1 + rand() % 6;
+    int grade = 1;
+
+    int counter = 0;
+
+    while(counter<6){
+        counter++;
+        if(masteredKanjis[grade].empty()){
+            grade++;
+            if (grade == 6) grade = 1;
+        } else break;
+    }
+
+    if(counter < 6) return getExercise(grade,true);
+    else{
+        Exercise e;
+        e.setExerciseType(ProgramState::TitleScreen);
+        return e;
+    }
+}
+
 bool KanjiRepository::checkAnswer(Exercise &exercise, std::wstring answer)
 {
     Kanji &kanji = kanjis[exercise.getId()];
@@ -412,8 +439,8 @@ bool KanjiRepository::allAnswered(Exercise &exercise, int answers)
         kanji.setOnyomiProgress(exercise.getOnyomiProgress());
 
         if(kanji.getMeaningProgress() == MAX_PROGRESS && 
-           kanji.getMeaningProgress() == MAX_PROGRESS &&
-           kanji.getMeaningProgress() == MAX_PROGRESS){
+           kanji.getKunyomiProgress() == MAX_PROGRESS &&
+           kanji.getOnyomiProgress() == MAX_PROGRESS){
             auto position = std::find(practicingKanjis[kanji.getGrade()].begin(),practicingKanjis[kanji.getGrade()].end(),kanji.getMeaning());
             if(position != practicingKanjis[kanji.getGrade()].end()){
                 practicingKanjis[kanji.getGrade()].erase(position);
