@@ -58,6 +58,12 @@ const sf::Color BUTTON_COLOR_INCORRECT = sf::Color(150,0,0);
 // Color for the continue button
 const sf::Color CONTINUE_COLOR = sf::Color(70,70,150);
 
+// Color for the save button when you can save
+const sf::Color SAVE_COLOR = sf::Color(100,100,170);
+
+// Color for the save button when you already saved
+const sf::Color SAVED_COLOR = sf::Color(200,200,200);
+
 // In the title screen, distance between buttons vertically
 const int TITLE_BUTTONS_VERTICAL_DISTANCE = 60;
 
@@ -97,9 +103,9 @@ const int INSTRUCTIONS_SIGN_Y = 5*WINDOW_HEIGHT/6;
 const int SHORT_EXERCISE_BUTTON_X[9] = {100,250,400,
                                         100,250,400,
                                         100,250,400};
-const int SHORT_EXERCISE_BUTTON_Y[9] = {30+WINDOW_HEIGHT/4,30+WINDOW_HEIGHT/4,30+WINDOW_HEIGHT/4,
-                                        30+WINDOW_HEIGHT/2,30+WINDOW_HEIGHT/2,30+WINDOW_HEIGHT/2,
-                                        30+3*WINDOW_HEIGHT/4,30+3*WINDOW_HEIGHT/4,30+3*WINDOW_HEIGHT/4};
+const int SHORT_EXERCISE_BUTTON_Y[9] = {60+WINDOW_HEIGHT/4,60+WINDOW_HEIGHT/4,60+WINDOW_HEIGHT/4,
+                                        60+WINDOW_HEIGHT/2,60+WINDOW_HEIGHT/2,60+WINDOW_HEIGHT/2,
+                                        60+3*WINDOW_HEIGHT/4,60+3*WINDOW_HEIGHT/4,60+3*WINDOW_HEIGHT/4};
 
 // Position for the tutorial sign that contains the meaning for the word or kanji
 const int MEANING_SIGN_X = 7*WINDOW_WIDTH/20;
@@ -131,7 +137,11 @@ const int ON_READING_Y[6] = {ONYOMI_SIGN_Y+110,ONYOMI_SIGN_Y+110,
 
 //Position for the button that takes you to the main menu
 const int BACK_MENU_BUTTON_X = 60;
-const int BACK_MENU_BUTTON_Y = 60;
+const int BACK_MENU_BUTTON_Y = 70;
+
+//Position for the button that saves the current progress
+const int SAVE_BUTTON_X = BACK_MENU_BUTTON_X+100;
+const int SAVE_BUTTON_Y = BACK_MENU_BUTTON_Y;
 
 // Placeholder progress for something not yet taught
 const int NO_PROGRESS = -1;

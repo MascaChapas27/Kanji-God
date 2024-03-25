@@ -9,6 +9,7 @@
 enum class TextureID{
     Title, Background,
     MenuArrowLeftBottom, MenuArrowLeftTop, MenuArrowRightBottom, MenuArrowRightTop, BigMenuButtonBottom, BigMenuButtonTop,
+    SaveBottom, SaveTop,
     ShortExerciseButtonBottom, ShortExerciseButtonTop, QuestionSign, InstructionsSign,
     MeaningSign, KunOnSign, ReadingSign
 };
@@ -29,8 +30,7 @@ enum class SoundID{
 enum class ProgramState{
     TitleScreen,
     KanjiKun, KanjiOn, KanjiMean, WordPron, WordMean,
-    KanjiTutor, WordTutor,
-    Saving
+    KanjiTutor, WordTutor
 };
 
 #endif

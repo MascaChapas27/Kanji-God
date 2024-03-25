@@ -50,7 +50,7 @@ bool Controller::checkAnswer(std::wstring answer, int &meanProgress, int &kunPro
         kunProgress = currentExercise.getKunyomiProgress();
         onProgress = currentExercise.getOnyomiProgress();
         break;
-    
+
     case ProgramState::WordMean:
     case ProgramState::WordPron:
         // correct = WordRepository::...
@@ -58,22 +58,22 @@ bool Controller::checkAnswer(std::wstring answer, int &meanProgress, int &kunPro
     default:
         break;
     }
-    
+
     // bool correct = answer == L"おと" || answer == L"ね";
     if(correct) correctAnswers.insert(answer);
     return correct;
 }
 
 bool Controller::allAnswered(){
-    
+
     switch(currentExercise.getExerciseType()){
     case ProgramState::KanjiKun:
     case ProgramState::KanjiOn:
     case ProgramState::KanjiMean:
-        
+
         return KanjiRepository::getInstance()->allAnswered(currentExercise, correctAnswers.size());
         break;
-    
+
     case ProgramState::WordMean:
     case ProgramState::WordPron:
         return false;
@@ -85,6 +85,10 @@ bool Controller::allAnswered(){
 }
 
 void Controller::saveAndExit(){
-    KanjiRepository::getInstance()->save();
+    save();
     exit(EXIT_SUCCESS);
+}
+
+void Controller::save(){
+    KanjiRepository::getInstance()->save();
 }

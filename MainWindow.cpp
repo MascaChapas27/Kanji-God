@@ -202,11 +202,24 @@ void MainWindow::start(){
         for(Button * button : menuButtons) button->resetPosition();
     });
 
+    // Button to save the progress
+    saveButton.setBottomTexture(textureHolder->get(TextureID::SaveBottom));
+    saveButton.setTopTexture(textureHolder->get(TextureID::SaveTop));
+    saveButton.setPosition(SAVE_BUTTON_X, SAVE_BUTTON_Y);
+    saveButton.setButtonColor(SAVED_COLOR);
+    saveButton.setPressedButtonAction([](Button &button){});
+    saveButton.setReleasedButtonAction([](Button &button){
+        Controller::getInstance()->save();
+        button.setButtonColor(SAVED_COLOR);
+    });
+
     // Function used to get an exercise (can be a tutorial for a new kanji/word)
     getExercise = [this](Button& button){
-        
+
+        saveButton.setButtonColor(SAVE_COLOR);
+
         Exercise exercise = Controller::getInstance()->getExercise();
-        
+
         ProgramState oldState = this->programState;
 
         // Set program state
@@ -228,7 +241,7 @@ void MainWindow::start(){
             if(oldState != ProgramState::KanjiKun &&
                oldState != ProgramState::KanjiOn &&
                oldState != ProgramState::KanjiMean){
-                
+
                 for(Button &b : shortExerciseButtons){
                     b.setButtonColor(BUTTON_COLOR_NORMAL);
                     b.resetPosition();
@@ -272,7 +285,7 @@ void MainWindow::start(){
             }
 
             index = 0;
-            
+
             for(std::wstring onReading : exercise.getOnyomiPronunciations()){
                 tutorialOnyomis[index].setText(onReading);
                 index++;
@@ -287,11 +300,13 @@ void MainWindow::start(){
     kanjiGradeSelector.setPressedButtonAction([this](Button &button){
         Controller::getInstance()->setGradeAndMode(kanjiGrade,true);
         mainMenuButton.resetPosition();
+        saveButton.resetPosition();
     });
 
     wordGradeSelector.setPressedButtonAction([this](Button &button){
         Controller::getInstance()->setGradeAndMode(wordGrade,false);
         mainMenuButton.resetPosition();
+        saveButton.resetPosition();
     });
 
     kanjiGradeSelector.setReleasedButtonAction(getExercise);
@@ -316,6 +331,7 @@ void MainWindow::start(){
                 case ProgramState::KanjiMean:
                     for(Button &button : shortExerciseButtons) button.notify(event);
                     mainMenuButton.notify(event);
+                    saveButton.notify(event);
                     break;
                 case ProgramState::KanjiTutor:
                     continueButton.notify(event);
@@ -334,6 +350,7 @@ void MainWindow::start(){
         case ProgramState::KanjiMean:
             for(Button &button : shortExerciseButtons) button.update();
             mainMenuButton.update();
+            saveButton.update();
             break;
         case ProgramState::KanjiTutor:
             continueButton.update();
@@ -358,6 +375,7 @@ void MainWindow::start(){
             window.draw(progressSign);
             for(Button &button : shortExerciseButtons) window.draw(button);
             window.draw(mainMenuButton);
+            window.draw(saveButton);
             break;
         case ProgramState::KanjiTutor:
             window.draw(kanjiWordSign);

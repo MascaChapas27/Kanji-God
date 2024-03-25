@@ -63,6 +63,9 @@ class Controller {
 
         // Saves the progress and exit
         void saveAndExit();
+
+        // Saves the progress but doesn't exit
+        void save();
 };
 
 #endif

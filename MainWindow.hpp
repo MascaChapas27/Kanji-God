@@ -80,6 +80,9 @@ class MainWindow {
         // Button that allows you to go back to the main menu
         Button mainMenuButton;
 
+        // Button that allows you to save the progress
+        Button saveButton;
+
     public:
 
         MainWindow();
