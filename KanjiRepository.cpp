@@ -19,16 +19,16 @@ KanjiRepository * KanjiRepository::getInstance()
 // Operation that loads all kanji and progress for kanji in one file
 void KanjiRepository::loadAllKanjis(){
 
-    for(int i=1;i<2;i++){
+    for(int i=5;i<6;i++){
 
         std::vector<std::wstring> classifiedKanjis;
 
         // Open the readings/meanings file
         #ifdef __linux__
-        std::wfstream file("files/grade" + std::to_string(i) + "kanji.txt");
+        std::wfstream file("files/JLPTN" + std::to_string(i) + "kanji.txt");
 
         if(!file.is_open()){
-            std::cerr << "ERROR: file " << "files/grade" << std::to_string(i) << "kanji.txt" <<" not found" << std::endl;
+            std::cerr << "ERROR: file " << "files/JLPTN" << std::to_string(i) << "kanji.txt" <<" not found" << std::endl;
             exit(EXIT_FAILURE);
         }
 
@@ -87,11 +87,11 @@ void KanjiRepository::loadAllKanjis(){
         #endif
 
         // Open the progress file
-        std::wfstream fileprogress("files/grade" + std::to_string(i) + "kanjiprogress.txt");
+        std::wfstream fileprogress("files/JLPTN" + std::to_string(i) + "kanjiprogress.txt");
 
         if(!fileprogress.is_open()){
             // The file doesn't exist: let's create it
-            fileprogress.open("files/grade" + std::to_string(i) + "kanjiprogress.txt",std::fstream::out);
+            fileprogress.open("files/JLPTN" + std::to_string(i) + "kanjiprogress.txt",std::fstream::out);
 
             for(std::wstring kanjiMeaning : classifiedKanjis){
                 fileprogress << kanjiMeaning << "\n-1\n-1\n-1\n";
@@ -348,12 +348,12 @@ Exercise KanjiRepository::getExercise(int grade, bool mastered)
 
 Exercise KanjiRepository::getMasteredExercise()
 {
-    // int grade = 1 + rand() % 6;
-    int grade = 1;
+    // int grade = 1 + rand() % 5;
+    int grade = 5;
 
     int counter = 0;
 
-    while(counter<6){
+    while(counter<5){
         counter++;
         if(masteredKanjis[grade].empty()){
             grade++;
@@ -361,7 +361,7 @@ Exercise KanjiRepository::getMasteredExercise()
         } else break;
     }
 
-    if(counter < 6) return getExercise(grade,true);
+    if(counter < 5) return getExercise(grade,true);
     else{
         Exercise e;
         e.setExerciseType(ProgramState::TitleScreen);
@@ -462,14 +462,10 @@ void KanjiRepository::save(){
 
     std::map<int,std::wfstream> files;
 
-    files[1] = std::wfstream("files/grade1kanjiprogress.txt",std::wfstream::trunc | std::wfstream::out);
+    files[5] = std::wfstream("files/JLPTN5kanjiprogress.txt",std::wfstream::trunc | std::wfstream::out);
 
     for(auto &pair : kanjis){
-        switch(pair.second.getGrade()){
-        case 1:
-            files[1] << pair.second.getMeaning() << L"\n" << pair.second.getMeaningProgress() << L"\n" << pair.second.getKunyomiProgress() << L"\n" << pair.second.getOnyomiProgress() << L"\n";
-            break;
-        }
+        files[pair.second.getGrade()] << pair.second.getMeaning() << L"\n" << pair.second.getMeaningProgress() << L"\n" << pair.second.getKunyomiProgress() << L"\n" << pair.second.getOnyomiProgress() << L"\n";
     }
 
     for(auto &pair : files){

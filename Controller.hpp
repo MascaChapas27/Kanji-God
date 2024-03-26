@@ -23,7 +23,7 @@ class Controller {
         // True if God Mode is selected (practice mastered elements)
         bool godMode;
 
-        // Grade selected (expected from 1 to 6, ignored if godMode is true)
+        // Grade selected (expected from 1 to 5, ignored if godMode is true)
         int selectedGrade;
 
         // True if kanji mode is selected, false if
