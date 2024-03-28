@@ -156,6 +156,24 @@ const int MIN_PROGRESS = 0;
 // Maximum progress for an exercise
 const int MAX_PROGRESS = 100;
 
+// Points given for correctly guessing a kunyomi reading
+const int CORRECT_KUN_POINTS = 1;
+
+// Points taken for incorrectly guessing a kunyomi reading
+const int INCORRECT_KUN_POINTS = 2;
+
+// Points given for correctly guessing an onyomi reading
+const int CORRECT_ON_POINTS = 1;
+
+// Points taken for incorrectly guessing an onyomi reading
+const int INCORRECT_ON_POINTS = 2;
+
+// Points given for correctly guessing a kanji meaning
+const int CORRECT_KANJIMEAN_POINTS = 2;
+
+// Points taken for incorrectly guessing a kanji meaning
+const int INCORRECT_KANJIMEAN_POINTS = 4;
+
 namespace util {
     // Calculates whether a point is in a rectangle
     bool isInRectangle(int x, int y, int rectX, int rectY, int rectWidth, int rectHeight);

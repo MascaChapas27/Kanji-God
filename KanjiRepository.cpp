@@ -148,7 +148,7 @@ void KanjiRepository::loadAllKanjis(){
         std::shuffle(std::begin(newKanjis[i]), std::end(newKanjis[i]), rng);
         std::shuffle(std::begin(practicingKanjis[i]), std::end(practicingKanjis[i]), rng);
         std::shuffle(std::begin(masteredKanjis[i]), std::end(masteredKanjis[i]), rng);
-        
+
     }
 
         // For each kanji read
@@ -202,6 +202,8 @@ Exercise KanjiRepository::getExercise(int grade, bool mastered)
         newKanjis[grade].pop_back();
         practicingKanjis[grade].push_back(chosenKanji.getMeaning());
 
+    } else if(practicingKanjis[grade].size() == 0){
+        exercise.setExerciseType(ProgramState::TitleScreen);
     } else {
 
         // Choose the kanji
@@ -217,7 +219,7 @@ Exercise KanjiRepository::getExercise(int grade, bool mastered)
         int exerciseType = rand()%3;
 
         bool decided = false;
-        
+
         while(!decided){
             switch(exerciseType){
             case 0:
@@ -239,7 +241,7 @@ Exercise KanjiRepository::getExercise(int grade, bool mastered)
                 break;
             }
         }
-        
+
 
         // Set for the answers that the exercise will have
         std::set<std::wstring> exerciseAnswers;
@@ -379,30 +381,30 @@ bool KanjiRepository::checkAnswer(Exercise &exercise, std::wstring answer)
     case ProgramState::KanjiKun:
         correct = kanji.getKunyomiReadings().count(answer);
         if(correct) {
-            exercise.setKunyomiProgress(exercise.getKunyomiProgress() + 1);
+            exercise.setKunyomiProgress(exercise.getKunyomiProgress() + CORRECT_KUN_POINTS);
             if(exercise.getKunyomiProgress() > MAX_PROGRESS) exercise.setKunyomiProgress(MAX_PROGRESS);
         } else {
-            exercise.setKunyomiProgress(exercise.getKunyomiProgress() - 2);
+            exercise.setKunyomiProgress(exercise.getKunyomiProgress() - INCORRECT_KUN_POINTS);
             if(exercise.getKunyomiProgress() < MIN_PROGRESS) exercise.setKunyomiProgress(MIN_PROGRESS);
         }
         break;
     case ProgramState::KanjiOn:
         correct = kanji.getOnyomiReadings().count(answer);
         if(correct) {
-            exercise.setOnyomiProgress(exercise.getOnyomiProgress() + 1);
+            exercise.setOnyomiProgress(exercise.getOnyomiProgress() + CORRECT_ON_POINTS);
             if(exercise.getOnyomiProgress() > MAX_PROGRESS) exercise.setOnyomiProgress(MAX_PROGRESS);
         } else {
-            exercise.setOnyomiProgress(exercise.getOnyomiProgress() - 2);
+            exercise.setOnyomiProgress(exercise.getOnyomiProgress() - INCORRECT_ON_POINTS);
             if(exercise.getOnyomiProgress() < MIN_PROGRESS) exercise.setOnyomiProgress(MIN_PROGRESS);
         }
         break;
     case ProgramState::KanjiMean:
         correct = kanji.getMeaning() == answer;
         if(correct) {
-            exercise.setMeaningProgress(exercise.getMeaningProgress() + 3);
+            exercise.setMeaningProgress(exercise.getMeaningProgress() + CORRECT_KANJIMEAN_POINTS);
             if(exercise.getMeaningProgress() > MAX_PROGRESS) exercise.setMeaningProgress(MAX_PROGRESS);
         } else {
-            exercise.setMeaningProgress(exercise.getMeaningProgress() - 5);
+            exercise.setMeaningProgress(exercise.getMeaningProgress() - INCORRECT_KANJIMEAN_POINTS);
             if(exercise.getMeaningProgress() < MIN_PROGRESS) exercise.setMeaningProgress(MIN_PROGRESS);
         }
         break;
@@ -413,7 +415,7 @@ bool KanjiRepository::checkAnswer(Exercise &exercise, std::wstring answer)
     return correct;
 }
 
-bool KanjiRepository::allAnswered(Exercise &exercise, int answers)
+bool KanjiRepository::allAnswered(Exercise &exercise, unsigned int answers)
 {
     Kanji &kanji = kanjis[exercise.getId()];
 
@@ -421,7 +423,7 @@ bool KanjiRepository::allAnswered(Exercise &exercise, int answers)
 
     switch(exercise.getExerciseType()){
     case ProgramState::KanjiKun:
-        completed = kanji.getKunyomiReadings().size() == answers;   
+        completed = kanji.getKunyomiReadings().size() == answers;
         break;
     case ProgramState::KanjiOn:
         completed = kanji.getOnyomiReadings().size() == answers;
@@ -438,7 +440,7 @@ bool KanjiRepository::allAnswered(Exercise &exercise, int answers)
         kanji.setKunyomiProgress(exercise.getKunyomiProgress());
         kanji.setOnyomiProgress(exercise.getOnyomiProgress());
 
-        if(kanji.getMeaningProgress() == MAX_PROGRESS && 
+        if(kanji.getMeaningProgress() == MAX_PROGRESS &&
            kanji.getKunyomiProgress() == MAX_PROGRESS &&
            kanji.getOnyomiProgress() == MAX_PROGRESS){
             auto position = std::find(practicingKanjis[kanji.getGrade()].begin(),practicingKanjis[kanji.getGrade()].end(),kanji.getMeaning());

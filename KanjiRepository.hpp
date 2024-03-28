@@ -63,7 +63,7 @@ class KanjiRepository{
         bool checkAnswer(Exercise &exercise, std::wstring answer);
 
         // Checks if all answeres were answered for a kanji
-        bool allAnswered(Exercise &exercise, int answers);
+        bool allAnswered(Exercise &exercise, unsigned int answers);
 
         // Saves all data
         void save();
