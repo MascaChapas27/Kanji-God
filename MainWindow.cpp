@@ -207,6 +207,7 @@ void MainWindow::start(){
     mainMenuButton.setButtonColor(BUTTON_COLOR_NORMAL);
     mainMenuButton.setPressedButtonAction([](Button &button){});
     mainMenuButton.setReleasedButtonAction([this](Button &button){
+        Controller::getInstance()->save();
         this->programState = ProgramState::TitleScreen;
         for(Button * button : menuButtons) button->resetPosition();
     });
