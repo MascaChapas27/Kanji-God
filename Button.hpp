@@ -2,6 +2,7 @@
 #define __BUTTON_HPP__
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include <functional>
 
 /*
@@ -26,6 +27,9 @@ class Button : public sf::Drawable{
         // Indicates if the button is currently being pressed
         bool pressed;
 
+        // Indicates if the mouse is in the button currently
+        bool mouseInside;
+
         // When deciding if a font is too bug, what percentage of the length and width of
         // the button should the text have. For example, 1.0 means that the text will fit so
         // that its bigger dimension (width or leight) is exactly the same as the button's
@@ -43,6 +47,15 @@ class Button : public sf::Drawable{
 
         // Action to be performed when the button is released
         std::function<void(Button&)> releasedButtonAction;
+
+        // Sound that plays when a button is pressed
+        static sf::Sound pressButtonSound;
+
+        // Sound that plays when a button is released
+        static sf::Sound releaseButtonSound;
+
+        // Sound that plays when you hover the mouse over a button
+        static sf::Sound hoverOverButtonSound;
 
     public:
         Button();

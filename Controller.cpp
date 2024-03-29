@@ -5,6 +5,9 @@
 
 Controller * Controller::controller = nullptr;
 
+sf::Sound Controller::correctAnswerSound = util::initializeSound(SoundID::CorrectAnswer);
+sf::Sound Controller::incorrectAnswerSound = util::initializeSound(SoundID::IncorrectAnswer);
+
 Controller * Controller::getInstance(){
     if(controller == nullptr) controller = new Controller();
     return controller;
@@ -63,7 +66,13 @@ bool Controller::checkAnswer(std::wstring answer, int &meanProgress, int &kunPro
     }
 
     // bool correct = answer == L"おと" || answer == L"ね";
-    if(correct) correctAnswers.insert(answer);
+    if(correct) {
+        correctAnswers.insert(answer);
+        correctAnswerSound.setPitch(INITIAL_PITCH_CORRECT_SOUND+PITCH_INCREMENT_CORRECT_SOUND*correctAnswers.size());
+        correctAnswerSound.play();
+    } else {
+        incorrectAnswerSound.play();
+    }
     return correct;
 }
 

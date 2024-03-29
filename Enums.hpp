@@ -21,7 +21,7 @@ enum class FontID{
 
 // Type of sound
 enum class SoundID{
-
+    CorrectAnswer, HoverOverButton, IncorrectAnswer, PressButton, ReleaseButton
 };
 
 // Type of action for the program (each action makes the program

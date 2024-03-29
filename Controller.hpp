@@ -2,6 +2,8 @@
 #define __CONTROLLER_HPP__
 
 #include "Exercise.hpp"
+#include "ResourceHolder.hpp"
+#include <SFML/Audio.hpp>
 #include <set>
 
 /*
@@ -35,6 +37,12 @@ class Controller {
 
         // Sets of answers that were sent and were correct
         std::set<std::wstring> correctAnswers;
+
+        // Sound that plays when the correct answer is selected
+        static sf::Sound correctAnswerSound;
+
+        // Sound that plays when an incorrect answer is selected
+        static sf::Sound incorrectAnswerSound;
 
     public:
         // NEVER CLONE A SINGLETON

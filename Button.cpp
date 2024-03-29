@@ -3,10 +3,15 @@
 #include "ResourceHolder.hpp"
 #include "Enums.hpp"
 
+sf::Sound Button::pressButtonSound = util::initializeSound(SoundID::PressButton);
+sf::Sound Button::releaseButtonSound = util::initializeSound(SoundID::ReleaseButton);
+sf::Sound Button::hoverOverButtonSound = util::initializeSound(SoundID::HoverOverButton);
+
 Button::Button(){
     text.setFont(FontHolder::getFontInstance()->get(FontID::MoboFont));
     topOffset = MAX_BUTTON_TOP_OFFSET;
     pressed = false;
+    mouseInside = false;
     pressedButtonAction = [](Button &button){};
     releasedButtonAction = [](Button &button){};
 }
@@ -111,23 +116,34 @@ void Button::resetPosition(){
 void Button::notify(sf::Event &event)
 {
     if(!pressed && event.type == sf::Event::MouseMoved){
-        if(util::isInRectangle(event.mouseMove.x,event.mouseMove.y,topSprite.getPosition().x-topSprite.getTextureRect().width/2,topSprite.getPosition().y-topSprite.getTextureRect().height/2,topSprite.getTextureRect().width,topSprite.getTextureRect().height)){
+        if(!mouseInside && util::isInRectangle(event.mouseMove.x,event.mouseMove.y,topSprite.getPosition().x-topSprite.getTextureRect().width/2,topSprite.getPosition().y-topSprite.getTextureRect().height/2,topSprite.getTextureRect().width,topSprite.getTextureRect().height)){
+            // Hovering over the button
+            hoverOverButtonSound.play();
             topOffset = MID_BUTTON_TOP_OFFSET;
-        } else {
+            mouseInside = true;
+        } else if(mouseInside && !util::isInRectangle(event.mouseMove.x,event.mouseMove.y,topSprite.getPosition().x-topSprite.getTextureRect().width/2,topSprite.getPosition().y-topSprite.getTextureRect().height/2,topSprite.getTextureRect().width,topSprite.getTextureRect().height)){
+            // Mouse is out of the button
             topOffset = MAX_BUTTON_TOP_OFFSET;
+            mouseInside = false;
         }
     } else if (!pressed && event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left){
         if(util::isInRectangle(event.mouseButton.x,event.mouseButton.y,topSprite.getPosition().x-topSprite.getTextureRect().width/2,topSprite.getPosition().y-topSprite.getTextureRect().height/2,topSprite.getTextureRect().width,topSprite.getTextureRect().height)){
+            // Pressed on the button
+            pressButtonSound.play();
             topSprite.setPosition(bottomSprite.getPosition());
             topOffset = MIN_BUTTON_TOP_OFFSET;
             pressed = true;
             pressedButtonAction(*this);
         }
     } else if (pressed && event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left){
+        
+        releaseButtonSound.play();
 
         if(util::isInRectangle(event.mouseButton.x,event.mouseButton.y,topSprite.getPosition().x-topSprite.getTextureRect().width/2,topSprite.getPosition().y-topSprite.getTextureRect().height/2,topSprite.getTextureRect().width,topSprite.getTextureRect().height)){
+            // Released and the mouse is in the button
             topOffset = MID_BUTTON_TOP_OFFSET;
         } else {
+            // Released and the mouse is out of the button
             topOffset = MAX_BUTTON_TOP_OFFSET;
         }
 

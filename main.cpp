@@ -9,15 +9,6 @@
 #include <ctime>
 
 int main(){
-    // Load all fonts
-    FontHolder::getFontInstance()->loadAllFonts();
-
-    // Load all textures
-    TextureHolder::getTextureInstance()->loadAllTextures();
-
-    // Load all sounds
-    SoundHolder::getSoundInstance()->loadAllSounds();
-
     // Load all kanjis
     KanjiRepository::getInstance()->loadAllKanjis();
 

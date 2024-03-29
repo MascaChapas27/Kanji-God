@@ -34,6 +34,11 @@ Resource& ResourceHolder<Resource,Identifier>::get(Identifier id){
     // type is automatically infered from the context)
     auto found = resourceMap.find(id);
 
+    if(found == resourceMap.end()){
+        std::cerr << "ERROR: could not find the desired element in the resource holder" << std::endl;
+        exit(EXIT_FAILURE);
+    }
+
     // Once we have the element, which is a pair, we return
     // the texture, which is the second element
     return *(found -> second);
@@ -42,24 +47,30 @@ Resource& ResourceHolder<Resource,Identifier>::get(Identifier id){
 template <class Resource, class Identifier>
 TextureHolder * ResourceHolder<Resource,Identifier>::getTextureInstance()
 {
-    if(textureHolder == nullptr)
+    if(textureHolder == nullptr){
         textureHolder = new TextureHolder;
+        textureHolder->loadAllTextures();
+    }
     return textureHolder;
 }
 
 template <class Resource, class Identifier>
 SoundHolder * ResourceHolder<Resource,Identifier>::getSoundInstance()
 {
-    if(soundHolder == nullptr)
+    if(soundHolder == nullptr){
         soundHolder = new SoundHolder;
+        soundHolder->loadAllSounds();
+    }
     return soundHolder;
 }
 
 template <class Resource, class Identifier>
 FontHolder * ResourceHolder<Resource,Identifier>::getFontInstance()
 {
-    if(fontHolder == nullptr)
+    if(fontHolder == nullptr){
         fontHolder = new FontHolder;
+        fontHolder->loadAllFonts();
+    }
     return fontHolder;
 }
 
@@ -92,7 +103,11 @@ void ResourceHolder<Resource,Identifier>::loadAllTextures()
 template <class Resource, class Identifier>
 void ResourceHolder<Resource,Identifier>::loadAllSounds()
 {
-    // load(SoundID::boss_voice,"sounds/boss-voice.wav");
+    load(SoundID::CorrectAnswer,"sounds/correct_answer.wav");
+    load(SoundID::HoverOverButton,"sounds/hover_over_button.wav");
+    load(SoundID::IncorrectAnswer,"sounds/incorrect_answer.wav");
+    load(SoundID::PressButton,"sounds/press_button.wav");
+    load(SoundID::ReleaseButton,"sounds/release_button.wav");
 }
 
 template <class Resource, class Identifier>

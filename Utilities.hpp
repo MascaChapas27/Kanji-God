@@ -1,7 +1,9 @@
 #ifndef __UTILITIES_HPP__
 #define __UTILITIES_HPP__
 
+#include "Enums.hpp"
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 
 /*
     This file contains constants and other important stuff that need to
@@ -174,12 +176,21 @@ const int CORRECT_KANJIMEAN_POINTS = 2;
 // Points taken for incorrectly guessing a kanji meaning
 const int INCORRECT_KANJIMEAN_POINTS = 4;
 
+// Initial pitch for the correct answer sound
+const double INITIAL_PITCH_CORRECT_SOUND = 1.3;
+
+// Pitch increment for the correct answer sound for every correct answer
+const double PITCH_INCREMENT_CORRECT_SOUND = 0.1;
+
 namespace util {
     // Calculates whether a point is in a rectangle
     bool isInRectangle(int x, int y, int rectX, int rectY, int rectWidth, int rectHeight);
 
     // Tells if you should learn a new kanji or practice an existing one
     bool shouldLearnNewKanji(int newKanji);
+
+    // Makes a sound based on the SoundID of that sound
+    sf::Sound initializeSound(SoundID soundId);
 }
 
 #endif
