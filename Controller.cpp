@@ -43,7 +43,12 @@ Exercise Controller::getExercise(){
 bool Controller::checkAnswer(std::wstring answer, int &meanProgress, int &kunProgress, int &onProgress){
 
     // That answer was already answered
-    if(correctAnswers.count(answer)) return true;
+    if(correctAnswers.count(answer)) {
+        kunProgress = currentExercise.getKunyomiProgress();
+        onProgress = currentExercise.getOnyomiProgress();
+        meanProgress = currentExercise.getMeaningProgress();
+        return true;
+    }
 
     bool correct = false;
 
