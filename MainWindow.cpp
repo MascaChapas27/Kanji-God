@@ -25,6 +25,7 @@ MainWindow::MainWindow(){
     background.setScale(2.0, 2.0);
     title.setTexture(textureHolder->get(TextureID::Title));
     title.setPosition(TITLE_X, TITLE_Y);
+    title.setOrigin(title.getTextureRect().width/2,title.getTextureRect().height/2);
 }
 
 void MainWindow::start(){
@@ -63,7 +64,7 @@ void MainWindow::start(){
         kanjiGradeSelector.setText("Kanji\nJLPT N" + std::to_string(kanjiGrade), true);
     });
 
-    Button wordGradeSelector;
+    /* Button wordGradeSelector;
     wordGradeSelector.setBottomTexture(textureHolder->get(TextureID::BigMenuButtonBottom));
     wordGradeSelector.setTopTexture(textureHolder->get(TextureID::BigMenuButtonTop));
     wordGradeSelector.setPosition(WORD_MENU_BUTTON_X,WORD_MENU_BUTTON_Y);
@@ -91,7 +92,7 @@ void MainWindow::start(){
         wordGrade--;
         if(wordGrade == 0) wordGrade = 5;
         wordGradeSelector.setText("Words\nJLPT N" + std::to_string(wordGrade), true);
-    });
+    }); */
 
     Button godModeSelector;
     godModeSelector.setBottomTexture(textureHolder->get(TextureID::BigMenuButtonBottom));
@@ -104,9 +105,11 @@ void MainWindow::start(){
     menuButtons.push_back(&leftArrowKanji);
     menuButtons.push_back(&rightArrowKanji);
     menuButtons.push_back(&kanjiGradeSelector);
+    /*
     menuButtons.push_back(&leftArrowWord);
     menuButtons.push_back(&rightArrowWord);
     menuButtons.push_back(&wordGradeSelector);
+    */
     menuButtons.push_back(&godModeSelector);
 
     // Short answer buttons
@@ -313,11 +316,11 @@ void MainWindow::start(){
         saveButton.resetPosition();
     });
 
-    wordGradeSelector.setPressedButtonAction([this](Button &button){
+    /* wordGradeSelector.setPressedButtonAction([this](Button &button){
         Controller::getInstance()->setGradeAndMode(wordGrade,false);
         mainMenuButton.resetPosition();
         saveButton.resetPosition();
-    });
+    }); */
 
     godModeSelector.setPressedButtonAction([this](Button &button){
         Controller::getInstance()->setGodMode(true);
@@ -326,7 +329,7 @@ void MainWindow::start(){
     });
 
     kanjiGradeSelector.setReleasedButtonAction(getExercise);
-    wordGradeSelector.setReleasedButtonAction(getExercise);
+    //wordGradeSelector.setReleasedButtonAction(getExercise);
     godModeSelector.setReleasedButtonAction(getExercise);
     continueButton.setReleasedButtonAction(getExercise);
 

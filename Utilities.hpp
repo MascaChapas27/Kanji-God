@@ -18,8 +18,8 @@ const int WINDOW_HEIGHT = 600;
 const std::string WINDOW_TITLE = "amai";
 
 // Position for the title
-const int TITLE_X = 80;
-const int TITLE_Y = 20;
+const int TITLE_X = WINDOW_WIDTH/2;
+const int TITLE_Y = WINDOW_HEIGHT/4;
 
 // Maximum offset for a button, used when the button is not being used
 // and just exists there
@@ -70,15 +70,15 @@ const sf::Color SAVED_COLOR = sf::Color(200,200,200);
 const int TITLE_BUTTONS_VERTICAL_DISTANCE = 60;
 
 // Position of the kanji button in the main menu
-const int KANJI_MENU_BUTTON_X = WINDOW_WIDTH/4;
+const int KANJI_MENU_BUTTON_X = WINDOW_WIDTH/3;
 const int KANJI_MENU_BUTTON_Y = 400;
-
+/*
 // Position of the word button in the main menu
 const int WORD_MENU_BUTTON_X = WINDOW_WIDTH/2;
 const int WORD_MENU_BUTTON_Y = KANJI_MENU_BUTTON_Y;
-
+*/
 // Position of the god mode button in the main menu
-const int GODMODE_MENU_BUTTON_X = 3*WINDOW_WIDTH/4;
+const int GODMODE_MENU_BUTTON_X = 2*WINDOW_WIDTH/3;
 const int GODMODE_MENU_BUTTON_Y = KANJI_MENU_BUTTON_Y;
 
 // Position of the arrows for the kanji button in the main menu
@@ -86,13 +86,13 @@ const int KANJI_MENU_ARROW_LEFT_X = KANJI_MENU_BUTTON_X - 50;
 const int KANJI_MENU_ARROW_LEFT_Y = KANJI_MENU_BUTTON_Y + 120;
 const int KANJI_MENU_ARROW_RIGHT_X = KANJI_MENU_BUTTON_X + 50;
 const int KANJI_MENU_ARROW_RIGHT_Y = KANJI_MENU_ARROW_LEFT_Y;
-
+/*
 // Position of the arrows for the word button in the main menu
 const int WORD_MENU_ARROW_LEFT_X = WORD_MENU_BUTTON_X - 50;
 const int WORD_MENU_ARROW_LEFT_Y = KANJI_MENU_ARROW_LEFT_Y;
 const int WORD_MENU_ARROW_RIGHT_X = WORD_MENU_BUTTON_X + 50;
 const int WORD_MENU_ARROW_RIGHT_Y = KANJI_MENU_ARROW_LEFT_Y;
-
+*/
 // Position for the sign that has the kanji/word that is currently being asked/taught
 const int KANJI_WORD_SIGN_X = 8*WINDOW_WIDTH/10;
 const int KANJI_WORD_SIGN_Y = WINDOW_HEIGHT/2;
