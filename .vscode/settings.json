@@ -112,7 +112,9 @@
     "streambuf": "cpp",
     "cinttypes": "cpp",
     "typeinfo": "cpp",
-    "*.tpp": "cpp"
+    "*.tpp": "cpp",
+    "chrono": "cpp",
+    "ratio": "cpp"
   },
   "lldb.showDisassembly": "auto",
   "lldb.dereferencePointers": true,

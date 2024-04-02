@@ -19,7 +19,7 @@ KanjiRepository * KanjiRepository::getInstance()
 // Operation that loads all kanji and progress for kanji in one file
 void KanjiRepository::loadAllKanjis(){
 
-    for(int i=5;i<6;i++){
+    for(int i=4;i<6;i++){
 
         std::vector<std::wstring> classifiedKanjis;
 
