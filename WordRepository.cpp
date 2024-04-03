@@ -1,4 +1,5 @@
 #include "WordRepository.hpp"
+#include "KanjiRepository.hpp"
 #include "Exercise.hpp"
 #include "Utilities.hpp"
 #include "FuckWindows.hpp"
@@ -22,112 +23,128 @@ WordRepository * WordRepository::getInstance()
 // Operation that loads all words and progress for words
 void WordRepository::loadAllWords(){
 
-    for(int i=5;i<6;i++){
+    std::vector<std::wstring> classifiedWords;
 
-        std::vector<std::wstring> classifiedWords;
+    // Open the words file
+    #ifdef __linux__
+    std::wfstream file("files/words.txt");
 
-        // Open the readings/meanings file
-        #ifdef __linux__
-        std::wfstream file("files/JLPTN" + std::to_string(i) + "words.txt");
+    if(!file.is_open()){
+        std::cerr << "ERROR: file " << "files/words.txt not found" << std::endl;
+        exit(EXIT_FAILURE);
+    }
 
-        if(!file.is_open()){
-            std::cerr << "ERROR: file " << "files/JLPTN" << std::to_string(i) << "words.txt" <<" not found" << std::endl;
+    file.imbue(std::locale("C.UTF-8"));
+    #else
+    std::wstringstream file(FuckWindows::bbb);
+    #endif
+    std::wstring data;
+
+    // Line that should be a kanji meaning (or "#")
+    getline(file,data);
+
+    while(data != L"#"){
+
+        int minGrade = 5;
+
+        while(data != L""){
+            int currentGrade = KanjiRepository::getInstance()->getKanji(data).getGrade();
+            if(currentGrade < minGrade)
+                minGrade = currentGrade;
+        }
+
+        Word w;
+
+        w.setGrade(minGrade);
+
+        getline(file,data);
+
+        w.setWord(data);
+
+        // Read the pronunciation
+        getline(file,data);
+
+        w.setPronunciation(data);
+
+        // Read the meaning
+        getline(file,data);
+
+        w.setMeaning(data);
+
+        // Read a line that contains "----"
+        getline(file,data);
+
+        // Read another word or "#"
+        getline(file,data);
+
+        if(words.find(w.getMeaning()) != words.end()){
+            std::wcerr << "ERROR: tried to enter word " << w.getMeaning() << " twice" << std::endl;
             exit(EXIT_FAILURE);
         }
 
-        file.imbue(std::locale("C.UTF-8"));
-        #else
-        std::wstringstream file(FuckWindows::bbb[i]);
-        #endif
-        std::wstring data;
+        words[w.getMeaning()] = w;
 
-        // Line that should be a word with kanji (or "#")
-        getline(file,data);
+        classifiedWords.push_back(w.getMeaning());
+    }
+
+    #ifdef __linux__
+    file.close();
+    #endif
+
+    // Open the progress file
+    std::wfstream fileprogress("files/wordprogress.txt");
+
+    if(!fileprogress.is_open()){
+        // The file doesn't exist: let's create it
+        fileprogress.open("files/wordprogress.txt",std::fstream::out);
+
+        for(std::wstring wordMeaning : classifiedWords){
+            fileprogress << wordMeaning << "\n-1\n-1\n";
+            words[wordMeaning].setPronunciationProgress(-1);
+            words[wordMeaning].setMeaningProgress(-1);
+            newWords[words[wordMeaning].getGrade()].push_back(wordMeaning);
+        }
+
+        fileprogress << "#";
+    } else {
+
+        // First line, can be a "#" or a word containing kanji
+        getline(fileprogress,data);
 
         while(data != L"#"){
-            Word w;
 
-            w.setGrade(i);
+            // Get the word and assign it the progress numbers
+            Word &w = words[data];
 
-            w.setWord(data);
-
-            // Read the pronunciation
-            getline(file,data);
-
-            w.setPronunciation(data);
-
-            // Read the meaning
-            getline(file,data);
-
-            w.setMeaning(data);
-
-            // Read an empty line
-            getline(file,data);
-
-            // Read another word or "#"
-            getline(file,data);
-
-            classifiedWords.push_back(w.getMeaning());
-        }
-
-        #ifdef __linux__
-        file.close();
-        #endif
-
-        // Open the progress file
-        std::wfstream fileprogress("files/JLPTN" + std::to_string(i) + "wordprogress.txt");
-
-        if(!fileprogress.is_open()){
-            // The file doesn't exist: let's create it
-            fileprogress.open("files/JLPTN" + std::to_string(i) + "wordprogress.txt",std::fstream::out);
-
-            for(std::wstring wordMeaning : classifiedWords){
-                fileprogress << wordMeaning << "\n-1\n-1\n";
-                words[wordMeaning].setPronunciationProgress(-1);
-                words[wordMeaning].setMeaningProgress(-1);
-            }
-
-            fileprogress << "#";
-
-            newWords[i] = classifiedWords;
-        } else {
-
-            // First line, can be a "#" or a word containing kanji
             getline(fileprogress,data);
+            int pronunciationProgress = std::stoi(data);
 
-            while(data != L"#"){
+            getline(fileprogress,data);
+            int meaningProgress = std::stoi(data);
 
-                // Get the word and assign it the progress numbers
-                Word &w = words[data];
+            w.setPronunciationProgress(pronunciationProgress);
+            w.setMeaningProgress(meaningProgress);
 
-                getline(fileprogress,data);
-                int pronunciationProgress = std::stoi(data);
-
-                getline(fileprogress,data);
-                int meaningProgress = std::stoi(data);
-
-                w.setPronunciationProgress(pronunciationProgress);
-                w.setMeaningProgress(meaningProgress);
-
-                // Classify the word depending on the progress numbers
-                if(pronunciationProgress == NO_PROGRESS && meaningProgress == NO_PROGRESS){
-                    newWords[i].push_back(w.getMeaning());
-                } else if (pronunciationProgress == NO_PROGRESS && meaningProgress == NO_PROGRESS){
-                    masteredWords[i].push_back(w.getMeaning());
-                } else {
-                    practicingWords[i].push_back(w.getMeaning());
-                }
-
-                // Get the next line, which can be a word containing kanji or a "#"
-                getline(fileprogress,data);
+            // Classify the word depending on the progress numbers
+            if(pronunciationProgress == NO_PROGRESS && meaningProgress == NO_PROGRESS){
+                newWords[w.getGrade()].push_back(w.getMeaning());
+            } else if (pronunciationProgress == NO_PROGRESS && meaningProgress == NO_PROGRESS){
+                masteredWords[w.getGrade()].push_back(w.getMeaning());
+            } else {
+                practicingWords[w.getGrade()].push_back(w.getMeaning());
             }
+
+            // Get the next line, which can be a word containing kanji or a "#"
+            getline(fileprogress,data);
         }
+    }
 
-        fileprogress.close();
+    fileprogress.close();
 
-        // Shuffle the vectors to make them more unpredictable
-        auto rng = std::default_random_engine {};
-        rng.seed(std::chrono::system_clock::now().time_since_epoch().count());
+    // Shuffle the vectors to make them more unpredictable
+    auto rng = std::default_random_engine {};
+    rng.seed(std::chrono::system_clock::now().time_since_epoch().count());
+    for(int i=5;i<6;i++){
         std::shuffle(std::begin(newWords[i]), std::end(newWords[i]), rng);
         std::shuffle(std::begin(practicingWords[i]), std::end(practicingWords[i]), rng);
         std::shuffle(std::begin(masteredWords[i]), std::end(masteredWords[i]), rng);

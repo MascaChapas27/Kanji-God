@@ -154,6 +154,11 @@ void KanjiRepository::loadAllKanjis(){
     }
 }
 
+Kanji KanjiRepository::getKanji(std::wstring meaning)
+{
+    return kanjis[meaning];
+}
+
 Exercise KanjiRepository::getExercise(int grade, bool mastered)
 {
     Exercise exercise;

@@ -49,6 +49,9 @@ class KanjiRepository{
         // Operation that loads all kanji and progress for kanji
         void loadAllKanjis();
 
+        // Returns the kanji specified by its meaning
+        Kanji getKanji(std::wstring meaning);
+
         // Returns an exercise with a kanji of the given grade. It defaults to a non-mastered
         // exercise but can return a mastered exercise
         Exercise getExercise(int grade, bool mastered = false);
