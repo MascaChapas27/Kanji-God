@@ -13,7 +13,7 @@ class FuckWindows{
     public:
         static std::map<int,std::wstring> aaa;
 
-        static void initializeAll();
+        static std::map<int,std::wstring> bbb;
 };
 
 #endif

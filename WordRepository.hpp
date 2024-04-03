@@ -36,6 +36,9 @@ class WordRepository{
         // store the meaning for that word
         std::map<int,std::vector<std::wstring>> masteredWords;
 
+        // This is just temporary
+        void classifyWords();
+
     public:
         // NEVER CLONE A SINGLETON
         WordRepository(WordRepository &other) = delete;

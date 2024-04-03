@@ -385,9 +385,9 @@ void MainWindow::start(){
                 continueButton.resetPosition();
             }
 
-            tutorialWordMeaning.setText(L"Meaning: " + exercise.getId());
+            tutorialWordMeaning.setText(exercise.getId());
 
-            tutorialPronunciation.setText(L"Pronunciation: " + exercise.getWordPronunciation());
+            tutorialPronunciation.setText(exercise.getWordPronunciation());
         }
             break;
         }
@@ -516,7 +516,6 @@ void MainWindow::start(){
         case ProgramState::WordTutor:
             window.draw(kanjiWordSign);
             window.draw(instructionsSign);
-            window.draw(tutorialKanjiMeaning);
             window.draw(tutorialWordMeaning);
             window.draw(tutorialPronunciation);
             window.draw(continueButton);

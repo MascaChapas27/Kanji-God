@@ -5,3 +5,7 @@ std::map<int, std::wstring> FuckWindows::aaa = {
     //{5, L"一\nOne\nイチ\nイツ\n\nひと\nーーーー\n八\nEight\nハチ\n\nや\nやっ\nーーーー\n人\nPerson\nジン\nニン\n\nひと\nーーーー\n二\nTwo\nニ\n\nふた\nーーーー\n入\nEnter\nニュウ\n\nい\nはい\nーーーー\n十\nTen\nジュウ\nジッ\n\nと\nとお\nーーーー\n七\nSeven\nシチ\n\nなな\nーーーー\n九\nNine\nキュウ\nク\n\nここの\nーーーー\n小\nLittle\nショウ\n\nお\nこ\nちい\nーーーー\n#\n"}
 };
 
+std::map<int,std::wstring> FuckWindows::bbb = {
+    {5, L"十一月\nじゅういちがつ\nNovember\nーーーー\n十一\nじゅういち\nEleven\nーーーー\n一生\nいっしょう\nWhole life\nーーーー\n一つ\nひとつ\nOne thing\nーーーー\n十八\nじゅうはち\nEighteen\nーーーー\n八月\nはちがつ\nAugust\nーーーー\n八十\nはちじゅう\nEighty\nーーーー\n百八\nひゃくはち\nOne hundred and eight\nーーーー\n#"}
+};
+
