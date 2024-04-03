@@ -4,6 +4,7 @@
 #include "Enums.hpp"
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
+#include <SFML/System.hpp>
 
 /*
     This file contains constants and other important stuff that need to
@@ -40,7 +41,10 @@ const double BUTTON_PRESS_SPEED = 5.0;
 const int FPS = 60;
 
 // Font size all fonts start at. It then gets smaller to fit in the button or label
-const int INITIAL_FONT_SIZE = 100;
+const int INITIAL_FONT_SIZE = 60;
+
+// Minumum font size so that letters are readable and dont shrink forever
+const double MIN_FONT_SIZE = 15;
 
 // Size in pixels of the margin that a text leaves in a button or sign
 const double BUTTON_TEXT_MARGIN = 40;
@@ -114,9 +118,9 @@ const int SHORT_EXERCISE_BUTTON_Y[9] = {60+WINDOW_HEIGHT/4,60+WINDOW_HEIGHT/4,60
                                         60+3*WINDOW_HEIGHT/4,60+3*WINDOW_HEIGHT/4,60+3*WINDOW_HEIGHT/4};
 
 // Position for the long buttons in exercises
-const int LONG_EXERCISE_BUTTON_X[6] = {150,325,
-                                       150,325,
-                                       150,325};
+const int LONG_EXERCISE_BUTTON_X[6] = {150,385,
+                                       150,385,
+                                       150,385};
 const int LONG_EXERCISE_BUTTON_Y[6] = {60+WINDOW_HEIGHT/4,60+WINDOW_HEIGHT/4,
                                         60+WINDOW_HEIGHT/2,60+WINDOW_HEIGHT/2,
                                         60+3*WINDOW_HEIGHT/4,60+3*WINDOW_HEIGHT/4};
@@ -220,6 +224,10 @@ namespace util {
 
     // Makes a sound based on the SoundID of that sound
     sf::Sound initializeSound(SoundID soundId);
+
+    // Replaces all line feeds with spaces so that answers that needed to be shrunk
+    // can be properly checked and don't contain extra line feeds
+    std::wstring trimLineFeeds(std::wstring answer);
 }
 
 #endif

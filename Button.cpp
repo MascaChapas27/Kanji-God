@@ -54,9 +54,34 @@ void Button::setText(sf::String textString, bool keepSize)
     if(!keepSize){
         text.setCharacterSize(INITIAL_FONT_SIZE);
 
-        while(text.getGlobalBounds().width > topSprite.getTextureRect().width*textButtonRatio ||
-            text.getGlobalBounds().height > topSprite.getTextureRect().height*textButtonRatio){
+        while(text.getCharacterSize() > MIN_FONT_SIZE &&
+             (text.getGlobalBounds().width > topSprite.getTextureRect().width*textButtonRatio ||
+              text.getGlobalBounds().height > topSprite.getTextureRect().height*textButtonRatio)){
             text.setCharacterSize(text.getCharacterSize()-1);
+        }
+
+        int attempts = 0;
+
+        while(text.getGlobalBounds().width > topSprite.getTextureRect().width*textButtonRatio ||
+              text.getGlobalBounds().height > topSprite.getTextureRect().height*textButtonRatio){
+
+            attempts++;
+
+            // This shit is too big let's try to find a space
+            std::size_t spacePosition = textString.find(" ");
+            if(spacePosition != sf::String::InvalidPos){
+                textString.replace(spacePosition,1,"\n");
+                text.setString(textString);
+                bool madeBigger = false;
+                while(text.getGlobalBounds().width < topSprite.getTextureRect().width*textButtonRatio &&
+                      text.getGlobalBounds().height < topSprite.getTextureRect().height*textButtonRatio){
+                    text.setCharacterSize(text.getCharacterSize()+1);
+                    madeBigger = true;
+                }
+                if(madeBigger){
+                    text.setCharacterSize(text.getCharacterSize()-1);
+                }
+            }
         }
     }
 
@@ -136,7 +161,7 @@ void Button::notify(sf::Event &event)
             pressedButtonAction(*this);
         }
     } else if (pressed && event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left){
-        
+
         releaseButtonSound.play();
 
         if(util::isInRectangle(event.mouseButton.x,event.mouseButton.y,topSprite.getPosition().x-topSprite.getTextureRect().width/2,topSprite.getPosition().y-topSprite.getTextureRect().height/2,topSprite.getTextureRect().width,topSprite.getTextureRect().height)){

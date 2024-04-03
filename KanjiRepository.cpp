@@ -327,6 +327,8 @@ Exercise KanjiRepository::getExercise(int grade, bool mastered)
         case ProgramState::KanjiMean:
             exercise.setHelp(L"Choose the\ncorrect meaning\nfor the\nkanji shown");
             break;
+        default:
+            break;
         }
     }
 

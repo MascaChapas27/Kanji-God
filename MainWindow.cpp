@@ -146,7 +146,8 @@ void MainWindow::start(){
     longAnswerButton.setButtonColor(BUTTON_COLOR_NORMAL);
     longAnswerButton.setPressedButtonAction([this](Button &thisButton){
         int pronProgress, meanProgress;
-        if(Controller::getInstance()->checkAnswer(thisButton.getText(),pronProgress,meanProgress)){
+        std::wstring answer = util::trimLineFeeds(thisButton.getText());
+        if(Controller::getInstance()->checkAnswer(answer,pronProgress,meanProgress)){
             thisButton.setButtonColor(sf::Color::White);
             thisButton.setFinalColor(BUTTON_COLOR_CORRECT);
         } else {
@@ -191,7 +192,7 @@ void MainWindow::start(){
     tutorialKanjiMeaning.setSignColor(BUTTON_COLOR_NORMAL);
 
     // Sign for the word meaning in the tutorial
-    tutorialWordMeaning.setSignTexture(textureHolder->get(TextureID::MeaningSign));
+    tutorialWordMeaning.setSignTexture(textureHolder->get(TextureID::WordTutorialSign));
     tutorialWordMeaning.setPosition(WORD_MEANING_SIGN_X,WORD_MEANING_SIGN_Y);
     tutorialWordMeaning.setTextColor(TEXT_COLOR);
     tutorialWordMeaning.setSignColor(BUTTON_COLOR_NORMAL);
@@ -228,7 +229,7 @@ void MainWindow::start(){
     }
 
     // Sign for the word pronunciation in the tutorial
-    tutorialPronunciation.setSignTexture(textureHolder->get(TextureID::MeaningSign));
+    tutorialPronunciation.setSignTexture(textureHolder->get(TextureID::WordTutorialSign));
     tutorialPronunciation.setPosition(WORD_PRON_SIGN_X,WORD_PRON_SIGN_Y);
     tutorialPronunciation.setTextColor(TEXT_COLOR);
     tutorialPronunciation.setSignColor(BUTTON_COLOR_NORMAL);
@@ -389,6 +390,8 @@ void MainWindow::start(){
 
             tutorialPronunciation.setText(exercise.getWordPronunciation());
         }
+            break;
+        default:
             break;
         }
     };

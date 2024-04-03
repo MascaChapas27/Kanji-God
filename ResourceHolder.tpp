@@ -92,9 +92,10 @@ void ResourceHolder<Resource,Identifier>::loadAllTextures()
 
     load(TextureID::ShortExerciseButtonBottom,"sprites/short_exercise_button_bottom.png");
     load(TextureID::ShortExerciseButtonTop,"sprites/short_exercise_button_top.png");
-    load(TextureID::LongExerciseButtonBottom,"sprites/short_exercise_button_bottom.png");
-    load(TextureID::LongExerciseButtonTop,"sprites/short_exercise_button_top.png");
+    load(TextureID::LongExerciseButtonBottom,"sprites/long_exercise_button_bottom.png");
+    load(TextureID::LongExerciseButtonTop,"sprites/long_exercise_button_top.png");
 
+    load(TextureID::WordTutorialSign,"sprites/word_tutorial_sign.png");
     load(TextureID::QuestionSign,"sprites/question_sign.png");
     load(TextureID::InstructionsSign,"sprites/instructions_sign.png");
 

@@ -22,14 +22,39 @@ void Sign::setPosition(sf::Vector2f position){
 }
 
 void Sign::setText(sf::String textString, bool keepSize){
-    text.setString(textString);
 
+    text.setString(textString);
     if(!keepSize){
         text.setCharacterSize(INITIAL_FONT_SIZE);
 
-        while(text.getGlobalBounds().width > signSprite.getTextureRect().width*textSignRatio ||
-            text.getGlobalBounds().height > signSprite.getTextureRect().height*textSignRatio){
+        while(text.getCharacterSize() > MIN_FONT_SIZE &&
+             (text.getGlobalBounds().width > signSprite.getTextureRect().width*textSignRatio ||
+              text.getGlobalBounds().height > signSprite.getTextureRect().height*textSignRatio)){
             text.setCharacterSize(text.getCharacterSize()-1);
+        }
+
+        int attempts = 0;
+
+        while(text.getGlobalBounds().width > signSprite.getTextureRect().width*textSignRatio ||
+              text.getGlobalBounds().height > signSprite.getTextureRect().height*textSignRatio){
+
+            attempts++;
+
+            // This shit is too big let's try to find a space
+            std::size_t spacePosition = textString.find(" ");
+            if(spacePosition != sf::String::InvalidPos){
+                textString.replace(spacePosition,1,"\n");
+                text.setString(textString);
+                bool madeBigger = false;
+                while(text.getGlobalBounds().width < signSprite.getTextureRect().width*textSignRatio &&
+                      text.getGlobalBounds().height < signSprite.getTextureRect().height*textSignRatio){
+                    text.setCharacterSize(text.getCharacterSize()+1);
+                    madeBigger = true;
+                }
+                if(madeBigger){
+                    text.setCharacterSize(text.getCharacterSize()-1);
+                }
+            }
         }
     }
 

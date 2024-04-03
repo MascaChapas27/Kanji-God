@@ -31,7 +31,7 @@ void WordRepository::classifyWords(){
     }
 
     file.imbue(std::locale("C.UTF-8"));
-    
+
     std::map<int,std::wfstream> realFiles;
     for(int i=1;i<6;i++){
         realFiles[i].open("files/JLPTN"+std::to_string(i)+"words.txt",std::fstream::out);
@@ -53,23 +53,23 @@ void WordRepository::classifyWords(){
                 minGrade = currentGrade;
             getline(file,data);
         }
-        
+
         Word w;
 
         w.setGrade(minGrade);
 
         // Read the word itself
         getline(file,data);
-        
+
         realFiles[minGrade] << data << L"\n";
-        
+
         w.setWord(data);
 
         // Read the pronunciation
         getline(file,data);
 
         realFiles[minGrade] << data << L"\n";
-        
+
         w.setPronunciation(data);
 
         // Read the meaning
@@ -81,9 +81,9 @@ void WordRepository::classifyWords(){
 
         // Read a line that contains "----"
         getline(file,data);
-        
+
         realFiles[minGrade] << data << L"\n";
-        
+
         // Read another word or "#"
         getline(file,data);
 
@@ -135,22 +135,22 @@ void WordRepository::loadAllWords(){
             Word w;
 
             w.setGrade(i);
-            
+
             w.setWord(data);
 
             // Read the pronunciation
             getline(file,data);
-            
+
             w.setPronunciation(data);
 
             // Read the meaning
             getline(file,data);
-           
+
             w.setMeaning(data);
 
             // Read a line that contains "----"
             getline(file,data);
-            
+
             // Read another word or "#"
             getline(file,data);
 
@@ -164,7 +164,9 @@ void WordRepository::loadAllWords(){
             classifiedWords.push_back(w.getMeaning());
         }
 
+        #ifdef __linux__
         file.close();
+        #endif
 
         // Open the progress file
         std::wfstream fileprogress("files/JLPTN"+std::to_string(i)+"wordprogress.txt");
@@ -217,7 +219,7 @@ void WordRepository::loadAllWords(){
         }
 
         fileprogress.close();
-    
+
         // Shuffle the vectors to make them more unpredictable
         auto rng = std::default_random_engine {};
         rng.seed(std::chrono::system_clock::now().time_since_epoch().count());
@@ -357,6 +359,8 @@ Exercise WordRepository::getExercise(int grade, bool mastered)
             break;
         case ProgramState::WordMean:
             exercise.setHelp(L"Choose the\ncorrect meaning\nfor the word\nshown");
+            break;
+        default:
             break;
         }
     }
