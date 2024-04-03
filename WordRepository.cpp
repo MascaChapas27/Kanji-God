@@ -295,15 +295,15 @@ Exercise WordRepository::getExercise(int grade, bool mastered)
         // Vector that contains words that will be used to get wrong answers. Get the
         // vector with the most words of this grade
         std::vector<std::wstring> &wrongAnswerWords =
-        newWords[grade].size() > practicingWords[grade].size()
+        newWords[grade].size() >= practicingWords[grade].size()
         &&
-        newWords[grade].size() > masteredWords[grade].size()
+        newWords[grade].size() >= masteredWords[grade].size()
         ?
         newWords[grade]
         :
-        practicingWords[grade].size() > newWords[grade].size()
+        practicingWords[grade].size() >= newWords[grade].size()
         &&
-        practicingWords[grade].size() > masteredWords[grade].size()
+        practicingWords[grade].size() >= masteredWords[grade].size()
         ?
         practicingWords[grade]
         :

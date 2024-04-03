@@ -234,15 +234,15 @@ Exercise KanjiRepository::getExercise(int grade, bool mastered)
         // Vector that contains kanjis that will be used to get wrong answers. Get the
         // vector with the most kanjis of this grade
         std::vector<std::wstring> &wrongAnswerKanjis =
-        newKanjis[grade].size() > practicingKanjis[grade].size()
+        newKanjis[grade].size() >= practicingKanjis[grade].size()
         &&
-        newKanjis[grade].size() > masteredKanjis[grade].size()
+        newKanjis[grade].size() >= masteredKanjis[grade].size()
         ?
         newKanjis[grade]
         :
-        practicingKanjis[grade].size() > newKanjis[grade].size()
+        practicingKanjis[grade].size() >= newKanjis[grade].size()
         &&
-        practicingKanjis[grade].size() > masteredKanjis[grade].size()
+        practicingKanjis[grade].size() >= masteredKanjis[grade].size()
         ?
         practicingKanjis[grade]
         :
