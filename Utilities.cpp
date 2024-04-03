@@ -9,9 +9,9 @@ bool util::isInRectangle(int x, int y, int rectX, int rectY, int rectWidth, int 
             y < rectY+rectHeight;
 }
 
-bool util::shouldLearnNewKanji(int practicingKanji)
+bool util::shouldLearnNewContent(int practicingContent)
 {
-    return practicingKanji == 0 || rand()%(practicingKanji*3) == 0;
+    return practicingContent == 0 || rand()%(practicingContent*3) == 0;
 }
 
 sf::Sound util::initializeSound(SoundID soundId){

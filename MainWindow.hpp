@@ -39,11 +39,11 @@ class MainWindow {
         std::list<Button*> menuButtons;
 
         // Buttons that let you answer when the answer is short
-        // (kunyomi and onyomi for one kanji)
+        // (kunyomi, onyomi and meaning for kanji)
         std::list<Button> shortExerciseButtons;
 
         // Buttons that let you answer when the answer is long
-        // (meaning for kanjis and words and pronunciation for words)
+        // (meaning and pronunciation for words)
         std::list<Button> longExerciseButtons;
 
         // Progress for the current kanji/word
@@ -55,9 +55,11 @@ class MainWindow {
         // Sign for the instructions of the current exercise
         Sign instructionsSign;
 
-        // Sign for the meaning of the current kanji/word for
-        // the tutorial
-        Sign tutorialMeaning;
+        // Sign for the meaning of the current kanji for the tutorial
+        Sign tutorialKanjiMeaning;
+
+        // Sign for the meaning of the current word for the tutorial
+        Sign tutorialWordMeaning;
 
         // Sign for the pronunciation of the current word tutorial
         Sign tutorialPronunciation;

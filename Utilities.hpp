@@ -70,15 +70,15 @@ const sf::Color SAVED_COLOR = sf::Color(200,200,200);
 const int TITLE_BUTTONS_VERTICAL_DISTANCE = 60;
 
 // Position of the kanji button in the main menu
-const int KANJI_MENU_BUTTON_X = WINDOW_WIDTH/3;
+const int KANJI_MENU_BUTTON_X = WINDOW_WIDTH/4;
 const int KANJI_MENU_BUTTON_Y = 400;
-/*
+
 // Position of the word button in the main menu
 const int WORD_MENU_BUTTON_X = WINDOW_WIDTH/2;
 const int WORD_MENU_BUTTON_Y = KANJI_MENU_BUTTON_Y;
-*/
+
 // Position of the god mode button in the main menu
-const int GODMODE_MENU_BUTTON_X = 2*WINDOW_WIDTH/3;
+const int GODMODE_MENU_BUTTON_X = 3*WINDOW_WIDTH/4;
 const int GODMODE_MENU_BUTTON_Y = KANJI_MENU_BUTTON_Y;
 
 // Position of the arrows for the kanji button in the main menu
@@ -86,13 +86,13 @@ const int KANJI_MENU_ARROW_LEFT_X = KANJI_MENU_BUTTON_X - 50;
 const int KANJI_MENU_ARROW_LEFT_Y = KANJI_MENU_BUTTON_Y + 120;
 const int KANJI_MENU_ARROW_RIGHT_X = KANJI_MENU_BUTTON_X + 50;
 const int KANJI_MENU_ARROW_RIGHT_Y = KANJI_MENU_ARROW_LEFT_Y;
-/*
+
 // Position of the arrows for the word button in the main menu
 const int WORD_MENU_ARROW_LEFT_X = WORD_MENU_BUTTON_X - 50;
 const int WORD_MENU_ARROW_LEFT_Y = KANJI_MENU_ARROW_LEFT_Y;
 const int WORD_MENU_ARROW_RIGHT_X = WORD_MENU_BUTTON_X + 50;
 const int WORD_MENU_ARROW_RIGHT_Y = KANJI_MENU_ARROW_LEFT_Y;
-*/
+
 // Position for the sign that has the kanji/word that is currently being asked/taught
 const int KANJI_WORD_SIGN_X = 8*WINDOW_WIDTH/10;
 const int KANJI_WORD_SIGN_Y = WINDOW_HEIGHT/2;
@@ -105,7 +105,7 @@ const int PROGRESS_SIGN_Y = WINDOW_HEIGHT/6;
 const int INSTRUCTIONS_SIGN_X = KANJI_WORD_SIGN_X;
 const int INSTRUCTIONS_SIGN_Y = 5*WINDOW_HEIGHT/6;
 
-// Position for the short buttons used when asking for kunyomi and onyomi for a single kanji
+// Position for the short buttons in exercises
 const int SHORT_EXERCISE_BUTTON_X[9] = {100,250,400,
                                         100,250,400,
                                         100,250,400};
@@ -113,16 +113,29 @@ const int SHORT_EXERCISE_BUTTON_Y[9] = {60+WINDOW_HEIGHT/4,60+WINDOW_HEIGHT/4,60
                                         60+WINDOW_HEIGHT/2,60+WINDOW_HEIGHT/2,60+WINDOW_HEIGHT/2,
                                         60+3*WINDOW_HEIGHT/4,60+3*WINDOW_HEIGHT/4,60+3*WINDOW_HEIGHT/4};
 
-// Position for the tutorial sign that contains the meaning for the word or kanji
-const int MEANING_SIGN_X = 7*WINDOW_WIDTH/20;
-const int MEANING_SIGN_Y = WINDOW_HEIGHT/8;
+// Position for the long buttons in exercises
+const int LONG_EXERCISE_BUTTON_X[6] = {150,325,
+                                       150,325,
+                                       150,325};
+const int LONG_EXERCISE_BUTTON_Y[6] = {60+WINDOW_HEIGHT/4,60+WINDOW_HEIGHT/4,
+                                        60+WINDOW_HEIGHT/2,60+WINDOW_HEIGHT/2,
+                                        60+3*WINDOW_HEIGHT/4,60+3*WINDOW_HEIGHT/4};
+
+
+// Position for the tutorial sign that contains the meaning for the kanji
+const int KANJI_MEANING_SIGN_X = 7*WINDOW_WIDTH/20;
+const int KANJI_MEANING_SIGN_Y = WINDOW_HEIGHT/8;
+
+// Position for the tutorial sign that contains the meaning for the word
+const int WORD_MEANING_SIGN_X = 7*WINDOW_WIDTH/20;
+const int WORD_MEANING_SIGN_Y = WINDOW_HEIGHT/3;
 
 // Position for the tutorial sign that says "Kunyomi"
-const int KUNYOMI_SIGN_X = MEANING_SIGN_X-125;
-const int KUNYOMI_SIGN_Y = MEANING_SIGN_Y+110;
+const int KUNYOMI_SIGN_X = KANJI_MEANING_SIGN_X-125;
+const int KUNYOMI_SIGN_Y = KANJI_MEANING_SIGN_Y+110;
 
 // Position for the tutorial sign that says "Onyomi"
-const int ONYOMI_SIGN_X = MEANING_SIGN_X+125;
+const int ONYOMI_SIGN_X = KANJI_MEANING_SIGN_X+125;
 const int ONYOMI_SIGN_Y = KUNYOMI_SIGN_Y;
 
 // Position for the signs that contain the kunyomi readings in the tutorial
@@ -140,6 +153,10 @@ const int ON_READING_X[6] = {ONYOMI_SIGN_X-60,ONYOMI_SIGN_X+60,
 const int ON_READING_Y[6] = {ONYOMI_SIGN_Y+110,ONYOMI_SIGN_Y+110,
                              ONYOMI_SIGN_Y+220,ONYOMI_SIGN_Y+220,
                              ONYOMI_SIGN_Y+330,ONYOMI_SIGN_Y+330};
+
+// Position for the sign that contains the pronunciation for the word in the tutorial
+const int WORD_PRON_SIGN_X = 7*WINDOW_WIDTH/20;
+const int WORD_PRON_SIGN_Y = 2*WINDOW_HEIGHT/3;
 
 //Position for the button that takes you to the main menu
 const int BACK_MENU_BUTTON_X = 60;
@@ -176,6 +193,18 @@ const int CORRECT_KANJIMEAN_POINTS = 2;
 // Points taken for incorrectly guessing a kanji meaning
 const int INCORRECT_KANJIMEAN_POINTS = 4;
 
+// Points given for correctly guessing a word pronunciation
+const int CORRECT_PRON_POINTS = 2;
+
+// Points taken for incorrectly guessing a word pronunciation
+const int INCORRECT_PRON_POINTS = 5;
+
+// Points given for correctly guessing a word meaning
+const int CORRECT_WORDMEAN_POINTS = 2;
+
+// Points taken for incorrectly guessing a word meaning
+const int INCORRECT_WORDMEAN_POINTS = 5;
+
 // Initial pitch for the correct answer sound
 const double INITIAL_PITCH_CORRECT_SOUND = 1.3;
 
@@ -186,8 +215,8 @@ namespace util {
     // Calculates whether a point is in a rectangle
     bool isInRectangle(int x, int y, int rectX, int rectY, int rectWidth, int rectHeight);
 
-    // Tells if you should learn a new kanji or practice an existing one
-    bool shouldLearnNewKanji(int newKanji);
+    // Tells if you should learn new content or practice
+    bool shouldLearnNewContent(int newContent);
 
     // Makes a sound based on the SoundID of that sound
     sf::Sound initializeSound(SoundID soundId);

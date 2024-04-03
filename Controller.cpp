@@ -1,5 +1,6 @@
 #include "Controller.hpp"
 #include "KanjiRepository.hpp"
+#include "WordRepository.hpp"
 #include "Utilities.hpp"
 #include "SFML/System.hpp"
 
@@ -31,9 +32,26 @@ Exercise Controller::getExercise(){
     Exercise exercise;
 
     if(godMode){
-        exercise = KanjiRepository::getInstance()->getMasteredExercise();
+        int whatType = rand()%2;
+        int numAttempts = 0;
+        do {
+            numAttempts++;
+            whatType = (whatType+1) % 2;
+            switch (whatType)
+            {
+            case 0:
+                exercise = KanjiRepository::getInstance()->getMasteredExercise();
+                break;
+            case 1:
+                exercise = WordRepository::getInstance()->getMasteredExercise();
+                break;
+            }
+        } while(numAttempts < 2 && exercise.getExerciseType() == ProgramState::TitleScreen);
+
     } else if(kanjiMode){
         exercise = KanjiRepository::getInstance()->getExercise(selectedGrade);
+    } else{
+        exercise = WordRepository::getInstance()->getExercise(selectedGrade);
     }
 
     currentExercise = exercise;
@@ -61,16 +79,42 @@ bool Controller::checkAnswer(std::wstring answer, int &meanProgress, int &kunPro
         kunProgress = currentExercise.getKunyomiProgress();
         onProgress = currentExercise.getOnyomiProgress();
         break;
+    default:
+        break;
+    }
 
-    case ProgramState::WordMean:
+    if(correct) {
+        correctAnswers.insert(answer);
+        correctAnswerSound.setPitch(INITIAL_PITCH_CORRECT_SOUND+PITCH_INCREMENT_CORRECT_SOUND*correctAnswers.size());
+        correctAnswerSound.play();
+    } else {
+        incorrectAnswerSound.play();
+    }
+    return correct;
+}
+
+bool Controller::checkAnswer(std::wstring answer, int &pronProgress, int &meanProgress){
+
+    // That answer was already answered
+    if(correctAnswers.count(answer)) {
+        pronProgress = currentExercise.getKunyomiProgress();
+        meanProgress = currentExercise.getMeaningProgress();
+        return true;
+    }
+
+    bool correct = false;
+
+    switch(currentExercise.getExerciseType()){
     case ProgramState::WordPron:
-        // correct = WordRepository::...
+    case ProgramState::WordMean:
+        correct = WordRepository::getInstance()->checkAnswer(currentExercise, answer);
+        pronProgress = currentExercise.getPronunciationProgress();
+        meanProgress = currentExercise.getMeaningProgress();
         break;
     default:
         break;
     }
 
-    // bool correct = answer == L"おと" || answer == L"ね";
     if(correct) {
         correctAnswers.insert(answer);
         correctAnswerSound.setPitch(INITIAL_PITCH_CORRECT_SOUND+PITCH_INCREMENT_CORRECT_SOUND*correctAnswers.size());
@@ -93,7 +137,7 @@ bool Controller::allAnswered(){
 
     case ProgramState::WordMean:
     case ProgramState::WordPron:
-        return false;
+        return WordRepository::getInstance()->allAnswered(currentExercise, correctAnswers.size());
         break;
     default:
         return false;
@@ -108,4 +152,5 @@ void Controller::saveAndExit(){
 
 void Controller::save(){
     KanjiRepository::getInstance()->save();
+    WordRepository::getInstance()->save();
 }

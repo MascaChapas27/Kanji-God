@@ -9,9 +9,6 @@
 #include <ctime>
 
 int main(){
-    // Load all kanjis
-    KanjiRepository::getInstance()->loadAllKanjis();
-
     srand(time(NULL));
 
     MainWindow mainWindow;

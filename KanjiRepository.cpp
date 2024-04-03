@@ -12,14 +12,17 @@ KanjiRepository * KanjiRepository::kanjiRepository = nullptr;
 
 KanjiRepository * KanjiRepository::getInstance()
 {
-    if(kanjiRepository == nullptr) kanjiRepository = new KanjiRepository;
+    if(kanjiRepository == nullptr) {
+        kanjiRepository = new KanjiRepository;
+        kanjiRepository->loadAllKanjis();
+    }
     return kanjiRepository;
 }
 
 // Operation that loads all kanji and progress for kanji in one file
 void KanjiRepository::loadAllKanjis(){
 
-    for(int i=4;i<6;i++){
+    for(int i=5;i<6;i++){
 
         std::vector<std::wstring> classifiedKanjis;
 
@@ -148,37 +151,14 @@ void KanjiRepository::loadAllKanjis(){
         std::shuffle(std::begin(newKanjis[i]), std::end(newKanjis[i]), rng);
         std::shuffle(std::begin(practicingKanjis[i]), std::end(practicingKanjis[i]), rng);
         std::shuffle(std::begin(masteredKanjis[i]), std::end(masteredKanjis[i]), rng);
-
     }
-
-        // For each kanji read
-
-            // Create the corresponding Kanji object and put it in the map
-
-            // Check the progress and put its wstring in the corresponding vector
-
-        // Close the file
-}
-
-// Updates the progress for a kanji
-void KanjiRepository::updateKanji(std::wstring kanji, int meaning, int kunyomi, int onyomi){
-    // Check if the kanji was new and if it is no more
-    // move it from one vector to another
-
-    // Check if the kanji was practicing and if it is now mastered move
-    // it from one vector to another
-
-    // Check if the kanji was mastered and if it is no more move it
-    // from one vector to another
-
-    // Finally change the kanji data in the map
 }
 
 Exercise KanjiRepository::getExercise(int grade, bool mastered)
 {
     Exercise exercise;
 
-    if(!mastered && newKanjis[grade].size() > 0 && util::shouldLearnNewKanji(practicingKanjis[grade].size())){
+    if(!mastered && newKanjis[grade].size() > 0 && util::shouldLearnNewContent(practicingKanjis[grade].size())){
 
         exercise.setExerciseType(ProgramState::KanjiTutor);
 

@@ -64,7 +64,7 @@ void MainWindow::start(){
         kanjiGradeSelector.setText("Kanji\nJLPT N" + std::to_string(kanjiGrade), true);
     });
 
-    /* Button wordGradeSelector;
+    Button wordGradeSelector;
     wordGradeSelector.setBottomTexture(textureHolder->get(TextureID::BigMenuButtonBottom));
     wordGradeSelector.setTopTexture(textureHolder->get(TextureID::BigMenuButtonTop));
     wordGradeSelector.setPosition(WORD_MENU_BUTTON_X,WORD_MENU_BUTTON_Y);
@@ -92,7 +92,7 @@ void MainWindow::start(){
         wordGrade--;
         if(wordGrade == 0) wordGrade = 5;
         wordGradeSelector.setText("Words\nJLPT N" + std::to_string(wordGrade), true);
-    }); */
+    });
 
     Button godModeSelector;
     godModeSelector.setBottomTexture(textureHolder->get(TextureID::BigMenuButtonBottom));
@@ -105,11 +105,9 @@ void MainWindow::start(){
     menuButtons.push_back(&leftArrowKanji);
     menuButtons.push_back(&rightArrowKanji);
     menuButtons.push_back(&kanjiGradeSelector);
-    /*
     menuButtons.push_back(&leftArrowWord);
     menuButtons.push_back(&rightArrowWord);
     menuButtons.push_back(&wordGradeSelector);
-    */
     menuButtons.push_back(&godModeSelector);
 
     // Short answer buttons
@@ -140,6 +138,34 @@ void MainWindow::start(){
         shortExerciseButtons.push_back(shortAnswerButton);
     }
 
+    // Long answer buttons
+    Button longAnswerButton;
+    longAnswerButton.setBottomTexture(textureHolder->get(TextureID::LongExerciseButtonBottom));
+    longAnswerButton.setTopTexture(textureHolder->get(TextureID::LongExerciseButtonTop));
+    longAnswerButton.setTextColor(TEXT_COLOR);
+    longAnswerButton.setButtonColor(BUTTON_COLOR_NORMAL);
+    longAnswerButton.setPressedButtonAction([this](Button &thisButton){
+        int pronProgress, meanProgress;
+        if(Controller::getInstance()->checkAnswer(thisButton.getText(),pronProgress,meanProgress)){
+            thisButton.setButtonColor(sf::Color::White);
+            thisButton.setFinalColor(BUTTON_COLOR_CORRECT);
+        } else {
+            thisButton.setButtonColor(sf::Color::Black);
+            thisButton.setFinalColor(BUTTON_COLOR_INCORRECT);
+        }
+        this->progressSign.setText("Pronunciation: " + std::to_string(pronProgress) + "%\n\nMeaning: " + std::to_string(meanProgress) + "%");
+    });
+    longAnswerButton.setReleasedButtonAction([this](Button &thisButton){
+        if(Controller::getInstance()->allAnswered()){
+            getExercise(thisButton);
+        }
+    });
+
+    for(int i=0;i<6;i++){
+        longAnswerButton.setPosition(LONG_EXERCISE_BUTTON_X[i],LONG_EXERCISE_BUTTON_Y[i]);
+        longExerciseButtons.push_back(longAnswerButton);
+    }
+
     // Sign for the kanji/word that is being asked/taught
     kanjiWordSign.setSignTexture(textureHolder->get(TextureID::QuestionSign));
     kanjiWordSign.setPosition(KANJI_WORD_SIGN_X, KANJI_WORD_SIGN_Y);
@@ -158,11 +184,17 @@ void MainWindow::start(){
     instructionsSign.setTextColor(TEXT_COLOR);
     instructionsSign.setSignColor(BUTTON_COLOR_NORMAL);
 
-    // Sign for the meaning in the tutorial
-    tutorialMeaning.setSignTexture(textureHolder->get(TextureID::MeaningSign));
-    tutorialMeaning.setPosition(MEANING_SIGN_X,MEANING_SIGN_Y);
-    tutorialMeaning.setTextColor(TEXT_COLOR);
-    tutorialMeaning.setSignColor(BUTTON_COLOR_NORMAL);
+    // Sign for the kanji meaning in the tutorial
+    tutorialKanjiMeaning.setSignTexture(textureHolder->get(TextureID::MeaningSign));
+    tutorialKanjiMeaning.setPosition(KANJI_MEANING_SIGN_X,KANJI_MEANING_SIGN_Y);
+    tutorialKanjiMeaning.setTextColor(TEXT_COLOR);
+    tutorialKanjiMeaning.setSignColor(BUTTON_COLOR_NORMAL);
+
+    // Sign for the word meaning in the tutorial
+    tutorialWordMeaning.setSignTexture(textureHolder->get(TextureID::MeaningSign));
+    tutorialWordMeaning.setPosition(WORD_MEANING_SIGN_X,WORD_MEANING_SIGN_Y);
+    tutorialWordMeaning.setTextColor(TEXT_COLOR);
+    tutorialWordMeaning.setSignColor(BUTTON_COLOR_NORMAL);
 
     // Sign that says "Kunyomi"
     kunyomiSign.setSignTexture(textureHolder->get(TextureID::KunOnSign));
@@ -194,6 +226,12 @@ void MainWindow::start(){
         readingSign.setPosition(ON_READING_X[i],ON_READING_Y[i]);
         tutorialOnyomis.push_back(readingSign);
     }
+
+    // Sign for the word pronunciation in the tutorial
+    tutorialPronunciation.setSignTexture(textureHolder->get(TextureID::MeaningSign));
+    tutorialPronunciation.setPosition(WORD_PRON_SIGN_X,WORD_PRON_SIGN_Y);
+    tutorialPronunciation.setTextColor(TEXT_COLOR);
+    tutorialPronunciation.setSignColor(BUTTON_COLOR_NORMAL);
 
     // Button to continue in the tutorial
     continueButton.setBottomTexture(textureHolder->get(TextureID::ShortExerciseButtonBottom));
@@ -281,12 +319,13 @@ void MainWindow::start(){
         }
             break;
         case ProgramState::KanjiTutor:
+        {
 
             if(oldState != ProgramState::KanjiTutor){
                 continueButton.resetPosition();
             }
 
-            tutorialMeaning.setText(L"Meaning: " + exercise.getId());
+            tutorialKanjiMeaning.setText(L"Meaning: " + exercise.getId());
 
             int index = 0;
             for(std::wstring kunReading : exercise.getKunyomiPronunciations()){
@@ -306,6 +345,50 @@ void MainWindow::start(){
             for(int i=index;i<6;i++){
                 tutorialOnyomis[i].setText(L"");
             }
+        }
+            break;
+        case ProgramState::WordMean:
+        case ProgramState::WordPron:
+        {
+            // Reset the buttons
+            if(oldState != ProgramState::WordMean &&
+               oldState != ProgramState::WordPron){
+
+                for(Button &b : longExerciseButtons){
+                    b.setButtonColor(BUTTON_COLOR_NORMAL);
+                    b.resetPosition();
+                }
+            }
+
+            // Set sign with progress
+            progressSign.setText("Pronunciation: " + std::to_string(exercise.getPronunciationProgress()) + "%\n\nMeaning: " + std::to_string(exercise.getMeaningProgress()) + "%");
+
+            std::set<std::wstring> answers = exercise.getAnswers();
+            std::set<std::wstring>::iterator iterAns = answers.begin();
+            // Sets can be very predictable so let's randomly advance the iterator
+            std::advance(iterAns,rand()%6);
+            std::list<Button>::iterator iterBut = longExerciseButtons.begin();
+
+            while(iterBut != longExerciseButtons.end()){
+                iterBut->setText(*iterAns);
+                iterBut->setButtonColor(BUTTON_COLOR_NORMAL);
+
+                iterBut++;
+                iterAns++;
+                if(iterAns == answers.end()) iterAns = answers.begin();
+            }
+        }
+            break;
+        case ProgramState::WordTutor:
+        {
+            if(oldState != ProgramState::WordTutor){
+                continueButton.resetPosition();
+            }
+
+            tutorialWordMeaning.setText(L"Meaning: " + exercise.getId());
+
+            tutorialPronunciation.setText(L"Pronunciation: " + exercise.getWordPronunciation());
+        }
             break;
         }
     };
@@ -316,11 +399,11 @@ void MainWindow::start(){
         saveButton.resetPosition();
     });
 
-    /* wordGradeSelector.setPressedButtonAction([this](Button &button){
+    wordGradeSelector.setPressedButtonAction([this](Button &button){
         Controller::getInstance()->setGradeAndMode(wordGrade,false);
         mainMenuButton.resetPosition();
         saveButton.resetPosition();
-    }); */
+    });
 
     godModeSelector.setPressedButtonAction([this](Button &button){
         Controller::getInstance()->setGodMode(true);
@@ -329,7 +412,7 @@ void MainWindow::start(){
     });
 
     kanjiGradeSelector.setReleasedButtonAction(getExercise);
-    //wordGradeSelector.setReleasedButtonAction(getExercise);
+    wordGradeSelector.setReleasedButtonAction(getExercise);
     godModeSelector.setReleasedButtonAction(getExercise);
     continueButton.setReleasedButtonAction(getExercise);
 
@@ -353,7 +436,14 @@ void MainWindow::start(){
                     mainMenuButton.notify(event);
                     saveButton.notify(event);
                     break;
+                case ProgramState::WordPron:
+                case ProgramState::WordMean:
+                    for(Button &button : longExerciseButtons) button.notify(event);
+                    mainMenuButton.notify(event);
+                    saveButton.notify(event);
+                    break;
                 case ProgramState::KanjiTutor:
+                case ProgramState::WordTutor:
                     continueButton.notify(event);
                     break;
                 }
@@ -372,7 +462,14 @@ void MainWindow::start(){
             mainMenuButton.update();
             saveButton.update();
             break;
+        case ProgramState::WordPron:
+        case ProgramState::WordMean:
+            for(Button &button : longExerciseButtons) button.update();
+            mainMenuButton.update();
+            saveButton.update();
+            break;
         case ProgramState::KanjiTutor:
+        case ProgramState::WordTutor:
             continueButton.update();
             break;
         }
@@ -397,14 +494,31 @@ void MainWindow::start(){
             window.draw(mainMenuButton);
             window.draw(saveButton);
             break;
+        case ProgramState::WordPron:
+        case ProgramState::WordMean:
+            window.draw(kanjiWordSign);
+            window.draw(instructionsSign);
+            window.draw(progressSign);
+            for(Button &button : longExerciseButtons) window.draw(button);
+            window.draw(mainMenuButton);
+            window.draw(saveButton);
+            break;
         case ProgramState::KanjiTutor:
             window.draw(kanjiWordSign);
             window.draw(instructionsSign);
-            window.draw(tutorialMeaning);
+            window.draw(tutorialKanjiMeaning);
             window.draw(kunyomiSign);
             window.draw(onyomiSign);
             for(Sign s : tutorialKunyomis) if(s.getText().toWideString() != L"") window.draw(s);
             for(Sign s : tutorialOnyomis) if(s.getText().toWideString() != L"") window.draw(s);
+            window.draw(continueButton);
+            break;
+        case ProgramState::WordTutor:
+            window.draw(kanjiWordSign);
+            window.draw(instructionsSign);
+            window.draw(tutorialKanjiMeaning);
+            window.draw(tutorialWordMeaning);
+            window.draw(tutorialPronunciation);
             window.draw(continueButton);
             break;
         }

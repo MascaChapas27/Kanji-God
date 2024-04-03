@@ -46,7 +46,7 @@ class KanjiRepository{
         // Singleton-specific method to get the one and only instance
         static KanjiRepository * getInstance();
 
-        // Operation that loads all kanji and progress for kanji in one file
+        // Operation that loads all kanji and progress for kanji
         void loadAllKanjis();
 
         // Returns an exercise with a kanji of the given grade. It defaults to a non-mastered
@@ -55,9 +55,6 @@ class KanjiRepository{
 
         // Returns an exercise with a kanji that has been mastered (all stats reached 100%)
         Exercise getMasteredExercise();
-
-        // Updates the progress for a kanji
-        void updateKanji(std::wstring kanji, int meaning, int kunyomi, int onyomi);
 
         // Checks if the given answer is valid for the current exercise
         bool checkAnswer(Exercise &exercise, std::wstring answer);
