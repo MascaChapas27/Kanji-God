@@ -42,21 +42,26 @@ void Sign::setText(sf::String textString, bool keepSize){
                 if(textString[i]==' ') spaces++;
             }
 
-            std::size_t spacePosition = textString.find(" ");
-            for(int i=0;i<spaces/2;i++){
-                spacePosition = textString.find(" ",spacePosition+1);
-            }
-            if(spacePosition != sf::String::InvalidPos){
-                textString.replace(spacePosition,1,"\n");
-                text.setString(textString);
-                bool madeBigger = false;
-                while(text.getGlobalBounds().width < signSprite.getTextureRect().width*textSignRatio &&
-                      text.getGlobalBounds().height < signSprite.getTextureRect().height*textSignRatio){
-                    text.setCharacterSize(text.getCharacterSize()+1);
-                    madeBigger = true;
+            if(spaces == 0){
+                // Look fuck it let's make it even smaller than the minimum size
+                text.setCharacterSize(text.getCharacterSize()-1);
+            } else {
+                std::size_t spacePosition = textString.find(" ");
+                for(int i=0;i<spaces/2;i++){
+                    spacePosition = textString.find(" ",spacePosition+1);
                 }
-                if(madeBigger){
-                    text.setCharacterSize(text.getCharacterSize()-1);
+                if(spacePosition != sf::String::InvalidPos){
+                    textString.replace(spacePosition,1,"\n");
+                    text.setString(textString);
+                    bool madeBigger = false;
+                    while(text.getGlobalBounds().width < signSprite.getTextureRect().width*textSignRatio &&
+                        text.getGlobalBounds().height < signSprite.getTextureRect().height*textSignRatio){
+                        text.setCharacterSize(text.getCharacterSize()+1);
+                        madeBigger = true;
+                    }
+                    if(madeBigger){
+                        text.setCharacterSize(text.getCharacterSize()-1);
+                    }
                 }
             }
         }

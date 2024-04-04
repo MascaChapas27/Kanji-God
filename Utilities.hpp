@@ -179,23 +179,25 @@ const int MIN_PROGRESS = 0;
 // Maximum progress for an exercise
 const int MAX_PROGRESS = 100;
 
-// Points given for correctly guessing a kunyomi reading
-const int CORRECT_KUN_POINTS = 6;
+// Points given for correctly guessing all kunyomi readings (kind of (it's divided
+// for all different answers so maybe this number divided by 6 or 5 isn't exact))
+const int CORRECT_KUN_POINTS = 20;
 
 // Points taken for incorrectly guessing a kunyomi reading
-const int INCORRECT_KUN_POINTS = 10;
+const int INCORRECT_KUN_POINTS = 30;
 
-// Points given for correctly guessing an onyomi reading
-const int CORRECT_ON_POINTS = 6;
+// Points given for correctly guessing all onyomi readings (kind of (it's divided
+// for all different answers so maybe this number divided by 6 or 5 isn't exact))
+const int CORRECT_ON_POINTS = 20;
 
 // Points taken for incorrectly guessing an onyomi reading
-const int INCORRECT_ON_POINTS = 10;
+const int INCORRECT_ON_POINTS = 30;
 
 // Points given for correctly guessing a kanji meaning
-const int CORRECT_KANJIMEAN_POINTS = 15;
+const int CORRECT_KANJIMEAN_POINTS = 20;
 
 // Points taken for incorrectly guessing a kanji meaning
-const int INCORRECT_KANJIMEAN_POINTS = 25;
+const int INCORRECT_KANJIMEAN_POINTS = 30;
 
 // Points given for correctly guessing a word pronunciation
 const int CORRECT_PRON_POINTS = 20;

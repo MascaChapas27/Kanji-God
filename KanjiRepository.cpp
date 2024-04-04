@@ -22,7 +22,7 @@ KanjiRepository * KanjiRepository::getInstance()
 // Operation that loads all kanji and progress for kanji in one file
 void KanjiRepository::loadAllKanjis(){
 
-    for(int i=4;i<6;i++){
+    for(int i=4;i<=5;i++){
 
         std::vector<std::wstring> classifiedKanjis;
 
@@ -350,7 +350,7 @@ Exercise KanjiRepository::getMasteredExercise()
 
     int counter = 0;
 
-    while(counter<5){
+    while(counter<=5){
         counter++;
         if(masteredKanjis[grade].empty()){
             grade++;
@@ -358,7 +358,7 @@ Exercise KanjiRepository::getMasteredExercise()
         } else break;
     }
 
-    if(counter < 5) return getExercise(grade,true);
+    if(counter <= 5) return getExercise(grade,true);
     else{
         Exercise e;
         e.setExerciseType(ProgramState::TitleScreen);
@@ -376,7 +376,7 @@ bool KanjiRepository::checkAnswer(Exercise &exercise, std::wstring answer)
     case ProgramState::KanjiKun:
         correct = kanji.getKunyomiReadings().count(answer);
         if(correct) {
-            exercise.setKunyomiProgress(exercise.getKunyomiProgress() + CORRECT_KUN_POINTS);
+            exercise.setKunyomiProgress(exercise.getKunyomiProgress() + CORRECT_KUN_POINTS/kanji.getKunyomiReadings().size());
             if(exercise.getKunyomiProgress() > MAX_PROGRESS) exercise.setKunyomiProgress(MAX_PROGRESS);
         } else {
             exercise.setKunyomiProgress(exercise.getKunyomiProgress() - INCORRECT_KUN_POINTS);
@@ -386,7 +386,7 @@ bool KanjiRepository::checkAnswer(Exercise &exercise, std::wstring answer)
     case ProgramState::KanjiOn:
         correct = kanji.getOnyomiReadings().count(answer);
         if(correct) {
-            exercise.setOnyomiProgress(exercise.getOnyomiProgress() + CORRECT_ON_POINTS);
+            exercise.setOnyomiProgress(exercise.getOnyomiProgress() + CORRECT_ON_POINTS/kanji.getOnyomiReadings().size());
             if(exercise.getOnyomiProgress() > MAX_PROGRESS) exercise.setOnyomiProgress(MAX_PROGRESS);
         } else {
             exercise.setOnyomiProgress(exercise.getOnyomiProgress() - INCORRECT_ON_POINTS);
@@ -459,7 +459,7 @@ void KanjiRepository::save(){
 
     std::map<int,std::wfstream> files;
 
-    for(int i=1;i<=5;i++){
+    for(int i=4;i<=5;i++){
         files[i] = std::wfstream("files/JLPTN"+std::to_string(i)+"kanjiprogress.txt",std::wfstream::trunc | std::wfstream::out);
     }
 

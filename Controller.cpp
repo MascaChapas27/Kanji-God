@@ -62,7 +62,7 @@ Exercise Controller::getExercise(){
                 exercise = WordRepository::getInstance()->getMasteredExercise();
                 break;
             }
-        } while(numAttempts < 2 && exercise.getExerciseType() == ProgramState::TitleScreen);
+        } while(numAttempts <= 2 && exercise.getExerciseType() == ProgramState::TitleScreen);
 
     } else if(kanjiMode){
         exercise = KanjiRepository::getInstance()->getExercise(selectedGrade);

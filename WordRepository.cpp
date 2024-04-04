@@ -107,7 +107,7 @@ void WordRepository::loadAllWords(){
     classifyWords();
     #endif
 
-    for(int i=5;i<6;i++){
+    for(int i=1;i<=5;i++){
 
         std::vector<std::wstring> classifiedWords;
 
@@ -167,7 +167,7 @@ void WordRepository::loadAllWords(){
         #ifdef __linux__
         file.close();
         #endif
-
+        /*
         // Open the progress file
         std::wfstream fileprogress("files/JLPTN"+std::to_string(i)+"wordprogress.txt");
 
@@ -219,7 +219,7 @@ void WordRepository::loadAllWords(){
         }
 
         fileprogress.close();
-
+        */
         // Shuffle the vectors to make them more unpredictable
         auto rng = std::default_random_engine {};
         rng.seed(std::chrono::system_clock::now().time_since_epoch().count());
@@ -383,7 +383,7 @@ Exercise WordRepository::getMasteredExercise()
 
     int counter = 0;
 
-    while(counter<5){
+    while(counter<=5){
         counter++;
         if(masteredWords[grade].empty()){
             grade++;
@@ -391,7 +391,7 @@ Exercise WordRepository::getMasteredExercise()
         } else break;
     }
 
-    if(counter < 5) return getExercise(grade,true);
+    if(counter <= 5) return getExercise(grade,true);
     else{
         Exercise e;
         e.setExerciseType(ProgramState::TitleScreen);
@@ -474,7 +474,7 @@ bool WordRepository::allAnswered(Exercise &exercise, unsigned int answers)
 }
 
 void WordRepository::save(){
-
+    /*
     std::map<int,std::wfstream> files;
 
     files[5] = std::wfstream("files/JLPTN5wordprogress.txt",std::wfstream::trunc | std::wfstream::out);
@@ -486,5 +486,5 @@ void WordRepository::save(){
     for(auto &pair : files){
         pair.second << L"#";
         pair.second.close();
-    }
+    }*/
 }
