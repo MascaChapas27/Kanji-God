@@ -229,6 +229,14 @@ void WordRepository::loadAllWords(){
     }
 }
 
+int WordRepository::getMasteredWords(int wordGrade){
+    return masteredWords[wordGrade].size();
+}
+
+int WordRepository::getTotalWords(int wordGrade){
+    return newWords[wordGrade].size() + practicingWords[wordGrade].size() + masteredWords[wordGrade].size();
+}
+
 Exercise WordRepository::getExercise(int grade, bool mastered)
 {
     Exercise exercise;

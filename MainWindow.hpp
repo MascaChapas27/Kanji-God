@@ -85,6 +85,10 @@ class MainWindow {
         // Button that allows you to save the progress
         Button saveButton;
 
+        // Function that updates the amount of mastered/total words in
+        // the main menu buttons
+        void updateMasteredCount(Button &kanjiGradeSelector, Button &wordGradeSelector);
+
     public:
 
         MainWindow();

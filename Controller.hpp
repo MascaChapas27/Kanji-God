@@ -59,6 +59,18 @@ class Controller {
 
         // Sets God Mode to the given value
         void setGodMode(bool godMode);
+        
+        // Returns the amount of kanji that were mastered in that grade 
+        int getMasteredKanji(int kanjiGrade);
+
+        // Returns the amount of total kanji in that grade 
+        int getTotalKanji(int kanjiGrade);
+
+        // Returns the amount of words that were mastered in that grade 
+        int getMasteredWords(int wordGrade);
+
+        // Returns the amount of total words in that grade 
+        int getTotalWords(int wordGrade);
 
         // Returns exercise
         Exercise getExercise();

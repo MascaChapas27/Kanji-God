@@ -54,4 +54,282 @@ Eight
 ひゃくはち
 One hundred and eight
 ーーーー
+Eight
+
+八つ
+やっつ
+Eight
+ーーーー
+White
+Person
+
+白人
+はくじん
+White person
+ーーーー
+Book
+Person
+
+本人
+ほんにん
+The person in question
+ーーーー
+Name
+Person
+
+名人
+めいじん
+Master, expert
+ーーーー
+Person
+Life
+
+人生
+じんせい
+(One's) life
+ーーーー
+Ten
+Two
+Month
+
+十二月
+じゅうにがつ
+December
+ーーーー
+Ten
+Two
+
+十二
+じゅうに
+Twelve
+ーーーー
+Two
+Hundred
+
+二百
+にひゃく
+Two hundred
+ーーーー
+Two
+Month
+
+二月
+にがつ
+February
+ーーーー
+Two
+
+二つ
+ふたつ
+Two things
+ーーーー
+Enter
+Study
+
+入学
+にゅうがく
+Admission to a school or university
+ーーーー
+Enter
+Hand
+
+入手
+にゅうしゅ
+Acquisition, obtaining
+ーーーー
+Exit
+Enter
+
+出入
+しゅつにゅう
+In and out
+ーーーー
+Enter
+Gold
+
+入金
+にゅうきん
+Recepit/deposit of money
+ーーーー
+Enter
+
+入れる
+いれる
+To put in
+ーーーー
+Enter
+
+入る
+はいる
+To enter
+ーーーー
+Ten
+Month
+
+十月
+じゅうがつ
+October
+ーーーー
+Ten
+Four
+
+十四
+じゅうよん
+Fourteen
+ーーーー
+Ten
+Five
+
+十五
+じゅうご
+Fifteen
+ーーーー
+Ten
+Seven
+
+十七
+じゅうなな
+Seventeen
+ーーーー
+Seven
+Month
+
+七月
+しちがつ
+July
+ーーーー
+Seven
+Ten
+
+七十
+しちじゅう
+Seventy
+ーーーー
+Seven
+
+七つ
+ななつ
+Seven things
+ーーーー
+Ten
+Nine
+
+十九
+じゅうきゅう
+Nineteen
+ーーーー
+Nine
+Month
+
+九月
+くがつ
+September
+ーーーー
+Nine
+Ten
+
+九十
+きゅうじゅう
+Ninety
+ーーーー
+Nine
+
+九つ
+ここのつ
+Nine things
+ーーーー
+Little
+Study
+Life
+
+小学生
+しょうがくせい
+Elementary school student
+ーーーー
+Little
+Study
+
+小学
+しょうがく
+Elementary school
+ーーーー
+Large
+Little
+
+大小
+だいしょう
+Large and small sizes
+ーーーー
+In
+Little
+
+中小
+ちゅうしょう
+Small and medium
+ーーーー
+Little
+
+小さい
+ちいさい
+Small
+ーーーー
+Above
+Empty
+
+上空
+じょうくう
+Sky
+ーーーー
+Water
+Above
+
+水上
+すいじょう
+Aquatic
+ーーーー
+Above
+Rice field
+
+上田
+じょうでん
+High/fertile rice field
+ーーーー
+Path
+Above
+
+路上
+ろじょう
+On the road
+ーーーー
+Above
+
+上
+うえ
+Above, up, top
+ーーーー
+River
+Above
+
+川上
+かわかみ
+Upper reaches of a river
+ーーーー
+Above
+
+上げる
+あげる
+To elevate
+ーーーー
+Above
+
+上がる
+あがる
+To go up
+ーーーー
+Above
+
+上る
+のぼる
+To climb
+ーーーー
 #

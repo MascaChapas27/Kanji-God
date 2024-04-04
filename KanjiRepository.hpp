@@ -52,6 +52,12 @@ class KanjiRepository{
         // Returns the kanji specified by its meaning
         Kanji getKanji(std::wstring meaning);
 
+        // Returns the amount of kanji that were mastered in that grade 
+        int getMasteredKanji(int kanjiGrade);
+
+        // Returns the amount of total kanji in that grade 
+        int getTotalKanji(int kanjiGrade);
+
         // Returns an exercise with a kanji of the given grade. It defaults to a non-mastered
         // exercise but can return a mastered exercise
         Exercise getExercise(int grade, bool mastered = false);

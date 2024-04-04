@@ -4,6 +4,30 @@
 #include <string>
 #include <iostream>
 
+void MainWindow::updateMasteredCount(Button &kanjiGradeSelector, Button &wordGradeSelector){
+    int masteredKanji = Controller::getInstance()->getMasteredKanji(kanjiGrade);
+    int totalKanji = Controller::getInstance()->getTotalKanji(kanjiGrade);
+
+    kanjiGradeSelector.setText("Kanji\nJLPT N"+std::to_string(kanjiGrade)+"\n"+std::to_string(masteredKanji)+"/"+std::to_string(totalKanji));
+
+    if(masteredKanji == totalKanji){
+        kanjiGradeSelector.setButtonColor(BUTTON_COLOR_CORRECT);
+    } else {
+        kanjiGradeSelector.setButtonColor(BUTTON_COLOR_NORMAL);
+    }
+
+    int masteredWords = Controller::getInstance()->getMasteredWords(wordGrade);
+    int totalWords = Controller::getInstance()->getTotalWords(wordGrade);
+
+    wordGradeSelector.setText("Words\nJLPT N"+std::to_string(wordGrade)+"\n"+std::to_string(masteredWords)+"/"+std::to_string(totalWords));
+    
+    if(masteredWords == totalWords){
+        wordGradeSelector.setButtonColor(BUTTON_COLOR_CORRECT);
+    } else {
+        wordGradeSelector.setButtonColor(BUTTON_COLOR_NORMAL);
+    }
+}
+
 MainWindow::MainWindow(){
 
     // Initial kanji and word grades are JLPT N5
@@ -42,28 +66,6 @@ void MainWindow::start(){
     kanjiGradeSelector.setTextColor(TEXT_COLOR);
     kanjiGradeSelector.setButtonColor(BUTTON_COLOR_NORMAL);
 
-    Button leftArrowKanji;
-    leftArrowKanji.setBottomTexture(textureHolder->get(TextureID::MenuArrowLeftBottom));
-    leftArrowKanji.setTopTexture(textureHolder->get(TextureID::MenuArrowLeftTop));
-    leftArrowKanji.setPosition(KANJI_MENU_ARROW_LEFT_X,KANJI_MENU_ARROW_LEFT_Y);
-    leftArrowKanji.setButtonColor(BUTTON_COLOR_NORMAL);
-    leftArrowKanji.setPressedButtonAction([this, &kanjiGradeSelector](Button &button){
-        kanjiGrade++;
-        if(kanjiGrade == 6) kanjiGrade = 1;
-        kanjiGradeSelector.setText("Kanji\nJLPT N" + std::to_string(kanjiGrade),true);
-    });
-
-    Button rightArrowKanji;
-    rightArrowKanji.setBottomTexture(textureHolder->get(TextureID::MenuArrowRightBottom));
-    rightArrowKanji.setTopTexture(textureHolder->get(TextureID::MenuArrowRightTop));
-    rightArrowKanji.setPosition(KANJI_MENU_ARROW_RIGHT_X,KANJI_MENU_ARROW_RIGHT_Y);
-    rightArrowKanji.setButtonColor(BUTTON_COLOR_NORMAL);
-    rightArrowKanji.setPressedButtonAction([this, &kanjiGradeSelector](Button &button){
-        kanjiGrade--;
-        if(kanjiGrade == 0) kanjiGrade = 5;
-        kanjiGradeSelector.setText("Kanji\nJLPT N" + std::to_string(kanjiGrade), true);
-    });
-
     Button wordGradeSelector;
     wordGradeSelector.setBottomTexture(textureHolder->get(TextureID::BigMenuButtonBottom));
     wordGradeSelector.setTopTexture(textureHolder->get(TextureID::BigMenuButtonTop));
@@ -72,15 +74,37 @@ void MainWindow::start(){
     wordGradeSelector.setTextColor(TEXT_COLOR);
     wordGradeSelector.setButtonColor(BUTTON_COLOR_NORMAL);
 
+    Button leftArrowKanji;
+    leftArrowKanji.setBottomTexture(textureHolder->get(TextureID::MenuArrowLeftBottom));
+    leftArrowKanji.setTopTexture(textureHolder->get(TextureID::MenuArrowLeftTop));
+    leftArrowKanji.setPosition(KANJI_MENU_ARROW_LEFT_X,KANJI_MENU_ARROW_LEFT_Y);
+    leftArrowKanji.setButtonColor(BUTTON_COLOR_NORMAL);
+    leftArrowKanji.setPressedButtonAction([this, &kanjiGradeSelector, &wordGradeSelector](Button &button){
+        kanjiGrade++;
+        if(kanjiGrade == 6) kanjiGrade = 1;
+        this->updateMasteredCount(kanjiGradeSelector, wordGradeSelector);
+    });
+
+    Button rightArrowKanji;
+    rightArrowKanji.setBottomTexture(textureHolder->get(TextureID::MenuArrowRightBottom));
+    rightArrowKanji.setTopTexture(textureHolder->get(TextureID::MenuArrowRightTop));
+    rightArrowKanji.setPosition(KANJI_MENU_ARROW_RIGHT_X,KANJI_MENU_ARROW_RIGHT_Y);
+    rightArrowKanji.setButtonColor(BUTTON_COLOR_NORMAL);
+    rightArrowKanji.setPressedButtonAction([this, &kanjiGradeSelector, &wordGradeSelector](Button &button){
+        kanjiGrade--;
+        if(kanjiGrade == 0) kanjiGrade = 5;
+        this->updateMasteredCount(kanjiGradeSelector, wordGradeSelector);
+    });
+
     Button leftArrowWord;
     leftArrowWord.setBottomTexture(textureHolder->get(TextureID::MenuArrowLeftBottom));
     leftArrowWord.setTopTexture(textureHolder->get(TextureID::MenuArrowLeftTop));
     leftArrowWord.setPosition(WORD_MENU_ARROW_LEFT_X,WORD_MENU_ARROW_LEFT_Y);
     leftArrowWord.setButtonColor(BUTTON_COLOR_NORMAL);
-    leftArrowWord.setPressedButtonAction([this, &wordGradeSelector](Button &button){
+    leftArrowWord.setPressedButtonAction([this, &kanjiGradeSelector, &wordGradeSelector](Button &button){
         wordGrade++;
         if(wordGrade == 6) wordGrade = 1;
-        wordGradeSelector.setText("Words\nJLPT N" + std::to_string(wordGrade), true);
+        this->updateMasteredCount(kanjiGradeSelector, wordGradeSelector);
     });
 
     Button rightArrowWord;
@@ -88,10 +112,10 @@ void MainWindow::start(){
     rightArrowWord.setTopTexture(textureHolder->get(TextureID::MenuArrowRightTop));
     rightArrowWord.setPosition(WORD_MENU_ARROW_RIGHT_X,WORD_MENU_ARROW_RIGHT_Y);
     rightArrowWord.setButtonColor(BUTTON_COLOR_NORMAL);
-    rightArrowWord.setPressedButtonAction([this, &wordGradeSelector](Button &button){
+    rightArrowWord.setPressedButtonAction([this, &kanjiGradeSelector, &wordGradeSelector](Button &button){
         wordGrade--;
         if(wordGrade == 0) wordGrade = 5;
-        wordGradeSelector.setText("Words\nJLPT N" + std::to_string(wordGrade), true);
+        this->updateMasteredCount(kanjiGradeSelector, wordGradeSelector);
     });
 
     Button godModeSelector;
@@ -248,10 +272,11 @@ void MainWindow::start(){
     mainMenuButton.setPosition(BACK_MENU_BUTTON_X, BACK_MENU_BUTTON_Y);
     mainMenuButton.setButtonColor(BUTTON_COLOR_NORMAL);
     mainMenuButton.setPressedButtonAction([](Button &button){});
-    mainMenuButton.setReleasedButtonAction([this](Button &button){
+    mainMenuButton.setReleasedButtonAction([this, &kanjiGradeSelector, &wordGradeSelector](Button &button){
         Controller::getInstance()->save();
         this->programState = ProgramState::TitleScreen;
         for(Button * button : menuButtons) button->resetPosition();
+        updateMasteredCount(kanjiGradeSelector,wordGradeSelector);
     });
 
     // Button to save the progress
@@ -266,7 +291,7 @@ void MainWindow::start(){
     });
 
     // Function used to get an exercise (can be a tutorial for a new kanji/word)
-    getExercise = [this](Button& button){
+    getExercise = [this, &kanjiGradeSelector, &wordGradeSelector](Button& button){
 
         saveButton.setButtonColor(SAVE_COLOR);
 
@@ -391,6 +416,11 @@ void MainWindow::start(){
             tutorialPronunciation.setText(exercise.getWordPronunciation());
         }
             break;
+        case ProgramState::TitleScreen:
+
+            this->updateMasteredCount(kanjiGradeSelector,wordGradeSelector);
+
+            break;
         default:
             break;
         }
@@ -418,6 +448,9 @@ void MainWindow::start(){
     wordGradeSelector.setReleasedButtonAction(getExercise);
     godModeSelector.setReleasedButtonAction(getExercise);
     continueButton.setReleasedButtonAction(getExercise);
+
+    // Before starting update the content of the buttons
+    updateMasteredCount(kanjiGradeSelector,wordGradeSelector);
 
     while(window.isOpen()){
 

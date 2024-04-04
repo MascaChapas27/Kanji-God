@@ -52,6 +52,12 @@ class WordRepository{
         // Operation that loads all words and progress for words
         void loadAllWords();
 
+        // Returns the amount of words that were mastered in that grade 
+        int getMasteredWords(int wordGrade);
+
+        // Returns the amount of total words in that grade 
+        int getTotalWords(int wordGrade);
+
         // Returns an exercise with a word of the given grade. It defaults to a non-mastered
         // exercise but can return a mastered exercise
         Exercise getExercise(int grade, bool mastered = false);

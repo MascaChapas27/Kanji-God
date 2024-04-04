@@ -24,7 +24,23 @@ void Controller::setGodMode(bool godMode){
     this->godMode = godMode;
 }
 
-// Returns exercise
+int Controller::getMasteredKanji(int kanjiGrade){
+    return KanjiRepository::getInstance()->getMasteredKanji(kanjiGrade);
+}
+
+int Controller::getTotalKanji(int kanjiGrade){
+    return KanjiRepository::getInstance()->getTotalKanji(kanjiGrade);
+}
+
+int Controller::getMasteredWords(int wordGrade){
+    return WordRepository::getInstance()->getMasteredWords(wordGrade);
+}
+
+int Controller::getTotalWords(int wordGrade){
+    return WordRepository::getInstance()->getTotalWords(wordGrade);
+}
+
+
 Exercise Controller::getExercise(){
 
     correctAnswers.clear();

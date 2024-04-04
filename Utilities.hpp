@@ -180,34 +180,34 @@ const int MIN_PROGRESS = 0;
 const int MAX_PROGRESS = 100;
 
 // Points given for correctly guessing a kunyomi reading
-const int CORRECT_KUN_POINTS = 1;
+const int CORRECT_KUN_POINTS = 6;
 
 // Points taken for incorrectly guessing a kunyomi reading
-const int INCORRECT_KUN_POINTS = 2;
+const int INCORRECT_KUN_POINTS = 10;
 
 // Points given for correctly guessing an onyomi reading
-const int CORRECT_ON_POINTS = 1;
+const int CORRECT_ON_POINTS = 6;
 
 // Points taken for incorrectly guessing an onyomi reading
-const int INCORRECT_ON_POINTS = 2;
+const int INCORRECT_ON_POINTS = 10;
 
 // Points given for correctly guessing a kanji meaning
-const int CORRECT_KANJIMEAN_POINTS = 2;
+const int CORRECT_KANJIMEAN_POINTS = 15;
 
 // Points taken for incorrectly guessing a kanji meaning
-const int INCORRECT_KANJIMEAN_POINTS = 4;
+const int INCORRECT_KANJIMEAN_POINTS = 25;
 
 // Points given for correctly guessing a word pronunciation
-const int CORRECT_PRON_POINTS = 2;
+const int CORRECT_PRON_POINTS = 20;
 
 // Points taken for incorrectly guessing a word pronunciation
-const int INCORRECT_PRON_POINTS = 5;
+const int INCORRECT_PRON_POINTS = 30;
 
 // Points given for correctly guessing a word meaning
-const int CORRECT_WORDMEAN_POINTS = 2;
+const int CORRECT_WORDMEAN_POINTS = 20;
 
 // Points taken for incorrectly guessing a word meaning
-const int INCORRECT_WORDMEAN_POINTS = 5;
+const int INCORRECT_WORDMEAN_POINTS = 30;
 
 // Initial pitch for the correct answer sound
 const double INITIAL_PITCH_CORRECT_SOUND = 1.3;

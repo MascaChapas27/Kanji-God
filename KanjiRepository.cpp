@@ -159,6 +159,14 @@ Kanji KanjiRepository::getKanji(std::wstring meaning)
     return kanjis[meaning];
 }
 
+int KanjiRepository::getMasteredKanji(int kanjiGrade){
+    return masteredKanjis[kanjiGrade].size();
+}
+
+int KanjiRepository::getTotalKanji(int kanjiGrade){
+    return newKanjis[kanjiGrade].size() + practicingKanjis[kanjiGrade].size() + masteredKanjis[kanjiGrade].size();
+}
+
 Exercise KanjiRepository::getExercise(int grade, bool mastered)
 {
     Exercise exercise;

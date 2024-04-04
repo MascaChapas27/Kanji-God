@@ -30,4 +30,160 @@ Eighty
 ひゃくはち
 One hundred and eight
 ーーーー
+八つ
+やっつ
+Eight
+ーーーー
+白人
+はくじん
+White person
+ーーーー
+本人
+ほんにん
+The person in question
+ーーーー
+名人
+めいじん
+Master, expert
+ーーーー
+人生
+じんせい
+(One's) life
+ーーーー
+十二月
+じゅうにがつ
+December
+ーーーー
+十二
+じゅうに
+Twelve
+ーーーー
+二百
+にひゃく
+Two hundred
+ーーーー
+二月
+にがつ
+February
+ーーーー
+二つ
+ふたつ
+Two things
+ーーーー
+入学
+にゅうがく
+Admission to a school or university
+ーーーー
+入手
+にゅうしゅ
+Acquisition, obtaining
+ーーーー
+出入
+しゅつにゅう
+In and out
+ーーーー
+入金
+にゅうきん
+Recepit/deposit of money
+ーーーー
+入れる
+いれる
+To put in
+ーーーー
+入る
+はいる
+To enter
+ーーーー
+十月
+じゅうがつ
+October
+ーーーー
+十四
+じゅうよん
+Fourteen
+ーーーー
+十五
+じゅうご
+Fifteen
+ーーーー
+十七
+じゅうなな
+Seventeen
+ーーーー
+七月
+しちがつ
+July
+ーーーー
+七十
+しちじゅう
+Seventy
+ーーーー
+七つ
+ななつ
+Seven things
+ーーーー
+十九
+じゅうきゅう
+Nineteen
+ーーーー
+九月
+くがつ
+September
+ーーーー
+九十
+きゅうじゅう
+Ninety
+ーーーー
+九つ
+ここのつ
+Nine things
+ーーーー
+小学生
+しょうがくせい
+Elementary school student
+ーーーー
+小学
+しょうがく
+Elementary school
+ーーーー
+大小
+だいしょう
+Large and small sizes
+ーーーー
+中小
+ちゅうしょう
+Small and medium
+ーーーー
+小さい
+ちいさい
+Small
+ーーーー
+上空
+じょうくう
+Sky
+ーーーー
+水上
+すいじょう
+Aquatic
+ーーーー
+上
+うえ
+Above, up, top
+ーーーー
+川上
+かわかみ
+Upper reaches of a river
+ーーーー
+上げる
+あげる
+To elevate
+ーーーー
+上がる
+あがる
+To go up
+ーーーー
+上る
+のぼる
+To climb
+ーーーー
 #
