@@ -22,7 +22,7 @@ KanjiRepository * KanjiRepository::getInstance()
 // Operation that loads all kanji and progress for kanji in one file
 void KanjiRepository::loadAllKanjis(){
 
-    for(int i=5;i<6;i++){
+    for(int i=4;i<6;i++){
 
         std::vector<std::wstring> classifiedKanjis;
 
@@ -459,7 +459,9 @@ void KanjiRepository::save(){
 
     std::map<int,std::wfstream> files;
 
-    files[5] = std::wfstream("files/JLPTN5kanjiprogress.txt",std::wfstream::trunc | std::wfstream::out);
+    for(int i=1;i<=5;i++){
+        files[i] = std::wfstream("files/JLPTN"+std::to_string(i)+"kanjiprogress.txt",std::wfstream::trunc | std::wfstream::out);
+    }
 
     for(auto &pair : kanjis){
         files[pair.second.getGrade()] << pair.second.getMeaning() << L"\n" << pair.second.getMeaningProgress() << L"\n" << pair.second.getKunyomiProgress() << L"\n" << pair.second.getOnyomiProgress() << L"\n";
