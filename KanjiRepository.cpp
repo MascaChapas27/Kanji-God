@@ -222,13 +222,15 @@ Exercise KanjiRepository::getExercise(int grade, bool mastered)
                 break;
 
             case 1:
-                if(!mastered && chosenKanji.getKunyomiProgress()==MAX_PROGRESS)
+                if((!mastered && chosenKanji.getKunyomiProgress()==MAX_PROGRESS) ||
+                   (mastered && chosenKanji.getKunyomiReadings().size() == 0))
                     exerciseType=(exerciseType+1)%3;
                 else decided = true;
                 break;
 
             case 2:
-                if(!mastered && chosenKanji.getOnyomiProgress()==MAX_PROGRESS)
+                if((!mastered && chosenKanji.getOnyomiProgress()==MAX_PROGRESS) ||
+                   (mastered && chosenKanji.getOnyomiReadings().size() == 0))
                     exerciseType=(exerciseType+1)%3;
                 else decided = true;
                 break;
