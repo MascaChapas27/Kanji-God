@@ -33,15 +33,19 @@ void Sign::setText(sf::String textString, bool keepSize){
             text.setCharacterSize(text.getCharacterSize()-1);
         }
 
-        int attempts = 0;
-
         while(text.getGlobalBounds().width > signSprite.getTextureRect().width*textSignRatio ||
               text.getGlobalBounds().height > signSprite.getTextureRect().height*textSignRatio){
 
-            attempts++;
+            // This shit is too big let's try to find a space in the middle
+            int spaces = 0;
+            for(std::size_t i=0;i<textString.getSize();i++){
+                if(textString[i]==' ') spaces++;
+            }
 
-            // This shit is too big let's try to find a space
             std::size_t spacePosition = textString.find(" ");
+            for(int i=0;i<spaces/2;i++){
+                spacePosition = textString.find(" ",spacePosition+1);
+            }
             if(spacePosition != sf::String::InvalidPos){
                 textString.replace(spacePosition,1,"\n");
                 text.setString(textString);

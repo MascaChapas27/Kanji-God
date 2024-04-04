@@ -207,7 +207,7 @@ void WordRepository::loadAllWords(){
                 // Classify the word depending on the progress numbers
                 if(pronunciationProgress == NO_PROGRESS && meaningProgress == NO_PROGRESS){
                     newWords[i].push_back(w.getMeaning());
-                } else if (pronunciationProgress == NO_PROGRESS && meaningProgress == NO_PROGRESS){
+                } else if (pronunciationProgress == MAX_PROGRESS && meaningProgress == MAX_PROGRESS){
                     masteredWords[i].push_back(w.getMeaning());
                 } else {
                     practicingWords[i].push_back(w.getMeaning());
@@ -262,7 +262,7 @@ Exercise WordRepository::getExercise(int grade, bool mastered)
         newWords[grade].pop_back();
         practicingWords[grade].push_back(chosenWord.getMeaning());
 
-    } else if(practicingWords[grade].size() == 0){
+    } else if(!mastered && practicingWords[grade].size() == 0){
         exercise.setExerciseType(ProgramState::TitleScreen);
     } else {
 

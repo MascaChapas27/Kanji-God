@@ -195,7 +195,7 @@ Exercise KanjiRepository::getExercise(int grade, bool mastered)
         newKanjis[grade].pop_back();
         practicingKanjis[grade].push_back(chosenKanji.getMeaning());
 
-    } else if(practicingKanjis[grade].size() == 0){
+    } else if(!mastered && practicingKanjis[grade].size() == 0){
         exercise.setExerciseType(ProgramState::TitleScreen);
     } else {
 
