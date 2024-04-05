@@ -110,9 +110,9 @@ const int INSTRUCTIONS_SIGN_X = KANJI_WORD_SIGN_X;
 const int INSTRUCTIONS_SIGN_Y = 5*WINDOW_HEIGHT/6;
 
 // Position for the short buttons in exercises
-const int SHORT_EXERCISE_BUTTON_X[9] = {100,250,400,
-                                        100,250,400,
-                                        100,250,400};
+const int SHORT_EXERCISE_BUTTON_X[9] = {115,267,420,
+                                        115,267,420,
+                                        115,267,420};
 const int SHORT_EXERCISE_BUTTON_Y[9] = {60+WINDOW_HEIGHT/4,60+WINDOW_HEIGHT/4,60+WINDOW_HEIGHT/4,
                                         60+WINDOW_HEIGHT/2,60+WINDOW_HEIGHT/2,60+WINDOW_HEIGHT/2,
                                         60+3*WINDOW_HEIGHT/4,60+3*WINDOW_HEIGHT/4,60+3*WINDOW_HEIGHT/4};
@@ -181,23 +181,23 @@ const int MAX_PROGRESS = 100;
 
 // Points given for correctly guessing all kunyomi readings (kind of (it's divided
 // for all different answers so maybe this number divided by 6 or 5 isn't exact))
-const int CORRECT_KUN_POINTS = 20;
+const int CORRECT_KUN_POINTS = 15;
 
 // Points taken for incorrectly guessing a kunyomi reading
-const int INCORRECT_KUN_POINTS = 30;
+const int INCORRECT_KUN_POINTS = 25;
 
 // Points given for correctly guessing all onyomi readings (kind of (it's divided
 // for all different answers so maybe this number divided by 6 or 5 isn't exact))
-const int CORRECT_ON_POINTS = 20;
+const int CORRECT_ON_POINTS = CORRECT_KUN_POINTS;
 
 // Points taken for incorrectly guessing an onyomi reading
-const int INCORRECT_ON_POINTS = 30;
+const int INCORRECT_ON_POINTS = INCORRECT_KUN_POINTS;
 
 // Points given for correctly guessing a kanji meaning
-const int CORRECT_KANJIMEAN_POINTS = 20;
+const int CORRECT_KANJIMEAN_POINTS = CORRECT_KUN_POINTS;
 
 // Points taken for incorrectly guessing a kanji meaning
-const int INCORRECT_KANJIMEAN_POINTS = 30;
+const int INCORRECT_KANJIMEAN_POINTS = INCORRECT_KUN_POINTS;
 
 // Points given for correctly guessing a word pronunciation
 const int CORRECT_PRON_POINTS = 20;
@@ -206,10 +206,10 @@ const int CORRECT_PRON_POINTS = 20;
 const int INCORRECT_PRON_POINTS = 30;
 
 // Points given for correctly guessing a word meaning
-const int CORRECT_WORDMEAN_POINTS = 20;
+const int CORRECT_WORDMEAN_POINTS = CORRECT_PRON_POINTS;
 
 // Points taken for incorrectly guessing a word meaning
-const int INCORRECT_WORDMEAN_POINTS = 30;
+const int INCORRECT_WORDMEAN_POINTS = INCORRECT_PRON_POINTS;
 
 // Initial pitch for the correct answer sound
 const double INITIAL_PITCH_CORRECT_SOUND = 1.3;

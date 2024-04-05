@@ -74,6 +74,10 @@ Exercise Controller::getExercise(){
     return exercise;
 }
 
+Exercise Controller::getCurrentExercise(){
+    return currentExercise;
+}
+
 bool Controller::checkAnswer(std::wstring answer, int &meanProgress, int &kunProgress, int &onProgress){
 
     // That answer was already answered

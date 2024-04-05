@@ -267,7 +267,7 @@ Exercise KanjiRepository::getExercise(int grade, bool mastered)
 
             int index = rand()%wrongAnswerKanjis.size();
 
-            while(exerciseAnswers.size() < 9) {
+            while(exerciseAnswers.size() < 6) {
                 std::wstring meaning = kanjis[wrongAnswerKanjis[index]].getMeaning();
                 if(exerciseAnswers.count(meaning))
                     continue;

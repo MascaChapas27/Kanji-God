@@ -169,16 +169,29 @@ void MainWindow::start(){
     longAnswerButton.setTextColor(TEXT_COLOR);
     longAnswerButton.setButtonColor(BUTTON_COLOR_NORMAL);
     longAnswerButton.setPressedButtonAction([this](Button &thisButton){
-        int pronProgress, meanProgress;
-        std::wstring answer = util::trimLineFeeds(thisButton.getText());
-        if(Controller::getInstance()->checkAnswer(answer,pronProgress,meanProgress)){
-            thisButton.setButtonColor(sf::Color::White);
-            thisButton.setFinalColor(BUTTON_COLOR_CORRECT);
+        if(Controller::getInstance()->getCurrentExercise().getExerciseType() == ProgramState::KanjiMean){
+            int meanProgress,kunProgress,onProgress;
+            if(Controller::getInstance()->checkAnswer(thisButton.getText(),meanProgress,kunProgress,onProgress)){
+                thisButton.setButtonColor(sf::Color::White);
+                thisButton.setFinalColor(BUTTON_COLOR_CORRECT);
+            } else {
+                thisButton.setButtonColor(sf::Color::Black);
+                thisButton.setFinalColor(BUTTON_COLOR_INCORRECT);
+            }
+            this->progressSign.setText("Meaning: " + std::to_string(meanProgress) + "%\n\nKunyomi: " + std::to_string(kunProgress) + "%\n\nOnyomi: " + std::to_string(onProgress) + "%");
         } else {
-            thisButton.setButtonColor(sf::Color::Black);
-            thisButton.setFinalColor(BUTTON_COLOR_INCORRECT);
+            int pronProgress, meanProgress;
+            std::wstring answer = util::trimLineFeeds(thisButton.getText());
+            if(Controller::getInstance()->checkAnswer(answer,pronProgress,meanProgress)){
+                thisButton.setButtonColor(sf::Color::White);
+                thisButton.setFinalColor(BUTTON_COLOR_CORRECT);
+            } else {
+                thisButton.setButtonColor(sf::Color::Black);
+                thisButton.setFinalColor(BUTTON_COLOR_INCORRECT);
+            }
+            this->progressSign.setText("Pronunciation: " + std::to_string(pronProgress) + "%\n\nMeaning: " + std::to_string(meanProgress) + "%");
         }
-        this->progressSign.setText("Pronunciation: " + std::to_string(pronProgress) + "%\n\nMeaning: " + std::to_string(meanProgress) + "%");
+        
     });
     longAnswerButton.setReleasedButtonAction([this](Button &thisButton){
         if(Controller::getInstance()->allAnswered()){
@@ -312,12 +325,10 @@ void MainWindow::start(){
         switch(programState){
         case ProgramState::KanjiKun:
         case ProgramState::KanjiOn:
-        case ProgramState::KanjiMean:
         {
             // Reset the buttons
             if(oldState != ProgramState::KanjiKun &&
-               oldState != ProgramState::KanjiOn &&
-               oldState != ProgramState::KanjiMean){
+               oldState != ProgramState::KanjiOn){
 
                 for(Button &b : shortExerciseButtons){
                     b.setButtonColor(BUTTON_COLOR_NORMAL);
@@ -375,10 +386,12 @@ void MainWindow::start(){
             break;
         case ProgramState::WordMean:
         case ProgramState::WordPron:
+        case ProgramState::KanjiMean:
         {
             // Reset the buttons
             if(oldState != ProgramState::WordMean &&
-               oldState != ProgramState::WordPron){
+               oldState != ProgramState::WordPron &&
+               oldState != ProgramState::KanjiMean){
 
                 for(Button &b : longExerciseButtons){
                     b.setButtonColor(BUTTON_COLOR_NORMAL);
@@ -387,7 +400,10 @@ void MainWindow::start(){
             }
 
             // Set sign with progress
-            progressSign.setText("Pronunciation: " + std::to_string(exercise.getPronunciationProgress()) + "%\n\nMeaning: " + std::to_string(exercise.getMeaningProgress()) + "%");
+            if(exercise.getExerciseType() == ProgramState::KanjiMean)
+                progressSign.setText("Meaning: " + std::to_string(exercise.getMeaningProgress()) + "%\n\nKunyomi: " + std::to_string(exercise.getKunyomiProgress()) + "%\n\nOnyomi: " + std::to_string(exercise.getOnyomiProgress()) + "%");
+            else 
+                progressSign.setText("Pronunciation: " + std::to_string(exercise.getPronunciationProgress()) + "%\n\nMeaning: " + std::to_string(exercise.getMeaningProgress()) + "%");
 
             std::set<std::wstring> answers = exercise.getAnswers();
             std::set<std::wstring>::iterator iterAns = answers.begin();
@@ -467,13 +483,13 @@ void MainWindow::start(){
                     break;
                 case ProgramState::KanjiKun:
                 case ProgramState::KanjiOn:
-                case ProgramState::KanjiMean:
                     for(Button &button : shortExerciseButtons) button.notify(event);
                     mainMenuButton.notify(event);
                     saveButton.notify(event);
                     break;
                 case ProgramState::WordPron:
                 case ProgramState::WordMean:
+                case ProgramState::KanjiMean:
                     for(Button &button : longExerciseButtons) button.notify(event);
                     mainMenuButton.notify(event);
                     saveButton.notify(event);
@@ -493,13 +509,13 @@ void MainWindow::start(){
             break;
         case ProgramState::KanjiKun:
         case ProgramState::KanjiOn:
-        case ProgramState::KanjiMean:
             for(Button &button : shortExerciseButtons) button.update();
             mainMenuButton.update();
             saveButton.update();
             break;
         case ProgramState::WordPron:
         case ProgramState::WordMean:
+        case ProgramState::KanjiMean:
             for(Button &button : longExerciseButtons) button.update();
             mainMenuButton.update();
             saveButton.update();
@@ -522,7 +538,6 @@ void MainWindow::start(){
             break;
         case ProgramState::KanjiKun:
         case ProgramState::KanjiOn:
-        case ProgramState::KanjiMean:
             window.draw(kanjiWordSign);
             window.draw(instructionsSign);
             window.draw(progressSign);
@@ -532,6 +547,7 @@ void MainWindow::start(){
             break;
         case ProgramState::WordPron:
         case ProgramState::WordMean:
+        case ProgramState::KanjiMean:
             window.draw(kanjiWordSign);
             window.draw(instructionsSign);
             window.draw(progressSign);

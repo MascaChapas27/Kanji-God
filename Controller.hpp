@@ -75,6 +75,9 @@ class Controller {
         // Returns exercise
         Exercise getExercise();
 
+        // Returns the current exercise
+        Exercise getCurrentExercise();
+
         // Checks if the kanjianswer is correct and returns the progress
         bool checkAnswer(std::wstring answer, int &meanProgress, int &kunProgress, int &onProgress);
 
