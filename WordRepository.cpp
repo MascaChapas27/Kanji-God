@@ -109,8 +109,6 @@ void WordRepository::loadAllWords(){
 
     for(int i=1;i<=5;i++){
 
-        std::vector<std::wstring> classifiedWords;
-
         // Open the words file
         #ifdef __linux__
         std::wfstream file("files/JLPTN"+std::to_string(i)+"words.txt");
@@ -159,15 +157,18 @@ void WordRepository::loadAllWords(){
                 exit(EXIT_FAILURE);
             }
 
+            w.setMeaningProgress(-1);
+            w.setPronunciationProgress(-1);
+
             words[w.getMeaning()] = w;
 
-            classifiedWords.push_back(w.getMeaning());
+            newWords[i].push_back(w.getMeaning());
         }
 
         #ifdef __linux__
         file.close();
         #endif
-        /*
+        
         // Open the progress file
         std::wfstream fileprogress("files/JLPTN"+std::to_string(i)+"wordprogress.txt");
 
@@ -175,15 +176,13 @@ void WordRepository::loadAllWords(){
             // The file doesn't exist: let's create it
             fileprogress.open("files/JLPTN"+std::to_string(i)+"wordprogress.txt",std::fstream::out);
 
-            for(std::wstring wordMeaning : classifiedWords){
+            for(std::wstring wordMeaning : newWords[i]){
                 fileprogress << wordMeaning << "\n-1\n-1\n";
                 words[wordMeaning].setPronunciationProgress(-1);
                 words[wordMeaning].setMeaningProgress(-1);
             }
 
             fileprogress << "#";
-
-            newWords[i] = classifiedWords;
 
         } else {
 
@@ -205,12 +204,18 @@ void WordRepository::loadAllWords(){
                 w.setMeaningProgress(meaningProgress);
 
                 // Classify the word depending on the progress numbers
-                if(pronunciationProgress == NO_PROGRESS && meaningProgress == NO_PROGRESS){
-                    newWords[i].push_back(w.getMeaning());
-                } else if (pronunciationProgress == MAX_PROGRESS && meaningProgress == MAX_PROGRESS){
-                    masteredWords[i].push_back(w.getMeaning());
-                } else {
-                    practicingWords[i].push_back(w.getMeaning());
+                if (pronunciationProgress == MAX_PROGRESS && meaningProgress == MAX_PROGRESS){
+                    auto position = std::find(newWords[i].begin(),newWords[i].end(),w.getMeaning());
+                    if(position != newWords[i].end()){
+                        newWords[i].erase(position);
+                        masteredWords[i].push_back(w.getMeaning());
+                    }
+                } else if (pronunciationProgress != NO_PROGRESS && meaningProgress != NO_PROGRESS){
+                    auto position = std::find(newWords[i].begin(),newWords[i].end(),w.getMeaning());
+                    if(position != newWords[i].end()){
+                        newWords[i].erase(position);
+                        practicingWords[i].push_back(w.getMeaning());
+                    }
                 }
 
                 // Get the next line, which can be a word containing kanji or a "#"
@@ -219,7 +224,7 @@ void WordRepository::loadAllWords(){
         }
 
         fileprogress.close();
-        */
+        
         // Shuffle the vectors to make them more unpredictable
         auto rng = std::default_random_engine {};
         rng.seed(std::chrono::system_clock::now().time_since_epoch().count());
@@ -474,10 +479,11 @@ bool WordRepository::allAnswered(Exercise &exercise, unsigned int answers)
 }
 
 void WordRepository::save(){
-    /*
+    
     std::map<int,std::wfstream> files;
 
-    files[5] = std::wfstream("files/JLPTN5wordprogress.txt",std::wfstream::trunc | std::wfstream::out);
+    for(int i=1;i<=5;i++)
+        files[i] = std::wfstream("files/JLPTN"+std::to_string(i)+"wordprogress.txt",std::wfstream::trunc | std::wfstream::out);
 
     for(auto &pair : words){
         files[pair.second.getGrade()] << pair.second.getMeaning() << L"\n" << pair.second.getPronunciationProgress() << L"\n" << pair.second.getMeaningProgress() << L"\n";
@@ -486,5 +492,5 @@ void WordRepository::save(){
     for(auto &pair : files){
         pair.second << L"#";
         pair.second.close();
-    }*/
+    }
 }

@@ -22,9 +22,7 @@ KanjiRepository * KanjiRepository::getInstance()
 // Operation that loads all kanji and progress for kanji in one file
 void KanjiRepository::loadAllKanjis(){
 
-    for(int i=4;i<=5;i++){
-
-        std::vector<std::wstring> classifiedKanjis;
+    for(int i=3;i<=5;i++){
 
         // Open the readings/meanings file
         #ifdef __linux__
@@ -77,12 +75,16 @@ void KanjiRepository::loadAllKanjis(){
 
             k.setKunyomiReadings(kunyomi);
 
+            k.setKunyomiProgress(-1);
+            k.setOnyomiProgress(-1);
+            k.setMeaningProgress(-1);
+
+            newKanjis[i].push_back(k.getMeaning());
+
             kanjis[k.getMeaning()] = k;
 
             // Kanji symbol or "#"
             getline(file,data);
-
-            classifiedKanjis.push_back(k.getMeaning());
         }
 
         #ifdef __linux__
@@ -96,7 +98,7 @@ void KanjiRepository::loadAllKanjis(){
             // The file doesn't exist: let's create it
             fileprogress.open("files/JLPTN" + std::to_string(i) + "kanjiprogress.txt",std::fstream::out);
 
-            for(std::wstring kanjiMeaning : classifiedKanjis){
+            for(std::wstring kanjiMeaning : newKanjis[i]){
                 fileprogress << kanjiMeaning << "\n-1\n-1\n-1\n";
                 kanjis[kanjiMeaning].setMeaningProgress(-1);
                 kanjis[kanjiMeaning].setKunyomiProgress(-1);
@@ -104,8 +106,6 @@ void KanjiRepository::loadAllKanjis(){
             }
 
             fileprogress << "#";
-
-            newKanjis[i] = classifiedKanjis;
         } else {
 
             // First line, can be a "#" or a kanji name
@@ -130,12 +130,19 @@ void KanjiRepository::loadAllKanjis(){
                 k.setOnyomiProgress(onyomiProgress);
 
                 // Classify the kanji depending on the progress numbers
-                if(meaningProgress == NO_PROGRESS && kunyomiProgress == NO_PROGRESS && onyomiProgress == NO_PROGRESS){
-                    newKanjis[i].push_back(k.getMeaning());
-                } else if (meaningProgress == MAX_PROGRESS && kunyomiProgress == MAX_PROGRESS && onyomiProgress == MAX_PROGRESS){
+                if (meaningProgress == MAX_PROGRESS && kunyomiProgress == MAX_PROGRESS && onyomiProgress == MAX_PROGRESS){
+                    auto position = std::find(newKanjis[i].begin(),newKanjis[i].end(),k.getMeaning());
+                    if(position != newKanjis[i].end()){
+                        newKanjis[i].erase(position);
+                        masteredKanjis[i].push_back(k.getMeaning());
+                    }
                     masteredKanjis[i].push_back(k.getMeaning());
-                } else {
-                    practicingKanjis[i].push_back(k.getMeaning());
+                } else if (meaningProgress != NO_PROGRESS && kunyomiProgress != NO_PROGRESS && onyomiProgress != NO_PROGRESS){
+                    auto position = std::find(newKanjis[i].begin(),newKanjis[i].end(),k.getMeaning());
+                    if(position != newKanjis[i].end()){
+                        newKanjis[i].erase(position);
+                        practicingKanjis[i].push_back(k.getMeaning());
+                    }
                 }
 
                 // Get the next line, which can be a kanji name or a "#"
@@ -461,7 +468,7 @@ void KanjiRepository::save(){
 
     std::map<int,std::wfstream> files;
 
-    for(int i=4;i<=5;i++){
+    for(int i=3;i<=5;i++){
         files[i] = std::wfstream("files/JLPTN"+std::to_string(i)+"kanjiprogress.txt",std::wfstream::trunc | std::wfstream::out);
     }
 
