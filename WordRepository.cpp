@@ -168,7 +168,7 @@ void WordRepository::loadAllWords(){
         #ifdef __linux__
         file.close();
         #endif
-        
+
         // Open the progress file
         std::wfstream fileprogress("files/JLPTN"+std::to_string(i)+"wordprogress.txt");
 
@@ -224,7 +224,7 @@ void WordRepository::loadAllWords(){
         }
 
         fileprogress.close();
-        
+
         // Shuffle the vectors to make them more unpredictable
         auto rng = std::default_random_engine {};
         rng.seed(std::chrono::system_clock::now().time_since_epoch().count());
@@ -371,7 +371,7 @@ Exercise WordRepository::getExercise(int grade, bool mastered)
 }
 
 Exercise WordRepository::getTutorial(std::wstring word){
-    
+
     Exercise exercise;
 
     exercise.setExerciseType(ProgramState::WordTutor);
@@ -488,7 +488,7 @@ bool WordRepository::allAnswered(Exercise &exercise, unsigned int answers)
 }
 
 void WordRepository::save(){
-    
+
     std::map<int,std::wfstream> files;
 
     for(int i=1;i<=5;i++)

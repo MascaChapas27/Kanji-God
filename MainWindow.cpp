@@ -20,7 +20,7 @@ void MainWindow::updateMasteredCount(Button &kanjiGradeSelector, Button &wordGra
     int totalWords = Controller::getInstance()->getTotalWords(wordGrade);
 
     wordGradeSelector.setText("Words\nJLPT N"+std::to_string(wordGrade)+"\n"+std::to_string(masteredWords)+"/"+std::to_string(totalWords));
-    
+
     if(masteredWords == totalWords){
         wordGradeSelector.setButtonColor(BUTTON_COLOR_CORRECT);
     } else {
@@ -191,7 +191,7 @@ void MainWindow::start(){
             }
             this->progressSign.setText("Pronunciation: " + std::to_string(pronProgress) + "%\n\nMeaning: " + std::to_string(meanProgress) + "%");
         }
-        
+
     });
     longAnswerButton.setReleasedButtonAction([this](Button &thisButton){
         if(Controller::getInstance()->allAnswered()){
@@ -304,8 +304,8 @@ void MainWindow::start(){
     });
 
     // Button that shows the tutorial page for the following exercise
-    helpButton.setBottomTexture(textureHolder->get(TextureID::SaveBottom));
-    helpButton.setTopTexture(textureHolder->get(TextureID::SaveTop));
+    helpButton.setBottomTexture(textureHolder->get(TextureID::HelpBottom));
+    helpButton.setTopTexture(textureHolder->get(TextureID::HelpTop));
     helpButton.setPosition(HELP_BUTTON_X, HELP_BUTTON_Y);
     helpButton.setButtonColor(HELP_COLOR);
     helpButton.setPressedButtonAction([](Button &button){});
@@ -411,7 +411,7 @@ void MainWindow::start(){
             // Set sign with progress
             if(exercise.getExerciseType() == ProgramState::KanjiMean)
                 progressSign.setText("Meaning: " + std::to_string(exercise.getMeaningProgress()) + "%\n\nKunyomi: " + std::to_string(exercise.getKunyomiProgress()) + "%\n\nOnyomi: " + std::to_string(exercise.getOnyomiProgress()) + "%");
-            else 
+            else
                 progressSign.setText("Pronunciation: " + std::to_string(exercise.getPronunciationProgress()) + "%\n\nMeaning: " + std::to_string(exercise.getMeaningProgress()) + "%");
 
             std::set<std::wstring> answers = exercise.getAnswers();
