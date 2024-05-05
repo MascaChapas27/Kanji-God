@@ -41,7 +41,7 @@ const double BUTTON_PRESS_SPEED = 5.0;
 const int FPS = 60;
 
 // Font size all fonts start at. It then gets smaller to fit in the button or label
-const int INITIAL_FONT_SIZE = 60;
+const int INITIAL_FONT_SIZE = 70;
 
 // Minumum font size so that letters are readable and dont shrink forever
 const double MIN_FONT_SIZE = 15;
@@ -69,6 +69,9 @@ const sf::Color SAVE_COLOR = sf::Color(100,100,170);
 
 // Color for the save button when you already saved
 const sf::Color SAVED_COLOR = sf::Color(200,200,200);
+
+// Color for the help button
+const sf::Color HELP_COLOR = sf::Color(100,100,170);
 
 // In the title screen, distance between buttons vertically
 const int TITLE_BUTTONS_VERTICAL_DISTANCE = 60;
@@ -170,6 +173,10 @@ const int BACK_MENU_BUTTON_Y = 70;
 const int SAVE_BUTTON_X = BACK_MENU_BUTTON_X+100;
 const int SAVE_BUTTON_Y = BACK_MENU_BUTTON_Y;
 
+//Position for the button that how help for the current exercise
+const int HELP_BUTTON_X = SAVE_BUTTON_X+100;
+const int HELP_BUTTON_Y = BACK_MENU_BUTTON_Y;
+
 // Placeholder progress for something not yet taught
 const int NO_PROGRESS = -1;
 
@@ -181,10 +188,10 @@ const int MAX_PROGRESS = 100;
 
 // Points given for correctly guessing all kunyomi readings (kind of (it's divided
 // for all different answers so maybe this number divided by 6 or 5 isn't exact))
-const int CORRECT_KUN_POINTS = 15;
+const int CORRECT_KUN_POINTS = 10;
 
 // Points taken for incorrectly guessing a kunyomi reading
-const int INCORRECT_KUN_POINTS = 25;
+const int INCORRECT_KUN_POINTS = 20;
 
 // Points given for correctly guessing all onyomi readings (kind of (it's divided
 // for all different answers so maybe this number divided by 6 or 5 isn't exact))
@@ -200,10 +207,10 @@ const int CORRECT_KANJIMEAN_POINTS = CORRECT_KUN_POINTS;
 const int INCORRECT_KANJIMEAN_POINTS = INCORRECT_KUN_POINTS;
 
 // Points given for correctly guessing a word pronunciation
-const int CORRECT_PRON_POINTS = 20;
+const int CORRECT_PRON_POINTS = 10;
 
 // Points taken for incorrectly guessing a word pronunciation
-const int INCORRECT_PRON_POINTS = 30;
+const int INCORRECT_PRON_POINTS = 20;
 
 // Points given for correctly guessing a word meaning
 const int CORRECT_WORDMEAN_POINTS = CORRECT_PRON_POINTS;

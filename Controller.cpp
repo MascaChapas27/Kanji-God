@@ -78,6 +78,25 @@ Exercise Controller::getCurrentExercise(){
     return currentExercise;
 }
 
+Exercise Controller::getCurrentTutorial(){
+    Exercise e;
+
+    switch(currentExercise.getExerciseType()){
+        case ProgramState::KanjiKun:
+        case ProgramState::KanjiOn:
+        case ProgramState::KanjiMean:
+            e = KanjiRepository::getInstance()->getTutorial(currentExercise.getId());
+            break;
+        case ProgramState::WordMean:
+        case ProgramState::WordPron:
+            e = WordRepository::getInstance()->getTutorial(currentExercise.getId());
+            break;
+        default:
+            break;
+    }
+    return e;
+}
+
 bool Controller::checkAnswer(std::wstring answer, int &meanProgress, int &kunProgress, int &onProgress){
 
     // That answer was already answered

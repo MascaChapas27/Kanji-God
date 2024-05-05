@@ -247,19 +247,8 @@ Exercise WordRepository::getExercise(int grade, bool mastered)
     Exercise exercise;
 
     if(!mastered && newWords[grade].size() > 0 && util::shouldLearnNewContent(practicingWords[grade].size())){
-
-        exercise.setExerciseType(ProgramState::WordTutor);
-
-        // Choose the word
-        Word &chosenWord = words[newWords[grade].back()];
-
-        exercise.setHelp(L"Memorize the\ninformation\nabout the\nnew word");
-
-        exercise.setId(chosenWord.getMeaning());
-
-        exercise.setWordPronunciation(chosenWord.getPronunciation());
-
-        exercise.setQuestion(chosenWord.getWord());
+        Word& chosenWord = words[newWords[grade].back()];
+        exercise = getTutorial(chosenWord.getMeaning());
 
         chosenWord.setPronunciationProgress(0);
         chosenWord.setMeaningProgress(0);
@@ -377,6 +366,26 @@ Exercise WordRepository::getExercise(int grade, bool mastered)
             break;
         }
     }
+
+    return exercise;
+}
+
+Exercise WordRepository::getTutorial(std::wstring word){
+    
+    Exercise exercise;
+
+    exercise.setExerciseType(ProgramState::WordTutor);
+
+    // Choose the word
+    Word &chosenWord = words[word];
+
+    exercise.setHelp(L"Memorize the\ninformation\nabout the\nnew word");
+
+    exercise.setId(chosenWord.getMeaning());
+
+    exercise.setWordPronunciation(chosenWord.getPronunciation());
+
+    exercise.setQuestion(chosenWord.getWord());
 
     return exercise;
 }

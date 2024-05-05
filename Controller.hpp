@@ -72,11 +72,14 @@ class Controller {
         // Returns the amount of total words in that grade 
         int getTotalWords(int wordGrade);
 
-        // Returns exercise
+        // Returns a new exercise
         Exercise getExercise();
 
         // Returns the current exercise
         Exercise getCurrentExercise();
+
+        // Returns the tutorial for the current exercise
+        Exercise getCurrentTutorial();
 
         // Checks if the kanjianswer is correct and returns the progress
         bool checkAnswer(std::wstring answer, int &meanProgress, int &kunProgress, int &onProgress);

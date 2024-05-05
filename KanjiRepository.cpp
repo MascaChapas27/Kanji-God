@@ -180,20 +180,9 @@ Exercise KanjiRepository::getExercise(int grade, bool mastered)
 
     if(!mastered && newKanjis[grade].size() > 0 && util::shouldLearnNewContent(practicingKanjis[grade].size())){
 
-        exercise.setExerciseType(ProgramState::KanjiTutor);
+        Kanji& chosenKanji = kanjis[newKanjis[grade].back()];
 
-        // Choose the kanji
-        Kanji &chosenKanji = kanjis[newKanjis[grade].back()];
-
-        exercise.setHelp(L"Memorize the\ninformation\nabout the\nnew kanji");
-
-        exercise.setId(chosenKanji.getMeaning());
-
-        exercise.setKunyomiPronunciations(chosenKanji.getKunyomiReadings());
-
-        exercise.setOnyomiPronunciations(chosenKanji.getOnyomiReadings());
-
-        exercise.setQuestion(chosenKanji.getKanji());
+        exercise = getTutorial(chosenKanji.getMeaning());
 
         chosenKanji.setKunyomiProgress(chosenKanji.getKunyomiReadings().empty() ? 100 : 0);
         chosenKanji.setOnyomiProgress(chosenKanji.getOnyomiReadings().empty() ? 100 : 0);
@@ -373,6 +362,27 @@ Exercise KanjiRepository::getMasteredExercise()
         e.setExerciseType(ProgramState::TitleScreen);
         return e;
     }
+}
+
+Exercise KanjiRepository::getTutorial(std::wstring kanji)
+{
+    Exercise exercise;
+
+    exercise.setExerciseType(ProgramState::KanjiTutor);
+
+    Kanji &chosenKanji = kanjis[kanji];
+
+    exercise.setHelp(L"Memorize the\ninformation\nabout the\nnew kanji");
+
+    exercise.setId(chosenKanji.getMeaning());
+
+    exercise.setKunyomiPronunciations(chosenKanji.getKunyomiReadings());
+
+    exercise.setOnyomiPronunciations(chosenKanji.getOnyomiReadings());
+
+    exercise.setQuestion(chosenKanji.getKanji());
+
+    return exercise;
 }
 
 bool KanjiRepository::checkAnswer(Exercise &exercise, std::wstring answer)

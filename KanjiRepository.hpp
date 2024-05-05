@@ -65,6 +65,9 @@ class KanjiRepository{
         // Returns an exercise with a kanji that has been mastered (all stats reached 100%)
         Exercise getMasteredExercise();
 
+        // Returns the tutorial for the given kanji
+        Exercise getTutorial(std::wstring kanji);
+
         // Checks if the given answer is valid for the current exercise
         bool checkAnswer(Exercise &exercise, std::wstring answer);
 

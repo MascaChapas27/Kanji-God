@@ -65,6 +65,9 @@ class WordRepository{
         // Returns an exercise with a word that has been mastered (all stats reached 100%)
         Exercise getMasteredExercise();
 
+        // Returns a tutorial for the given word
+        Exercise getTutorial(std::wstring word);
+
         // Checks if the given answer is valid for the current exercise
         bool checkAnswer(Exercise &exercise, std::wstring answer);
 

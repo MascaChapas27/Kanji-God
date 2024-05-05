@@ -303,6 +303,13 @@ void MainWindow::start(){
         button.setButtonColor(SAVED_COLOR);
     });
 
+    // Button that shows the tutorial page for the following exercise
+    helpButton.setBottomTexture(textureHolder->get(TextureID::SaveBottom));
+    helpButton.setTopTexture(textureHolder->get(TextureID::SaveTop));
+    helpButton.setPosition(HELP_BUTTON_X, HELP_BUTTON_Y);
+    helpButton.setButtonColor(HELP_COLOR);
+    helpButton.setPressedButtonAction([](Button &button){});
+
     // Function used to get an exercise (can be a tutorial for a new kanji/word)
     getExercise = [this, &kanjiGradeSelector, &wordGradeSelector](Button& button){
 
@@ -334,6 +341,7 @@ void MainWindow::start(){
                     b.setButtonColor(BUTTON_COLOR_NORMAL);
                     b.resetPosition();
                 }
+                helpButton.resetPosition();
             }
 
             // Set sign with progress
@@ -397,6 +405,7 @@ void MainWindow::start(){
                     b.setButtonColor(BUTTON_COLOR_NORMAL);
                     b.resetPosition();
                 }
+                helpButton.resetPosition();
             }
 
             // Set sign with progress
@@ -446,24 +455,96 @@ void MainWindow::start(){
         Controller::getInstance()->setGradeAndMode(kanjiGrade,true);
         mainMenuButton.resetPosition();
         saveButton.resetPosition();
+        helpButton.resetPosition();
     });
 
     wordGradeSelector.setPressedButtonAction([this](Button &button){
         Controller::getInstance()->setGradeAndMode(wordGrade,false);
         mainMenuButton.resetPosition();
         saveButton.resetPosition();
+        helpButton.resetPosition();
     });
 
     godModeSelector.setPressedButtonAction([this](Button &button){
         Controller::getInstance()->setGodMode(true);
         mainMenuButton.resetPosition();
         saveButton.resetPosition();
+        helpButton.resetPosition();
     });
 
     kanjiGradeSelector.setReleasedButtonAction(getExercise);
     wordGradeSelector.setReleasedButtonAction(getExercise);
     godModeSelector.setReleasedButtonAction(getExercise);
     continueButton.setReleasedButtonAction(getExercise);
+
+    helpButton.setReleasedButtonAction([this, &kanjiGradeSelector, &wordGradeSelector](Button& button){
+
+        saveButton.setButtonColor(SAVE_COLOR);
+
+        Exercise exercise = Controller::getInstance()->getCurrentTutorial();
+
+        ProgramState oldState = this->programState;
+
+        // Set program state
+        this->programState = exercise.getExerciseType();
+
+        // Set sign with question
+        kanjiWordSign.setText(exercise.getQuestion());
+
+        // Set sign with instructions
+        instructionsSign.setText(exercise.getHelp());
+
+        // Fill answer buttons depending on the exercise type
+        switch(programState){
+        case ProgramState::KanjiTutor:
+        {
+
+            if(oldState != ProgramState::KanjiTutor){
+                continueButton.resetPosition();
+            }
+
+            tutorialKanjiMeaning.setText(L"Meaning: " + exercise.getId());
+
+            int index = 0;
+            for(std::wstring kunReading : exercise.getKunyomiPronunciations()){
+                tutorialKunyomis[index].setText(kunReading);
+                index++;
+            }
+            for(int i=index;i<6;i++){
+                tutorialKunyomis[i].setText(L"");
+            }
+
+            index = 0;
+
+            for(std::wstring onReading : exercise.getOnyomiPronunciations()){
+                tutorialOnyomis[index].setText(onReading);
+                index++;
+            }
+            for(int i=index;i<6;i++){
+                tutorialOnyomis[i].setText(L"");
+            }
+        }
+            break;
+        case ProgramState::WordTutor:
+        {
+            if(oldState != ProgramState::WordTutor){
+                continueButton.resetPosition();
+            }
+
+            tutorialWordMeaning.setText(exercise.getId());
+
+            tutorialPronunciation.setText(exercise.getWordPronunciation());
+        }
+            break;
+        case ProgramState::TitleScreen:
+
+            this->updateMasteredCount(kanjiGradeSelector,wordGradeSelector);
+
+            break;
+        default:
+            break;
+        }
+    });
 
     // Before starting update the content of the buttons
     updateMasteredCount(kanjiGradeSelector,wordGradeSelector);
@@ -486,6 +567,7 @@ void MainWindow::start(){
                     for(Button &button : shortExerciseButtons) button.notify(event);
                     mainMenuButton.notify(event);
                     saveButton.notify(event);
+                    helpButton.notify(event);
                     break;
                 case ProgramState::WordPron:
                 case ProgramState::WordMean:
@@ -493,6 +575,7 @@ void MainWindow::start(){
                     for(Button &button : longExerciseButtons) button.notify(event);
                     mainMenuButton.notify(event);
                     saveButton.notify(event);
+                    helpButton.notify(event);
                     break;
                 case ProgramState::KanjiTutor:
                 case ProgramState::WordTutor:
@@ -512,6 +595,7 @@ void MainWindow::start(){
             for(Button &button : shortExerciseButtons) button.update();
             mainMenuButton.update();
             saveButton.update();
+            helpButton.update();
             break;
         case ProgramState::WordPron:
         case ProgramState::WordMean:
@@ -519,6 +603,7 @@ void MainWindow::start(){
             for(Button &button : longExerciseButtons) button.update();
             mainMenuButton.update();
             saveButton.update();
+            helpButton.update();
             break;
         case ProgramState::KanjiTutor:
         case ProgramState::WordTutor:
@@ -544,6 +629,7 @@ void MainWindow::start(){
             for(Button &button : shortExerciseButtons) window.draw(button);
             window.draw(mainMenuButton);
             window.draw(saveButton);
+            window.draw(helpButton);
             break;
         case ProgramState::WordPron:
         case ProgramState::WordMean:
@@ -554,6 +640,7 @@ void MainWindow::start(){
             for(Button &button : longExerciseButtons) window.draw(button);
             window.draw(mainMenuButton);
             window.draw(saveButton);
+            window.draw(helpButton);
             break;
         case ProgramState::KanjiTutor:
             window.draw(kanjiWordSign);
