@@ -48,8 +48,8 @@ void WordRepository::classifyWords(){
         int minGrade = 5;
 
         for(wchar_t kanji : data){
-            // I don't know how to make a wstring with a wchar_t so i'll do this hehe
-            Kanji k = KanjiRepository::getInstance()->getKanji(util::hash(L""+kanji));
+            // Transform the wchar_t into an unsigned long
+            Kanji k = KanjiRepository::getInstance()->getKanji((unsigned long)kanji);
             if(k.getKanji() == L"")
                 continue;
 
@@ -149,11 +149,6 @@ void WordRepository::loadAllWords(){
 
             // Read another word or "#"
             getline(file,data);
-
-            if(words.find(hashCode) != words.end()){
-                std::wcerr << "ERROR: tried to enter word " << w.getMeaning() << " twice" << std::endl;
-                exit(EXIT_FAILURE);
-            }
 
             w.setMeaningProgress(-1);
             w.setPronunciationProgress(-1);
