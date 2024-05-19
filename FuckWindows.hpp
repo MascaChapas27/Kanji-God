@@ -11,7 +11,7 @@
 */
 class FuckWindows{
     public:
-        // For the kanji
+        // For the kanjis
         static std::map<int,std::wstring> aaa;
 
         // For the words

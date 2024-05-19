@@ -48,7 +48,8 @@ void WordRepository::classifyWords(){
         int minGrade = 5;
 
         for(wchar_t kanji : data){
-            Kanji k = KanjiRepository::getInstance()->getKanji(util::hash(data));
+            // I don't know how to make a wstring with a wchar_t so i'll do this hehe
+            Kanji k = KanjiRepository::getInstance()->getKanji(util::hash(L""+kanji));
             if(k.getKanji() == L"")
                 continue;
 
