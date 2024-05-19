@@ -47,19 +47,19 @@ void WordRepository::classifyWords(){
 
         int minGrade = 5;
 
-        while(data != L""){
-            int currentGrade = KanjiRepository::getInstance()->getKanji(data).getGrade();
+        for(wchar_t kanji : data){
+            Kanji k = KanjiRepository::getInstance()->getKanji(util::hash(data));
+            if(k.getKanji() == L"")
+                continue;
+
+            int currentGrade = k.getGrade();
             if(currentGrade < minGrade)
                 minGrade = currentGrade;
-            getline(file,data);
         }
 
         Word w;
 
         w.setGrade(minGrade);
-
-        // Read the word itself
-        getline(file,data);
 
         realFiles[minGrade] << data << L"\n";
 
@@ -86,11 +86,6 @@ void WordRepository::classifyWords(){
 
         // Read another word or "#"
         getline(file,data);
-
-        if(words.find(w.getMeaning()) != words.end()){
-            std::wcerr << "ERROR: tried to enter word " << w.getMeaning() << " twice" << std::endl;
-            exit(EXIT_FAILURE);
-        }
     }
 
     for(auto &pair : realFiles){
@@ -130,6 +125,8 @@ void WordRepository::loadAllWords(){
 
         while(data != L"#"){
 
+            unsigned long hashCode = util::hash(data);
+
             Word w;
 
             w.setGrade(i);
@@ -152,7 +149,7 @@ void WordRepository::loadAllWords(){
             // Read another word or "#"
             getline(file,data);
 
-            if(words.find(w.getMeaning()) != words.end()){
+            if(words.find(hashCode) != words.end()){
                 std::wcerr << "ERROR: tried to enter word " << w.getMeaning() << " twice" << std::endl;
                 exit(EXIT_FAILURE);
             }
@@ -160,9 +157,9 @@ void WordRepository::loadAllWords(){
             w.setMeaningProgress(-1);
             w.setPronunciationProgress(-1);
 
-            words[w.getMeaning()] = w;
+            words[hashCode] = w;
 
-            newWords[i].push_back(w.getMeaning());
+            newWords[i].push_back(hashCode);
         }
 
         #ifdef __linux__
@@ -176,10 +173,10 @@ void WordRepository::loadAllWords(){
             // The file doesn't exist: let's create it
             fileprogress.open("files/JLPTN"+std::to_string(i)+"wordprogress.txt",std::fstream::out);
 
-            for(std::wstring wordMeaning : newWords[i]){
-                fileprogress << wordMeaning << "\n-1\n-1\n";
-                words[wordMeaning].setPronunciationProgress(-1);
-                words[wordMeaning].setMeaningProgress(-1);
+            for(unsigned long hashCode : newWords[i]){
+                fileprogress << hashCode << "\n-1\n-1\n";
+                words[hashCode].setPronunciationProgress(-1);
+                words[hashCode].setMeaningProgress(-1);
             }
 
             fileprogress << "#";
@@ -191,8 +188,10 @@ void WordRepository::loadAllWords(){
 
             while(data != L"#"){
 
+                unsigned long hashCode = std::stoul(data);
+
                 // Get the word and assign it the progress numbers
-                Word &w = words[data];
+                Word &w = words[hashCode];
 
                 getline(fileprogress,data);
                 int pronunciationProgress = std::stoi(data);
@@ -205,16 +204,16 @@ void WordRepository::loadAllWords(){
 
                 // Classify the word depending on the progress numbers
                 if (pronunciationProgress == MAX_PROGRESS && meaningProgress == MAX_PROGRESS){
-                    auto position = std::find(newWords[i].begin(),newWords[i].end(),w.getMeaning());
+                    auto position = std::find(newWords[i].begin(),newWords[i].end(),hashCode);
                     if(position != newWords[i].end()){
                         newWords[i].erase(position);
-                        masteredWords[i].push_back(w.getMeaning());
+                        masteredWords[i].push_back(hashCode);
                     }
                 } else if (pronunciationProgress != NO_PROGRESS && meaningProgress != NO_PROGRESS){
-                    auto position = std::find(newWords[i].begin(),newWords[i].end(),w.getMeaning());
+                    auto position = std::find(newWords[i].begin(),newWords[i].end(),hashCode);
                     if(position != newWords[i].end()){
                         newWords[i].erase(position);
-                        practicingWords[i].push_back(w.getMeaning());
+                        practicingWords[i].push_back(hashCode);
                     }
                 }
 
@@ -247,27 +246,31 @@ Exercise WordRepository::getExercise(int grade, bool mastered)
     Exercise exercise;
 
     if(!mastered && newWords[grade].size() > 0 && util::shouldLearnNewContent(practicingWords[grade].size())){
-        Word& chosenWord = words[newWords[grade].back()];
-        exercise = getTutorial(chosenWord.getMeaning());
+        unsigned long hashCode = newWords[grade].back();
+        Word& chosenWord = words[hashCode];
+        exercise = getTutorial(hashCode);
 
         chosenWord.setPronunciationProgress(0);
         chosenWord.setMeaningProgress(0);
 
         newWords[grade].pop_back();
-        practicingWords[grade].push_back(chosenWord.getMeaning());
+        practicingWords[grade].push_back(hashCode);
 
     } else if(!mastered && practicingWords[grade].size() == 0){
         exercise.setExerciseType(ProgramState::TitleScreen);
     } else {
 
         // Choose the word
-        Word &chosenWord = words[mastered
-                                ?
-                                masteredWords[grade][rand()%masteredWords[grade].size()]
-                                :
-                                practicingWords[grade][rand()%practicingWords[grade].size()]];
+        unsigned long hashCode = mastered
+                                 ?
+                                 masteredWords[grade][rand()%masteredWords[grade].size()]
+                                 :
+                                 practicingWords[grade][rand()%practicingWords[grade].size()];
 
-        exercise.setId(chosenWord.getMeaning());
+
+        Word &chosenWord = words[hashCode];
+
+        exercise.setHashCode(hashCode);
 
         // Choose the type of question
         int exerciseType = rand()%2;
@@ -296,7 +299,7 @@ Exercise WordRepository::getExercise(int grade, bool mastered)
 
         // Vector that contains words that will be used to get wrong answers. Get the
         // vector with the most words of this grade
-        std::vector<std::wstring> &wrongAnswerWords =
+        std::vector<unsigned long> &wrongAnswerWords =
         newWords[grade].size() >= practicingWords[grade].size()
         &&
         newWords[grade].size() >= masteredWords[grade].size()
@@ -348,7 +351,6 @@ Exercise WordRepository::getExercise(int grade, bool mastered)
         }
 
         exercise.setQuestion(chosenWord.getWord());
-        exercise.setId(chosenWord.getMeaning());
 
         exercise.setAnswers(exerciseAnswers);
 
@@ -370,18 +372,20 @@ Exercise WordRepository::getExercise(int grade, bool mastered)
     return exercise;
 }
 
-Exercise WordRepository::getTutorial(std::wstring word){
+Exercise WordRepository::getTutorial(unsigned long hashCode){
 
     Exercise exercise;
 
     exercise.setExerciseType(ProgramState::WordTutor);
 
     // Choose the word
-    Word &chosenWord = words[word];
+    Word &chosenWord = words[hashCode];
 
     exercise.setHelp(L"Memorize the\ninformation\nabout the\nnew word");
 
-    exercise.setId(chosenWord.getMeaning());
+    exercise.setHashCode(hashCode);
+
+    exercise.setTutorialMeaning(chosenWord.getMeaning());
 
     exercise.setWordPronunciation(chosenWord.getPronunciation());
 
@@ -392,8 +396,7 @@ Exercise WordRepository::getTutorial(std::wstring word){
 
 Exercise WordRepository::getMasteredExercise()
 {
-    // int grade = 1 + rand() % 5;
-    int grade = 5;
+    int grade = 1 + rand() % 5;
 
     int counter = 0;
 
@@ -415,7 +418,7 @@ Exercise WordRepository::getMasteredExercise()
 
 bool WordRepository::checkAnswer(Exercise &exercise, std::wstring answer)
 {
-    Word &word = words[exercise.getId()];
+    Word &word = words[exercise.getHashCode()];
 
     bool correct = false;
 
@@ -449,7 +452,7 @@ bool WordRepository::checkAnswer(Exercise &exercise, std::wstring answer)
 
 bool WordRepository::allAnswered(Exercise &exercise, unsigned int answers)
 {
-    Word &word = words[exercise.getId()];
+    Word &word = words[exercise.getHashCode()];
 
     bool completed = false;
 
@@ -470,16 +473,16 @@ bool WordRepository::allAnswered(Exercise &exercise, unsigned int answers)
 
         if(word.getPronunciationProgress() == MAX_PROGRESS &&
            word.getMeaningProgress() == MAX_PROGRESS){
-            auto position = std::find(practicingWords[word.getGrade()].begin(),practicingWords[word.getGrade()].end(),word.getMeaning());
+            auto position = std::find(practicingWords[word.getGrade()].begin(),practicingWords[word.getGrade()].end(),exercise.getHashCode());
             if(position != practicingWords[word.getGrade()].end()){
                 practicingWords[word.getGrade()].erase(position);
-                masteredWords[word.getGrade()].push_back(word.getMeaning());
+                masteredWords[word.getGrade()].push_back(exercise.getHashCode());
             }
         } else {
-            auto position = std::find(masteredWords[word.getGrade()].begin(),masteredWords[word.getGrade()].end(),word.getMeaning());
+            auto position = std::find(masteredWords[word.getGrade()].begin(),masteredWords[word.getGrade()].end(),exercise.getHashCode());
             if(position != masteredWords[word.getGrade()].end()){
                 masteredWords[word.getGrade()].erase(position);
-                practicingWords[word.getGrade()].push_back(word.getMeaning());
+                practicingWords[word.getGrade()].push_back(exercise.getHashCode());
             }
         }
     }
@@ -495,7 +498,7 @@ void WordRepository::save(){
         files[i] = std::wfstream("files/JLPTN"+std::to_string(i)+"wordprogress.txt",std::wfstream::trunc | std::wfstream::out);
 
     for(auto &pair : words){
-        files[pair.second.getGrade()] << pair.second.getMeaning() << L"\n" << pair.second.getPronunciationProgress() << L"\n" << pair.second.getMeaningProgress() << L"\n";
+        files[pair.second.getGrade()] << util::hash(pair.second.getWord()) << L"\n" << pair.second.getPronunciationProgress() << L"\n" << pair.second.getMeaningProgress() << L"\n";
     }
 
     for(auto &pair : files){

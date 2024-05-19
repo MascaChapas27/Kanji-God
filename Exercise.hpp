@@ -15,8 +15,8 @@ class Exercise {
         // Type of the exercise
         ProgramState exerciseType;
 
-        // Identifier for the exercise (meaning)
-        std::wstring id;
+        // Hash code for the kanji or word
+        unsigned long hashCode;
 
         // Progress for the meaning
         int meaningProgress;
@@ -30,6 +30,9 @@ class Exercise {
 
         // Kanji or word that is being asked or taught
         std::wstring question;
+
+        // Meaning for the kanji or word that is being taught
+        std::wstring tutorialMeaning;
 
         // Vector of possible answers (only if it's a question)
         std::set<std::wstring> answers;
@@ -47,12 +50,13 @@ class Exercise {
     public:
         // GETTERS
         ProgramState getExerciseType();
-        std::wstring getId();
+        unsigned long getHashCode();
         int getMeaningProgress();
         int getKunyomiProgress();
         int getOnyomiProgress();
         int getPronunciationProgress();
         std::wstring getQuestion();
+        std::wstring getTutorialMeaning();
         std::set<std::wstring> getAnswers();
         std::set<std::wstring> getKunyomiPronunciations();
         std::set<std::wstring> getOnyomiPronunciations();
@@ -61,11 +65,12 @@ class Exercise {
 
         // SETTERS
         void setExerciseType(ProgramState exerciseType);
-        void setId(std::wstring id);
+        void setHashCode(unsigned long hashCode);
         void setMeaningProgress(int meaningProgress);
         void setKunyomiProgress(int kunyomiProgress);
         void setOnyomiProgress(int onyomiProgress);
         void setPronunciationProgress(int pronunciationProgress);
+        void setTutorialMeaning(std::wstring tutorialMeaning);
         void setQuestion(std::wstring question);
         void setAnswers(std::set<std::wstring> answers);
         void setKunyomiPronunciations(std::set<std::wstring> kunyomiPronunciations);

@@ -114,7 +114,8 @@
     "typeinfo": "cpp",
     "*.tpp": "cpp",
     "chrono": "cpp",
-    "ratio": "cpp"
+    "ratio": "cpp",
+    "complex": "cpp"
   },
   "lldb.showDisassembly": "auto",
   "lldb.dereferencePointers": true,

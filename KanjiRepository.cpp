@@ -22,7 +22,7 @@ KanjiRepository * KanjiRepository::getInstance()
 // Operation that loads all kanji and progress for kanji in one file
 void KanjiRepository::loadAllKanjis(){
 
-    for(int i=3;i<=5;i++){
+    for(int i=2;i<=5;i++){
 
         // Open the readings/meanings file
         #ifdef __linux__
@@ -79,9 +79,11 @@ void KanjiRepository::loadAllKanjis(){
             k.setOnyomiProgress(-1);
             k.setMeaningProgress(-1);
 
-            newKanjis[i].push_back(k.getMeaning());
+            unsigned long hash = util::hash(k.getKanji());
 
-            kanjis[k.getMeaning()] = k;
+            newKanjis[i].push_back(hash);
+
+            kanjis[hash] = k;
 
             // Kanji symbol or "#"
             getline(file,data);
@@ -98,23 +100,25 @@ void KanjiRepository::loadAllKanjis(){
             // The file doesn't exist: let's create it
             fileprogress.open("files/JLPTN" + std::to_string(i) + "kanjiprogress.txt",std::fstream::out);
 
-            for(std::wstring kanjiMeaning : newKanjis[i]){
-                fileprogress << kanjiMeaning << "\n-1\n-1\n-1\n";
-                kanjis[kanjiMeaning].setMeaningProgress(-1);
-                kanjis[kanjiMeaning].setKunyomiProgress(-1);
-                kanjis[kanjiMeaning].setOnyomiProgress(-1);
+            for(unsigned long hashCode : newKanjis[i]){
+                fileprogress << hashCode << "\n-1\n-1\n-1\n";
+                kanjis[hashCode].setMeaningProgress(-1);
+                kanjis[hashCode].setKunyomiProgress(-1);
+                kanjis[hashCode].setOnyomiProgress(-1);
             }
 
             fileprogress << "#";
         } else {
 
-            // First line, can be a "#" or a kanji name
+            // First line, can be a "#" or a hash code
             getline(fileprogress,data);
 
             while(data != L"#"){
 
+                unsigned long hashCode = std::stoul(data);
+
                 // Get the kanji and assign it the progress numbers
-                Kanji &k = kanjis[data];
+                Kanji &k = kanjis[hashCode];
 
                 getline(fileprogress,data);
                 int meaningProgress = std::stoi(data);
@@ -131,21 +135,20 @@ void KanjiRepository::loadAllKanjis(){
 
                 // Classify the kanji depending on the progress numbers
                 if (meaningProgress == MAX_PROGRESS && kunyomiProgress == MAX_PROGRESS && onyomiProgress == MAX_PROGRESS){
-                    auto position = std::find(newKanjis[i].begin(),newKanjis[i].end(),k.getMeaning());
+                    auto position = std::find(newKanjis[i].begin(),newKanjis[i].end(),hashCode);
                     if(position != newKanjis[i].end()){
                         newKanjis[i].erase(position);
-                        masteredKanjis[i].push_back(k.getMeaning());
+                        masteredKanjis[i].push_back(hashCode);
                     }
-                    masteredKanjis[i].push_back(k.getMeaning());
                 } else if (meaningProgress != NO_PROGRESS && kunyomiProgress != NO_PROGRESS && onyomiProgress != NO_PROGRESS){
-                    auto position = std::find(newKanjis[i].begin(),newKanjis[i].end(),k.getMeaning());
+                    auto position = std::find(newKanjis[i].begin(),newKanjis[i].end(),hashCode);
                     if(position != newKanjis[i].end()){
                         newKanjis[i].erase(position);
-                        practicingKanjis[i].push_back(k.getMeaning());
+                        practicingKanjis[i].push_back(hashCode);
                     }
                 }
 
-                // Get the next line, which can be a kanji name or a "#"
+                // Get the next line, which can be a hash code or a "#"
                 getline(fileprogress,data);
             }
         }
@@ -161,9 +164,15 @@ void KanjiRepository::loadAllKanjis(){
     }
 }
 
-Kanji KanjiRepository::getKanji(std::wstring meaning)
+Kanji KanjiRepository::getKanji(unsigned long hashCode)
 {
-    return kanjis[meaning];
+    if(kanjis.count(hashCode))
+        return kanjis[hashCode];
+    
+    // If the kanji can't be found, return an empty kanji
+    Kanji k;
+    k.setKanji(L"");
+    return k;
 }
 
 int KanjiRepository::getMasteredKanji(int kanjiGrade){
@@ -180,16 +189,17 @@ Exercise KanjiRepository::getExercise(int grade, bool mastered)
 
     if(!mastered && newKanjis[grade].size() > 0 && util::shouldLearnNewContent(practicingKanjis[grade].size())){
 
-        Kanji& chosenKanji = kanjis[newKanjis[grade].back()];
+        unsigned long hashCode = newKanjis[grade].back();
+        Kanji& chosenKanji = kanjis[hashCode];
 
-        exercise = getTutorial(chosenKanji.getMeaning());
+        exercise = getTutorial(hashCode);
 
         chosenKanji.setKunyomiProgress(chosenKanji.getKunyomiReadings().empty() ? 100 : 0);
         chosenKanji.setOnyomiProgress(chosenKanji.getOnyomiReadings().empty() ? 100 : 0);
         chosenKanji.setMeaningProgress(0);
 
         newKanjis[grade].pop_back();
-        practicingKanjis[grade].push_back(chosenKanji.getMeaning());
+        practicingKanjis[grade].push_back(hashCode);
 
     } else if(!mastered && practicingKanjis[grade].size() == 0){
         exercise.setExerciseType(ProgramState::TitleScreen);
@@ -202,7 +212,7 @@ Exercise KanjiRepository::getExercise(int grade, bool mastered)
                                     :
                                     practicingKanjis[grade][rand()%practicingKanjis[grade].size()]];
 
-        exercise.setId(chosenKanji.getMeaning());
+        exercise.setHashCode(util::hash(chosenKanji.getKanji()));
 
         // Choose the type of question
         int exerciseType = rand()%3;
@@ -239,7 +249,7 @@ Exercise KanjiRepository::getExercise(int grade, bool mastered)
 
         // Vector that contains kanjis that will be used to get wrong answers. Get the
         // vector with the most kanjis of this grade
-        std::vector<std::wstring> &wrongAnswerKanjis =
+        std::vector<unsigned long> &wrongAnswerKanjis =
         newKanjis[grade].size() >= practicingKanjis[grade].size()
         &&
         newKanjis[grade].size() >= masteredKanjis[grade].size()
@@ -315,7 +325,6 @@ Exercise KanjiRepository::getExercise(int grade, bool mastered)
         }
 
         exercise.setQuestion(chosenKanji.getKanji());
-        exercise.setId(chosenKanji.getMeaning());
 
         exercise.setAnswers(exerciseAnswers);
 
@@ -343,8 +352,7 @@ Exercise KanjiRepository::getExercise(int grade, bool mastered)
 
 Exercise KanjiRepository::getMasteredExercise()
 {
-    // int grade = 1 + rand() % 5;
-    int grade = 5;
+    int grade = 1 + rand() % 5;
 
     int counter = 0;
 
@@ -364,17 +372,19 @@ Exercise KanjiRepository::getMasteredExercise()
     }
 }
 
-Exercise KanjiRepository::getTutorial(std::wstring kanji)
+Exercise KanjiRepository::getTutorial(unsigned long hashCode)
 {
     Exercise exercise;
 
     exercise.setExerciseType(ProgramState::KanjiTutor);
 
-    Kanji &chosenKanji = kanjis[kanji];
+    Kanji &chosenKanji = kanjis[hashCode];
 
     exercise.setHelp(L"Memorize the\ninformation\nabout the\nnew kanji");
 
-    exercise.setId(chosenKanji.getMeaning());
+    exercise.setHashCode(hashCode);
+
+    exercise.setTutorialMeaning(chosenKanji.getMeaning());
 
     exercise.setKunyomiPronunciations(chosenKanji.getKunyomiReadings());
 
@@ -387,7 +397,7 @@ Exercise KanjiRepository::getTutorial(std::wstring kanji)
 
 bool KanjiRepository::checkAnswer(Exercise &exercise, std::wstring answer)
 {
-    Kanji &kanji = kanjis[exercise.getId()];
+    Kanji &kanji = kanjis[exercise.getHashCode()];
 
     bool correct = false;
 
@@ -431,7 +441,7 @@ bool KanjiRepository::checkAnswer(Exercise &exercise, std::wstring answer)
 
 bool KanjiRepository::allAnswered(Exercise &exercise, unsigned int answers)
 {
-    Kanji &kanji = kanjis[exercise.getId()];
+    Kanji &kanji = kanjis[exercise.getHashCode()];
 
     bool completed = false;
 
@@ -457,16 +467,16 @@ bool KanjiRepository::allAnswered(Exercise &exercise, unsigned int answers)
         if(kanji.getMeaningProgress() == MAX_PROGRESS &&
            kanji.getKunyomiProgress() == MAX_PROGRESS &&
            kanji.getOnyomiProgress() == MAX_PROGRESS){
-            auto position = std::find(practicingKanjis[kanji.getGrade()].begin(),practicingKanjis[kanji.getGrade()].end(),kanji.getMeaning());
+            auto position = std::find(practicingKanjis[kanji.getGrade()].begin(),practicingKanjis[kanji.getGrade()].end(),exercise.getHashCode());
             if(position != practicingKanjis[kanji.getGrade()].end()){
                 practicingKanjis[kanji.getGrade()].erase(position);
-                masteredKanjis[kanji.getGrade()].push_back(kanji.getMeaning());
+                masteredKanjis[kanji.getGrade()].push_back(exercise.getHashCode());
             }
         } else {
-            auto position = std::find(masteredKanjis[kanji.getGrade()].begin(),masteredKanjis[kanji.getGrade()].end(),kanji.getMeaning());
+            auto position = std::find(masteredKanjis[kanji.getGrade()].begin(),masteredKanjis[kanji.getGrade()].end(),exercise.getHashCode());
             if(position != masteredKanjis[kanji.getGrade()].end()){
                 masteredKanjis[kanji.getGrade()].erase(position);
-                practicingKanjis[kanji.getGrade()].push_back(kanji.getMeaning());
+                practicingKanjis[kanji.getGrade()].push_back(exercise.getHashCode());
             }
         }
     }
@@ -483,7 +493,7 @@ void KanjiRepository::save(){
     }
 
     for(auto &pair : kanjis){
-        files[pair.second.getGrade()] << pair.second.getMeaning() << L"\n" << pair.second.getMeaningProgress() << L"\n" << pair.second.getKunyomiProgress() << L"\n" << pair.second.getOnyomiProgress() << L"\n";
+        files[pair.second.getGrade()] << util::hash(pair.second.getKanji()) << L"\n" << pair.second.getMeaningProgress() << L"\n" << pair.second.getKunyomiProgress() << L"\n" << pair.second.getOnyomiProgress() << L"\n";
     }
 
     for(auto &pair : files){

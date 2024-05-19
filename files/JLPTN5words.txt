@@ -4,7 +4,7 @@ November
 ーーーー
 十一
 じゅういち
-Eleven
+11
 ーーーー
 一生
 いっしょう
@@ -12,11 +12,11 @@ Whole life
 ーーーー
 一つ
 ひとつ
-One thing
+One
 ーーーー
 十八
 じゅうはち
-Eighteen
+18
 ーーーー
 八月
 はちがつ
@@ -28,11 +28,11 @@ Eighty
 ーーーー
 百八
 ひゃくはち
-One hundred and eight
+108
 ーーーー
 八つ
 やっつ
-Eight things
+Eight
 ーーーー
 白人
 はくじん
@@ -40,15 +40,15 @@ White person
 ーーーー
 本人
 ほんにん
-The person in question
+The person himself
 ーーーー
 名人
 めいじん
-Master, expert
+Master
 ーーーー
 人生
 じんせい
-(One's) life
+Life
 ーーーー
 十二月
 じゅうにがつ
@@ -56,7 +56,7 @@ December
 ーーーー
 十二
 じゅうに
-Twelve
+12
 ーーーー
 二百
 にひゃく
@@ -68,15 +68,15 @@ February
 ーーーー
 二つ
 ふたつ
-Two things
+Two
 ーーーー
 入学
 にゅうがく
-Admission to a school or university
+Entry to school or university
 ーーーー
 入手
 にゅうしゅ
-Acquisition, obtaining
+Acquisition
 ーーーー
 出入
 しゅつにゅう
@@ -84,7 +84,7 @@ In and out
 ーーーー
 入金
 にゅうきん
-Recepit/deposit of money
+Deposit
 ーーーー
 入れる
 いれる
@@ -100,15 +100,15 @@ October
 ーーーー
 十四
 じゅうよん
-Fourteen
+14
 ーーーー
 十五
 じゅうご
-Fifteen
+15
 ーーーー
 十七
 じゅうなな
-Seventeen
+17
 ーーーー
 七月
 しちがつ
@@ -120,11 +120,11 @@ Seventy
 ーーーー
 七つ
 ななつ
-Seven things
+Seven
 ーーーー
 十九
 じゅうきゅう
-Nineteen
+19
 ーーーー
 九月
 くがつ
@@ -136,7 +136,7 @@ Ninety
 ーーーー
 九つ
 ここのつ
-Nine things
+Nine
 ーーーー
 小学生
 しょうがくせい
@@ -148,11 +148,11 @@ Elementary school
 ーーーー
 大小
 だいしょう
-Large and small sizes
+Sizes
 ーーーー
 中小
 ちゅうしょう
-Small and medium
+Small to medium
 ーーーー
 小さい
 ちいさい
@@ -166,24 +166,80 @@ Sky
 すいじょう
 Aquatic
 ーーーー
+上田
+じょうでん
+High rice field
+ーーーー
+路上
+ろじょう
+Road
+ーーーー
 上
 うえ
-Above, up, top
+Above
 ーーーー
 川上
 かわかみ
-Upper reaches of a river
+Upstream
 ーーーー
 上げる
 あげる
-To elevate
+To raise
 ーーーー
 上がる
 あがる
-To go up
+To rise
 ーーーー
 上る
 のぼる
-To climb
+To ascend
+ーーーー
+山下
+さんげ
+Foot of a mountain
+ーーーー
+下車
+げしゃ
+Getting off
+ーーーー
+天下
+てんか
+The whole world
+ーーーー
+下水
+げすい
+Drainage
+ーーーー
+下
+した
+Below
+ーーーー
+下げる
+さげる
+To hang
+ーーーー
+下る
+くだる
+To descend
+ーーーー
+下りる
+おりる
+To descend
+ーーーー
+山川
+さんせん
+Mountains and rivers
+ーーーー
+大川
+たいせん
+Big river
+ーーーー
+河川
+かせん
+Rivers
+ーーーー
+川柳
+せんりゅう
+Humorous poem
 ーーーー
 #

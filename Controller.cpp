@@ -85,11 +85,11 @@ Exercise Controller::getCurrentTutorial(){
         case ProgramState::KanjiKun:
         case ProgramState::KanjiOn:
         case ProgramState::KanjiMean:
-            e = KanjiRepository::getInstance()->getTutorial(currentExercise.getId());
+            e = KanjiRepository::getInstance()->getTutorial(currentExercise.getHashCode());
             break;
         case ProgramState::WordMean:
         case ProgramState::WordPron:
-            e = WordRepository::getInstance()->getTutorial(currentExercise.getId());
+            e = WordRepository::getInstance()->getTutorial(currentExercise.getHashCode());
             break;
         default:
             break;

@@ -20,21 +20,21 @@ class KanjiRepository{
         // Only instance
         static KanjiRepository * kanjiRepository;
 
-        // Map that stores kanji information based on the meaning for that kanji.
+        // Map that stores kanji information based on a hash code for that kanji.
         // This map is the main container for kanjis, it stores real objects
-        std::map<std::wstring,Kanji> kanjis;
+        std::map<unsigned long,Kanji> kanjis;
 
         // Vectors that store information about kanjis that were never learnt. They only
-        // store the meaning for that kanji
-        std::map<int,std::vector<std::wstring>> newKanjis;
+        // store the hash code for that kanji
+        std::map<int,std::vector<unsigned long>> newKanjis;
 
         // Vectors that store information about kanjis that are being practiced. They only
-        // store the meaning for that kanji
-        std::map<int,std::vector<std::wstring>> practicingKanjis;
+        // store the hash code for that kanji
+        std::map<int,std::vector<unsigned long>> practicingKanjis;
 
         // Vectors that store information about kanjis that were mastered. They only
-        // store the meaning for that kanji
-        std::map<int,std::vector<std::wstring>> masteredKanjis;
+        // store the hash code for that kanji
+        std::map<int,std::vector<unsigned long>> masteredKanjis;
 
     public:
         // NEVER CLONE A SINGLETON
@@ -49,10 +49,10 @@ class KanjiRepository{
         // Operation that loads all kanji and progress for kanji
         void loadAllKanjis();
 
-        // Returns the kanji specified by its meaning
-        Kanji getKanji(std::wstring meaning);
+        // Returns the kanji specified by its hash code
+        Kanji getKanji(unsigned long hash);
 
-        // Returns the amount of kanji that were mastered in that grade 
+        // Returns the amount of kanji that were mastered in that grade
         int getMasteredKanji(int kanjiGrade);
 
         // Returns the amount of total kanji in that grade 
@@ -65,8 +65,8 @@ class KanjiRepository{
         // Returns an exercise with a kanji that has been mastered (all stats reached 100%)
         Exercise getMasteredExercise();
 
-        // Returns the tutorial for the given kanji
-        Exercise getTutorial(std::wstring kanji);
+        // Returns the tutorial for the kanji with the given hash code
+        Exercise getTutorial(unsigned long hashCode);
 
         // Checks if the given answer is valid for the current exercise
         bool checkAnswer(Exercise &exercise, std::wstring answer);

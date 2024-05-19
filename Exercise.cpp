@@ -4,8 +4,8 @@ ProgramState Exercise::getExerciseType(){
     return exerciseType;
 }
 
-std::wstring Exercise::getId(){
-    return id;
+unsigned long Exercise::getHashCode(){
+    return hashCode;
 }
 
 int Exercise::getMeaningProgress(){
@@ -22,6 +22,10 @@ int Exercise::getOnyomiProgress(){
 
 int Exercise::getPronunciationProgress(){
     return pronunciationProgress;
+}
+
+std::wstring Exercise::getTutorialMeaning(){
+    return tutorialMeaning;
 }
 
 std::wstring Exercise::getQuestion(){
@@ -54,8 +58,8 @@ void Exercise::setExerciseType(ProgramState exerciseType){
     this->exerciseType = exerciseType;
 }
 
-void Exercise::setId(std::wstring id){
-    this->id = id;
+void Exercise::setHashCode(unsigned long hashCode){
+    this->hashCode = hashCode;
 }
 
 void Exercise::setMeaningProgress(int meaningProgress){
@@ -76,6 +80,10 @@ void Exercise::setPronunciationProgress(int pronunciationProgress){
 
 void Exercise::setQuestion(std::wstring question){
     this->question = question;
+}
+
+void Exercise::setTutorialMeaning(std::wstring tutorialMeaning){
+    this->tutorialMeaning = tutorialMeaning;
 }
 
 void Exercise::setAnswers(std::set<std::wstring> answers){

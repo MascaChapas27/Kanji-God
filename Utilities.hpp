@@ -237,6 +237,9 @@ namespace util {
     // Replaces all line feeds with spaces so that answers that needed to be shrunk
     // can be properly checked and don't contain extra line feeds
     std::wstring trimLineFeeds(std::wstring answer);
+
+    // Calculates a hash code given a wstring
+    unsigned long hash(std::wstring wstring);
 }
 
 #endif

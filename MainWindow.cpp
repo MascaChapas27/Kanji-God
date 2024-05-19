@@ -370,7 +370,7 @@ void MainWindow::start(){
                 continueButton.resetPosition();
             }
 
-            tutorialKanjiMeaning.setText(L"Meaning: " + exercise.getId());
+            tutorialKanjiMeaning.setText(L"Meaning: " + exercise.getTutorialMeaning());
 
             int index = 0;
             for(std::wstring kunReading : exercise.getKunyomiPronunciations()){
@@ -436,7 +436,7 @@ void MainWindow::start(){
                 continueButton.resetPosition();
             }
 
-            tutorialWordMeaning.setText(exercise.getId());
+            tutorialWordMeaning.setText(exercise.getTutorialMeaning());
 
             tutorialPronunciation.setText(exercise.getWordPronunciation());
         }
@@ -503,7 +503,7 @@ void MainWindow::start(){
                 continueButton.resetPosition();
             }
 
-            tutorialKanjiMeaning.setText(L"Meaning: " + exercise.getId());
+            tutorialKanjiMeaning.setText(L"Meaning: " + exercise.getTutorialMeaning());
 
             int index = 0;
             for(std::wstring kunReading : exercise.getKunyomiPronunciations()){
@@ -531,7 +531,7 @@ void MainWindow::start(){
                 continueButton.resetPosition();
             }
 
-            tutorialWordMeaning.setText(exercise.getId());
+            tutorialWordMeaning.setText(exercise.getTutorialMeaning());
 
             tutorialPronunciation.setText(exercise.getWordPronunciation());
         }

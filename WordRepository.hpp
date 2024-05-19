@@ -20,21 +20,21 @@ class WordRepository{
         // Only instance
         static WordRepository * wordRepository;
 
-        // Map that stores word information based on the meaning for that word.
+        // Map that stores word information based on the hash code for that word.
         // This map is the main container for words, it stores real objects
-        std::map<std::wstring,Word> words;
+        std::map<unsigned long,Word> words;
 
         // Vectors that store information about words that were never learnt. They only
-        // store the meaning for that word
-        std::map<int,std::vector<std::wstring>> newWords;
+        // store the hash code for that word
+        std::map<int,std::vector<unsigned long>> newWords;
 
         // Vectors that store information about words that are being practiced. They only
-        // store the meaning for that word
-        std::map<int,std::vector<std::wstring>> practicingWords;
+        // store the hash code for that word
+        std::map<int,std::vector<unsigned long>> practicingWords;
 
         // Vectors that store information about words that were mastered. They only
-        // store the meaning for that word
-        std::map<int,std::vector<std::wstring>> masteredWords;
+        // store the hash code for that word
+        std::map<int,std::vector<unsigned long>> masteredWords;
 
         // This is just temporary
         void classifyWords();
@@ -55,7 +55,7 @@ class WordRepository{
         // Returns the amount of words that were mastered in that grade 
         int getMasteredWords(int wordGrade);
 
-        // Returns the amount of total words in that grade 
+        // Returns the amount of total words in that grade
         int getTotalWords(int wordGrade);
 
         // Returns an exercise with a word of the given grade. It defaults to a non-mastered
@@ -65,8 +65,8 @@ class WordRepository{
         // Returns an exercise with a word that has been mastered (all stats reached 100%)
         Exercise getMasteredExercise();
 
-        // Returns a tutorial for the given word
-        Exercise getTutorial(std::wstring word);
+        // Returns a tutorial for the word with the given hash code
+        Exercise getTutorial(unsigned long hashCode);
 
         // Checks if the given answer is valid for the current exercise
         bool checkAnswer(Exercise &exercise, std::wstring answer);
