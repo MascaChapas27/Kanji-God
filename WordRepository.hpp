@@ -3,6 +3,7 @@
 
 #include "Word.hpp"
 #include "Exercise.hpp"
+#include "Utilities.hpp"
 #include <map>
 #include <vector>
 
@@ -22,19 +23,19 @@ class WordRepository{
 
         // Map that stores word information based on the hash code for that word.
         // This map is the main container for words, it stores real objects
-        std::map<unsigned long,Word> words;
+        std::map<hash_t,Word> words;
 
         // Vectors that store information about words that were never learnt. They only
         // store the hash code for that word
-        std::map<int,std::vector<unsigned long>> newWords;
+        std::map<int,std::vector<hash_t>> newWords;
 
         // Vectors that store information about words that are being practiced. They only
         // store the hash code for that word
-        std::map<int,std::vector<unsigned long>> practicingWords;
+        std::map<int,std::vector<hash_t>> practicingWords;
 
         // Vectors that store information about words that were mastered. They only
         // store the hash code for that word
-        std::map<int,std::vector<unsigned long>> masteredWords;
+        std::map<int,std::vector<hash_t>> masteredWords;
 
         // This is just temporary
         void classifyWords();
@@ -66,7 +67,7 @@ class WordRepository{
         Exercise getMasteredExercise();
 
         // Returns a tutorial for the word with the given hash code
-        Exercise getTutorial(unsigned long hashCode);
+        Exercise getTutorial(hash_t hashCode);
 
         // Checks if the given answer is valid for the current exercise
         bool checkAnswer(Exercise &exercise, std::wstring answer);

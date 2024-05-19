@@ -2,6 +2,7 @@
 #define __EXERCISE_HPP__
 
 #include "Enums.hpp"
+#include "Utilities.hpp"
 #include <string>
 #include <set>
 
@@ -16,7 +17,7 @@ class Exercise {
         ProgramState exerciseType;
 
         // Hash code for the kanji or word
-        unsigned long hashCode;
+        hash_t hashCode;
 
         // Progress for the meaning
         int meaningProgress;
@@ -50,7 +51,7 @@ class Exercise {
     public:
         // GETTERS
         ProgramState getExerciseType();
-        unsigned long getHashCode();
+        hash_t getHashCode();
         int getMeaningProgress();
         int getKunyomiProgress();
         int getOnyomiProgress();
@@ -65,7 +66,7 @@ class Exercise {
 
         // SETTERS
         void setExerciseType(ProgramState exerciseType);
-        void setHashCode(unsigned long hashCode);
+        void setHashCode(hash_t hashCode);
         void setMeaningProgress(int meaningProgress);
         void setKunyomiProgress(int kunyomiProgress);
         void setOnyomiProgress(int onyomiProgress);

@@ -29,11 +29,11 @@ std::wstring util::trimLineFeeds(std::wstring answer){
     return answer;
 }
 
-unsigned long util::hash(std::wstring wstring){
-    unsigned long hashCode = 0;
+hash_t util::hash(std::wstring wstring){
+    hash_t hashCode = 0;
 
     // Depending on the position, the value will be multiplied by this multiplier
-    unsigned long multiplier = 1;
+    hash_t multiplier = 1;
 
     for(wchar_t wchar : wstring){
         // The wchar_t type is 16 bits long so it can be used as a number

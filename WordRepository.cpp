@@ -125,7 +125,7 @@ void WordRepository::loadAllWords(){
 
         while(data != L"#"){
 
-            unsigned long hashCode = util::hash(data);
+            hash_t hashCode = util::hash(data);
 
             Word w;
 
@@ -173,7 +173,7 @@ void WordRepository::loadAllWords(){
             // The file doesn't exist: let's create it
             fileprogress.open("files/JLPTN"+std::to_string(i)+"wordprogress.txt",std::fstream::out);
 
-            for(unsigned long hashCode : newWords[i]){
+            for(hash_t hashCode : newWords[i]){
                 fileprogress << hashCode << "\n-1\n-1\n";
                 words[hashCode].setPronunciationProgress(-1);
                 words[hashCode].setMeaningProgress(-1);
@@ -188,7 +188,7 @@ void WordRepository::loadAllWords(){
 
             while(data != L"#"){
 
-                unsigned long hashCode = std::stoul(data);
+                hash_t hashCode = std::stoul(data);
 
                 // Get the word and assign it the progress numbers
                 Word &w = words[hashCode];
@@ -246,7 +246,7 @@ Exercise WordRepository::getExercise(int grade, bool mastered)
     Exercise exercise;
 
     if(!mastered && newWords[grade].size() > 0 && util::shouldLearnNewContent(practicingWords[grade].size())){
-        unsigned long hashCode = newWords[grade].back();
+        hash_t hashCode = newWords[grade].back();
         Word& chosenWord = words[hashCode];
         exercise = getTutorial(hashCode);
 
@@ -261,7 +261,7 @@ Exercise WordRepository::getExercise(int grade, bool mastered)
     } else {
 
         // Choose the word
-        unsigned long hashCode = mastered
+        hash_t hashCode = mastered
                                  ?
                                  masteredWords[grade][rand()%masteredWords[grade].size()]
                                  :
@@ -299,7 +299,7 @@ Exercise WordRepository::getExercise(int grade, bool mastered)
 
         // Vector that contains words that will be used to get wrong answers. Get the
         // vector with the most words of this grade
-        std::vector<unsigned long> &wrongAnswerWords =
+        std::vector<hash_t> &wrongAnswerWords =
         newWords[grade].size() >= practicingWords[grade].size()
         &&
         newWords[grade].size() >= masteredWords[grade].size()
@@ -372,7 +372,7 @@ Exercise WordRepository::getExercise(int grade, bool mastered)
     return exercise;
 }
 
-Exercise WordRepository::getTutorial(unsigned long hashCode){
+Exercise WordRepository::getTutorial(hash_t hashCode){
 
     Exercise exercise;
 

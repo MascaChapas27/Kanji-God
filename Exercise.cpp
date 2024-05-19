@@ -4,7 +4,7 @@ ProgramState Exercise::getExerciseType(){
     return exerciseType;
 }
 
-unsigned long Exercise::getHashCode(){
+hash_t Exercise::getHashCode(){
     return hashCode;
 }
 
@@ -58,7 +58,7 @@ void Exercise::setExerciseType(ProgramState exerciseType){
     this->exerciseType = exerciseType;
 }
 
-void Exercise::setHashCode(unsigned long hashCode){
+void Exercise::setHashCode(hash_t hashCode){
     this->hashCode = hashCode;
 }
 

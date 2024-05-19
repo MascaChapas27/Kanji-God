@@ -3,6 +3,7 @@
 
 #include "Kanji.hpp"
 #include "Exercise.hpp"
+#include "Utilities.hpp"
 #include <map>
 #include <vector>
 
@@ -22,19 +23,19 @@ class KanjiRepository{
 
         // Map that stores kanji information based on a hash code for that kanji.
         // This map is the main container for kanjis, it stores real objects
-        std::map<unsigned long,Kanji> kanjis;
+        std::map<hash_t,Kanji> kanjis;
 
         // Vectors that store information about kanjis that were never learnt. They only
         // store the hash code for that kanji
-        std::map<int,std::vector<unsigned long>> newKanjis;
+        std::map<int,std::vector<hash_t>> newKanjis;
 
         // Vectors that store information about kanjis that are being practiced. They only
         // store the hash code for that kanji
-        std::map<int,std::vector<unsigned long>> practicingKanjis;
+        std::map<int,std::vector<hash_t>> practicingKanjis;
 
         // Vectors that store information about kanjis that were mastered. They only
         // store the hash code for that kanji
-        std::map<int,std::vector<unsigned long>> masteredKanjis;
+        std::map<int,std::vector<hash_t>> masteredKanjis;
 
     public:
         // NEVER CLONE A SINGLETON
@@ -50,7 +51,7 @@ class KanjiRepository{
         void loadAllKanjis();
 
         // Returns the kanji specified by its hash code
-        Kanji getKanji(unsigned long hash);
+        Kanji getKanji(hash_t hash);
 
         // Returns the amount of kanji that were mastered in that grade
         int getMasteredKanji(int kanjiGrade);
@@ -66,7 +67,7 @@ class KanjiRepository{
         Exercise getMasteredExercise();
 
         // Returns the tutorial for the kanji with the given hash code
-        Exercise getTutorial(unsigned long hashCode);
+        Exercise getTutorial(hash_t hashCode);
 
         // Checks if the given answer is valid for the current exercise
         bool checkAnswer(Exercise &exercise, std::wstring answer);

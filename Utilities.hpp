@@ -11,6 +11,9 @@
     be global
 */
 
+// Type for the hash code used to identify kanjis and words
+typedef unsigned long hash_t;
+
 // Size for the main window
 const int WINDOW_WIDTH = 800;
 const int WINDOW_HEIGHT = 600;
@@ -239,7 +242,7 @@ namespace util {
     std::wstring trimLineFeeds(std::wstring answer);
 
     // Calculates a hash code given a wstring
-    unsigned long hash(std::wstring wstring);
+    hash_t hash(std::wstring wstring);
 }
 
 #endif

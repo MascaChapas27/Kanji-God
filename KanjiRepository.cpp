@@ -79,7 +79,7 @@ void KanjiRepository::loadAllKanjis(){
             k.setOnyomiProgress(-1);
             k.setMeaningProgress(-1);
 
-            unsigned long hash = util::hash(k.getKanji());
+            hash_t hash = util::hash(k.getKanji());
 
             newKanjis[i].push_back(hash);
 
@@ -100,7 +100,7 @@ void KanjiRepository::loadAllKanjis(){
             // The file doesn't exist: let's create it
             fileprogress.open("files/JLPTN" + std::to_string(i) + "kanjiprogress.txt",std::fstream::out);
 
-            for(unsigned long hashCode : newKanjis[i]){
+            for(hash_t hashCode : newKanjis[i]){
                 fileprogress << hashCode << "\n-1\n-1\n-1\n";
                 kanjis[hashCode].setMeaningProgress(-1);
                 kanjis[hashCode].setKunyomiProgress(-1);
@@ -115,7 +115,7 @@ void KanjiRepository::loadAllKanjis(){
 
             while(data != L"#"){
 
-                unsigned long hashCode = std::stoul(data);
+                hash_t hashCode = std::stoul(data);
 
                 // Get the kanji and assign it the progress numbers
                 Kanji &k = kanjis[hashCode];
@@ -164,7 +164,7 @@ void KanjiRepository::loadAllKanjis(){
     }
 }
 
-Kanji KanjiRepository::getKanji(unsigned long hashCode)
+Kanji KanjiRepository::getKanji(hash_t hashCode)
 {
     if(kanjis.count(hashCode))
         return kanjis[hashCode];
@@ -189,7 +189,7 @@ Exercise KanjiRepository::getExercise(int grade, bool mastered)
 
     if(!mastered && newKanjis[grade].size() > 0 && util::shouldLearnNewContent(practicingKanjis[grade].size())){
 
-        unsigned long hashCode = newKanjis[grade].back();
+        hash_t hashCode = newKanjis[grade].back();
         Kanji& chosenKanji = kanjis[hashCode];
 
         exercise = getTutorial(hashCode);
@@ -249,7 +249,7 @@ Exercise KanjiRepository::getExercise(int grade, bool mastered)
 
         // Vector that contains kanjis that will be used to get wrong answers. Get the
         // vector with the most kanjis of this grade
-        std::vector<unsigned long> &wrongAnswerKanjis =
+        std::vector<hash_t> &wrongAnswerKanjis =
         newKanjis[grade].size() >= practicingKanjis[grade].size()
         &&
         newKanjis[grade].size() >= masteredKanjis[grade].size()
@@ -372,7 +372,7 @@ Exercise KanjiRepository::getMasteredExercise()
     }
 }
 
-Exercise KanjiRepository::getTutorial(unsigned long hashCode)
+Exercise KanjiRepository::getTutorial(hash_t hashCode)
 {
     Exercise exercise;
 
