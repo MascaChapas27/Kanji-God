@@ -54,7 +54,7 @@ Nine
 ここの
 ーーーー
 小
-Little
+Small
 ショウ
 
 お
@@ -62,7 +62,7 @@ Little
 ちい
 ーーーー
 上
-Above
+Up
 ジョウ
 
 あ
@@ -194,7 +194,7 @@ Noon
 
 ーーーー
 分
-Part
+Part, minute of time
 ブン
 ブ
 フン
@@ -208,7 +208,7 @@ Hand
 て
 ーーーー
 天
-Heavens
+Heaven
 テン
 
 あめ
@@ -229,13 +229,13 @@ Tree
 き
 ーーーー
 中
-In
+Middle
 チュウ
 
 なか
 ーーーー
 月
-Month
+Month, moon
 ゲツ
 ガツ
 
@@ -254,7 +254,7 @@ Friend
 とも
 ーーーー
 円
-Circle
+Round, yen
 エン
 
 まる
@@ -287,7 +287,7 @@ Outside
 ほか
 ーーーー
 右
-Right
+Right (direction)
 ウ
 ユウ
 
@@ -319,7 +319,7 @@ Life
 は
 ーーーー
 左
-Left
+Left (direction)
 サ
 
 ひだり
@@ -352,13 +352,13 @@ Eye
 め
 ーーーー
 母
-Mama
+Mother
 ボ
 
 はは
 ーーーー
 行
-Going
+Go
 コウ
 ギョウ
 
@@ -393,7 +393,7 @@ Meeting
 あ
 ーーーー
 先
-Before
+Previous
 セン
 
 さき
@@ -410,7 +410,7 @@ Hundred
 
 ーーーー
 気
-Spirit
+Feeling
 キ
 ケ
 
@@ -422,7 +422,7 @@ Rest
 やす
 ーーーー
 安
-Relax
+Cheap
 アン
 
 やす
@@ -448,7 +448,7 @@ Say
 こと
 ーーーー
 足
-Leg
+Foot
 ソク
 
 あし
@@ -505,7 +505,7 @@ Study
 まな
 ーーーー
 空
-Empty
+Sky
 クウ
 
 あ
@@ -514,7 +514,7 @@ Empty
 そら
 ーーーー
 店
-Store
+Shop
 テン
 
 みせ
@@ -551,7 +551,7 @@ Country
 くに
 ーーーー
 食
-Eat
+Eat, meal
 ショク
 
 く
@@ -591,7 +591,7 @@ Time
 とき
 ーーーー
 高
-Tall
+Tall, expensive
 コウ
 
 たか
@@ -621,7 +621,7 @@ Drink
 の
 ーーーー
 道
-Road-way
+Road
 ドウ
 
 みち
@@ -641,7 +641,7 @@ Interval
 ま
 ーーーー
 話
-Tale
+Talk
 ワ
 
 はな
@@ -668,7 +668,7 @@ Read
 よ
 ーーーー
 語
-Word
+Language
 ゴ
 
 かた

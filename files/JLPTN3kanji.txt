@@ -34,7 +34,7 @@ Change
 ば
 ーーーー
 予
-Beforehand
+In advance
 ヨ
 
 ーーーー
@@ -63,7 +63,7 @@ Mutually
 たが
 ーーーー
 収
-Income
+Take in
 シュウ
 
 おさ
@@ -75,26 +75,26 @@ Anti-
 そ
 ーーーー
 必
-Invariably
+Without fail
 ヒツ
 
 かなら
 ーーーー
 示
-Show
+Indicate
 ジ
 シ
 
 しめ
 ーーーー
 礼
-Salutation
+Thanks
 レイ
 ライ
 
 ーーーー
 平
-Even
+Flat
 ヘイ
 ビョウ
 
@@ -107,7 +107,7 @@ Crowded
 こ
 ーーーー
 付
-Adhere
+Attach
 フ
 
 つ
@@ -212,7 +212,7 @@ Busy
 いそぐ
 ーーーー
 守
-Guard
+Protect
 シュ
 
 まも
@@ -224,7 +224,7 @@ Style
 
 ーーーー
 向
-Yonder
+Over there
 コウ
 
 む
@@ -268,7 +268,7 @@ Responsibility
 まか
 ーーーー
 列
-File
+Row
 レツ
 
 ーーーー
@@ -302,7 +302,7 @@ Old man
 おふ
 ーーーー
 成
-Turn into
+Become
 セイ
 
 な
@@ -314,7 +314,7 @@ Suck
 す
 ーーーー
 争
-Contend
+Conflict
 ソウ
 
 あらそ
@@ -332,7 +332,7 @@ Both
 
 ーーーー
 曲
-Bend
+Musical composition
 キョク
 
 ま
@@ -356,7 +356,7 @@ Blow
 ふ
 ーーーー
 似
-Similar
+Becoming
 ジ
 
 に
@@ -376,7 +376,7 @@ Request
 もと
 ーーーー
 対
-Vis-a-vis
+Opposite
 タイ
 ツイ
 
@@ -393,7 +393,7 @@ Labor
 
 ーーーー
 状
-Status quo
+Form
 ジョウ
 
 ーーーー
@@ -417,7 +417,7 @@ Decide
 き
 ーーーー
 余
-Too much
+Leave over
 ヨ
 
 あま
@@ -443,7 +443,7 @@ Fold
 おり
 ーーーー
 告
-Revelation
+Tell
 コク
 
 つ
@@ -455,13 +455,13 @@ Welcome
 むか
 ーーーー
 判
-Judgement
+Judge
 ハン
 バン
 
 ーーーー
 初
-First time
+First
 ショ
 
 うい
@@ -476,7 +476,7 @@ Profit
 き
 ーーーー
 役
-Duty
+Service
 ヤク
 エキ
 
@@ -507,7 +507,7 @@ Throw
 な
 ーーーー
 局
-Bureau
+Office
 キョク
 
 ーーーー
@@ -537,13 +537,13 @@ Grow late
 ふ
 ーーーー
 君
-Old boy
+You
 クン
 
 きみ
 ーーーー
 困
-Quandary
+Become distressed
 コン
 
 こま
@@ -555,7 +555,7 @@ Swim
 およ
 ーーーー
 治
-Reign
+Govern
 ジ
 チ
 
@@ -568,7 +568,7 @@ Method
 
 ーーーー
 念
-Wish
+Thought
 ネン
 
 ーーーー
@@ -579,12 +579,12 @@ Call
 よ
 ーーーー
 非
-Un-
+Negative
 ヒ
 
 ーーーー
 和
-Harmony
+Peace
 ワ
 
 なぎ
@@ -598,7 +598,7 @@ Determine
 さだ
 ーーーー
 官
-Bureaucrat
+Government official
 カン
 
 ーーーー
@@ -641,40 +641,40 @@ Engrave
 きざ
 ーーーー
 供
-Sumbit
+Offer
 キョウ
 
 そな
 とも
 ーーーー
 杯
-Cupfuls
+Counter for cupfuls
 ハイ
 
 さかずき
 ーーーー
 苦
-Suffering
+Suffer
 ク
 
 くる
 にが
 ーーーー
 放
-Set free
+Release
 ホウ
 
 はな
 ほう
 ーーーー
 昔
-Once upon a time
+Long ago
 セキ
 
 むかし
 ーーーー
 性
-Sex
+Gender
 セイ
 ショウ
 
@@ -685,21 +685,21 @@ Tool
 
 ーーーー
 育
-Bring up
+Nurture
 イク
 
 そだ
 はぐく
 ーーーー
 実
-Reality
+Truth
 ジツ
 
 み
 みの
 ーーーー
 参
-Visit
+Participate
 サン
 
 まい
@@ -712,7 +712,7 @@ Young
 わか
 ーーーー
 表
-Surface
+Express
 ヒョウ
 
 あらわ
@@ -781,7 +781,7 @@ System
 
 ーーーー
 直
-Straightaway
+Straight
 チョク
 ジキ
 
@@ -801,12 +801,12 @@ Wife
 つま
 ーーーー
 点
-Spot
+Point
 テン
 
 ーーーー
 活
-Lively
+Active
 カツ
 
 ーーーー
@@ -926,7 +926,7 @@ Grass
 くさ
 ーーーー
 段
-Grade
+Steps
 ダン
 
 ーーーー
@@ -942,7 +942,7 @@ Ancestor
 
 ーーーー
 神
-Gods
+God
 シン
 ジン
 
@@ -962,7 +962,7 @@ Limit
 かぎ
 ーーーー
 相
-Inter-
+Mutual
 ソウ
 ショウ
 
@@ -997,13 +997,13 @@ Extinguish
 け
 ーーーー
 記
-Scribe
+Write down
 キ
 
 しる
 ーーーー
 流
-Current
+Stream
 リュウ
 
 なが
@@ -1073,7 +1073,7 @@ Horse
 うま
 ーーーー
 財
-Property
+Wealth
 ザイ
 
 ーーーー
@@ -1112,19 +1112,19 @@ Seat
 
 ーーーー
 庭
-Courtyard
+Garden
 テイ
 
 にわ
 ーーーー
 疲
-Tired
+Exhausted
 ヒ
 
 つか
 ーーーー
 速
-Quick
+Fast
 ソク
 
 すみ
@@ -1147,7 +1147,7 @@ Daughter
 むすめ
 ーーーー
 酒
-Sake
+Alcoholic drink
 シュ
 
 さけ
@@ -1247,20 +1247,20 @@ Deep
 ふか
 ーーーー
 済
-Finish
+Settle
 サイ
 
 す
 ーーーー
 訪
-Call on
+Visit
 ホウ
 
 おとず
 たず
 ーーーー
 常
-Usual
+Normal
 ジョウ
 
 つね
@@ -1284,13 +1284,13 @@ Failure
 やぶ
 ーーーー
 寄
-Draw near
+Approach
 キ
 
 よ
 ーーーー
 部
-Section
+Part
 ブ
 
 ーーーー
@@ -1301,7 +1301,7 @@ Hang
 がかり
 ーーーー
 貧
-Poverty
+Poor
 ヒン
 ビン
 
@@ -1326,7 +1326,7 @@ Ship
 ふね
 ーーーー
 得
-Gain
+Acquire
 トク
 
 う
@@ -1364,7 +1364,7 @@ Feelings
 なさ
 ーーーー
 現
-Present
+Appear
 ゲン
 
 あらわ
@@ -1377,14 +1377,14 @@ Grope
 さぐ
 ーーーー
 経
-Sutra
+Manage
 ケイ
 キョウ
 
 へ
 ーーーー
 断
-Severance
+Cut off
 ダン
 
 ことわ
@@ -1416,7 +1416,7 @@ Precipitous
 けわ
 ーーーー
 務
-Task
+Duty
 ム
 
 つと
@@ -1456,19 +1456,19 @@ Sad
 かな
 ーーーー
 然
-Sort of thing
+So
 ゼン
 ネン
 
 ーーーー
 等
-Etc.
+Class
 トウ
 
 ひと
 ーーーー
 登
-Ascend
+Climb
 トウ
 ト
 
@@ -1522,7 +1522,7 @@ Transit
 わた
 ーーーー
 達
-Accomplished
+Attain
 タツ
 
 ーーーー
@@ -1553,7 +1553,7 @@ Nightfall
 
 ーーーー
 富
-Wealth
+Rich
 フ
 
 と
@@ -1572,7 +1572,7 @@ Tooth
 は
 ーーーー
 過
-Overdo
+Go beyond
 カ
 
 あやま
@@ -1616,18 +1616,18 @@ Slow
 おそ
 ーーーー
 番
-Turn
+One's turn
 バン
 
 ーーーー
 越
-Surpass
+Cross over
 エツ
 
 こ
 ーーーー
 期
-Period
+Period of time
 キ
 
 ーーーー
@@ -1667,20 +1667,20 @@ Sunshine
 
 ーーーー
 勝
-Victory
+Win
 ショウ
 
 か
 まさ
 ーーーー
 最
-Utmost
+Most
 サイ
 
 もっと
 ーーーー
 備
-Equip
+Provide
 ビ
 
 そな
@@ -1719,7 +1719,7 @@ Continue
 つづ
 ーーーー
 資
-Assets
+Resources
 シ
 
 ーーーー
@@ -1774,7 +1774,7 @@ Year-end
 
 ーーーー
 福
-Blessing
+Luck
 フク
 
 ーーーー
@@ -1797,14 +1797,14 @@ Abdomen
 はら
 ーーーー
 解
-Unravel
+Untie
 カイ
 ゲ
 
 と
 ーーーー
 置
-Placement
+Put
 チ
 
 お
@@ -1816,12 +1816,12 @@ Park
 その
 ーーーー
 演
-Performance
+Perform
 エン
 
 ーーーー
 認
-Acknowledge
+Recognize
 ニン
 
 みと
@@ -1850,7 +1850,7 @@ Guess
 
 ーーーー
 様
-Esq.
+Formal title
 ヨウ
 
 さま
@@ -1891,7 +1891,7 @@ Refined
 
 ーーーー
 関
-Connection
+Related
 カン
 
 かか
@@ -1922,13 +1922,13 @@ Quiet
 しず
 ーーーー
 種
-Species
+Kind
 シュ
 
 たね
 ーーーー
 構
-Posture
+Construct
 コウ
 
 かま
@@ -1973,7 +1973,7 @@ Tune
 ととの
 ーーーー
 確
-Assurance
+Certain
 カク
 
 たし
@@ -1992,7 +1992,7 @@ Dance
 まい
 ーーーー
 権
-Authority
+Rights
 ケン
 
 ーーーー
@@ -2010,13 +2010,13 @@ Trust
 たよ
 ーーーー
 機
-Mechanism
+Machine
 キ
 
 はた
 ーーーー
 優
-Tenderness
+Superior
 ユウ
 
 すぐ
@@ -2029,7 +2029,7 @@ Sort
 たぐ
 ーーーー
 職
-Post
+Employment
 ショク
 
 ーーーー
@@ -2041,7 +2041,7 @@ Difficult
 むずか
 ーーーー
 観
-Outlook
+Observe
 カン
 
 ーーーー
@@ -2051,7 +2051,7 @@ Discriminating
 
 ーーーー
 警
-Admonish
+Guard against
 ケイ
 
 ーーーー

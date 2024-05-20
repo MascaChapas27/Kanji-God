@@ -37,7 +37,7 @@ Plump
 ふと
 ーーーー
 不
-Negative
+Non-
 フ
 ブ
 
@@ -61,14 +61,14 @@ Cow
 うし
 ーーーー
 文
-Sentence
+Writing
 ブン
 モン
 
 ふみ
 ーーーー
 元
-Beginning
+Origin
 ゲン
 ガン
 
@@ -103,7 +103,7 @@ Winter
 ふゆ
 ーーーー
 主
-Lord
+Master
 シュ
 
 おも
@@ -158,7 +158,7 @@ Attend
 つか
 ーーーー
 去
-Gone
+Leave
 キョ
 コ
 
@@ -178,7 +178,7 @@ Generation
 よ
 ーーーー
 田
-Rice field
+Rice paddy
 デン
 
 た
@@ -216,7 +216,7 @@ Pond
 いけ
 ーーーー
 字
-Character
+Letter
 ジ
 
 あざ
@@ -261,14 +261,14 @@ Times
 まわ
 ーーーー
 有
-Possess
+Have
 ユウ
 ウ
 
 あ
 ーーーー
 好
-Fond
+Like
 コウ
 
 この
@@ -317,7 +317,7 @@ Voice
 こえ
 ーーーー
 住
-Dwell
+Dwelling
 ジュウ
 
 す
@@ -366,7 +366,7 @@ Separate
 わか
 ーーーー
 低
-Lower
+Low
 テイ
 
 ひく
@@ -390,7 +390,7 @@ Doctor
 
 ーーーー
 図
-Map
+Diagram
 ズ
 ト
 
@@ -448,13 +448,13 @@ Gates
 かど
 ーーーー
 始
-Commence
+Begin
 シ
 
 はじ
 ーーーー
 林
-Grove
+Woods
 リン
 
 はやし
@@ -478,7 +478,7 @@ Blue
 あお
 ーーーー
 姉
-Elder sister
+Older sister
 シ
 
 あね
@@ -511,18 +511,18 @@ Younger sister
 いもうと
 ーーーー
 画
-Brush stroke
+Tableau
 ガ
 カク
 
 ーーーー
 服
-Clothing
+Clothes
 フク
 
 ーーーー
 事
-Matter
+Abstract thing
 ジ
 
 こと
@@ -533,7 +533,7 @@ Ocean
 
 ーーーー
 計
-Plot
+Meassure
 ケイ
 
 はか
@@ -577,13 +577,13 @@ Hurry
 いそ
 ーーーー
 送
-Send off
+Send
 ソウ
 
 おく
 ーーーー
 品
-Goods
+Article
 ヒン
 
 しな
@@ -623,13 +623,13 @@ World
 
 ーーーー
 研
-Polish
+Sharpen
 ケン
 
 と
 ーーーー
 発
-Discharge
+Departure
 ハツ
 ホツ
 
@@ -725,7 +725,7 @@ Trip
 たび
 ーーーー
 起
-Rouse
+Wake up
 キ
 
 お
@@ -736,12 +736,12 @@ Special
 
 ーーーー
 院
-Inst.
+Institution
 イン
 
 ーーーー
 員
-Employee
+Member
 イン
 
 ーーーー
@@ -764,7 +764,7 @@ Weak
 よわ
 ーーーー
 病
-Ill
+Sick
 ビョウ
 
 や
@@ -794,7 +794,7 @@ Exertion
 
 ーーーー
 通
-Traffic
+Pass through
 ツウ
 
 とう
@@ -841,7 +841,7 @@ Black
 くろ
 ーーーー
 産
-Products
+Give birth
 サン
 
 う
@@ -880,7 +880,7 @@ Question
 と
 ーーーー
 野
-Plains
+Field
 ヤ
 
 の
@@ -900,7 +900,7 @@ Metropolis
 
 ーーーー
 理
-Logic
+Reason
 リ
 
 ーーーー
@@ -911,7 +911,7 @@ Move
 うご
 ーーーー
 答
-Solution
+Answer
 トウ
 
 こた
@@ -935,7 +935,7 @@ Cold
 さむ
 ーーーー
 着
-Don
+Wear
 チャク
 
 き
@@ -960,7 +960,7 @@ Meal
 めし
 ーーーー
 集
-Gather
+Collect
 シュウ
 
 あつ
@@ -979,7 +979,7 @@ Carry
 はこ
 ーーーー
 軽
-Lightly
+Light
 ケイ
 
 かる
@@ -993,7 +993,7 @@ Open
 ひら
 ーーーー
 暑
-Sultry
+Hot
 ショ
 
 あつ
@@ -1013,7 +1013,7 @@ Music
 たの
 ーーーー
 遠
-Distant
+Far
 エン
 
 とお
@@ -1024,18 +1024,18 @@ Idea
 
 ーーーー
 漢
-Sino-
+China
 カン
 
 ーーーー
 暗
-Darkness
+Dark
 アン
 
 くら
 ーーーー
 業
-Profession
+Business
 ギョウ
 ゴウ
 
@@ -1048,7 +1048,7 @@ Work
 はたら
 ーーーー
 説
-Rumor
+Theory
 セツ
 
 と
@@ -1065,7 +1065,7 @@ Silver
 
 ーーーー
 質
-Substance
+Quality
 シツ
 シチ
 
@@ -1114,7 +1114,7 @@ Topic
 
 ーーーー
 曜
-Weekday
+Day of the week
 ヨウ
 
 ーーーー
