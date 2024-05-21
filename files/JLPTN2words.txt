@@ -2,4 +2,32 @@
 かせん
 Rivers
 ーーーー
+子午線
+しごせん
+Meridian
+ーーーー
+木造
+もくぞう
+Wooden
+ーーーー
+円筒
+えんとう
+Cylinder
+ーーーー
+極右
+きょくう
+Extreme right
+ーーーー
+左腕
+さわん
+Left arm
+ーーーー
+多角
+たかく
+Many-sided
+ーーーー
+耳鼻咽喉科
+じびいんこうか
+Otorhinolaryngology
+ーーーー
 #

@@ -2,4 +2,64 @@
 ろじょう
 Road
 ーーーー
+口座
+こうざ
+Account
+ーーーー
+土石
+どせき
+Earth and stones
+ーーーー
+大石
+たいせき
+Large stone
+ーーーー
+女王
+じょおう
+Queen
+ーーーー
+少数
+しょうすう
+Minority
+ーーーー
+祖父
+そふ
+Grandfather
+ーーーー
+交友
+こうゆう
+Friend
+ーーーー
+円形
+えんけい
+Round shape
+ーーーー
+王立
+おうりつ
+Royal
+ーーーー
+北部
+ほくぶ
+Northern part
+ーーーー
+半数
+はんすう
+Half the number
+ーーーー
+外交
+がいこう
+Diplomacy
+ーーーー
+四球
+しきゅう
+Four balls
+ーーーー
+種目
+しゅもく
+Event
+ーーーー
+多数
+たすう
+Great number
+ーーーー
 #

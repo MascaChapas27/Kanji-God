@@ -2,4 +2,128 @@
 じょうでん
 High rice field
 ーーーー
+山林
+さんりん
+Mountain forest
+ーーーー
+山村
+さんそん
+Mountain village
+ーーーー
+口頭
+こうとう
+Oral
+ーーーー
+千代
+ちよ
+Thousands of years
+ーーーー
+千秋楽
+せんしゅうらく
+Concluding festivities
+ーーーー
+火力
+かりょく
+Heating power
+ーーーー
+今秋
+こんしゅう
+This autumn
+ーーーー
+今春
+こんしゅん
+This spring
+ーーーー
+水田
+すいでん
+Paddy field
+ーーーー
+水力
+すいりょく
+Hydraulic power
+ーーーー
+正午
+しょうご
+Noon
+ーーーー
+自分
+じぶん
+Myself
+ーーーー
+分野
+ぶんや
+Field
+ーーーー
+運転手
+うんてんしゅ
+Driver
+ーーーー
+天文学
+てんもんがく
+Astronomy
+ーーーー
+正月
+しょうがつ
+New Year
+ーーーー
+親友
+しんゆう
+Close friend
+ーーーー
+友好
+ゆうこう
+Friendship
+ーーーー
+自立
+じりつ
+Independence
+ーーーー
+県立
+けんりつ
+Prefectural
+ーーーー
+海外
+かいがい
+Foreign
+ーーーー
+出力
+しゅつりょく
+Output
+ーーーー
+考古学
+こうこがく
+Archaeology
+ーーーー
+四方
+しほう
+The four cardinal directions
+ーーーー
+注目
+ちゅうもく
+Notice
+ーーーー
+母体
+ぼたい
+Mother's body
+ーーーー
+同行
+どうこう
+Accompanying
+ーーーー
+通行
+つうこう
+Passage
+ーーーー
+走行
+そうこう
+Running a wheeled vehicle
+ーーーー
+青年
+せいねん
+Youth
+ーーーー
+教会
+きょうかい
+Church
+ーーーー
 #

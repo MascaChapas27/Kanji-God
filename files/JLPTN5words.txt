@@ -1,11 +1,3 @@
-一生
-いっしょう
-Whole life
-ーーーー
-一つ
-ひとつ
-One
-ーーーー
 十一月
 じゅういちがつ
 November
@@ -13,6 +5,14 @@ November
 十一
 じゅういち
 11
+ーーーー
+一生
+いっしょう
+Whole life
+ーーーー
+一つ
+ひとつ
+One
 ーーーー
 十八
 じゅうはち
@@ -26,13 +26,13 @@ August
 はちじゅう
 Eighty
 ーーーー
-八つ
-やっつ
-Eight
-ーーーー
 百八
 ひゃくはち
 108
+ーーーー
+八つ
+やっつ
+Eight
 ーーーー
 白人
 はくじん
@@ -168,7 +168,7 @@ Aquatic
 ーーーー
 上
 うえ
-Above
+Up
 ーーーー
 川上
 かわかみ
@@ -250,8 +250,572 @@ Three people
 みっつ
 Three
 ーーーー
-山下
-さんげ
-Foot of a mountain
+山中
+さんちゅう
+In the mountains
+ーーーー
+人口
+じんこう
+Population
+ーーーー
+口上
+こうじょう
+Vocal message
+ーーーー
+本土
+ほんど
+Mainland
+ーーーー
+土木
+どぼく
+Engineering works
+ーーーー
+出土
+しゅつど
+Archeological excavation
+ーーーー
+土
+つち
+Earth
+ーーーー
+一千
+いっせん
+1000
+ーーーー
+千里
+せんり
+1000 ri
+ーーーー
+女子大
+じょしだい
+Women's college
+ーーーー
+大気
+たいき
+Atmosphere
+ーーーー
+大学
+だいがく
+University
+ーーーー
+大きい
+おおきい
+Big
+ーーーー
+金子
+きんす
+Money
+ーーーー
+男子
+だんし
+Young man
+ーーーー
+女子
+じょし
+Girl
+ーーーー
+百万
+ひゃくまん
+1000000
+ーーーー
+十万
+じゅうまん
+100000
+ーーーー
+五百万
+ごひゃくまん
+5000000
+ーーーー
+一万
+いちまん
+10000
+ーーーー
+男女
+だんじょ
+Men and women
+ーーーー
+女
+おんな
+Female
+ーーーー
+六月
+ろくがつ
+June
+ーーーー
+六十
+ろくじゅう
+Sixty
+ーーーー
+十六
+じゅうろく
+16
+ーーーー
+四六時中
+しろくじちゅう
+Around the clock
+ーーーー
+六つ
+むっつ
+Six
+ーーーー
+少年
+しょうねん
+Boy
+ーーーー
+少女
+しょうじょ
+Little girl
+ーーーー
+多少
+たしょう
+More or less
+ーーーー
+少ない
+すくない
+Few
+ーーーー
+少し
+すこし
+Small quantity
+ーーーー
+出火
+しゅっか
+Outbreak of fire
+ーーーー
+大火
+たいか
+Large fire
+ーーーー
+火災
+かさい
+Conflagration
+ーーーー
+父母
+ふぼ
+Father and mother
+ーーーー
+父子
+ふし
+Father and child
+ーーーー
+義父
+ぎふ
+Father-in-law
+ーーーー
+今週
+こんしゅう
+This week
+ーーーー
+今後
+こんご
+From now on
+ーーーー
+水中
+すいちゅう
+Underwater
+ーーーー
+午後
+ごご
+Afternoon
+ーーーー
+午前
+ごぜん
+Morning
+ーーーー
+半分
+はんぶん
+Half
+ーーーー
+気分
+きぶん
+Feeling
+ーーーー
+分ける
+わける
+To divide
+ーーーー
+分かれる
+わかれる
+To branch
+ーーーー
+分かる
+わかる
+To understand
+ーーーー
+手中
+しゅちゅう
+In one's hands
+ーーーー
+名手
+めいしゅ
+Master
+ーーーー
+天気
+てんき
+Weather
+ーーーー
+天
+あめ
+Sky
+ーーーー
+先日
+せんじつ
+The other day
+ーーーー
+休日
+きゅうじつ
+Holiday
+ーーーー
+一日
+いちにち
+One day
+ーーーー
+中日
+ちゅうにち
+China and japan
+ーーーー
+日
+ひ
+Day
+ーーーー
+大木
+たいぼく
+Large tree
+ーーーー
+高木
+こうぼく
+Tall tree
+ーーーー
+中立
+ちゅうりつ
+Neutrality
+ーーーー
+中学生
+ちゅうがくせい
+Junior high school student
+ーーーー
+中学
+ちゅうがく
+Middle school
+ーーーー
+空中
+くうちゅう
+Sky
+ーーーー
+中
+なか
+Inside
+ーーーー
+四月
+しがつ
+April
+ーーーー
+月
+つき
+Moon
+ーーーー
+五百
+ごひゃく
+500
+ーーーー
+五十
+ごじゅう
+Fifty
+ーーーー
+五つ
+いつつ
+Five
+ーーーー
+友人
+ゆうじん
+Friend
+ーーーー
+一円
+いちえん
+One yen
+ーーーー
+円滑
+えんかつ
+Smooth
+ーーーー
+円い
+まるい
+Round
+ーーーー
+立つ
+たつ
+To stand
+ーーーー
+立てる
+たてる
+To stand up
+ーーーー
+東北
+とうほく
+North-east
+ーーーー
+北東
+ほくとう
+Northeast
+ーーーー
+北西
+ほくせい
+Northwest
+ーーーー
+時半
+じはん
+Half an hour
+ーーーー
+後半
+こうはん
+Second half
+ーーーー
+半ば
+なかば
+Middle
+ーーーー
+外国
+がいこく
+Foreign country
+ーーーー
+国外
+こくがい
+Outside the country
+ーーーー
+外
+そと
+Outside
+ーーーー
+外す
+はずす
+To unfasten
+ーーーー
+外れる
+はずれる
+To be disconnected
+ーーーー
+左右
+さゆう
+Left and right
+ーーーー
+右翼
+うよく
+Right-wing
+ーーーー
+右中間
+うちゅうかん
+Between right and center fielders
+ーーーー
+出生
+しゅっしょう
+Birth
+ーーーー
+出る
+でる
+To leave
+ーーーー
+出す
+だす
+To take out
+ーーーー
+古書
+こしょ
+Old book
+ーーーー
+中古車
+ちゅうこしゃ
+Used car
+ーーーー
+中古
+ちゅうこ
+Used
+ーーーー
+古い
+ふるい
+Old
+ーーーー
+古す
+ふるす
+To wear out
+ーーーー
+年生
+ねんせい
+Pupil in ... year
+ーーーー
+学生
+がくせい
+Student
+ーーーー
+生きる
+いきる
+To live
+ーーーー
+生ける
+いける
+To arrange flowers
+ーーーー
+生まれる
+うまれる
+To be born
+ーーーー
+生む
+うむ
+To give birth
+ーーーー
+生える
+はえる
+To sprout
+ーーーー
+生
+なま
+Raw
+ーーーー
+左翼
+さよく
+Left-wing
+ーーーー
+左派
+さは
+Left wing
+ーーーー
+四つ
+よっつ
+Four
+ーーーー
+本名
+ほんみょう
+Real name
+ーーーー
+本気
+ほんき
+Seriousness
+ーーーー
+空白
+くうはく
+White space
+ーーーー
+白書
+はくしょ
+White paper
+ーーーー
+白日
+はくじつ
+Bright sunshine
+ーーーー
+白い
+しろい
+White
+ーーーー
+名目
+めいもく
+Name
+ーーーー
+項目
+こうもく
+Item
+ーーーー
+母国
+ぼこく
+One's homeland
+ーーーー
+空母
+くうぼ
+Aircraft carrier
+ーーーー
+母
+はは
+Mother
+ーーーー
+先行
+せんこう
+Preceding
+ーーーー
+行く
+いく
+To go
+ーーーー
+行う
+おこなう
+To perform
+ーーーー
+多分
+たぶん
+Perhaps
+ーーーー
+多い
+おおい
+Many
+ーーーー
+大名
+だいみょう
+Japanese feudal lord
+ーーーー
+年金
+ねんきん
+Annuity
+ーーーー
+学年
+がくねん
+Academic year
+ーーーー
+社会
+しゃかい
+Society
+ーーーー
+会長
+かいちょう
+President
+ーーーー
+会話
+かいわ
+Conversation
+ーーーー
+会う
+あう
+To meet
+ーーーー
+先生
+せんせい
+Teacher
+ーーーー
+先月
+せんげつ
+Last month
+ーーーー
+先見
+せんけん
+Foresight
+ーーーー
+先
+さき
+Previous
+ーーーー
+耳目
+じもく
+Eye and ear
+ーーーー
+中耳
+ちゅうじ
+Middle ear
+ーーーー
+中耳炎
+ちゅうじえん
+Inflammation of the middle ear
+ーーーー
+九百
+くひゃく
+900
+ーーーー
+七百
+しちひゃく
+700
+ーーーー
+空気
+くうき
+Air
+ーーーー
+人気
+にんき
+Popularity
 ーーーー
 #

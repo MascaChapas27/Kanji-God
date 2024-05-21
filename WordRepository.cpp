@@ -32,6 +32,13 @@ void WordRepository::classifyWords(){
 
     file.imbue(std::locale("C.UTF-8"));
 
+    // Open new words file
+    std::wfstream newFile("files/newWords.txt",std::fstream::out);
+
+    newFile.imbue(std::locale("C.UTF-8"));
+
+    std::set<std::wstring> classifiedWords;
+
     std::map<int,std::wfstream> realFiles;
     for(int i=1;i<6;i++){
         realFiles[i].open("files/JLPTN"+std::to_string(i)+"words.txt",std::fstream::out);
@@ -44,6 +51,24 @@ void WordRepository::classifyWords(){
     getline(file,data);
 
     while(data != L"#"){
+        
+        // If the word is repeated...
+        if(classifiedWords.count(data)){
+            // Skip the line for the pronunciation
+            getline(file,data);
+            // Skip the line for the meaning
+            getline(file,data);
+            // Skip the separator line
+            getline(file,data);
+            // Get the next word
+            getline(file,data);
+            // Continue to the next iteration
+            continue;
+        } else {
+            classifiedWords.insert(data);
+        }
+
+        newFile << data << L"\n";
 
         int minGrade = 5;
 
@@ -68,6 +93,7 @@ void WordRepository::classifyWords(){
 
         // Read the pronunciation
         getline(file,data);
+        newFile << data << L"\n";
 
         realFiles[minGrade] << data << L"\n";
 
@@ -75,6 +101,7 @@ void WordRepository::classifyWords(){
 
         // Read the meaning
         getline(file,data);
+        newFile << data << L"\n";
 
         realFiles[minGrade] << data << L"\n";
 
@@ -82,6 +109,7 @@ void WordRepository::classifyWords(){
 
         // Read a line that contains "----"
         getline(file,data);
+        newFile << data << L"\n";
 
         realFiles[minGrade] << data << L"\n";
 
@@ -89,11 +117,15 @@ void WordRepository::classifyWords(){
         getline(file,data);
     }
 
+    newFile << L"#";
+
     for(auto &pair : realFiles){
         pair.second << L"#";
+        pair.second.close();
     }
 
     file.close();
+    newFile.close();
 }
 
 // Operation that loads all words and progress for words
