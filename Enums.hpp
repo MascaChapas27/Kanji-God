@@ -17,7 +17,7 @@ enum class TextureID{
 
 // Type of font for the text
 enum class FontID{
-    MoboFont
+    MoboFont, ShipporiFont
 };
 
 // Type of sound

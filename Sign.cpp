@@ -5,6 +5,7 @@
 
 Sign::Sign(){
     text.setFont(FontHolder::getFontInstance()->get(FontID::MoboFont));
+    maxTextSize = INITIAL_FONT_SIZE;
 }
 
 void Sign::setSignTexture(sf::Texture &texture){
@@ -25,7 +26,7 @@ void Sign::setText(sf::String textString, bool keepSize){
 
     text.setString(textString);
     if(!keepSize){
-        text.setCharacterSize(INITIAL_FONT_SIZE);
+        text.setCharacterSize(maxTextSize);
 
         while(text.getCharacterSize() > MIN_FONT_SIZE &&
              (text.getGlobalBounds().width > signSprite.getTextureRect().width*textSignRatio ||
@@ -83,6 +84,14 @@ void Sign::setSignColor(sf::Color color){
 
 sf::String Sign::getText(){
     return text.getString().toWideString();
+}
+
+void Sign::setFont(sf::Font &font){
+    text.setFont(font);
+}
+
+void Sign::setMaxTextSize(int size){
+    maxTextSize = size;
 }
 
 void Sign::draw(sf::RenderTarget& target, sf::RenderStates states) const{

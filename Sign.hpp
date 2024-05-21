@@ -15,8 +15,11 @@ class Sign : public sf::Drawable{
         // Text to be displayed on the sign
         sf::Text text;
 
-        //
+        // How big the text can get compared to the size of the sign
         double textSignRatio;
+
+        // Maximum size for the text (if it doesn't fit, it will be smaller)
+        int maxTextSize;
 
     public:
 
@@ -40,6 +43,12 @@ class Sign : public sf::Drawable{
 
         // Get the text that the sign contains
         sf::String getText();
+
+        // Sets the font for the text
+        void setFont(sf::Font &font);
+
+        // Sets the maximum size for the text
+        void setMaxTextSize(int size);
 
         // Draws the button
         virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;

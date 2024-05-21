@@ -209,6 +209,8 @@ void MainWindow::start(){
     kanjiWordSign.setPosition(KANJI_WORD_SIGN_X, KANJI_WORD_SIGN_Y);
     kanjiWordSign.setTextColor(TEXT_COLOR);
     kanjiWordSign.setSignColor(BUTTON_COLOR_NORMAL);
+    kanjiWordSign.setFont(FontHolder::getFontInstance()->get(FontID::ShipporiFont));
+    kanjiWordSign.setMaxTextSize(INITIAL_FONT_SIZE*2);
 
     // Sign for the current progress of the kanji/word
     progressSign.setSignTexture(textureHolder->get(TextureID::InstructionsSign));

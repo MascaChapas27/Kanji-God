@@ -120,4 +120,5 @@ template <class Resource, class Identifier>
 void ResourceHolder<Resource,Identifier>::loadAllFonts()
 {
     load(FontID::MoboFont,"fonts/MOBO_Bold.otf");
+    load(FontID::ShipporiFont,"fonts/ShipporiGothicB2-OTF-Bold.otf");
 }
