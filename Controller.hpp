@@ -28,10 +28,6 @@ class Controller {
         // Grade selected (expected from 1 to 5, ignored if godMode is true)
         int selectedGrade;
 
-        // True if kanji mode is selected, false if
-        // word mode (ignored if godMode is true)
-        bool kanjiMode;
-
         // Current exercise
         Exercise currentExercise;
 
@@ -55,7 +51,7 @@ class Controller {
         static Controller * getInstance();
 
         // Sets the current grade and mode to be practiced
-        void setGradeAndMode(int selectedGrade, bool kanjiMode);
+        void setGrade(int selectedGrade);
 
         // Sets God Mode to the given value
         void setGodMode(bool godMode);

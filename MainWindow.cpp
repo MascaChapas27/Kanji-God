@@ -454,14 +454,14 @@ void MainWindow::start(){
     };
 
     kanjiGradeSelector.setPressedButtonAction([this](Button &button){
-        Controller::getInstance()->setGradeAndMode(kanjiGrade,true);
+        Controller::getInstance()->setGrade(kanjiGrade);
         mainMenuButton.resetPosition();
         saveButton.resetPosition();
         helpButton.resetPosition();
     });
 
     wordGradeSelector.setPressedButtonAction([this](Button &button){
-        Controller::getInstance()->setGradeAndMode(wordGrade,false);
+        Controller::getInstance()->setGrade(wordGrade);
         mainMenuButton.resetPosition();
         saveButton.resetPosition();
         helpButton.resetPosition();

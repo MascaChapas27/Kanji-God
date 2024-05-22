@@ -274,28 +274,50 @@ Exercise WordRepository::getExercise(int grade, bool mastered)
     Exercise exercise;
 
     if(!mastered && newWords[grade].size() > 0 && util::shouldLearnNewContent(practicingWords[grade].size())){
-        // If we have to select a new word, the situation is more complex than it may seem
-        // because we have to select a word such as its kanji componentes are known by the player
-        hash_t hashCode = newWords[grade].back();
-        Word& chosenWord = words[hashCode];
+        
+        int attemptsLeft = 5;
+        while(attemptsLeft > 0){
 
-        for(wchar_t wchar : chosenWord.getWord()){
-            Kanji k = KanjiRepository::getInstance()->getKanji(util::hash(std::wstring(1,wchar)));
-            // If the kanji found is actually a kanji and not a hiragana, and if it's a
-            // completely new kanji, then the word can't be taught (not yet, at least)
-            if(k.getKanji() != L"" && k.isNew()){
-                exercise.setExerciseType(ProgramState::TitleScreen);
-                return exercise;
+            bool iterationFailed = false;
+        
+            // If we have to select a new word, the situation is more complex than it may seem
+            // because we have to select a word such as its kanji componentes are known by the player
+            hash_t hashCode = newWords[grade].back();
+            Word& chosenWord = words[hashCode];
+
+            for(wchar_t wchar : chosenWord.getWord()){
+                Kanji k = KanjiRepository::getInstance()->getKanji(util::hash(std::wstring(1,wchar)));
+                // If the kanji found is actually a kanji and not a hiragana, and if it's a
+                // completely new kanji, then the word can't be taught (not yet, at least)
+                if(k.getKanji() != L"" && k.isNew()){
+                    // There is a kanji that the player doesn't know, failed attempts
+                    iterationFailed = true;
+                    break;
+                }
             }
+
+            // Try again
+            if(iterationFailed) {
+                attemptsLeft--;
+                // Maybe this is very expensive but anyways
+                newWords[grade].pop_back();
+                newWords[grade].insert(newWords[grade].begin(),hashCode);
+                continue;
+            }
+
+            // A good exercise could finally be found, exit the loop
+            exercise = getTutorial(hashCode);
+
+            chosenWord.setPronunciationProgress(0);
+            chosenWord.setMeaningProgress(0);
+
+            newWords[grade].pop_back();
+            practicingWords[grade].push_back(hashCode);
+            break;
         }
 
-        exercise = getTutorial(hashCode);
-
-        chosenWord.setPronunciationProgress(0);
-        chosenWord.setMeaningProgress(0);
-
-        newWords[grade].pop_back();
-        practicingWords[grade].push_back(hashCode);
+        if(attemptsLeft == 0)
+            exercise.setExerciseType(ProgramState::TitleScreen);
 
     } else if(!mastered && practicingWords[grade].size() == 0){
         exercise.setExerciseType(ProgramState::TitleScreen);

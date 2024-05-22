@@ -14,9 +14,8 @@ Controller * Controller::getInstance(){
     return controller;
 }
 
-void Controller::setGradeAndMode(int selectedGrade, bool kanjiMode){
+void Controller::setGrade(int selectedGrade){
     this->selectedGrade = selectedGrade;
-    this->kanjiMode = kanjiMode;
     this->godMode = false;
 }
 
