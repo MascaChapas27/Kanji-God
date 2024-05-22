@@ -1,4 +1,5 @@
 #include "Kanji.hpp"
+#include "Utilities.hpp"
 
 std::wstring Kanji::getKanji(){
     return kanji;
@@ -62,4 +63,8 @@ void Kanji::setKunyomiProgress(int kunyomiProgress){
 
 void Kanji::setOnyomiProgress(int onyomiProgress){
     this->onyomiProgress = onyomiProgress;
+}
+
+bool Kanji::isNew(){
+    return this->kunyomiProgress == NO_PROGRESS && this->onyomiProgress == NO_PROGRESS && this->meaningProgress == NO_PROGRESS;
 }

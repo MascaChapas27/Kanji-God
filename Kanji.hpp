@@ -54,6 +54,9 @@ class Kanji{
         void setMeaningProgress(int meaningProgress);
         void setKunyomiProgress(int kunyomiProgress);
         void setOnyomiProgress(int onyomiProgress);
+
+        // Returns true if the three progress indicators for the kanji are NO_PROGRESS
+        bool isNew();
 };
 
 #endif

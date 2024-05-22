@@ -73,8 +73,8 @@ void WordRepository::classifyWords(){
         int minGrade = 5;
 
         for(wchar_t kanji : data){
-            // Transform the wchar_t into an unsigned long
-            Kanji k = KanjiRepository::getInstance()->getKanji((unsigned long)kanji);
+            // Transform the wchar_t into a hash_t because a kanji is just one character
+            Kanji k = KanjiRepository::getInstance()->getKanji(util::hash(std::wstring(1,kanji)));
             if(k.getKanji() == L"")
                 continue;
 
@@ -274,8 +274,21 @@ Exercise WordRepository::getExercise(int grade, bool mastered)
     Exercise exercise;
 
     if(!mastered && newWords[grade].size() > 0 && util::shouldLearnNewContent(practicingWords[grade].size())){
+        // If we have to select a new word, the situation is more complex than it may seem
+        // because we have to select a word such as its kanji componentes are known by the player
         hash_t hashCode = newWords[grade].back();
         Word& chosenWord = words[hashCode];
+
+        for(wchar_t wchar : chosenWord.getWord()){
+            Kanji k = KanjiRepository::getInstance()->getKanji(util::hash(std::wstring(1,wchar)));
+            // If the kanji found is actually a kanji and not a hiragana, and if it's a
+            // completely new kanji, then the word can't be taught (not yet, at least)
+            if(k.getKanji() != L"" && k.isNew()){
+                exercise.setExerciseType(ProgramState::TitleScreen);
+                return exercise;
+            }
+        }
+
         exercise = getTutorial(hashCode);
 
         chosenWord.setPronunciationProgress(0);

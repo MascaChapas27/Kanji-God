@@ -166,6 +166,14 @@ Sky
 すいじょう
 Aquatic
 ーーーー
+上田
+じょうでん
+High rice field
+ーーーー
+路上
+ろじょう
+Road
+ーーーー
 上
 うえ
 Up
@@ -226,6 +234,10 @@ Mountains and rivers
 たいせん
 Big river
 ーーーー
+河川
+かせん
+Rivers
+ーーーー
 川柳
 せんりゅう
 Humorous poem
@@ -250,6 +262,14 @@ Three people
 みっつ
 Three
 ーーーー
+山林
+さんりん
+Mountain forest
+ーーーー
+山村
+さんそん
+Mountain village
+ーーーー
 山中
 さんちゅう
 In the mountains
@@ -258,13 +278,25 @@ In the mountains
 じんこう
 Population
 ーーーー
+口座
+こうざ
+Account
+ーーーー
 口上
 こうじょう
 Vocal message
 ーーーー
+口頭
+こうとう
+Oral
+ーーーー
 本土
 ほんど
 Mainland
+ーーーー
+土石
+どせき
+Earth and stones
 ーーーー
 土木
 どぼく
@@ -286,6 +318,14 @@ Earth
 せんり
 1000 ri
 ーーーー
+千代
+ちよ
+Thousands of years
+ーーーー
+千秋楽
+せんしゅうらく
+Concluding festivities
+ーーーー
 女子大
 じょしだい
 Women's college
@@ -297,6 +337,10 @@ Atmosphere
 大学
 だいがく
 University
+ーーーー
+大石
+たいせき
+Large stone
 ーーーー
 大きい
 おおきい
@@ -334,6 +378,10 @@ Girl
 だんじょ
 Men and women
 ーーーー
+女王
+じょおう
+Queen
+ーーーー
 女
 おんな
 Female
@@ -358,6 +406,10 @@ Around the clock
 むっつ
 Six
 ーーーー
+少数
+しょうすう
+Minority
+ーーーー
 少年
 しょうねん
 Boy
@@ -377,6 +429,10 @@ Few
 少し
 すこし
 Small quantity
+ーーーー
+火力
+かりょく
+Heating power
 ーーーー
 出火
 しゅっか
@@ -402,17 +458,37 @@ Father and child
 ぎふ
 Father-in-law
 ーーーー
+祖父
+そふ
+Grandfather
+ーーーー
 今週
 こんしゅう
 This week
+ーーーー
+今秋
+こんしゅう
+This autumn
+ーーーー
+今春
+こんしゅん
+This spring
 ーーーー
 今後
 こんご
 From now on
 ーーーー
+水田
+すいでん
+Paddy field
+ーーーー
 水中
 すいちゅう
 Underwater
+ーーーー
+水力
+すいりょく
+Hydraulic power
 ーーーー
 午後
 ごご
@@ -422,9 +498,25 @@ Afternoon
 ごぜん
 Morning
 ーーーー
+正午
+しょうご
+Noon
+ーーーー
+子午線
+しごせん
+Meridian
+ーーーー
+自分
+じぶん
+Myself
+ーーーー
 半分
 はんぶん
 Half
+ーーーー
+分野
+ぶんや
+Field
 ーーーー
 気分
 きぶん
@@ -450,9 +542,17 @@ In one's hands
 めいしゅ
 Master
 ーーーー
+運転手
+うんてんしゅ
+Driver
+ーーーー
 天気
 てんき
 Weather
+ーーーー
+天文学
+てんもんがく
+Astronomy
 ーーーー
 天
 あめ
@@ -486,6 +586,10 @@ Large tree
 こうぼく
 Tall tree
 ーーーー
+木造
+もくぞう
+Wooden
+ーーーー
 中立
 ちゅうりつ
 Neutrality
@@ -505,6 +609,10 @@ Sky
 中
 なか
 Inside
+ーーーー
+正月
+しょうがつ
+New Year
 ーーーー
 四月
 しがつ
@@ -530,17 +638,49 @@ Five
 ゆうじん
 Friend
 ーーーー
+親友
+しんゆう
+Close friend
+ーーーー
+交友
+こうゆう
+Friend
+ーーーー
+友好
+ゆうこう
+Friendship
+ーーーー
 一円
 いちえん
 One yen
+ーーーー
+円形
+えんけい
+Round shape
 ーーーー
 円滑
 えんかつ
 Smooth
 ーーーー
+円筒
+えんとう
+Cylinder
+ーーーー
 円い
 まるい
 Round
+ーーーー
+王立
+おうりつ
+Royal
+ーーーー
+自立
+じりつ
+Independence
+ーーーー
+県立
+けんりつ
+Prefectural
 ーーーー
 立つ
 たつ
@@ -562,6 +702,10 @@ Northeast
 ほくせい
 Northwest
 ーーーー
+北部
+ほくぶ
+Northern part
+ーーーー
 時半
 じはん
 Half an hour
@@ -570,13 +714,25 @@ Half an hour
 こうはん
 Second half
 ーーーー
+半数
+はんすう
+Half the number
+ーーーー
 半ば
 なかば
 Middle
 ーーーー
+海外
+かいがい
+Foreign
+ーーーー
 外国
 がいこく
 Foreign country
+ーーーー
+外交
+がいこう
+Diplomacy
 ーーーー
 国外
 こくがい
@@ -606,9 +762,17 @@ Right-wing
 うちゅうかん
 Between right and center fielders
 ーーーー
+極右
+きょくう
+Extreme right
+ーーーー
 出生
 しゅっしょう
 Birth
+ーーーー
+出力
+しゅつりょく
+Output
 ーーーー
 出る
 でる
@@ -621,6 +785,10 @@ To take out
 古書
 こしょ
 Old book
+ーーーー
+考古学
+こうこがく
+Archaeology
 ーーーー
 中古車
 ちゅうこしゃ
@@ -674,9 +842,21 @@ Raw
 さよく
 Left-wing
 ーーーー
+左腕
+さわん
+Left arm
+ーーーー
 左派
 さは
 Left wing
+ーーーー
+四球
+しきゅう
+Four balls
+ーーーー
+四方
+しほう
+The four cardinal directions
 ーーーー
 四つ
 よっつ
@@ -710,13 +890,25 @@ White
 めいもく
 Name
 ーーーー
+注目
+ちゅうもく
+Notice
+ーーーー
 項目
 こうもく
 Item
 ーーーー
+種目
+しゅもく
+Event
+ーーーー
 母国
 ぼこく
 One's homeland
+ーーーー
+母体
+ぼたい
+Mother's body
 ーーーー
 空母
 くうぼ
@@ -726,9 +918,21 @@ Aircraft carrier
 はは
 Mother
 ーーーー
+同行
+どうこう
+Accompanying
+ーーーー
 先行
 せんこう
 Preceding
+ーーーー
+通行
+つうこう
+Passage
+ーーーー
+走行
+そうこう
+Running a wheeled vehicle
 ーーーー
 行く
 いく
@@ -737,6 +941,14 @@ To go
 行う
 おこなう
 To perform
+ーーーー
+多角
+たかく
+Many-sided
+ーーーー
+多数
+たすう
+Great number
 ーーーー
 多分
 たぶん
@@ -750,6 +962,10 @@ Many
 だいみょう
 Japanese feudal lord
 ーーーー
+青年
+せいねん
+Youth
+ーーーー
 年金
 ねんきん
 Annuity
@@ -761,6 +977,10 @@ Academic year
 社会
 しゃかい
 Society
+ーーーー
+教会
+きょうかい
+Church
 ーーーー
 会長
 かいちょう
@@ -797,6 +1017,10 @@ Eye and ear
 中耳
 ちゅうじ
 Middle ear
+ーーーー
+耳鼻咽喉科
+じびいんこうか
+Otorhinolaryngology
 ーーーー
 中耳炎
 ちゅうじえん

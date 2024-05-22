@@ -63,12 +63,26 @@ Exercise Controller::getExercise(){
                 break;
             }
         } while(numAttempts <= 2 && exercise.getExerciseType() == ProgramState::TitleScreen);
-
+    } else {
+        int random = rand()%2;
+        // First we check if the selected exercise is a word exercise
+        if(random){
+            exercise = WordRepository::getInstance()->getExercise(selectedGrade);
+        }
+        
+        // Maybe the selected exercise was a word exercise that failed, or was a
+        // genuine kanji exercise from the beginning
+        if(!random || exercise.getExerciseType() == ProgramState::TitleScreen){
+            exercise = KanjiRepository::getInstance()->getExercise(selectedGrade);
+        }
+    }
+    /*
     } else if(kanjiMode){
         exercise = KanjiRepository::getInstance()->getExercise(selectedGrade);
     } else{
         exercise = WordRepository::getInstance()->getExercise(selectedGrade);
     }
+    */
 
     currentExercise = exercise;
     return exercise;
