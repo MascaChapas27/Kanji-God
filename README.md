@@ -1,4 +1,6 @@
-![Logo](https://img.itch.zone/aW1nLzE2MDMyMTUyLnBuZw==/original/j090bt.png)
+<p align="center">
+  <img align="center" src="https://img.itch.zone/aW1nLzE2MDMyMTUyLnBuZw==/original/j090bt.png">
+</p>
 
 Thank you for visiting the GitHub repository! Here you can find the full code for the game and (if you are on a Linux machine) instructions on how to compile it and customize the Kanjis and words.
 
