@@ -27,9 +27,8 @@ class MainWindow {
         // Current state of the program, determines what happens
         ProgramState programState;
 
-        // Grade shown in the kanji and word buttons
-        int kanjiGrade;
-        int wordGrade;
+        // Grade shown in the grade selection button
+        int grade;
 
         // Function that gets an exercise from the Controller and parses it and stuff
         std::function<void(Button&)> getExercise;
@@ -88,9 +87,8 @@ class MainWindow {
         // Button that shows the tutorial page for the current exercise
         Button helpButton;
 
-        // Function that updates the amount of mastered/total words in
-        // the main menu buttons
-        void updateMasteredCount(Button &kanjiGradeSelector, Button &wordGradeSelector);
+        // Function that updates the amount of mastered/total exercises in the main menu button
+        void updateMasteredCount(Button &gradeSelector);
 
     public:
 

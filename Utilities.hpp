@@ -80,28 +80,18 @@ const sf::Color HELP_COLOR = sf::Color(100,100,170);
 const int TITLE_BUTTONS_VERTICAL_DISTANCE = 60;
 
 // Position of the kanji button in the main menu
-const int KANJI_MENU_BUTTON_X = WINDOW_WIDTH/4;
-const int KANJI_MENU_BUTTON_Y = 400;
-
-// Position of the word button in the main menu
-const int WORD_MENU_BUTTON_X = WINDOW_WIDTH/2;
-const int WORD_MENU_BUTTON_Y = KANJI_MENU_BUTTON_Y;
+const int GRADE_MENU_BUTTON_X = WINDOW_WIDTH/3;
+const int GRADE_MENU_BUTTON_Y = 400;
 
 // Position of the god mode button in the main menu
-const int GODMODE_MENU_BUTTON_X = 3*WINDOW_WIDTH/4;
-const int GODMODE_MENU_BUTTON_Y = KANJI_MENU_BUTTON_Y;
+const int GODMODE_MENU_BUTTON_X = 2*WINDOW_WIDTH/3;
+const int GODMODE_MENU_BUTTON_Y = GRADE_MENU_BUTTON_Y;
 
-// Position of the arrows for the kanji button in the main menu
-const int KANJI_MENU_ARROW_LEFT_X = KANJI_MENU_BUTTON_X - 50;
-const int KANJI_MENU_ARROW_LEFT_Y = KANJI_MENU_BUTTON_Y + 120;
-const int KANJI_MENU_ARROW_RIGHT_X = KANJI_MENU_BUTTON_X + 50;
-const int KANJI_MENU_ARROW_RIGHT_Y = KANJI_MENU_ARROW_LEFT_Y;
-
-// Position of the arrows for the word button in the main menu
-const int WORD_MENU_ARROW_LEFT_X = WORD_MENU_BUTTON_X - 50;
-const int WORD_MENU_ARROW_LEFT_Y = KANJI_MENU_ARROW_LEFT_Y;
-const int WORD_MENU_ARROW_RIGHT_X = WORD_MENU_BUTTON_X + 50;
-const int WORD_MENU_ARROW_RIGHT_Y = KANJI_MENU_ARROW_LEFT_Y;
+// Position of the arrows for the grade selection button in the main menu
+const int MENU_ARROW_LEFT_X = GRADE_MENU_BUTTON_X - 75;
+const int MENU_ARROW_LEFT_Y = GRADE_MENU_BUTTON_Y + 120;
+const int MENU_ARROW_RIGHT_X = GRADE_MENU_BUTTON_X + 75;
+const int MENU_ARROW_RIGHT_Y = MENU_ARROW_LEFT_Y;
 
 // Position for the sign that has the kanji/word that is currently being asked/taught
 const int KANJI_WORD_SIGN_X = 8*WINDOW_WIDTH/10;
