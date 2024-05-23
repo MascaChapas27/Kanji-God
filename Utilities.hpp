@@ -12,7 +12,7 @@
 */
 
 // Type for the hash code used to identify kanjis and words
-typedef unsigned long hash_t;
+typedef unsigned long long hash_t;
 
 // Size for the main window
 const int WINDOW_WIDTH = 800;

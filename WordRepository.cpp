@@ -142,7 +142,7 @@ void WordRepository::loadAllWords(){
         std::wfstream file("files/JLPTN"+std::to_string(i)+"words.txt");
 
         if(!file.is_open()){
-            std::cerr << "ERROR: file " << "files/JLPTN"+std::to_string(i)+"words.txt" << std::endl;
+            std::cerr << "ERROR: file " << "files/JLPTN"+std::to_string(i)+"words.txt not found" << std::endl;
             exit(EXIT_FAILURE);
         }
 
@@ -185,9 +185,13 @@ void WordRepository::loadAllWords(){
             w.setMeaningProgress(-1);
             w.setPronunciationProgress(-1);
 
-            words[hashCode] = w;
+            if(!words.count(hashCode)) {
+                newWords[i].push_back(hashCode);
+            } else {
+                std::wcerr << "WARNING: Found hash collision between words " << w.getMeaning() << " and " << words[hashCode].getMeaning() << " (" << hashCode << ")" << std::endl;
+            }
 
-            newWords[i].push_back(hashCode);
+            words[hashCode] = w;
         }
 
         #ifdef __linux__
@@ -195,11 +199,11 @@ void WordRepository::loadAllWords(){
         #endif
 
         // Open the progress file
-        std::wfstream fileprogress("files/JLPTN"+std::to_string(i)+"wordprogress.txt");
+        std::wfstream fileprogress("save/JLPTN"+std::to_string(i)+"wordprogress.txt");
 
         if(!fileprogress.is_open()){
             // The file doesn't exist: let's create it
-            fileprogress.open("files/JLPTN"+std::to_string(i)+"wordprogress.txt",std::fstream::out);
+            fileprogress.open("save/JLPTN"+std::to_string(i)+"wordprogress.txt",std::fstream::out);
 
             for(hash_t hashCode : newWords[i]){
                 fileprogress << hashCode << "\n-1\n-1\n";
@@ -217,6 +221,9 @@ void WordRepository::loadAllWords(){
             while(data != L"#"){
 
                 hash_t hashCode = std::stoul(data);
+
+                if(!words.count(hashCode))
+                    std::wcerr << "WARNING: In grade " << i << " found saved data for word with hash code " << hashCode << " but no word was found" << std::endl;
 
                 // Get the word and assign it the progress numbers
                 Word &w = words[hashCode];
@@ -556,7 +563,7 @@ void WordRepository::save(){
     std::map<int,std::wfstream> files;
 
     for(int i=1;i<=5;i++)
-        files[i] = std::wfstream("files/JLPTN"+std::to_string(i)+"wordprogress.txt",std::wfstream::trunc | std::wfstream::out);
+        files[i] = std::wfstream("save/JLPTN"+std::to_string(i)+"wordprogress.txt",std::wfstream::trunc | std::wfstream::out);
 
     for(auto &pair : words){
         files[pair.second.getGrade()] << util::hash(pair.second.getWord()) << L"\n" << pair.second.getPronunciationProgress() << L"\n" << pair.second.getMeaningProgress() << L"\n";

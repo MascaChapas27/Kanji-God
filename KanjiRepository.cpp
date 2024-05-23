@@ -22,7 +22,7 @@ KanjiRepository * KanjiRepository::getInstance()
 // Operation that loads all kanji and progress for kanji in one file
 void KanjiRepository::loadAllKanjis(){
 
-    for(int i=2;i<=5;i++){
+    for(int i=1;i<=5;i++){
 
         // Open the readings/meanings file
         #ifdef __linux__
@@ -81,7 +81,11 @@ void KanjiRepository::loadAllKanjis(){
 
             hash_t hash = util::hash(k.getKanji());
 
-            newKanjis[i].push_back(hash);
+            if(!kanjis.count(hash)) {
+                newKanjis[i].push_back(hash);
+            } else {
+                std::wcerr << "WARNING: Found hash collision between " << k.getMeaning() << " and " << kanjis[hash].getMeaning() << " (" << hash << ")" << std::endl;
+            }
 
             kanjis[hash] = k;
 
@@ -94,11 +98,11 @@ void KanjiRepository::loadAllKanjis(){
         #endif
 
         // Open the progress file
-        std::wfstream fileprogress("files/JLPTN" + std::to_string(i) + "kanjiprogress.txt");
+        std::wfstream fileprogress("save/JLPTN" + std::to_string(i) + "kanjiprogress.txt");
 
         if(!fileprogress.is_open()){
             // The file doesn't exist: let's create it
-            fileprogress.open("files/JLPTN" + std::to_string(i) + "kanjiprogress.txt",std::fstream::out);
+            fileprogress.open("save/JLPTN" + std::to_string(i) + "kanjiprogress.txt",std::fstream::out);
 
             for(hash_t hashCode : newKanjis[i]){
                 fileprogress << hashCode << "\n-1\n-1\n-1\n";
@@ -116,6 +120,9 @@ void KanjiRepository::loadAllKanjis(){
             while(data != L"#"){
 
                 hash_t hashCode = std::stoul(data);
+
+                if(!kanjis.count(hashCode))
+                    std::wcerr << "WARNING: In grade " << i << " found saved data for kanji with hash code " << hashCode << " but no kanji was found" << std::endl;
 
                 // Get the kanji and assign it the progress numbers
                 Kanji &k = kanjis[hashCode];
@@ -487,7 +494,7 @@ void KanjiRepository::save(){
     std::map<int,std::wfstream> files;
 
     for(int i=3;i<=5;i++){
-        files[i] = std::wfstream("files/JLPTN"+std::to_string(i)+"kanjiprogress.txt",std::wfstream::trunc | std::wfstream::out);
+        files[i] = std::wfstream("save/JLPTN"+std::to_string(i)+"kanjiprogress.txt",std::wfstream::trunc | std::wfstream::out);
     }
 
     for(auto &pair : kanjis){

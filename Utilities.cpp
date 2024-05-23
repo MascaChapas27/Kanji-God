@@ -42,7 +42,7 @@ hash_t util::hash(std::wstring wstring){
         hashCode+=(wchar*multiplier);
 
         // For the next iteration, the multiplier will be bigger
-        multiplier+=10;
+        multiplier+=10000;
     }
 
     return hashCode;

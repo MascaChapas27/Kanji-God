@@ -126,9 +126,10 @@ void MainWindow::start(){
     longAnswerButton.setTextColor(TEXT_COLOR);
     longAnswerButton.setButtonColor(BUTTON_COLOR_NORMAL);
     longAnswerButton.setPressedButtonAction([this](Button &thisButton){
+        std::wstring answer = util::trimLineFeeds(thisButton.getText());
         if(Controller::getInstance()->getCurrentExercise().getExerciseType() == ProgramState::KanjiMean){
             int meanProgress,kunProgress,onProgress;
-            if(Controller::getInstance()->checkAnswer(thisButton.getText(),meanProgress,kunProgress,onProgress)){
+            if(Controller::getInstance()->checkAnswer(answer,meanProgress,kunProgress,onProgress)){
                 thisButton.setButtonColor(sf::Color::White);
                 thisButton.setFinalColor(BUTTON_COLOR_CORRECT);
             } else {
@@ -138,7 +139,6 @@ void MainWindow::start(){
             this->progressSign.setText("Meaning: " + std::to_string(meanProgress) + "%\n\nKunyomi: " + std::to_string(kunProgress) + "%\n\nOnyomi: " + std::to_string(onProgress) + "%");
         } else {
             int pronProgress, meanProgress;
-            std::wstring answer = util::trimLineFeeds(thisButton.getText());
             if(Controller::getInstance()->checkAnswer(answer,pronProgress,meanProgress)){
                 thisButton.setButtonColor(sf::Color::White);
                 thisButton.setFinalColor(BUTTON_COLOR_CORRECT);
