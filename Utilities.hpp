@@ -222,7 +222,7 @@ namespace util {
     bool isInRectangle(int x, int y, int rectX, int rectY, int rectWidth, int rectHeight);
 
     // Tells if you should learn new content or practice
-    bool shouldLearnNewContent(int newContent);
+    bool shouldLearnNewContent(int newContent, bool isWord);
 
     // Makes a sound based on the SoundID of that sound
     sf::Sound initializeSound(SoundID soundId);

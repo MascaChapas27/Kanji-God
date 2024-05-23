@@ -11,9 +11,11 @@ bool util::isInRectangle(int x, int y, int rectX, int rectY, int rectWidth, int 
             y < rectY+rectHeight;
 }
 
-bool util::shouldLearnNewContent(int practicingContent)
+bool util::shouldLearnNewContent(int practicingContent, bool isWord)
 {
-    return practicingContent == 0 || rand()%(5+practicingContent) == 0;
+    // If there is no content to practice, then it's necessary to learn new content.
+    // But if there is content being practiced, words have a higher change to be learnt
+    return practicingContent == 0 || rand()%((isWord ? 0 : 5)+practicingContent) == 0;
 }
 
 sf::Sound util::initializeSound(SoundID soundId){

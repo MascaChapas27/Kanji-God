@@ -187,7 +187,7 @@ Exercise KanjiRepository::getExercise(int grade, bool mastered)
 {
     Exercise exercise;
 
-    if(!mastered && newKanjis[grade].size() > 0 && util::shouldLearnNewContent(practicingKanjis[grade].size())){
+    if(!mastered && newKanjis[grade].size() > 0 && util::shouldLearnNewContent(practicingKanjis[grade].size(),false)){
 
         hash_t hashCode = newKanjis[grade].back();
         Kanji& chosenKanji = kanjis[hashCode];
@@ -436,6 +436,26 @@ bool KanjiRepository::checkAnswer(Exercise &exercise, std::wstring answer)
         return false;
     }
 
+    kanji.setMeaningProgress(exercise.getMeaningProgress());
+    kanji.setKunyomiProgress(exercise.getKunyomiProgress());
+    kanji.setOnyomiProgress(exercise.getOnyomiProgress());
+
+    if(kanji.getMeaningProgress() == MAX_PROGRESS &&
+        kanji.getKunyomiProgress() == MAX_PROGRESS &&
+        kanji.getOnyomiProgress() == MAX_PROGRESS){
+        auto position = std::find(practicingKanjis[kanji.getGrade()].begin(),practicingKanjis[kanji.getGrade()].end(),exercise.getHashCode());
+        if(position != practicingKanjis[kanji.getGrade()].end()){
+            practicingKanjis[kanji.getGrade()].erase(position);
+            masteredKanjis[kanji.getGrade()].push_back(exercise.getHashCode());
+        }
+    } else {
+        auto position = std::find(masteredKanjis[kanji.getGrade()].begin(),masteredKanjis[kanji.getGrade()].end(),exercise.getHashCode());
+        if(position != masteredKanjis[kanji.getGrade()].end()){
+            masteredKanjis[kanji.getGrade()].erase(position);
+            practicingKanjis[kanji.getGrade()].push_back(exercise.getHashCode());
+        }
+    }
+
     return correct;
 }
 
@@ -457,28 +477,6 @@ bool KanjiRepository::allAnswered(Exercise &exercise, unsigned int answers)
         break;
     default:
         return false;
-    }
-
-    if(completed){
-        kanji.setMeaningProgress(exercise.getMeaningProgress());
-        kanji.setKunyomiProgress(exercise.getKunyomiProgress());
-        kanji.setOnyomiProgress(exercise.getOnyomiProgress());
-
-        if(kanji.getMeaningProgress() == MAX_PROGRESS &&
-           kanji.getKunyomiProgress() == MAX_PROGRESS &&
-           kanji.getOnyomiProgress() == MAX_PROGRESS){
-            auto position = std::find(practicingKanjis[kanji.getGrade()].begin(),practicingKanjis[kanji.getGrade()].end(),exercise.getHashCode());
-            if(position != practicingKanjis[kanji.getGrade()].end()){
-                practicingKanjis[kanji.getGrade()].erase(position);
-                masteredKanjis[kanji.getGrade()].push_back(exercise.getHashCode());
-            }
-        } else {
-            auto position = std::find(masteredKanjis[kanji.getGrade()].begin(),masteredKanjis[kanji.getGrade()].end(),exercise.getHashCode());
-            if(position != masteredKanjis[kanji.getGrade()].end()){
-                masteredKanjis[kanji.getGrade()].erase(position);
-                practicingKanjis[kanji.getGrade()].push_back(exercise.getHashCode());
-            }
-        }
     }
 
     return completed;

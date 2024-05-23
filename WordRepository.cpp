@@ -273,7 +273,7 @@ Exercise WordRepository::getExercise(int grade, bool mastered)
 {
     Exercise exercise;
 
-    if(!mastered && newWords[grade].size() > 0 && util::shouldLearnNewContent(practicingWords[grade].size())){
+    if(!mastered && newWords[grade].size() > 0 && util::shouldLearnNewContent(practicingWords[grade].size(), true)){
         
         int attemptsLeft = 5;
         while(attemptsLeft > 0){
@@ -510,6 +510,24 @@ bool WordRepository::checkAnswer(Exercise &exercise, std::wstring answer)
         return false;
     }
 
+    word.setPronunciationProgress(exercise.getPronunciationProgress());
+    word.setMeaningProgress(exercise.getMeaningProgress());
+
+    if(word.getPronunciationProgress() == MAX_PROGRESS &&
+        word.getMeaningProgress() == MAX_PROGRESS){
+        auto position = std::find(practicingWords[word.getGrade()].begin(),practicingWords[word.getGrade()].end(),exercise.getHashCode());
+        if(position != practicingWords[word.getGrade()].end()){
+            practicingWords[word.getGrade()].erase(position);
+            masteredWords[word.getGrade()].push_back(exercise.getHashCode());
+        }
+    } else {
+        auto position = std::find(masteredWords[word.getGrade()].begin(),masteredWords[word.getGrade()].end(),exercise.getHashCode());
+        if(position != masteredWords[word.getGrade()].end()){
+            masteredWords[word.getGrade()].erase(position);
+            practicingWords[word.getGrade()].push_back(exercise.getHashCode());
+        }
+    }
+
     return correct;
 }
 
@@ -528,26 +546,6 @@ bool WordRepository::allAnswered(Exercise &exercise, unsigned int answers)
         break;
     default:
         return false;
-    }
-
-    if(completed){
-        word.setPronunciationProgress(exercise.getPronunciationProgress());
-        word.setMeaningProgress(exercise.getMeaningProgress());
-
-        if(word.getPronunciationProgress() == MAX_PROGRESS &&
-           word.getMeaningProgress() == MAX_PROGRESS){
-            auto position = std::find(practicingWords[word.getGrade()].begin(),practicingWords[word.getGrade()].end(),exercise.getHashCode());
-            if(position != practicingWords[word.getGrade()].end()){
-                practicingWords[word.getGrade()].erase(position);
-                masteredWords[word.getGrade()].push_back(exercise.getHashCode());
-            }
-        } else {
-            auto position = std::find(masteredWords[word.getGrade()].begin(),masteredWords[word.getGrade()].end(),exercise.getHashCode());
-            if(position != masteredWords[word.getGrade()].end()){
-                masteredWords[word.getGrade()].erase(position);
-                practicingWords[word.getGrade()].push_back(exercise.getHashCode());
-            }
-        }
     }
 
     return completed;
