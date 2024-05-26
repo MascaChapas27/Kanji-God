@@ -95,6 +95,6 @@ void Sign::setMaxTextSize(int size){
 }
 
 void Sign::draw(sf::RenderTarget& target, sf::RenderStates states) const{
-    target.draw(signSprite);
-    target.draw(text);
+    target.draw(signSprite,states);
+    target.draw(text,states);
 }

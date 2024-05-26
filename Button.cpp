@@ -189,7 +189,7 @@ void Button::notify(sf::Event &event)
 // Draws the button
 void Button::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-    target.draw(bottomSprite);
-    target.draw(topSprite);
-    if(text.getString() != "") target.draw(text);
+    target.draw(bottomSprite),states;
+    target.draw(topSprite,states);
+    if(text.getString() != "") target.draw(text,states);
 }

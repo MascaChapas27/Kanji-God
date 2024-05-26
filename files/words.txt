@@ -1042,4 +1042,32 @@ Air
 にんき
 Popularity
 ーーーー
+休日
+きゅうじつ
+Holiday
+ーーーー
+休暇
+きゅうか
+Day off
+ーーーー
+年休
+ねんきゅう
+Yearly paid vacation
+ーーーー
+休校
+きゅうこう
+Closing school
+ーーーー
+休む
+やすむ
+To be absent
+ーーーー
+休まる
+やすまる
+To be rested
+ーーーー
+休める
+やすめる
+To rest
+ーーーー
 #
