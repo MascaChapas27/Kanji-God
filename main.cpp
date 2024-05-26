@@ -9,9 +9,24 @@
 #include <ctime>
 #include "DrawingBoard.hpp"
 
+// This debug function allows you to create your own strokes
+// and dump them as vertex coordinates (implementation is under the main function)
+void debugStroke();
+
 int main(){
     srand(time(NULL));
 
+    debugStroke();
+    
+    MainWindow mainWindow;
+    
+    mainWindow.start();
+    
+}
+
+// This debug function allows you to create your own strokes
+// and dump them as vertex coordinates
+void debugStroke(){
     sf::RenderWindow window;
     window.create(sf::VideoMode(WINDOW_WIDTH,WINDOW_HEIGHT),WINDOW_TITLE,sf::Style::Close);
     window.setFramerateLimit(FPS);
@@ -27,6 +42,12 @@ int main(){
             if(event.type == sf::Event::Closed){
                 window.close();
                 exit(EXIT_SUCCESS);
+            } else if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Key::Enter){
+                board.dump();
+            } else if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Key::Backspace){
+                board.clearBoard();
+            } else if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Key::Space){
+                board.undo();
             } else {
                 board.notify(event);
             }
@@ -37,12 +58,7 @@ int main(){
         window.draw(board);
 
         window.display();
-
     }
 
-    /*
-    MainWindow mainWindow;
-    
-    mainWindow.start();
-    */
+    exit(EXIT_SUCCESS);
 }

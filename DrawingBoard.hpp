@@ -16,6 +16,19 @@ class DrawingBoard : public sf::Drawable{
         // If set to false, end the current stroke and stop registering vertices
         bool currentlyDrawing;
 
+        // These variables make strokes a bit pointier but they avoid 234793824723 vertices
+        // from being captured (60 fps = 60 vertices per second = death and destruction)
+        
+        // The frames of delay between different vertices in the same stroke
+        // 0 = no delay
+        // 1 = one frame delay
+        // 5 = capture a vertex, wait 5 frames, capture a vertex
+        int captureCountMax;
+        
+        // If set to captureCountMax, next vertex will be captured. If not, ignore and
+        // make it bigger until it reaches captureCountMax
+        int captureCount;
+
         // A vector of strokes. Each stroke is a vertex array, which means that it's
         // formed by points in space. Each point is a mouse position
         std::vector<sf::VertexArray> strokes;
@@ -24,7 +37,8 @@ class DrawingBoard : public sf::Drawable{
 
         DrawingBoard();
 
-        // Sets the texture for the board
+        // Sets the texture for the board and also set the origin for the sprite
+        // to the center of the texture
         void setBoardTexture(sf::Texture &texture);
 
         // Sets the current position for the board and all its strokes
@@ -34,11 +48,25 @@ class DrawingBoard : public sf::Drawable{
         // Sets the color for the board
         void setBoardColor(sf::Color color);
 
+        // Erases all strokes
+        void clearBoard();
+
+        // Erases only the last stroke
+        void undo();
+
         // Reacts to an event that happened
         void notify(sf::Event &event);
 
+        // Dumps the information about the strokes relative to the origin of
+        // the board sprite (currently the center)
+        void dump();
+
         // Draws the button
         virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+    
+    private:
+        // Create a vertex with this position and add it to the last stroke
+        void captureVertex(sf::Vector2f position);
 };
 
 #endif

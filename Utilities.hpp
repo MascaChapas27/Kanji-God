@@ -217,6 +217,9 @@ const double INITIAL_PITCH_CORRECT_SOUND = 1.3;
 // Pitch increment for the correct answer sound for every correct answer
 const double PITCH_INCREMENT_CORRECT_SOUND = 0.1;
 
+// How much to wait among vertices when drawing
+const int VERTEX_DELAY = 2;
+
 namespace util {
     // Calculates whether a point is in a rectangle
     bool isInRectangle(int x, int y, int rectX, int rectY, int rectWidth, int rectHeight);
