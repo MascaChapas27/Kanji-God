@@ -21,6 +21,10 @@ std::wstring Kanji::getMeaning(){
     return meaning;
 }
 
+std::vector<sf::VertexArray> Kanji::getStrokes(){
+    return strokes;
+}
+
 int Kanji::getMeaningProgress(){
     return meaningProgress;
 }
@@ -31,6 +35,10 @@ int Kanji::getKunyomiProgress(){
 
 int Kanji::getOnyomiProgress(){
     return onyomiProgress;
+}
+
+int Kanji::getDrawingProgress(){
+    return drawingProgress;
 }
 
 void Kanji::setKanji(std::wstring kanji){
@@ -53,6 +61,10 @@ void Kanji::setMeaning(std::wstring meaning){
     this->meaning = meaning;
 }
 
+void Kanji::setStrokes(std::vector<sf::VertexArray> strokes){
+    this->strokes = strokes;
+}
+
 void Kanji::setMeaningProgress(int meaningProgress){
     this->meaningProgress = meaningProgress;
 }
@@ -63,6 +75,10 @@ void Kanji::setKunyomiProgress(int kunyomiProgress){
 
 void Kanji::setOnyomiProgress(int onyomiProgress){
     this->onyomiProgress = onyomiProgress;
+}
+
+void Kanji::setDrawingProgress(int drawingProgress){
+    this->drawingProgress = drawingProgress;
 }
 
 bool Kanji::isNew(){

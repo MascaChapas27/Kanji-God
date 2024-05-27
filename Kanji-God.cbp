@@ -45,6 +45,8 @@
 		<Unit filename="Button.hpp" />
 		<Unit filename="Controller.cpp" />
 		<Unit filename="Controller.hpp" />
+		<Unit filename="DrawingBoard.cpp" />
+		<Unit filename="DrawingBoard.hpp" />
 		<Unit filename="Enums.hpp" />
 		<Unit filename="Exercise.cpp" />
 		<Unit filename="Exercise.hpp" />
@@ -58,6 +60,8 @@
 		<Unit filename="MainWindow.hpp" />
 		<Unit filename="ResourceHolder.hpp" />
 		<Unit filename="ResourceHolder.tpp" />
+		<Unit filename="ShowingBoard.cpp" />
+		<Unit filename="ShowingBoard.hpp" />
 		<Unit filename="Sign.cpp" />
 		<Unit filename="Sign.hpp" />
 		<Unit filename="Utilities.cpp" />

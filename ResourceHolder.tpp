@@ -104,6 +104,8 @@ void ResourceHolder<Resource,Identifier>::loadAllTextures()
     load(TextureID::MeaningSign,"sprites/meaning_sign.png");
     load(TextureID::KunOnSign,"sprites/kun_on_sign.png");
     load(TextureID::ReadingSign,"sprites/reading_sign.png");
+
+    load(TextureID::DrawingBoard,"sprites/drawing_board.png");
 }
 
 template <class Resource, class Identifier>

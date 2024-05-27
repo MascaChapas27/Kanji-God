@@ -98,15 +98,15 @@ void MainWindow::start(){
     shortAnswerButton.setTextColor(TEXT_COLOR);
     shortAnswerButton.setButtonColor(BUTTON_COLOR_NORMAL);
     shortAnswerButton.setPressedButtonAction([this](Button &thisButton){
-        int meanProgress,kunProgress,onProgress;
-        if(Controller::getInstance()->checkAnswer(thisButton.getText(),meanProgress,kunProgress,onProgress)){
+        int meanProgress,kunProgress,onProgress,drawProgress;
+        if(Controller::getInstance()->checkAnswer(thisButton.getText(),meanProgress,kunProgress,onProgress,drawProgress)){
             thisButton.setButtonColor(sf::Color::White);
             thisButton.setFinalColor(BUTTON_COLOR_CORRECT);
         } else {
             thisButton.setButtonColor(sf::Color::Black);
             thisButton.setFinalColor(BUTTON_COLOR_INCORRECT);
         }
-        this->progressSign.setText("Meaning: " + std::to_string(meanProgress) + "%\n\nKunyomi: " + std::to_string(kunProgress) + "%\n\nOnyomi: " + std::to_string(onProgress) + "%");
+        this->progressSign.setText("Meaning: " + std::to_string(meanProgress) + "%\n\nKunyomi: " + std::to_string(kunProgress) + "%\n\nOnyomi: " + std::to_string(onProgress) + "%\n\nDrawing: " + std::to_string(drawProgress) + "%");
     });
     shortAnswerButton.setReleasedButtonAction([this](Button &thisButton){
         if(Controller::getInstance()->allAnswered()){
@@ -128,15 +128,15 @@ void MainWindow::start(){
     longAnswerButton.setPressedButtonAction([this](Button &thisButton){
         std::wstring answer = util::trimLineFeeds(thisButton.getText());
         if(Controller::getInstance()->getCurrentExercise().getExerciseType() == ProgramState::KanjiMean){
-            int meanProgress,kunProgress,onProgress;
-            if(Controller::getInstance()->checkAnswer(answer,meanProgress,kunProgress,onProgress)){
+            int meanProgress,kunProgress,onProgress,drawProgress;
+            if(Controller::getInstance()->checkAnswer(answer,meanProgress,kunProgress,onProgress,drawProgress)){
                 thisButton.setButtonColor(sf::Color::White);
                 thisButton.setFinalColor(BUTTON_COLOR_CORRECT);
             } else {
                 thisButton.setButtonColor(sf::Color::Black);
                 thisButton.setFinalColor(BUTTON_COLOR_INCORRECT);
             }
-            this->progressSign.setText("Meaning: " + std::to_string(meanProgress) + "%\n\nKunyomi: " + std::to_string(kunProgress) + "%\n\nOnyomi: " + std::to_string(onProgress) + "%");
+            this->progressSign.setText("Meaning: " + std::to_string(meanProgress) + "%\n\nKunyomi: " + std::to_string(kunProgress) + "%\n\nOnyomi: " + std::to_string(onProgress) + "%\n\nDrawing: " + std::to_string(drawProgress) + "%");
         } else {
             int pronProgress, meanProgress;
             if(Controller::getInstance()->checkAnswer(answer,pronProgress,meanProgress)){
@@ -230,6 +230,24 @@ void MainWindow::start(){
     tutorialPronunciation.setTextColor(TEXT_COLOR);
     tutorialPronunciation.setSignColor(BUTTON_COLOR_NORMAL);
 
+    // Board that tells the user what strokes to draw during the tutorial
+    strokeTutorialBoardShow.setBoardTexture(textureHolder->get(TextureID::DrawingBoard));
+    strokeTutorialBoardShow.setBoardColor(BOARD_TUTORIAL_SHOW_COLOR);
+    strokeTutorialBoardShow.setStrokeColor(STROKE_TUTORIAL_SHOW_COLOR);
+    strokeTutorialBoardShow.setPosition(BOARD_TUTORIAL_SHOW_X,BOARD_TUTORIAL_SHOW_Y);
+
+    // Board that lets the user practice during the tutorial
+    strokeTutorialBoardDraw.setBoardTexture(textureHolder->get(TextureID::DrawingBoard));
+    strokeTutorialBoardDraw.setBoardColor(BOARD_DRAW_COLOR);
+    strokeTutorialBoardDraw.setStrokeColor(STROKE_DRAW_COLOR);
+    strokeTutorialBoardDraw.setPosition(BOARD_TUTORIAL_DRAW_X,BOARD_TUTORIAL_DRAW_Y);
+
+    // Board that lets the user draw in stroke exercises
+    strokeExerciseBoard.setBoardTexture(textureHolder->get(TextureID::DrawingBoard));
+    strokeExerciseBoard.setBoardColor(BOARD_DRAW_COLOR);
+    strokeExerciseBoard.setStrokeColor(STROKE_DRAW_COLOR);
+    strokeExerciseBoard.setPosition(BOARD_EXERCISE_DRAW_X,BOARD_EXERCISE_DRAW_Y);
+
     // Button to continue in the tutorial
     continueButton.setBottomTexture(textureHolder->get(TextureID::ShortExerciseButtonBottom));
     continueButton.setTopTexture(textureHolder->get(TextureID::ShortExerciseButtonTop));
@@ -304,7 +322,7 @@ void MainWindow::start(){
             }
 
             // Set sign with progress
-            progressSign.setText("Meaning: " + std::to_string(exercise.getMeaningProgress()) + "%\n\nKunyomi: " + std::to_string(exercise.getKunyomiProgress()) + "%\n\nOnyomi: " + std::to_string(exercise.getOnyomiProgress()) + "%");
+            progressSign.setText("Meaning: " + std::to_string(exercise.getMeaningProgress()) + "%\n\nKunyomi: " + std::to_string(exercise.getKunyomiProgress()) + "%\n\nOnyomi: " + std::to_string(exercise.getOnyomiProgress()) + "%\n\nDrawing: " + std::to_string(exercise.getKunyomiProgress()) + "%");
 
             std::set<std::wstring> answers = exercise.getAnswers();
             std::set<std::wstring>::iterator iterAns = answers.begin();
@@ -322,10 +340,23 @@ void MainWindow::start(){
             }
         }
             break;
+        case ProgramState::KanjiStroke:
+
+            if(oldState != ProgramState::KanjiStroke){
+                helpButton.resetPosition();
+            }
+
+            // Set sign with progress
+            progressSign.setText("Meaning: " + std::to_string(exercise.getMeaningProgress()) + "%\n\nKunyomi: " + std::to_string(exercise.getKunyomiProgress()) + "%\n\nOnyomi: " + std::to_string(exercise.getOnyomiProgress()) + "%\n\nDrawing: " + std::to_string(exercise.getKunyomiProgress()) + "%");
+            strokeExerciseBoard.clearBoard();
+
+            break;
         case ProgramState::KanjiTutor:
         {
 
-            if(oldState != ProgramState::KanjiTutor){
+            if(oldState != ProgramState::WordTutor ||
+               oldState != ProgramState::KanjiTutor ||
+               oldState != ProgramState::StrokeTutor){
                 continueButton.resetPosition();
             }
 
@@ -369,7 +400,7 @@ void MainWindow::start(){
 
             // Set sign with progress
             if(exercise.getExerciseType() == ProgramState::KanjiMean)
-                progressSign.setText("Meaning: " + std::to_string(exercise.getMeaningProgress()) + "%\n\nKunyomi: " + std::to_string(exercise.getKunyomiProgress()) + "%\n\nOnyomi: " + std::to_string(exercise.getOnyomiProgress()) + "%");
+                progressSign.setText("Meaning: " + std::to_string(exercise.getMeaningProgress()) + "%\n\nKunyomi: " + std::to_string(exercise.getKunyomiProgress()) + "%\n\nOnyomi: " + std::to_string(exercise.getOnyomiProgress()) + "%\n\nDrawing: " + std::to_string(exercise.getKunyomiProgress()) + "%");
             else
                 progressSign.setText("Pronunciation: " + std::to_string(exercise.getPronunciationProgress()) + "%\n\nMeaning: " + std::to_string(exercise.getMeaningProgress()) + "%");
 
@@ -391,7 +422,9 @@ void MainWindow::start(){
             break;
         case ProgramState::WordTutor:
         {
-            if(oldState != ProgramState::WordTutor){
+            if(oldState != ProgramState::WordTutor ||
+               oldState != ProgramState::KanjiTutor ||
+               oldState != ProgramState::StrokeTutor){
                 continueButton.resetPosition();
             }
 
@@ -400,6 +433,14 @@ void MainWindow::start(){
             tutorialPronunciation.setText(exercise.getWordPronunciation());
         }
             break;
+        case ProgramState::StrokeTutor:
+        {
+            if(oldState != ProgramState::WordTutor ||
+               oldState != ProgramState::KanjiTutor ||
+               oldState != ProgramState::StrokeTutor){
+                continueButton.resetPosition();
+            }
+        }
         case ProgramState::TitleScreen:
 
             this->updateMasteredCount(gradeSelector);
@@ -500,6 +541,8 @@ void MainWindow::start(){
     // Before starting update the content of the grade selector
     updateMasteredCount(gradeSelector);
 
+    programState = ProgramState::KanjiStroke;
+
     while(window.isOpen()){
 
         // Event handling phase
@@ -520,6 +563,12 @@ void MainWindow::start(){
                     saveButton.notify(event);
                     helpButton.notify(event);
                     break;
+                case ProgramState::KanjiStroke:
+                    strokeExerciseBoard.notify(event);
+                    mainMenuButton.notify(event);
+                    saveButton.notify(event);
+                    helpButton.notify(event);
+                    break;
                 case ProgramState::WordPron:
                 case ProgramState::WordMean:
                 case ProgramState::KanjiMean:
@@ -528,6 +577,9 @@ void MainWindow::start(){
                     saveButton.notify(event);
                     helpButton.notify(event);
                     break;
+                case ProgramState::StrokeTutor:
+                    strokeTutorialBoardDraw.notify(event);
+                    // No break (C++ trick)
                 case ProgramState::KanjiTutor:
                 case ProgramState::WordTutor:
                     continueButton.notify(event);
@@ -544,6 +596,8 @@ void MainWindow::start(){
         case ProgramState::KanjiKun:
         case ProgramState::KanjiOn:
             for(Button &button : shortExerciseButtons) button.update();
+            // No break (C++ trick)
+        case ProgramState::KanjiStroke:
             mainMenuButton.update();
             saveButton.update();
             helpButton.update();
@@ -558,6 +612,7 @@ void MainWindow::start(){
             break;
         case ProgramState::KanjiTutor:
         case ProgramState::WordTutor:
+        case ProgramState::StrokeTutor:
             continueButton.update();
             break;
         }
@@ -578,6 +633,15 @@ void MainWindow::start(){
             window.draw(instructionsSign);
             window.draw(progressSign);
             for(Button &button : shortExerciseButtons) window.draw(button);
+            window.draw(mainMenuButton);
+            window.draw(saveButton);
+            window.draw(helpButton);
+            break;
+        case ProgramState::KanjiStroke:
+            window.draw(kanjiWordSign);
+            window.draw(instructionsSign);
+            window.draw(progressSign);
+            window.draw(strokeExerciseBoard);
             window.draw(mainMenuButton);
             window.draw(saveButton);
             window.draw(helpButton);
@@ -609,6 +673,13 @@ void MainWindow::start(){
             window.draw(tutorialWordMeaning);
             window.draw(tutorialPronunciation);
             window.draw(continueButton);
+            break;
+        case ProgramState::StrokeTutor:
+            window.draw(kanjiWordSign);
+            window.draw(instructionsSign);
+            window.draw(continueButton);
+            window.draw(strokeTutorialBoardDraw);
+            window.draw(strokeTutorialBoardShow);
             break;
         }
 

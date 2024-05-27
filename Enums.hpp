@@ -12,7 +12,8 @@ enum class TextureID{
     SaveBottom, SaveTop, HelpBottom, HelpTop,
     ShortExerciseButtonBottom, ShortExerciseButtonTop, LongExerciseButtonBottom, LongExerciseButtonTop,
     WordTutorialSign, QuestionSign, InstructionsSign,
-    MeaningSign, KunOnSign, ReadingSign
+    MeaningSign, KunOnSign, ReadingSign,
+    DrawingBoard
 };
 
 // Type of font for the text
@@ -30,8 +31,8 @@ enum class SoundID{
 // really know how to make it work in this situation)
 enum class ProgramState{
     TitleScreen,
-    KanjiKun, KanjiOn, KanjiMean, WordPron, WordMean,
-    KanjiTutor, WordTutor
+    KanjiKun, KanjiOn, KanjiMean, WordPron, WordMean, KanjiStroke,
+    KanjiTutor, WordTutor, StrokeTutor
 };
 
 #endif

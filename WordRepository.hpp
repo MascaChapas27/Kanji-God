@@ -14,7 +14,7 @@
 class WordRepository{
     private:
         // Constructor and destructor are made private
-        // because the controller is a Singleton
+        // because the WordRepository is a Singleton
         WordRepository(){}
         ~WordRepository(){}
 
@@ -53,7 +53,7 @@ class WordRepository{
         // Operation that loads all words and progress for words
         void loadAllWords();
 
-        // Returns the amount of words that were mastered in that grade 
+        // Returns the amount of words that were mastered in that grade
         int getMasteredWords(int wordGrade);
 
         // Returns the amount of total words in that grade

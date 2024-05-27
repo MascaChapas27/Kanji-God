@@ -35,7 +35,7 @@ void KanjiRepository::loadAllKanjis(){
 
         file.imbue(std::locale("C.UTF-8"));
         #else
-        std::wstringstream file(FuckWindows::aaa[i]);
+        std::wstringstream file(FuckWindows::kanjisForWindows[i]);
         #endif
         std::wstring data;
 
@@ -105,10 +105,11 @@ void KanjiRepository::loadAllKanjis(){
             fileprogress.open("save/JLPTN" + std::to_string(i) + "kanjiprogress.txt",std::fstream::out);
 
             for(hash_t hashCode : newKanjis[i]){
-                fileprogress << hashCode << "\n-1\n-1\n-1\n";
+                fileprogress << hashCode << "\n-1\n-1\n-1\n-1\n";
                 kanjis[hashCode].setMeaningProgress(-1);
                 kanjis[hashCode].setKunyomiProgress(-1);
                 kanjis[hashCode].setOnyomiProgress(-1);
+                kanjis[hashCode].setDrawingProgress(-1);
             }
 
             fileprogress << "#";
@@ -136,17 +137,22 @@ void KanjiRepository::loadAllKanjis(){
                 getline(fileprogress,data);
                 int onyomiProgress = std::stoi(data);
 
+                getline(fileprogress,data);
+                int drawingProgress = std::stoi(data);
+
                 k.setMeaningProgress(meaningProgress);
                 k.setKunyomiProgress(kunyomiProgress);
                 k.setOnyomiProgress(onyomiProgress);
+                k.setDrawingProgress(drawingProgress);
 
                 // Classify the kanji depending on the progress numbers
-                if (meaningProgress == MAX_PROGRESS && kunyomiProgress == MAX_PROGRESS && onyomiProgress == MAX_PROGRESS){
+                if (meaningProgress == MAX_PROGRESS && kunyomiProgress == MAX_PROGRESS && onyomiProgress == MAX_PROGRESS && drawingProgress == MAX_PROGRESS){
                     auto position = std::find(newKanjis[i].begin(),newKanjis[i].end(),hashCode);
                     if(position != newKanjis[i].end()){
                         newKanjis[i].erase(position);
                         masteredKanjis[i].push_back(hashCode);
                     }
+                // For practicing kanjis don't consider drawing progress because it can be -1 even if the kanji is being practiced
                 } else if (meaningProgress != NO_PROGRESS && kunyomiProgress != NO_PROGRESS && onyomiProgress != NO_PROGRESS){
                     auto position = std::find(newKanjis[i].begin(),newKanjis[i].end(),hashCode);
                     if(position != newKanjis[i].end()){
@@ -162,6 +168,63 @@ void KanjiRepository::loadAllKanjis(){
 
         fileprogress.close();
 
+        // Open the strokes file
+        #ifdef __linux__
+        std::wfstream fileStrokes("files/JLPTN" + std::to_string(i) + "strokes.txt");
+
+        if(!file.is_open()){
+            std::cerr << "ERROR: file " << "files/JLPTN" << std::to_string(i) << "strokes.txt" <<" not found" << std::endl;
+            exit(EXIT_FAILURE);
+        }
+
+        fileStrokes.imbue(std::locale("C.UTF-8"));
+        #else
+        std::wstringstream fileStrokes(FuckWindows::strokesForWindows[i]);
+        #endif
+
+        // Line that should be a kanji or #
+        getline(fileStrokes,data);
+
+        while(data != L"#"){
+            Kanji &k = kanjis[util::hash(data)];
+
+            std::vector<sf::VertexArray> strokes;
+
+            // Next lines should be lines containing positions of vertices for strokes (one stroke in each line)
+            getline(fileStrokes,data);
+
+            while(data != L""){
+
+                sf::VertexArray va;
+                va.setPrimitiveType(sf::LineStrip);
+
+                for(std::wstring vertex : util::split(data,L';')){
+
+                    std::vector<std::wstring> coordinates = util::split(vertex,L',');
+
+                    sf::Vertex v;
+                    v.position.x = std::stoi(coordinates[0]);
+                    v.position.y = std::stoi(coordinates[1]);
+
+                    va.append(v);
+                }
+
+                strokes.push_back(va);
+
+                getline(fileStrokes,data);
+            }
+
+            // Now we have the strokes for the kanji
+            k.setStrokes(strokes);
+
+            // Next line should be a kanji or #
+            getline(fileStrokes,data);
+        }
+
+        #ifdef __linux__
+        fileStrokes.close();
+        #endif
+
         // Shuffle the vectors to make them more unpredictable
         auto rng = std::default_random_engine {};
         rng.seed(std::chrono::system_clock::now().time_since_epoch().count());
@@ -175,7 +238,7 @@ Kanji KanjiRepository::getKanji(hash_t hashCode)
 {
     if(kanjis.count(hashCode))
         return kanjis[hashCode];
-    
+
     // If the kanji can't be found, return an empty kanji
     Kanji k;
     k.setKanji(L"");
@@ -222,7 +285,7 @@ Exercise KanjiRepository::getExercise(int grade, bool mastered)
         exercise.setHashCode(util::hash(chosenKanji.getKanji()));
 
         // Choose the type of question
-        int exerciseType = rand()%3;
+        int exerciseType = rand()%4;
 
         bool decided = false;
 
@@ -230,26 +293,35 @@ Exercise KanjiRepository::getExercise(int grade, bool mastered)
             switch(exerciseType){
             case 0:
                 if(!mastered && chosenKanji.getMeaningProgress()==MAX_PROGRESS)
-                    exerciseType=(exerciseType+1)%3;
+                    exerciseType=(exerciseType+1)%4;
                 else decided = true;
                 break;
 
             case 1:
                 if((!mastered && chosenKanji.getKunyomiProgress()==MAX_PROGRESS) ||
                    (mastered && chosenKanji.getKunyomiReadings().size() == 0))
-                    exerciseType=(exerciseType+1)%3;
+                    exerciseType=(exerciseType+1)%4;
                 else decided = true;
                 break;
 
             case 2:
                 if((!mastered && chosenKanji.getOnyomiProgress()==MAX_PROGRESS) ||
                    (mastered && chosenKanji.getOnyomiReadings().size() == 0))
-                    exerciseType=(exerciseType+1)%3;
+                    exerciseType=(exerciseType+1)%4;
+                else decided = true;
+                break;
+            case 3:
+                if((!mastered && chosenKanji.getDrawingProgress()==MAX_PROGRESS))
+                    exerciseType=(exerciseType+1)%4;
                 else decided = true;
                 break;
             }
         }
 
+        // If the exercise is going to be a stroke exercise, treat it differently
+        if(exerciseType == 3){
+            return makeStrokeExercise(chosenKanji);
+        }
 
         // Set for the answers that the exercise will have
         std::set<std::wstring> exerciseAnswers;
@@ -338,6 +410,8 @@ Exercise KanjiRepository::getExercise(int grade, bool mastered)
         exercise.setKunyomiProgress(chosenKanji.getKunyomiProgress());
         exercise.setOnyomiProgress(chosenKanji.getOnyomiProgress());
         exercise.setMeaningProgress(chosenKanji.getMeaningProgress());
+        int drawingProgress = chosenKanji.getDrawingProgress();
+        exercise.setDrawingProgress(drawingProgress == NO_PROGRESS ? MIN_PROGRESS : drawingProgress);
 
         switch(exercise.getExerciseType()){
         case ProgramState::KanjiKun:
@@ -493,16 +567,42 @@ void KanjiRepository::save(){
 
     std::map<int,std::wfstream> files;
 
-    for(int i=3;i<=5;i++){
+    for(int i=1;i<=5;i++){
         files[i] = std::wfstream("save/JLPTN"+std::to_string(i)+"kanjiprogress.txt",std::wfstream::trunc | std::wfstream::out);
     }
 
     for(auto &pair : kanjis){
-        files[pair.second.getGrade()] << util::hash(pair.second.getKanji()) << L"\n" << pair.second.getMeaningProgress() << L"\n" << pair.second.getKunyomiProgress() << L"\n" << pair.second.getOnyomiProgress() << L"\n";
+        files[pair.second.getGrade()] << util::hash(pair.second.getKanji()) << L"\n" << pair.second.getMeaningProgress() << L"\n" << pair.second.getKunyomiProgress() << L"\n" << pair.second.getOnyomiProgress() << L"\n" << pair.second.getDrawingProgress() << L"\n";;
     }
 
     for(auto &pair : files){
         pair.second << L"#";
         pair.second.close();
     }
+}
+
+Exercise KanjiRepository::makeStrokeExercise(Kanji &k){
+
+    Exercise e;
+
+    e.setHashCode(util::hash(k.getKanji()));
+    e.setQuestion(k.getMeaning());
+    e.setStrokes(k.getStrokes());
+
+    if(k.getDrawingProgress() == NO_PROGRESS){
+        // This kanji is already being practiced so it's not
+        k.setDrawingProgress(MIN_PROGRESS);
+
+        e.setExerciseType(ProgramState::StrokeTutor);
+        e.setHelp(L"Practice how to draw the kanji");
+    } else {
+        e.setExerciseType(ProgramState::KanjiStroke);
+
+        e.setMeaningProgress(k.getMeaningProgress());
+        e.setKunyomiProgress(k.getKunyomiProgress());
+        e.setOnyomiProgress(k.getOnyomiProgress());
+        e.setDrawingProgress(k.getDrawingProgress());
+    }
+
+    return e;
 }

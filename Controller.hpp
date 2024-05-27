@@ -55,17 +55,17 @@ class Controller {
 
         // Sets God Mode to the given value
         void setGodMode(bool godMode);
-        
-        // Returns the amount of kanji that were mastered in that grade 
+
+        // Returns the amount of kanji that were mastered in that grade
         int getMasteredKanji(int kanjiGrade);
 
-        // Returns the amount of total kanji in that grade 
+        // Returns the amount of total kanji in that grade
         int getTotalKanji(int kanjiGrade);
 
-        // Returns the amount of words that were mastered in that grade 
+        // Returns the amount of words that were mastered in that grade
         int getMasteredWords(int wordGrade);
 
-        // Returns the amount of total words in that grade 
+        // Returns the amount of total words in that grade
         int getTotalWords(int wordGrade);
 
         // Returns a new exercise
@@ -77,8 +77,8 @@ class Controller {
         // Returns the tutorial for the current exercise
         Exercise getCurrentTutorial();
 
-        // Checks if the kanjianswer is correct and returns the progress
-        bool checkAnswer(std::wstring answer, int &meanProgress, int &kunProgress, int &onProgress);
+        // Checks if the kanji answer is correct and returns the progress
+        bool checkAnswer(std::wstring answer, int &meanProgress, int &kunProgress, int &onProgress, int &drawProgress);
 
         // Checks if the word answer is correct and returns the progress
         bool checkAnswer(std::wstring answer, int &pronProgress, int &meanProgress);

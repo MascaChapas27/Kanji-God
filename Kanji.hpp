@@ -1,6 +1,7 @@
 #ifndef __KANJI_HPP__
 #define __KANJI_HPP__
 
+#include <SFML/Graphics.hpp>
 #include <string>
 #include <set>
 
@@ -24,6 +25,9 @@ class Kanji{
         // Meaning of the kanji
         std::wstring meaning;
 
+        // Strokes for the kanji
+        std::vector<sf::VertexArray> strokes;
+
         // Progress for the meaning of the kanji
         int meaningProgress;
 
@@ -32,7 +36,10 @@ class Kanji{
 
         // Progress for the onyomi of the kanji
         int onyomiProgress;
-    
+
+        // Progress for the drawing of the kanji
+        int drawingProgress;
+
     public:
 
         // GETTERS
@@ -41,9 +48,11 @@ class Kanji{
         std::set<std::wstring> getKunyomiReadings();
         std::set<std::wstring> getOnyomiReadings();
         std::wstring getMeaning();
+        std::vector<sf::VertexArray> getStrokes();
         int getMeaningProgress();
         int getKunyomiProgress();
         int getOnyomiProgress();
+        int getDrawingProgress();
 
         // SETTERS
         void setKanji(std::wstring kanji);
@@ -51,9 +60,11 @@ class Kanji{
         void setKunyomiReadings(std::set<std::wstring> kunyomiReadings);
         void setOnyomiReadings(std::set<std::wstring> onyomiReadings);
         void setMeaning(std::wstring meaning);
+        void setStrokes(std::vector<sf::VertexArray> strokes);
         void setMeaningProgress(int meaningProgress);
         void setKunyomiProgress(int kunyomiProgress);
         void setOnyomiProgress(int onyomiProgress);
+        void setDrawingProgress(int drawingProgress);
 
         // Returns true if the three progress indicators for the kanji are NO_PROGRESS
         bool isNew();

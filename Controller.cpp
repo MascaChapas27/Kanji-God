@@ -68,7 +68,7 @@ Exercise Controller::getExercise(){
         if(random){
             exercise = WordRepository::getInstance()->getExercise(selectedGrade);
         }
-        
+
         // Maybe the selected exercise was a word exercise that failed, or was a
         // genuine kanji exercise from the beginning
         if(!random || exercise.getExerciseType() == ProgramState::TitleScreen){
@@ -110,13 +110,14 @@ Exercise Controller::getCurrentTutorial(){
     return e;
 }
 
-bool Controller::checkAnswer(std::wstring answer, int &meanProgress, int &kunProgress, int &onProgress){
+bool Controller::checkAnswer(std::wstring answer, int &meanProgress, int &kunProgress, int &onProgress, int &drawProgress){
 
     // That answer was already answered
     if(correctAnswers.count(answer)) {
         kunProgress = currentExercise.getKunyomiProgress();
         onProgress = currentExercise.getOnyomiProgress();
         meanProgress = currentExercise.getMeaningProgress();
+        drawProgress = currentExercise.getDrawingProgress();
         return true;
     }
 
@@ -130,6 +131,7 @@ bool Controller::checkAnswer(std::wstring answer, int &meanProgress, int &kunPro
         meanProgress = currentExercise.getMeaningProgress();
         kunProgress = currentExercise.getKunyomiProgress();
         onProgress = currentExercise.getOnyomiProgress();
+        drawProgress = currentExercise.getDrawingProgress();
         break;
     default:
         break;

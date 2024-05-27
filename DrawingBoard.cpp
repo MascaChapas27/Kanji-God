@@ -6,6 +6,7 @@ DrawingBoard::DrawingBoard(){
     currentlyDrawing = false;
     captureCountMax = VERTEX_DELAY;
     captureCount = captureCountMax;
+    strokeColor = sf::Color::Black;
 }
 
 void DrawingBoard::setBoardTexture(sf::Texture &texture){
@@ -20,7 +21,7 @@ void DrawingBoard::setPosition(double x, double y){
 
     boardSprite.setPosition(x,y);
     for(sf::VertexArray &va : strokes){
-        for(int i=0;i<va.getVertexCount();i++){
+        for(unsigned int i=0;i<va.getVertexCount();i++){
             va[i].position.x += diff.x;
             va[i].position.y += diff.y;
         }
@@ -35,6 +36,15 @@ void DrawingBoard::setBoardColor(sf::Color color){
     boardSprite.setColor(color);
 }
 
+void DrawingBoard::setStrokeColor(sf::Color color){
+    strokeColor = color;
+    for(sf::VertexArray &va : strokes){
+        for(unsigned int i=0;i<va.getVertexCount();i++){
+            va[i].color = color;
+        }
+    }
+}
+
 void DrawingBoard::clearBoard(){
     strokes.clear();
     currentlyDrawing = false;
@@ -43,7 +53,7 @@ void DrawingBoard::clearBoard(){
 
 void DrawingBoard::undo(){
     if(strokes.empty()) return;
-    
+
     strokes.pop_back();
     currentlyDrawing = false;
     captureCount = captureCountMax;
@@ -60,21 +70,25 @@ void DrawingBoard::notify(sf::Event &event){
 
         strokes.push_back(va);
 
-        captureVertex(sf::Vector2f(event.mouseButton.x,event.mouseButton.y));
+        if(!captureVertex(sf::Vector2f(event.mouseButton.x,event.mouseButton.y))){
+            strokes.pop_back();
+            currentlyDrawing = false;
+        }
     }
     else if (currentlyDrawing && event.type == sf::Event::MouseMoved)
     {
-        captureVertex(sf::Vector2f(event.mouseMove.x,event.mouseMove.y));
+        if(!captureVertex(sf::Vector2f(event.mouseMove.x,event.mouseMove.y)))
+            endStroke();
     }
     else if (currentlyDrawing && event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Button::Left)
     {
-        currentlyDrawing = false;
+        endStroke();
     }
 }
 
 void DrawingBoard::dump(){
     for(sf::VertexArray &va : strokes){
-        for(int i=0;i<va.getVertexCount();i++){
+        for(unsigned int i=0;i<va.getVertexCount();i++){
             std::cout << va[i].position.x-boardSprite.getPosition().x << "," << va[i].position.y-boardSprite.getPosition().y << ";";
         }
         std::cout << std::endl;
@@ -88,15 +102,27 @@ void DrawingBoard::draw(sf::RenderTarget& target, sf::RenderStates states) const
     }
 }
 
-void DrawingBoard::captureVertex(sf::Vector2f position){
-    
+bool DrawingBoard::captureVertex(sf::Vector2f position){
+
+    if(position.x > boardSprite.getPosition().x+boardSprite.getTextureRect().width/2 ||
+       position.x < boardSprite.getPosition().x-boardSprite.getTextureRect().width/2 ||
+       position.y > boardSprite.getPosition().y+boardSprite.getTextureRect().height/2 ||
+       position.y < boardSprite.getPosition().y-boardSprite.getTextureRect().height/2) return false;
+
+
     if(captureCount == captureCountMax){
         sf::Vertex v(position);
-        v.color = sf::Color::Black;
+        v.color = strokeColor;
         strokes.back().append(v);
-        
+
         captureCount = 0;
     } else {
         captureCount++;
     }
+
+    return true;
+}
+
+void DrawingBoard::endStroke(){
+    currentlyDrawing = false;
 }

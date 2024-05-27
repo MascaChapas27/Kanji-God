@@ -4,6 +4,8 @@
 #include "Button.hpp"
 #include "Enums.hpp"
 #include "Sign.hpp"
+#include "DrawingBoard.hpp"
+#include "ShowingBoard.hpp"
 #include <SFML/Graphics.hpp>
 #include <list>
 
@@ -74,6 +76,15 @@ class MainWindow {
 
         // Sign that shows "Onyomi" on top of the kunyomi readings
         Sign onyomiSign;
+
+        // Board that contains the stroke order for the stroke tutorial
+        ShowingBoard strokeTutorialBoardShow;
+
+        // Board that allows the user to practice the strokes in a stroke tutorial
+        DrawingBoard strokeTutorialBoardDraw;
+
+        // Board that allows the user to draw kanjis in an exercise
+        DrawingBoard strokeExerciseBoard;
 
         // Button to continue when the tutorial has been completed
         Button continueButton;

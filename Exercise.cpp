@@ -24,6 +24,10 @@ int Exercise::getPronunciationProgress(){
     return pronunciationProgress;
 }
 
+int Exercise::getDrawingProgress(){
+    return drawingProgress;
+}
+
 std::wstring Exercise::getTutorialMeaning(){
     return tutorialMeaning;
 }
@@ -34,6 +38,10 @@ std::wstring Exercise::getQuestion(){
 
 std::set<std::wstring> Exercise::getAnswers(){
     return answers;
+}
+
+std::vector<sf::VertexArray> Exercise::getStrokes(){
+    return strokes;
 }
 
 std::set<std::wstring> Exercise::getKunyomiPronunciations(){
@@ -78,6 +86,10 @@ void Exercise::setPronunciationProgress(int pronunciationProgress){
     this->pronunciationProgress = pronunciationProgress;
 }
 
+void Exercise::setDrawingProgress(int drawingProgress){
+    this->drawingProgress = drawingProgress;
+}
+
 void Exercise::setQuestion(std::wstring question){
     this->question = question;
 }
@@ -88,6 +100,10 @@ void Exercise::setTutorialMeaning(std::wstring tutorialMeaning){
 
 void Exercise::setAnswers(std::set<std::wstring> answers){
     this->answers = answers;
+}
+
+void Exercise::setStrokes(std::vector<sf::VertexArray> strokes){
+    this->strokes = strokes;
 }
 
 void Exercise::setKunyomiPronunciations(std::set<std::wstring> kunyomiPronunciations){

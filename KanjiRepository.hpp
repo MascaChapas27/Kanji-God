@@ -8,13 +8,12 @@
 #include <vector>
 
 /*
-    This class contains all kanjis and their progress, meaning
-    and pronunciations
+    This class contains all kanjis and provides kanji exercises and tutorials (including strokes)
 */
 class KanjiRepository{
     private:
         // Constructor and destructor are made private
-        // because the controller is a Singleton
+        // because the KanjiRepository is a Singleton
         KanjiRepository(){}
         ~KanjiRepository(){}
 
@@ -56,7 +55,7 @@ class KanjiRepository{
         // Returns the amount of kanji that were mastered in that grade
         int getMasteredKanji(int kanjiGrade);
 
-        // Returns the amount of total kanji in that grade 
+        // Returns the amount of total kanji in that grade
         int getTotalKanji(int kanjiGrade);
 
         // Returns an exercise with a kanji of the given grade. It defaults to a non-mastered
@@ -78,6 +77,12 @@ class KanjiRepository{
         // Saves all data
         void save();
 
+    private:
+
+        // Makes an Exercise to practice the drawing of the specified kanji (WHICH SHOULD BE IN practicingKanjis IF
+        // THE KANJI'S drawingProgress IS EQUAL TO NO_PROGRESS (this means that, when learning a new kanji, the first
+        // thing to learn is always its pronunciations and meaning, and then the drawing))
+        Exercise makeStrokeExercise(Kanji &k);
 };
 
 #endif

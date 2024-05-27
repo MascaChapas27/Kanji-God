@@ -5,6 +5,7 @@
 #include "Utilities.hpp"
 #include <string>
 #include <set>
+#include <SFML/Graphics.hpp>
 
 /*
     This class defines exercises and tutorials that are passed from the
@@ -29,16 +30,22 @@ class Exercise {
         // Progress for the pronunciation (only in word exercises)
         int pronunciationProgress;
 
+        // Progress for drawing the strokes (only in stroke exercises)
+        int drawingProgress;
+
         // Kanji or word that is being asked or taught
         std::wstring question;
 
         // Meaning for the kanji or word that is being taught
         std::wstring tutorialMeaning;
 
-        // Vector of possible answers (only if it's a question)
+        // Set of possible answers (only if it's a question)
         std::set<std::wstring> answers;
 
-        // Vectors of kunyomi and onyomi pronunciations (only if it's a kanji tutor)
+        // Vector of strokes (represented by arrays of vertices)
+        std::vector<sf::VertexArray> strokes;
+
+        // Sets of kunyomi and onyomi pronunciations (only if it's a kanji tutor)
         std::set<std::wstring> kunyomiPronunciations;
         std::set<std::wstring> onyomiPronunciations;
 
@@ -56,9 +63,11 @@ class Exercise {
         int getKunyomiProgress();
         int getOnyomiProgress();
         int getPronunciationProgress();
+        int getDrawingProgress();
         std::wstring getQuestion();
         std::wstring getTutorialMeaning();
         std::set<std::wstring> getAnswers();
+        std::vector<sf::VertexArray> getStrokes();
         std::set<std::wstring> getKunyomiPronunciations();
         std::set<std::wstring> getOnyomiPronunciations();
         std::wstring getWordPronunciation();
@@ -71,9 +80,11 @@ class Exercise {
         void setKunyomiProgress(int kunyomiProgress);
         void setOnyomiProgress(int onyomiProgress);
         void setPronunciationProgress(int pronunciationProgress);
+        void setDrawingProgress(int drawingProgress);
         void setTutorialMeaning(std::wstring tutorialMeaning);
         void setQuestion(std::wstring question);
         void setAnswers(std::set<std::wstring> answers);
+        void setStrokes(std::vector<sf::VertexArray> strokes);
         void setKunyomiPronunciations(std::set<std::wstring> kunyomiPronunciations);
         void setOnyomiPronunciations(std::set<std::wstring> onyomiPronunciations);
         void setWordPronunciation(std::wstring wordPronunciation);

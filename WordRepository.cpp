@@ -51,7 +51,7 @@ void WordRepository::classifyWords(){
     getline(file,data);
 
     while(data != L"#"){
-        
+
         // If the word is repeated...
         if(classifiedWords.count(data)){
             // Skip the line for the pronunciation
@@ -149,7 +149,7 @@ void WordRepository::loadAllWords(){
         file.imbue(std::locale("C.UTF-8"));
 
         #else
-        std::wstringstream file(FuckWindows::bbb[i]);
+        std::wstringstream file(FuckWindows::wordsForWindows[i]);
         #endif
         std::wstring data;
 
@@ -281,12 +281,12 @@ Exercise WordRepository::getExercise(int grade, bool mastered)
     Exercise exercise;
 
     if(!mastered && newWords[grade].size() > 0 && util::shouldLearnNewContent(practicingWords[grade].size(), true)){
-        
+
         int attemptsLeft = 5;
         while(attemptsLeft > 0){
 
             bool iterationFailed = false;
-        
+
             // If we have to select a new word, the situation is more complex than it may seem
             // because we have to select a word such as its kanji componentes are known by the player
             hash_t hashCode = newWords[grade].back();
@@ -540,8 +540,6 @@ bool WordRepository::checkAnswer(Exercise &exercise, std::wstring answer)
 
 bool WordRepository::allAnswered(Exercise &exercise, unsigned int answers)
 {
-    Word &word = words[exercise.getHashCode()];
-
     bool completed = false;
 
     switch(exercise.getExerciseType()){

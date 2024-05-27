@@ -76,6 +76,18 @@ const sf::Color SAVED_COLOR = sf::Color(200,200,200);
 // Color for the help button
 const sf::Color HELP_COLOR = sf::Color(100,100,170);
 
+// Color for the board that shows the strokes in the tutorial
+const sf::Color BOARD_TUTORIAL_SHOW_COLOR = sf::Color(50,50,50);
+
+// Color for the boards that let the user draw
+const sf::Color BOARD_DRAW_COLOR = sf::Color(255,255,255);
+
+// Color for the strokes in the board that shows the strokes in the tutorial
+const sf::Color STROKE_TUTORIAL_SHOW_COLOR = sf::Color(255,255,255);
+
+// Color for the strokes drawn by the user
+const sf::Color STROKE_DRAW_COLOR = sf::Color(0,0,0);
+
 // In the title screen, distance between buttons vertically
 const int TITLE_BUTTONS_VERTICAL_DISTANCE = 60;
 
@@ -217,8 +229,24 @@ const double INITIAL_PITCH_CORRECT_SOUND = 1.3;
 // Pitch increment for the correct answer sound for every correct answer
 const double PITCH_INCREMENT_CORRECT_SOUND = 0.1;
 
-// How much to wait among vertices when drawing
+// Position for the board that shows the strokes in the tutorial
+const double BOARD_TUTORIAL_SHOW_X = WINDOW_WIDTH/3;
+const double BOARD_TUTORIAL_SHOW_Y = 6*WINDOW_HEIGHT/20;
+
+// Position for the board that lets the user practice strokes in the tutorial
+const double BOARD_TUTORIAL_DRAW_X = BOARD_TUTORIAL_SHOW_X;
+const double BOARD_TUTORIAL_DRAW_Y = 14*WINDOW_HEIGHT/20;
+
+// Position for the board used in exercises
+const double BOARD_EXERCISE_DRAW_X = BOARD_TUTORIAL_DRAW_X;
+const double BOARD_EXERCISE_DRAW_Y = WINDOW_HEIGHT/2;
+
+// How many frames to wait among vertices when drawing
+#ifdef _WIN32
+const int VERTEX_DELAY = 1;
+#else
 const int VERTEX_DELAY = 2;
+#endif
 
 namespace util {
     // Calculates whether a point is in a rectangle
@@ -236,6 +264,10 @@ namespace util {
 
     // Calculates a hash code given a wstring
     hash_t hash(std::wstring wstring);
+
+    // Gets a wstring and a character and returns a vector of substrings separated by that character
+    // (the character itself is not included in any substring)
+    std::vector<std::wstring> split(std::wstring wstring, wchar_t separator);
 }
 
 #endif

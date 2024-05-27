@@ -2,6 +2,8 @@
 
 #include "Utilities.hpp"
 #include "ResourceHolder.hpp"
+#include <vector>
+#include <sstream>
 
 bool util::isInRectangle(int x, int y, int rectX, int rectY, int rectWidth, int rectHeight)
 {
@@ -46,4 +48,19 @@ hash_t util::hash(std::wstring wstring){
     }
 
     return hashCode;
+}
+
+std::vector<std::wstring> util::split(std::wstring wstring, wchar_t separator){
+
+    std::wstringstream wstringstream(wstring);
+
+    std::vector<std::wstring> returnVector;
+
+    std::wstring data;
+
+    while(std::getline(wstringstream,data,separator)){
+        returnVector.push_back(data);
+    }
+
+    return returnVector;
 }

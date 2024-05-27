@@ -18,16 +18,19 @@ class DrawingBoard : public sf::Drawable{
 
         // These variables make strokes a bit pointier but they avoid 234793824723 vertices
         // from being captured (60 fps = 60 vertices per second = death and destruction)
-        
+
         // The frames of delay between different vertices in the same stroke
         // 0 = no delay
         // 1 = one frame delay
         // 5 = capture a vertex, wait 5 frames, capture a vertex
         int captureCountMax;
-        
+
         // If set to captureCountMax, next vertex will be captured. If not, ignore and
         // make it bigger until it reaches captureCountMax
         int captureCount;
+
+        // Color for the strokes
+        sf::Color strokeColor;
 
         // A vector of strokes. Each stroke is a vertex array, which means that it's
         // formed by points in space. Each point is a mouse position
@@ -48,6 +51,9 @@ class DrawingBoard : public sf::Drawable{
         // Sets the color for the board
         void setBoardColor(sf::Color color);
 
+        // Sets the color for the strokes
+        void setStrokeColor(sf::Color color);
+
         // Erases all strokes
         void clearBoard();
 
@@ -55,18 +61,22 @@ class DrawingBoard : public sf::Drawable{
         void undo();
 
         // Reacts to an event that happened
-        void notify(sf::Event &event);
+        virtual void notify(sf::Event &event);
 
         // Dumps the information about the strokes relative to the origin of
         // the board sprite (currently the center)
         void dump();
 
         // Draws the button
-        virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
-    
+        void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+
     private:
         // Create a vertex with this position and add it to the last stroke
-        void captureVertex(sf::Vector2f position);
+        // If it returns false, the vertex was out of the board and couldn't be captured
+        bool captureVertex(sf::Vector2f position);
+
+        // Ends the current stroke and does stuff
+        void endStroke();
 };
 
 #endif

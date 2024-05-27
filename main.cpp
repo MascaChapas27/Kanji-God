@@ -16,12 +16,11 @@ void debugStroke();
 int main(){
     srand(time(NULL));
 
-    debugStroke();
-    
+    //debugStroke();
+
     MainWindow mainWindow;
-    
+
     mainWindow.start();
-    
 }
 
 // This debug function allows you to create your own strokes
@@ -33,7 +32,9 @@ void debugStroke(){
 
     DrawingBoard board;
     board.setPosition(WINDOW_WIDTH/2,WINDOW_HEIGHT/2);
-    board.setBoardTexture(TextureHolder::getTextureInstance()->get(TextureID::QuestionSign));
+    board.setBoardTexture(TextureHolder::getTextureInstance()->get(TextureID::DrawingBoard));
+    board.setBoardColor(BOARD_TUTORIAL_SHOW_COLOR);
+    board.setStrokeColor(STROKE_TUTORIAL_SHOW_COLOR);
 
     while(window.isOpen()){
 
@@ -53,7 +54,7 @@ void debugStroke(){
             }
         }
 
-        window.clear();
+        window.clear(sf::Color(100,100,100));
 
         window.draw(board);
 
