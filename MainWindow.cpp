@@ -538,6 +538,25 @@ void MainWindow::start(){
         }
     });
 
+    // Action for the stroke exercise board
+    strokeExerciseBoard.setFinishedStrokeAction([this](DrawingBoard &thisBoard){
+
+        sf::VertexArray latestStroke = thisBoard.getStrokes().back();
+
+        thisBoard.undo();
+
+        if(Controller::getInstance()->checkStroke(latestStroke)){
+            thisBoard.addStroke(latestStroke);
+        }
+
+        if(Controller::getInstance()->strokesCompleted(thisBoard.getStrokes().size())){
+            // For some reason i forgor :skull: this function needs to be passed a button even though it
+            // doesn't even need to use a button so i'll just make a button out of thin air and pass it
+            Button aaa;
+            getExercise(aaa);
+        }
+    });
+
     // Before starting update the content of the grade selector
     updateMasteredCount(gradeSelector);
 

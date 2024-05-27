@@ -179,6 +179,26 @@ bool Controller::checkAnswer(std::wstring answer, int &pronProgress, int &meanPr
     return correct;
 }
 
+bool Controller::checkStroke(sf::VertexArray &stroke){
+    stroke.clear();
+    stroke.append(sf::Vertex(sf::Vector2f(rand()%50,rand()%50)));
+    stroke.append(sf::Vertex(sf::Vector2f(rand()%50,rand()%50)));
+
+    bool correct = rand()%2;
+
+    if(correct){
+        correctAnswerSound.play();
+    } else {
+        incorrectAnswerSound.play();
+    }
+
+    return correct;
+}
+
+bool Controller::strokesCompleted(int numStrokes){
+    return numStrokes == 10;
+}
+
 bool Controller::allAnswered(){
 
     switch(currentExercise.getExerciseType()){

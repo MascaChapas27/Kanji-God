@@ -83,6 +83,12 @@ class Controller {
         // Checks if the word answer is correct and returns the progress
         bool checkAnswer(std::wstring answer, int &pronProgress, int &meanProgress);
 
+        // Checks if the stroke that was sent is correct and changes it to the correct stroke
+        bool checkStroke(sf::VertexArray &stroke);
+
+        // Checks if all strokes were completed
+        bool strokesCompleted(int numStrokes);
+
         // True if all correct answers for the current exercise were selected
         bool allAnswered();
 

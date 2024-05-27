@@ -2,6 +2,7 @@
 #define __DRAWING_BOARD_HPP__
 
 #include <SFML/Graphics.hpp>
+#include <functional>
 
 /*
     This class defines a drawing board formed by an image for the background
@@ -15,6 +16,9 @@ class DrawingBoard : public sf::Drawable{
         // If set to true, start a new stroke and register every vertex
         // If set to false, end the current stroke and stop registering vertices
         bool currentlyDrawing;
+
+        // Function to be called when a stroke is finished
+        std::function<void(DrawingBoard&)> finishedStrokeAction;
 
         // These variables make strokes a bit pointier but they avoid 234793824723 vertices
         // from being captured (60 fps = 60 vertices per second = death and destruction)
@@ -53,6 +57,15 @@ class DrawingBoard : public sf::Drawable{
 
         // Sets the color for the strokes
         void setStrokeColor(sf::Color color);
+
+        // Establishes the action to be performed if a stroke is finished
+        void setFinishedStrokeAction(std::function<void(DrawingBoard&)> finishedStrokeAction);
+
+        // Adds a stroke to the stroke list
+        void addStroke(sf::VertexArray stroke);
+
+        // Returns the strokes
+        std::vector<sf::VertexArray> getStrokes();
 
         // Erases all strokes
         void clearBoard();

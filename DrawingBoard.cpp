@@ -7,6 +7,7 @@ DrawingBoard::DrawingBoard(){
     captureCountMax = VERTEX_DELAY;
     captureCount = captureCountMax;
     strokeColor = sf::Color::Black;
+    finishedStrokeAction = [](DrawingBoard &drawingBoard){};
 }
 
 void DrawingBoard::setBoardTexture(sf::Texture &texture){
@@ -45,6 +46,24 @@ void DrawingBoard::setStrokeColor(sf::Color color){
     }
 }
 
+void DrawingBoard::setFinishedStrokeAction(std::function<void(DrawingBoard&)> finishedStrokeAction){
+    this->finishedStrokeAction = finishedStrokeAction;
+}
+
+void DrawingBoard::addStroke(sf::VertexArray stroke){
+    for(unsigned int i=0;i<stroke.getVertexCount();i++){
+        stroke[i].position.x+=boardSprite.getPosition().x;
+        stroke[i].position.y+=boardSprite.getPosition().y;
+        captureVertex(sf::Vector2f(stroke[i].position.x, stroke[i].position.y));
+    }
+
+    endStroke();
+}
+
+std::vector<sf::VertexArray> DrawingBoard::getStrokes(){
+    return strokes;
+}
+
 void DrawingBoard::clearBoard(){
     strokes.clear();
     currentlyDrawing = false;
@@ -77,12 +96,15 @@ void DrawingBoard::notify(sf::Event &event){
     }
     else if (currentlyDrawing && event.type == sf::Event::MouseMoved)
     {
-        if(!captureVertex(sf::Vector2f(event.mouseMove.x,event.mouseMove.y)))
+        if(!captureVertex(sf::Vector2f(event.mouseMove.x,event.mouseMove.y))){
             endStroke();
+            finishedStrokeAction(*this);
+        }
     }
     else if (currentlyDrawing && event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Button::Left)
     {
         endStroke();
+        finishedStrokeAction(*this);
     }
 }
 
