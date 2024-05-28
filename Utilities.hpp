@@ -241,7 +241,16 @@ const double BOARD_TUTORIAL_DRAW_Y = 14*WINDOW_HEIGHT/20;
 const double BOARD_EXERCISE_DRAW_X = BOARD_TUTORIAL_DRAW_X;
 const double BOARD_EXERCISE_DRAW_Y = WINDOW_HEIGHT/2;
 
-// How many frames to wait among vertices when drawing
+// When comparing the length of two strokes, the minimum and maximum
+// ratio that is considered correct
+const double MIN_STROKE_SIZE_RATIO = 0.8;
+const double MAX_STROKE_SIZE_RATIO = 1.2;
+
+// For the first and last vertices of a stroke, the maximum distance in pixels
+// that is considered correct
+const double MAX_STROKE_VERTEX_DIST = 20;
+
+// How many frames to wait among vertices when drawing (in Windows it works differently)
 #ifdef _WIN32
 const int VERTEX_DELAY = 1;
 #else
@@ -268,6 +277,9 @@ namespace util {
     // Gets a wstring and a character and returns a vector of substrings separated by that character
     // (the character itself is not included in any substring)
     std::vector<std::wstring> split(std::wstring wstring, wchar_t separator);
+
+    // Given two points in space, returns the euclidean distance between them
+    double euclideanDistance(sf::Vector2f a, sf::Vector2f b);
 }
 
 #endif

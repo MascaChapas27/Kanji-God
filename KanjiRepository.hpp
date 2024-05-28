@@ -71,8 +71,15 @@ class KanjiRepository{
         // Checks if the given answer is valid for the current exercise
         bool checkAnswer(Exercise &exercise, std::wstring answer);
 
-        // Checks if all answeres were answered for a kanji
+        // Checks if the current stroke was drawn properly and changes it for the correct
+        // stroke if it was drawn properly
+        bool checkStroke(Exercise &exercise, sf::VertexArray &stroke, int strokeNumber);
+
+        // Checks if all answers were answered for a kanji
         bool allAnswered(Exercise &exercise, unsigned int answers);
+
+        // Checks if all strokes were drawn for a kanji
+        bool strokesCompleted(Exercise &exercise, int numStrokes);
 
         // Saves all data
         void save();

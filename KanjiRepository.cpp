@@ -172,8 +172,8 @@ void KanjiRepository::loadAllKanjis(){
         #ifdef __linux__
         std::wfstream fileStrokes("files/JLPTN" + std::to_string(i) + "strokes.txt");
 
-        if(!file.is_open()){
-            std::cerr << "ERROR: file " << "files/JLPTN" << std::to_string(i) << "strokes.txt" <<" not found" << std::endl;
+        if(!fileStrokes.is_open()){
+            std::cerr << "ERROR: file " << "files/JLPTN" << std::to_string(i) << "strokes.txt" << " not found" << std::endl;
             exit(EXIT_FAILURE);
         }
 
@@ -561,6 +561,52 @@ bool KanjiRepository::allAnswered(Exercise &exercise, unsigned int answers)
     }
 
     return completed;
+}
+
+bool KanjiRepository::checkStroke(Exercise &exercise, sf::VertexArray &stroke, int strokeNumber){
+    
+    sf::VertexArray realStroke = kanjis[exercise.getHashCode()].getStrokes()[strokeNumber];
+
+    // First check: the size is similar
+    double realSize = 0;
+    for(int i=0;i<realStroke.getVertexCount()-1;i++){
+        realSize += util::euclideanDistance(realStroke[i].position,realStroke[i+1].position);
+    }
+
+    double mySize = 0;
+    for(int i=0;i<stroke.getVertexCount()-1;i++){
+        mySize += util::euclideanDistance(stroke[i].position,stroke[i+1].position);
+    }
+
+    double ratio = realSize/mySize;
+
+    if(ratio < MIN_STROKE_SIZE_RATIO || ratio > MAX_STROKE_SIZE_RATIO)
+        return false;
+
+    // Second check: positions of first and last vertices are similar enough
+    sf::Vector2f myFirstVertex = stroke[0].position;
+    sf::Vector2f myLastVertex = stroke[stroke.getVertexCount()-1].position;
+    sf::Vector2f realFirstVertex = realStroke[0].position;
+    sf::Vector2f realLastVertex = realStroke[realStroke.getVertexCount()-1].position;
+
+    if(util::euclideanDistance(myFirstVertex,realFirstVertex) > MAX_STROKE_VERTEX_DIST ||
+       util::euclideanDistance(myLastVertex,realLastVertex) > MAX_STROKE_VERTEX_DIST){
+        return false;
+    }
+
+    // If you are still here, the stroke is correct
+
+    stroke.clear();
+
+    for(int i=0;i<realStroke.getVertexCount()-1;i++){
+        stroke.append(realStroke[i]);
+    }
+
+    return true;
+}
+
+bool KanjiRepository::strokesCompleted(Exercise &exercise, int numStrokes){
+    return kanjis[exercise.getHashCode()].getStrokes().size() == numStrokes;
 }
 
 void KanjiRepository::save(){

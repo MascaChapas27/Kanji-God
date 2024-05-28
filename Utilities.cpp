@@ -4,6 +4,7 @@
 #include "ResourceHolder.hpp"
 #include <vector>
 #include <sstream>
+#include <cmath>
 
 bool util::isInRectangle(int x, int y, int rectX, int rectY, int rectWidth, int rectHeight)
 {
@@ -63,4 +64,8 @@ std::vector<std::wstring> util::split(std::wstring wstring, wchar_t separator){
     }
 
     return returnVector;
+}
+
+double util::euclideanDistance(sf::Vector2f a, sf::Vector2f b){
+    return sqrt(pow(a.x-b.x,2) + pow(a.y-b.y,2));
 }

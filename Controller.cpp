@@ -43,6 +43,7 @@ int Controller::getTotalWords(int wordGrade){
 Exercise Controller::getExercise(){
 
     correctAnswers.clear();
+    numStrokes = 0;
 
     Exercise exercise;
 
@@ -180,13 +181,12 @@ bool Controller::checkAnswer(std::wstring answer, int &pronProgress, int &meanPr
 }
 
 bool Controller::checkStroke(sf::VertexArray &stroke){
-    stroke.clear();
-    stroke.append(sf::Vertex(sf::Vector2f(rand()%50,rand()%50)));
-    stroke.append(sf::Vertex(sf::Vector2f(rand()%50,rand()%50)));
-
-    bool correct = rand()%2;
+    
+    bool correct = KanjiRepository::getInstance()->checkStroke(currentExercise,stroke,numStrokes);
 
     if(correct){
+        numStrokes++;
+        correctAnswerSound.setPitch(INITIAL_PITCH_CORRECT_SOUND+PITCH_INCREMENT_CORRECT_SOUND*numStrokes);
         correctAnswerSound.play();
     } else {
         incorrectAnswerSound.play();
@@ -196,7 +196,7 @@ bool Controller::checkStroke(sf::VertexArray &stroke){
 }
 
 bool Controller::strokesCompleted(int numStrokes){
-    return numStrokes == 10;
+    return KanjiRepository::getInstance()->strokesCompleted(currentExercise, numStrokes);
 }
 
 bool Controller::allAnswered(){

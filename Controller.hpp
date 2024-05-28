@@ -34,6 +34,9 @@ class Controller {
         // Sets of answers that were sent and were correct
         std::set<std::wstring> correctAnswers;
 
+        // Number of strokes currently drawn correctly in a stroke exercise
+        int numStrokes;
+
         // Sound that plays when the correct answer is selected
         static sf::Sound correctAnswerSound;
 

@@ -51,13 +51,14 @@ void DrawingBoard::setFinishedStrokeAction(std::function<void(DrawingBoard&)> fi
 }
 
 void DrawingBoard::addStroke(sf::VertexArray stroke){
+
     for(unsigned int i=0;i<stroke.getVertexCount();i++){
         stroke[i].position.x+=boardSprite.getPosition().x;
         stroke[i].position.y+=boardSprite.getPosition().y;
-        captureVertex(sf::Vector2f(stroke[i].position.x, stroke[i].position.y));
+        stroke[i].color = strokeColor;
     }
 
-    endStroke();
+    strokes.push_back(stroke);
 }
 
 std::vector<sf::VertexArray> DrawingBoard::getStrokes(){
@@ -98,13 +99,11 @@ void DrawingBoard::notify(sf::Event &event){
     {
         if(!captureVertex(sf::Vector2f(event.mouseMove.x,event.mouseMove.y))){
             endStroke();
-            finishedStrokeAction(*this);
         }
     }
     else if (currentlyDrawing && event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Button::Left)
     {
         endStroke();
-        finishedStrokeAction(*this);
     }
 }
 
@@ -147,4 +146,5 @@ bool DrawingBoard::captureVertex(sf::Vector2f position){
 
 void DrawingBoard::endStroke(){
     currentlyDrawing = false;
+    finishedStrokeAction(*this);
 }
