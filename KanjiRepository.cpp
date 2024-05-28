@@ -255,6 +255,9 @@ int KanjiRepository::getTotalKanji(int kanjiGrade){
 
 Exercise KanjiRepository::getExercise(int grade, bool mastered)
 {
+    Kanji &k = kanjis[util::hash(L"一")];
+    Exercise e = makeStrokeExercise(k);
+    return e;
     Exercise exercise;
 
     if(!mastered && newKanjis[grade].size() > 0 && util::shouldLearnNewContent(practicingKanjis[grade].size(),false)){
@@ -564,17 +567,17 @@ bool KanjiRepository::allAnswered(Exercise &exercise, unsigned int answers)
 }
 
 bool KanjiRepository::checkStroke(Exercise &exercise, sf::VertexArray &stroke, int strokeNumber){
-    
-    sf::VertexArray realStroke = kanjis[exercise.getHashCode()].getStrokes()[strokeNumber];
 
+    sf::VertexArray realStroke = kanjis[exercise.getHashCode()].getStrokes()[strokeNumber];
+    std::cerr << "Starting 1a" << std::endl;
     // First check: the size is similar
     double realSize = 0;
-    for(int i=0;i<realStroke.getVertexCount()-1;i++){
+    for(unsigned int i=0;i<realStroke.getVertexCount()-1;i++){
         realSize += util::euclideanDistance(realStroke[i].position,realStroke[i+1].position);
     }
-
+    std::cerr << "Starting 1b" << std::endl;
     double mySize = 0;
-    for(int i=0;i<stroke.getVertexCount()-1;i++){
+    for(unsigned int i=0;i<stroke.getVertexCount()-1;i++){
         mySize += util::euclideanDistance(stroke[i].position,stroke[i+1].position);
     }
 
@@ -582,7 +585,7 @@ bool KanjiRepository::checkStroke(Exercise &exercise, sf::VertexArray &stroke, i
 
     if(ratio < MIN_STROKE_SIZE_RATIO || ratio > MAX_STROKE_SIZE_RATIO)
         return false;
-
+    std::cerr << "Starting 2" << std::endl;
     // Second check: positions of first and last vertices are similar enough
     sf::Vector2f myFirstVertex = stroke[0].position;
     sf::Vector2f myLastVertex = stroke[stroke.getVertexCount()-1].position;
@@ -595,17 +598,17 @@ bool KanjiRepository::checkStroke(Exercise &exercise, sf::VertexArray &stroke, i
     }
 
     // If you are still here, the stroke is correct
-
+    std::cerr << "Starting 3" << std::endl;
     stroke.clear();
 
-    for(int i=0;i<realStroke.getVertexCount()-1;i++){
+    for(unsigned int i=0;i<realStroke.getVertexCount()-1;i++){std::cerr << "xd" << std::endl;
         stroke.append(realStroke[i]);
     }
-
+    std::cerr << "aaa" << std::endl;
     return true;
 }
 
-bool KanjiRepository::strokesCompleted(Exercise &exercise, int numStrokes){
+bool KanjiRepository::strokesCompleted(Exercise &exercise, unsigned int numStrokes){
     return kanjis[exercise.getHashCode()].getStrokes().size() == numStrokes;
 }
 
@@ -636,7 +639,6 @@ Exercise KanjiRepository::makeStrokeExercise(Kanji &k){
     e.setStrokes(k.getStrokes());
 
     if(k.getDrawingProgress() == NO_PROGRESS){
-        // This kanji is already being practiced so it's not
         k.setDrawingProgress(MIN_PROGRESS);
 
         e.setExerciseType(ProgramState::StrokeTutor);
@@ -648,6 +650,7 @@ Exercise KanjiRepository::makeStrokeExercise(Kanji &k){
         e.setKunyomiProgress(k.getKunyomiProgress());
         e.setOnyomiProgress(k.getOnyomiProgress());
         e.setDrawingProgress(k.getDrawingProgress());
+        e.setHelp(L"Draw the kanji represented by its meaning");
     }
 
     return e;

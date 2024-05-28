@@ -114,6 +114,7 @@ void DrawingBoard::dump(){
         }
         std::cout << std::endl;
     }
+    std::cout << std::endl;
 }
 
 void DrawingBoard::draw(sf::RenderTarget& target, sf::RenderStates states) const{

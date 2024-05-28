@@ -79,12 +79,10 @@ class KanjiRepository{
         bool allAnswered(Exercise &exercise, unsigned int answers);
 
         // Checks if all strokes were drawn for a kanji
-        bool strokesCompleted(Exercise &exercise, int numStrokes);
+        bool strokesCompleted(Exercise &exercise, unsigned int numStrokes);
 
         // Saves all data
         void save();
-
-    private:
 
         // Makes an Exercise to practice the drawing of the specified kanji (WHICH SHOULD BE IN practicingKanjis IF
         // THE KANJI'S drawingProgress IS EQUAL TO NO_PROGRESS (this means that, when learning a new kanji, the first

@@ -252,7 +252,7 @@ const double MAX_STROKE_VERTEX_DIST = 20;
 
 // How many frames to wait among vertices when drawing (in Windows it works differently)
 #ifdef _WIN32
-const int VERTEX_DELAY = 1;
+const int VERTEX_DELAY = 3;
 #else
 const int VERTEX_DELAY = 2;
 #endif

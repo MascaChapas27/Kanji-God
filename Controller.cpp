@@ -46,7 +46,10 @@ Exercise Controller::getExercise(){
     numStrokes = 0;
 
     Exercise exercise;
-
+    //
+    currentExercise = KanjiRepository::getInstance()->getExercise(1,1);
+    return currentExercise;
+    //
     if(godMode){
         int whatType = rand()%2;
         int numAttempts = 0;
@@ -181,7 +184,7 @@ bool Controller::checkAnswer(std::wstring answer, int &pronProgress, int &meanPr
 }
 
 bool Controller::checkStroke(sf::VertexArray &stroke){
-    
+
     bool correct = KanjiRepository::getInstance()->checkStroke(currentExercise,stroke,numStrokes);
 
     if(correct){

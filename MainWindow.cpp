@@ -322,7 +322,7 @@ void MainWindow::start(){
             }
 
             // Set sign with progress
-            progressSign.setText("Meaning: " + std::to_string(exercise.getMeaningProgress()) + "%\n\nKunyomi: " + std::to_string(exercise.getKunyomiProgress()) + "%\n\nOnyomi: " + std::to_string(exercise.getOnyomiProgress()) + "%\n\nDrawing: " + std::to_string(exercise.getKunyomiProgress()) + "%");
+            progressSign.setText("Meaning: " + std::to_string(exercise.getMeaningProgress()) + "%\n\nKunyomi: " + std::to_string(exercise.getKunyomiProgress()) + "%\n\nOnyomi: " + std::to_string(exercise.getOnyomiProgress()) + "%\n\nDrawing: " + std::to_string(exercise.getDrawingProgress()) + "%");
 
             std::set<std::wstring> answers = exercise.getAnswers();
             std::set<std::wstring>::iterator iterAns = answers.begin();
@@ -347,7 +347,7 @@ void MainWindow::start(){
             }
 
             // Set sign with progress
-            progressSign.setText("Meaning: " + std::to_string(exercise.getMeaningProgress()) + "%\n\nKunyomi: " + std::to_string(exercise.getKunyomiProgress()) + "%\n\nOnyomi: " + std::to_string(exercise.getOnyomiProgress()) + "%\n\nDrawing: " + std::to_string(exercise.getKunyomiProgress()) + "%");
+            progressSign.setText("Meaning: " + std::to_string(exercise.getMeaningProgress()) + "%\n\nKunyomi: " + std::to_string(exercise.getKunyomiProgress()) + "%\n\nOnyomi: " + std::to_string(exercise.getOnyomiProgress()) + "%\n\nDrawing: " + std::to_string(exercise.getDrawingProgress()) + "%");
             strokeExerciseBoard.clearBoard();
 
             break;
@@ -400,7 +400,7 @@ void MainWindow::start(){
 
             // Set sign with progress
             if(exercise.getExerciseType() == ProgramState::KanjiMean)
-                progressSign.setText("Meaning: " + std::to_string(exercise.getMeaningProgress()) + "%\n\nKunyomi: " + std::to_string(exercise.getKunyomiProgress()) + "%\n\nOnyomi: " + std::to_string(exercise.getOnyomiProgress()) + "%\n\nDrawing: " + std::to_string(exercise.getKunyomiProgress()) + "%");
+                progressSign.setText("Meaning: " + std::to_string(exercise.getMeaningProgress()) + "%\n\nKunyomi: " + std::to_string(exercise.getKunyomiProgress()) + "%\n\nOnyomi: " + std::to_string(exercise.getOnyomiProgress()) + "%\n\nDrawing: " + std::to_string(exercise.getDrawingProgress()) + "%");
             else
                 progressSign.setText("Pronunciation: " + std::to_string(exercise.getPronunciationProgress()) + "%\n\nMeaning: " + std::to_string(exercise.getMeaningProgress()) + "%");
 
@@ -540,15 +540,15 @@ void MainWindow::start(){
 
     // Action for the stroke exercise board
     strokeExerciseBoard.setFinishedStrokeAction([this](DrawingBoard &thisBoard){
-
+        std::cerr << "A" << std::endl;
         sf::VertexArray latestStroke = thisBoard.getStrokes().back();
-
+        std::cerr << "B" << std::endl;
         thisBoard.undo();
-
+        std::cerr << "C" << std::endl;
         if(Controller::getInstance()->checkStroke(latestStroke)){
             thisBoard.addStroke(latestStroke);
         }
-
+        std::cerr << "D" << std::endl;
         if(Controller::getInstance()->strokesCompleted(thisBoard.getStrokes().size())){
             // For some reason i forgor :skull: this function needs to be passed a button even though it
             // doesn't even need to use a button so i'll just make a button out of thin air and pass it
