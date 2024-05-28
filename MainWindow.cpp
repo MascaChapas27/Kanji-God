@@ -540,16 +540,16 @@ void MainWindow::start(){
 
     // Action for the stroke exercise board
     strokeExerciseBoard.setFinishedStrokeAction([this](DrawingBoard &thisBoard){
-        std::cerr << "A" << std::endl;
-        sf::VertexArray latestStroke = thisBoard.getStrokes().back();
-        std::cerr << "B" << std::endl;
+
+        sf::VertexArray latestStroke = thisBoard.getLatestStroke();
+
         thisBoard.undo();
-        std::cerr << "C" << std::endl;
+
         if(Controller::getInstance()->checkStroke(latestStroke)){
             thisBoard.addStroke(latestStroke);
         }
-        std::cerr << "D" << std::endl;
-        if(Controller::getInstance()->strokesCompleted(thisBoard.getStrokes().size())){
+
+        if(Controller::getInstance()->strokesCompleted(thisBoard.getNumStrokes())){
             // For some reason i forgor :skull: this function needs to be passed a button even though it
             // doesn't even need to use a button so i'll just make a button out of thin air and pass it
             Button aaa;
@@ -557,10 +557,10 @@ void MainWindow::start(){
         }
     });
 
-    // Before starting update the content of the grade selector
+    // Before starting, update the content of the grade selector
     updateMasteredCount(gradeSelector);
 
-    programState = ProgramState::KanjiStroke;
+    programState = ProgramState::TitleScreen;
 
     while(window.isOpen()){
 

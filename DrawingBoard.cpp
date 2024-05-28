@@ -61,8 +61,21 @@ void DrawingBoard::addStroke(sf::VertexArray stroke){
     strokes.push_back(stroke);
 }
 
-std::vector<sf::VertexArray> DrawingBoard::getStrokes(){
-    return strokes;
+sf::VertexArray DrawingBoard::getLatestStroke(){
+    if(strokes.empty()) return sf::VertexArray();
+
+    sf::VertexArray latestStroke = strokes.back();
+
+    for(unsigned int i=0;i<latestStroke.getVertexCount();i++){
+        latestStroke[i].position.x-=boardSprite.getPosition().x;
+        latestStroke[i].position.y-=boardSprite.getPosition().y;
+    }
+
+    return latestStroke;
+}
+
+unsigned int DrawingBoard::getNumStrokes(){
+    return strokes.size();
 }
 
 void DrawingBoard::clearBoard(){

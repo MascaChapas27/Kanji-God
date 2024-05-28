@@ -46,10 +46,7 @@ Exercise Controller::getExercise(){
     numStrokes = 0;
 
     Exercise exercise;
-    //
-    currentExercise = KanjiRepository::getInstance()->getExercise(1,1);
-    return currentExercise;
-    //
+
     if(godMode){
         int whatType = rand()%2;
         int numAttempts = 0;

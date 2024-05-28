@@ -243,12 +243,12 @@ const double BOARD_EXERCISE_DRAW_Y = WINDOW_HEIGHT/2;
 
 // When comparing the length of two strokes, the minimum and maximum
 // ratio that is considered correct
-const double MIN_STROKE_SIZE_RATIO = 0.8;
-const double MAX_STROKE_SIZE_RATIO = 1.2;
+const double MIN_STROKE_SIZE_RATIO = 0.6;
+const double MAX_STROKE_SIZE_RATIO = 1.4;
 
 // For the first and last vertices of a stroke, the maximum distance in pixels
 // that is considered correct
-const double MAX_STROKE_VERTEX_DIST = 20;
+const double MAX_STROKE_VERTEX_DIST = 40;
 
 // How many frames to wait among vertices when drawing (in Windows it works differently)
 #ifdef _WIN32

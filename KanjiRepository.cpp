@@ -569,13 +569,13 @@ bool KanjiRepository::allAnswered(Exercise &exercise, unsigned int answers)
 bool KanjiRepository::checkStroke(Exercise &exercise, sf::VertexArray &stroke, int strokeNumber){
 
     sf::VertexArray realStroke = kanjis[exercise.getHashCode()].getStrokes()[strokeNumber];
-    std::cerr << "Starting 1a" << std::endl;
+
     // First check: the size is similar
     double realSize = 0;
     for(unsigned int i=0;i<realStroke.getVertexCount()-1;i++){
         realSize += util::euclideanDistance(realStroke[i].position,realStroke[i+1].position);
     }
-    std::cerr << "Starting 1b" << std::endl;
+
     double mySize = 0;
     for(unsigned int i=0;i<stroke.getVertexCount()-1;i++){
         mySize += util::euclideanDistance(stroke[i].position,stroke[i+1].position);
@@ -585,7 +585,7 @@ bool KanjiRepository::checkStroke(Exercise &exercise, sf::VertexArray &stroke, i
 
     if(ratio < MIN_STROKE_SIZE_RATIO || ratio > MAX_STROKE_SIZE_RATIO)
         return false;
-    std::cerr << "Starting 2" << std::endl;
+
     // Second check: positions of first and last vertices are similar enough
     sf::Vector2f myFirstVertex = stroke[0].position;
     sf::Vector2f myLastVertex = stroke[stroke.getVertexCount()-1].position;
@@ -598,13 +598,13 @@ bool KanjiRepository::checkStroke(Exercise &exercise, sf::VertexArray &stroke, i
     }
 
     // If you are still here, the stroke is correct
-    std::cerr << "Starting 3" << std::endl;
+
     stroke.clear();
 
-    for(unsigned int i=0;i<realStroke.getVertexCount()-1;i++){std::cerr << "xd" << std::endl;
+    for(unsigned int i=0;i<realStroke.getVertexCount()-1;i++){
         stroke.append(realStroke[i]);
     }
-    std::cerr << "aaa" << std::endl;
+
     return true;
 }
 

@@ -61,11 +61,14 @@ class DrawingBoard : public sf::Drawable{
         // Establishes the action to be performed if a stroke is finished
         void setFinishedStrokeAction(std::function<void(DrawingBoard&)> finishedStrokeAction);
 
-        // Adds a stroke to the stroke list
+        // Adds a stroke to the stroke list (THE ORIGIN OF ALL VERTICES MUST BE 0,0)
         void addStroke(sf::VertexArray stroke);
 
-        // Returns the strokes
-        std::vector<sf::VertexArray> getStrokes();
+        // Returns the latest stroke (THE ORIGIN WILL BE 0,0 AND NOT THE CENTER OF THE BOARD)
+        sf::VertexArray getLatestStroke();
+
+        // Returns the number of strokes stored
+        unsigned int getNumStrokes();
 
         // Erases all strokes
         void clearBoard();
