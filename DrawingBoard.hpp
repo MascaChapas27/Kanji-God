@@ -9,7 +9,7 @@
     and an area to draw.
 */
 class DrawingBoard : public sf::Drawable{
-    private:
+    protected:
         // Sprite for the board
         sf::Sprite boardSprite;
 
@@ -86,7 +86,7 @@ class DrawingBoard : public sf::Drawable{
         // Draws the button
         void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
-    private:
+    protected:
         // Create a vertex with this position and add it to the last stroke
         // If it returns false, the vertex was out of the board and couldn't be captured
         bool captureVertex(sf::Vector2f position);

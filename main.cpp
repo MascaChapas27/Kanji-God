@@ -7,7 +7,7 @@
 #include "MainWindow.hpp"
 #include "KanjiRepository.hpp"
 #include <ctime>
-#include "DrawingBoard.hpp"
+#include "PointByPointBoard.hpp"
 
 // This debug function allows you to create your own strokes
 // and dump them as vertex coordinates (implementation is under the main function)
@@ -16,7 +16,7 @@ void debugStroke();
 int main(){
     srand(time(NULL));
 
-    //debugStroke();
+    debugStroke();
 
     MainWindow mainWindow;
 
@@ -27,11 +27,11 @@ int main(){
 // and dump them as vertex coordinates
 void debugStroke(){
     sf::RenderWindow window;
-    window.create(sf::VideoMode(WINDOW_WIDTH,WINDOW_HEIGHT),WINDOW_TITLE,sf::Style::Close);
+    window.create(sf::VideoMode(WINDOW_WIDTH/2,WINDOW_HEIGHT/2),WINDOW_TITLE,sf::Style::Close);
     window.setFramerateLimit(FPS);
 
-    DrawingBoard board;
-    board.setPosition(WINDOW_WIDTH/2,WINDOW_HEIGHT/2);
+    PointByPointBoard board;
+    board.setPosition(WINDOW_WIDTH/4,WINDOW_HEIGHT/4);
     board.setBoardTexture(TextureHolder::getTextureInstance()->get(TextureID::DrawingBoard));
     board.setBoardColor(BOARD_TUTORIAL_SHOW_COLOR);
     board.setStrokeColor(STROKE_TUTORIAL_SHOW_COLOR);

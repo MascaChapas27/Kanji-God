@@ -1,5 +1,6 @@
 #include "DrawingBoard.hpp"
 #include "Utilities.hpp"
+#include "DrawableStroke.hpp"
 #include <iostream>
 
 DrawingBoard::DrawingBoard(){
@@ -133,7 +134,22 @@ void DrawingBoard::dump(){
 void DrawingBoard::draw(sf::RenderTarget& target, sf::RenderStates states) const{
     target.draw(boardSprite,states);
     for(sf::VertexArray v : strokes){
-        target.draw(v,states);
+        for(unsigned int i=0;i<v.getVertexCount()-1;i++){
+            DrawableStroke d(v[i].position,v[i+1].position,strokeColor,STROKE_THICKNESS);
+            target.draw(d,states);
+            sf::CircleShape c;
+            c.setFillColor(strokeColor);
+            c.setRadius(STROKE_THICKNESS/2);
+            c.setOrigin(STROKE_THICKNESS/2,STROKE_THICKNESS/2);
+            c.setPosition(v[i].position);
+            target.draw(c,states);
+        }
+        sf::CircleShape c;
+        c.setFillColor(strokeColor);
+        c.setRadius(STROKE_THICKNESS/2);
+        c.setOrigin(STROKE_THICKNESS/2,STROKE_THICKNESS/2);
+        c.setPosition(v[v.getVertexCount()-1].position);
+        target.draw(c,states);
     }
 }
 

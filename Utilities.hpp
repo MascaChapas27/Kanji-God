@@ -246,13 +246,16 @@ const double BOARD_EXERCISE_DRAW_Y = WINDOW_HEIGHT/2;
 const double MIN_STROKE_SIZE_RATIO = 0.6;
 const double MAX_STROKE_SIZE_RATIO = 1.4;
 
+// Thickness for strokes
+const double STROKE_THICKNESS = 5;
+
 // For the first and last vertices of a stroke, the maximum distance in pixels
 // that is considered correct
 const double MAX_STROKE_VERTEX_DIST = 40;
 
-// How many frames to wait among vertices when drawing (in Windows it works differently)
+// How many frames to wait between vertices when drawing (in Windows it works differently)
 #ifdef _WIN32
-const int VERTEX_DELAY = 3;
+const int VERTEX_DELAY = 2;
 #else
 const int VERTEX_DELAY = 2;
 #endif
