@@ -49,7 +49,7 @@ class KanjiRepository{
         // Operation that loads all kanji and progress for kanji
         void loadAllKanjis();
 
-        // Returns the kanji specified by its hash code
+        // Returns a reference to the kanji specified by its hash code
         Kanji getKanji(hash_t hash);
 
         // Returns the amount of kanji that were mastered in that grade
@@ -73,7 +73,7 @@ class KanjiRepository{
 
         // Checks if the current stroke was drawn properly and changes it for the correct
         // stroke if it was drawn properly
-        bool checkStroke(Exercise &exercise, sf::VertexArray &stroke, int strokeNumber);
+        bool checkStroke(Exercise &exercise, sf::VertexArray &stroke, int strokeNumber, bool tutorial=false);
 
         // Checks if all answers were answered for a kanji
         bool allAnswered(Exercise &exercise, unsigned int answers);
@@ -87,7 +87,11 @@ class KanjiRepository{
         // Makes an Exercise to practice the drawing of the specified kanji (WHICH SHOULD BE IN practicingKanjis IF
         // THE KANJI'S drawingProgress IS EQUAL TO NO_PROGRESS (this means that, when learning a new kanji, the first
         // thing to learn is always its pronunciations and meaning, and then the drawing))
-        Exercise makeStrokeExercise(Kanji &k);
+        Exercise makeStrokeExercise(hash_t hashCode, bool tutorial = false);
+    
+    private:
+        // When a kanji changes its progress, move it to another vector (mastered or practicing)
+        void updateKanjiVectors(Kanji &kanji);
 };
 
 #endif

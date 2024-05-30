@@ -83,7 +83,7 @@ class DrawingBoard : public sf::Drawable{
         // the board sprite (currently the center)
         void dump();
 
-        // Draws the button
+        // Draws the board
         void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
     protected:
@@ -91,7 +91,7 @@ class DrawingBoard : public sf::Drawable{
         // If it returns false, the vertex was out of the board and couldn't be captured
         bool captureVertex(sf::Vector2f position);
 
-        // Ends the current stroke and does stuff
+        // Ends the current stroke and performs the finishedStrokeAction
         void endStroke();
 };
 

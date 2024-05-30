@@ -1,6 +1,8 @@
 #include "MainWindow.hpp"
 #include "ResourceHolder.hpp"
 #include "Controller.hpp"
+#include "Kanji.hpp"
+#include "KanjiRepository.hpp"
 #include <string>
 #include <iostream>
 
@@ -440,6 +442,9 @@ void MainWindow::start(){
                oldState != ProgramState::StrokeTutor){
                 continueButton.resetPosition();
             }
+
+            strokeTutorialBoardShow.setStrokes(exercise.getStrokes());
+            strokeTutorialBoardDraw.clearBoard();
         }
         case ProgramState::TitleScreen:
 
@@ -533,6 +538,17 @@ void MainWindow::start(){
             this->updateMasteredCount(gradeSelector);
 
             break;
+        case ProgramState::StrokeTutor:
+        {
+            if(oldState != ProgramState::WordTutor ||
+               oldState != ProgramState::KanjiTutor ||
+               oldState != ProgramState::StrokeTutor){
+                continueButton.resetPosition();
+            }
+
+            strokeTutorialBoardShow.setStrokes(exercise.getStrokes());
+            strokeTutorialBoardDraw.clearBoard();
+        }
         default:
             break;
         }
@@ -547,6 +563,9 @@ void MainWindow::start(){
 
         if(Controller::getInstance()->checkStroke(latestStroke)){
             thisBoard.addStroke(latestStroke);
+        } else {
+            Kanji k = KanjiRepository::getInstance()->getKanji(Controller::getInstance()->getCurrentExercise().getHashCode());
+            progressSign.setText("Meaning: " + std::to_string(k.getMeaningProgress()) + "%\n\nKunyomi: " + std::to_string(k.getKunyomiProgress()) + "%\n\nOnyomi: " + std::to_string(k.getOnyomiProgress()) + "%\n\nDrawing: " + std::to_string(k.getDrawingProgress()) + "%");
         }
 
         if(Controller::getInstance()->strokesCompleted(thisBoard.getNumStrokes())){
@@ -554,6 +573,17 @@ void MainWindow::start(){
             // doesn't even need to use a button so i'll just make a button out of thin air and pass it
             Button aaa;
             getExercise(aaa);
+        }
+    });
+
+    strokeTutorialBoardDraw.setFinishedStrokeAction([this](DrawingBoard &thisBoard){
+        sf::VertexArray stroke = thisBoard.getLatestStroke();
+
+        thisBoard.undo();
+
+        if(Controller::getInstance()->checkStrokeTutorial(stroke,thisBoard.getNumStrokes())){
+            thisBoard.addStroke(stroke);
+            strokeTutorialBoardShow.nextStroke();
         }
     });
 

@@ -255,9 +255,6 @@ int KanjiRepository::getTotalKanji(int kanjiGrade){
 
 Exercise KanjiRepository::getExercise(int grade, bool mastered)
 {
-    Kanji &k = kanjis[util::hash(L"一")];
-    Exercise e = makeStrokeExercise(k);
-    return e;
     Exercise exercise;
 
     if(!mastered && newKanjis[grade].size() > 0 && util::shouldLearnNewContent(practicingKanjis[grade].size(),false)){
@@ -323,7 +320,7 @@ Exercise KanjiRepository::getExercise(int grade, bool mastered)
 
         // If the exercise is going to be a stroke exercise, treat it differently
         if(exerciseType == 3){
-            return makeStrokeExercise(chosenKanji);
+            return makeStrokeExercise(util::hash(chosenKanji.getKanji()));
         }
 
         // Set for the answers that the exercise will have
@@ -524,23 +521,29 @@ bool KanjiRepository::checkAnswer(Exercise &exercise, std::wstring answer)
     kanji.setKunyomiProgress(exercise.getKunyomiProgress());
     kanji.setOnyomiProgress(exercise.getOnyomiProgress());
 
-    if(kanji.getMeaningProgress() == MAX_PROGRESS &&
-        kanji.getKunyomiProgress() == MAX_PROGRESS &&
-        kanji.getOnyomiProgress() == MAX_PROGRESS){
-        auto position = std::find(practicingKanjis[kanji.getGrade()].begin(),practicingKanjis[kanji.getGrade()].end(),exercise.getHashCode());
-        if(position != practicingKanjis[kanji.getGrade()].end()){
-            practicingKanjis[kanji.getGrade()].erase(position);
-            masteredKanjis[kanji.getGrade()].push_back(exercise.getHashCode());
-        }
-    } else {
-        auto position = std::find(masteredKanjis[kanji.getGrade()].begin(),masteredKanjis[kanji.getGrade()].end(),exercise.getHashCode());
-        if(position != masteredKanjis[kanji.getGrade()].end()){
-            masteredKanjis[kanji.getGrade()].erase(position);
-            practicingKanjis[kanji.getGrade()].push_back(exercise.getHashCode());
-        }
-    }
+
+    updateKanjiVectors(kanji);
 
     return correct;
+}
+
+void KanjiRepository::updateKanjiVectors(Kanji &kanji){
+    if(kanji.getMeaningProgress() == MAX_PROGRESS &&
+        kanji.getKunyomiProgress() == MAX_PROGRESS &&
+        kanji.getOnyomiProgress() == MAX_PROGRESS &&
+        kanji.getDrawingProgress() == MAX_PROGRESS){
+        auto position = std::find(practicingKanjis[kanji.getGrade()].begin(),practicingKanjis[kanji.getGrade()].end(),util::hash(kanji.getKanji()));
+        if(position != practicingKanjis[kanji.getGrade()].end()){
+            practicingKanjis[kanji.getGrade()].erase(position);
+            masteredKanjis[kanji.getGrade()].push_back(util::hash(kanji.getKanji()));
+        }
+    } else {
+        auto position = std::find(masteredKanjis[kanji.getGrade()].begin(),masteredKanjis[kanji.getGrade()].end(),util::hash(kanji.getKanji()));
+        if(position != masteredKanjis[kanji.getGrade()].end()){
+            masteredKanjis[kanji.getGrade()].erase(position);
+            practicingKanjis[kanji.getGrade()].push_back(util::hash(kanji.getKanji()));
+        }
+    }
 }
 
 bool KanjiRepository::allAnswered(Exercise &exercise, unsigned int answers)
@@ -566,8 +569,19 @@ bool KanjiRepository::allAnswered(Exercise &exercise, unsigned int answers)
     return completed;
 }
 
-bool KanjiRepository::checkStroke(Exercise &exercise, sf::VertexArray &stroke, int strokeNumber){
+bool KanjiRepository::checkStroke(Exercise &exercise, sf::VertexArray &stroke, int strokeNumber, bool tutorial){
 
+    bool correct = true;
+
+    // This should only happen in tutorials
+    if(kanjis[exercise.getHashCode()].getStrokes().size() <= strokeNumber){
+        if(tutorial) return false;
+        else {
+            std::cerr << "ERROR: Received more strokes than expected" << std::endl;
+            exit(EXIT_FAILURE);
+        }
+    }
+    
     sf::VertexArray realStroke = kanjis[exercise.getHashCode()].getStrokes()[strokeNumber];
 
     // First check: the size is similar
@@ -581,10 +595,10 @@ bool KanjiRepository::checkStroke(Exercise &exercise, sf::VertexArray &stroke, i
         mySize += util::euclideanDistance(stroke[i].position,stroke[i+1].position);
     }
 
-    double ratio = realSize/mySize;
+    double diff = std::abs(realSize-mySize);
 
-    if(ratio < MIN_STROKE_SIZE_RATIO || ratio > MAX_STROKE_SIZE_RATIO)
-        return false;
+    if(diff > MAX_STROKE_SIZE_DIFF)
+        correct = false;
 
     // Second check: positions of first and last vertices are similar enough
     sf::Vector2f myFirstVertex = stroke[0].position;
@@ -594,22 +608,36 @@ bool KanjiRepository::checkStroke(Exercise &exercise, sf::VertexArray &stroke, i
 
     if(util::euclideanDistance(myFirstVertex,realFirstVertex) > MAX_STROKE_VERTEX_DIST ||
        util::euclideanDistance(myLastVertex,realLastVertex) > MAX_STROKE_VERTEX_DIST){
-        return false;
+        correct = false;
     }
 
-    // If you are still here, the stroke is correct
+    if(correct){
+        stroke.clear();
 
-    stroke.clear();
-
-    for(unsigned int i=0;i<realStroke.getVertexCount()-1;i++){
-        stroke.append(realStroke[i]);
+        for(unsigned int i=0;i<realStroke.getVertexCount();i++){
+            stroke.append(realStroke[i]);
+        }
+    } else if (!tutorial){
+        Kanji &k = kanjis[exercise.getHashCode()];
+        int newDrawingProgress = k.getDrawingProgress()-INCORRECT_STROKE_POINTS;
+        k.setDrawingProgress(newDrawingProgress < MIN_PROGRESS ? MIN_PROGRESS : newDrawingProgress);
+        updateKanjiVectors(k);
     }
 
-    return true;
+    return correct;
 }
 
 bool KanjiRepository::strokesCompleted(Exercise &exercise, unsigned int numStrokes){
-    return kanjis[exercise.getHashCode()].getStrokes().size() == numStrokes;
+    bool completed = kanjis[exercise.getHashCode()].getStrokes().size() == numStrokes;
+
+    if(completed){
+        Kanji &k = kanjis[exercise.getHashCode()];
+        int newDrawingProgress = k.getDrawingProgress()+CORRECT_DRAWING_POINTS;
+        k.setDrawingProgress(newDrawingProgress > MAX_PROGRESS ? MAX_PROGRESS : newDrawingProgress);
+        updateKanjiVectors(k);
+    }
+
+    return completed;
 }
 
 void KanjiRepository::save(){
@@ -630,7 +658,9 @@ void KanjiRepository::save(){
     }
 }
 
-Exercise KanjiRepository::makeStrokeExercise(Kanji &k){
+Exercise KanjiRepository::makeStrokeExercise(hash_t hashCode, bool tutorial){
+
+    Kanji &k = kanjis[hashCode];
 
     Exercise e;
 
@@ -638,7 +668,7 @@ Exercise KanjiRepository::makeStrokeExercise(Kanji &k){
     e.setQuestion(k.getMeaning());
     e.setStrokes(k.getStrokes());
 
-    if(k.getDrawingProgress() == NO_PROGRESS){
+    if(tutorial || k.getDrawingProgress() == NO_PROGRESS){
         k.setDrawingProgress(MIN_PROGRESS);
 
         e.setExerciseType(ProgramState::StrokeTutor);

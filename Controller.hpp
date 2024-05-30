@@ -89,6 +89,10 @@ class Controller {
         // Checks if the stroke that was sent is correct and changes it to the correct stroke
         bool checkStroke(sf::VertexArray &stroke);
 
+        // Checks if the stroke that was sent is correct and changes it to the correct stroke
+        // but only for the tutorial (it doesn't change progress)
+        bool checkStrokeTutorial(sf::VertexArray &stroke, size_t numStroke);
+
         // Checks if all strokes were completed
         bool strokesCompleted(int numStrokes);
 

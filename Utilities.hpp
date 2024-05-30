@@ -88,6 +88,9 @@ const sf::Color STROKE_TUTORIAL_SHOW_COLOR = sf::Color(255,255,255);
 // Color for the strokes drawn by the user
 const sf::Color STROKE_DRAW_COLOR = sf::Color(0,0,0);
 
+// Color for the first vertex of a stroke in a tutorial
+const sf::Color FIRST_VERTEX_COLOR = sf::Color::Red;
+
 // In the title screen, distance between buttons vertically
 const int TITLE_BUTTONS_VERTICAL_DISTANCE = 60;
 
@@ -223,6 +226,12 @@ const int CORRECT_WORDMEAN_POINTS = CORRECT_PRON_POINTS;
 // Points taken for incorrectly guessing a word meaning
 const int INCORRECT_WORDMEAN_POINTS = INCORRECT_PRON_POINTS;
 
+// Points given for correctly drawing a whole kanji
+const int CORRECT_DRAWING_POINTS = 10;
+
+// Points taken for incorrectly drawing a stroke of a kanji
+const int INCORRECT_STROKE_POINTS = 5;
+
 // Initial pitch for the correct answer sound
 const double INITIAL_PITCH_CORRECT_SOUND = 1.3;
 
@@ -241,17 +250,18 @@ const double BOARD_TUTORIAL_DRAW_Y = 14*WINDOW_HEIGHT/20;
 const double BOARD_EXERCISE_DRAW_X = BOARD_TUTORIAL_DRAW_X;
 const double BOARD_EXERCISE_DRAW_Y = WINDOW_HEIGHT/2;
 
-// When comparing the length of two strokes, the minimum and maximum
-// ratio that is considered correct
-const double MIN_STROKE_SIZE_RATIO = 0.6;
-const double MAX_STROKE_SIZE_RATIO = 1.4;
+// When comparing the length of two strokes, the maximun difference allowed
+const double MAX_STROKE_SIZE_DIFF = 50;
+
+// For the first and last vertices of a stroke, the maximum distance in pixels
+// that is considered correct
+const double MAX_STROKE_VERTEX_DIST = 70;
 
 // Thickness for strokes
 const double STROKE_THICKNESS = 5;
 
-// For the first and last vertices of a stroke, the maximum distance in pixels
-// that is considered correct
-const double MAX_STROKE_VERTEX_DIST = 40;
+// Radius for the circle that encloses the first vertex of a strokein a tutorial
+const double FIRST_VERTEX_RADIUS = STROKE_THICKNESS*3;
 
 // How many frames to wait between vertices when drawing (in Windows it works differently)
 #ifdef _WIN32

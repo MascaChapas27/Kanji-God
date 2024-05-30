@@ -16,7 +16,7 @@ void debugStroke();
 int main(){
     srand(time(NULL));
 
-    debugStroke();
+    //debugStroke();
 
     MainWindow mainWindow;
 

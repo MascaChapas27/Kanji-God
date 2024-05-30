@@ -1,4 +1,5 @@
 #include "DrawableStroke.hpp"
+#include <cmath>
 
 DrawableStroke::DrawableStroke(const sf::Vector2f point1, const sf::Vector2f point2, sf::Color color, double thickness){
 

@@ -105,6 +105,8 @@ Exercise Controller::getCurrentTutorial(){
         case ProgramState::WordPron:
             e = WordRepository::getInstance()->getTutorial(currentExercise.getHashCode());
             break;
+        case ProgramState::KanjiStroke:
+            e = KanjiRepository::getInstance()->makeStrokeExercise(currentExercise.getHashCode(),true);
         default:
             break;
     }
@@ -187,6 +189,20 @@ bool Controller::checkStroke(sf::VertexArray &stroke){
     if(correct){
         numStrokes++;
         correctAnswerSound.setPitch(INITIAL_PITCH_CORRECT_SOUND+PITCH_INCREMENT_CORRECT_SOUND*numStrokes);
+        correctAnswerSound.play();
+    } else {
+        incorrectAnswerSound.play();
+    }
+
+    return correct;
+}
+
+bool Controller::checkStrokeTutorial(sf::VertexArray &stroke, size_t numStroke){
+
+    bool correct = KanjiRepository::getInstance()->checkStroke(currentExercise,stroke,numStroke,true);
+
+    if(correct){
+        correctAnswerSound.setPitch(INITIAL_PITCH_CORRECT_SOUND+PITCH_INCREMENT_CORRECT_SOUND*numStroke);
         correctAnswerSound.play();
     } else {
         incorrectAnswerSound.play();
