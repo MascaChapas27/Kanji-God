@@ -569,7 +569,7 @@ bool KanjiRepository::allAnswered(Exercise &exercise, unsigned int answers)
     return completed;
 }
 
-bool KanjiRepository::checkStroke(Exercise &exercise, sf::VertexArray &stroke, int strokeNumber, bool tutorial){
+bool KanjiRepository::checkStroke(Exercise &exercise, sf::VertexArray &stroke, size_t strokeNumber, bool tutorial){
 
     bool correct = true;
 
@@ -581,7 +581,7 @@ bool KanjiRepository::checkStroke(Exercise &exercise, sf::VertexArray &stroke, i
             exit(EXIT_FAILURE);
         }
     }
-    
+
     sf::VertexArray realStroke = kanjis[exercise.getHashCode()].getStrokes()[strokeNumber];
 
     // First check: the size is similar

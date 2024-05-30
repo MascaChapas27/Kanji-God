@@ -9,7 +9,7 @@
 enum class TextureID{
     Title, Background,
     MenuArrowLeftBottom, MenuArrowLeftTop, MenuArrowRightBottom, MenuArrowRightTop, BigMenuButtonBottom, BigMenuButtonTop,
-    SaveBottom, SaveTop, HelpBottom, HelpTop,
+    SaveBottom, SaveTop, HelpBottom, HelpTop, UndoArrowTop, UndoArrowBottom,
     ShortExerciseButtonBottom, ShortExerciseButtonTop, LongExerciseButtonBottom, LongExerciseButtonTop,
     WordTutorialSign, QuestionSign, InstructionsSign,
     MeaningSign, KunOnSign, ReadingSign,

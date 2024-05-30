@@ -25,7 +25,7 @@ void Button::setBottomTexture(sf::Texture &texture)
 void Button::setTopTexture(sf::Texture &texture)
 {
     topSprite.setTexture(texture);
-    topSprite.setOrigin(bottomSprite.getTextureRect().width/2,bottomSprite.getTextureRect().height/2);
+    topSprite.setOrigin(topSprite.getTextureRect().width/2,topSprite.getTextureRect().height/2);
     textButtonRatio = (topSprite.getTextureRect().width - BUTTON_TEXT_MARGIN) / topSprite.getTextureRect().width;
 }
 

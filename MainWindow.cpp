@@ -250,6 +250,12 @@ void MainWindow::start(){
     strokeExerciseBoard.setStrokeColor(STROKE_DRAW_COLOR);
     strokeExerciseBoard.setPosition(BOARD_EXERCISE_DRAW_X,BOARD_EXERCISE_DRAW_Y);
 
+    // Button that lets you undo a stroke in the stroke tutorial
+    strokeTutorialUndoButton.setTopTexture(textureHolder->get(TextureID::UndoArrowTop));
+    strokeTutorialUndoButton.setBottomTexture(textureHolder->get(TextureID::UndoArrowBottom));
+    strokeTutorialUndoButton.setButtonColor(UNDO_BUTTON_COLOR);
+    strokeTutorialUndoButton.setPosition(UNDO_BUTTON_X, UNDO_BUTTON_Y);
+
     // Button to continue in the tutorial
     continueButton.setBottomTexture(textureHolder->get(TextureID::ShortExerciseButtonBottom));
     continueButton.setTopTexture(textureHolder->get(TextureID::ShortExerciseButtonTop));
@@ -576,6 +582,7 @@ void MainWindow::start(){
         }
     });
 
+    // Action for the stroke tutorial board
     strokeTutorialBoardDraw.setFinishedStrokeAction([this](DrawingBoard &thisBoard){
         sf::VertexArray stroke = thisBoard.getLatestStroke();
 
@@ -585,6 +592,12 @@ void MainWindow::start(){
             thisBoard.addStroke(stroke);
             strokeTutorialBoardShow.nextStroke();
         }
+    });
+
+    // Action for the undo button
+    strokeTutorialUndoButton.setReleasedButtonAction([this](Button &thisButton){
+        strokeTutorialBoardDraw.undo();
+        strokeTutorialBoardShow.undo();
     });
 
     // Before starting, update the content of the grade selector
@@ -628,6 +641,7 @@ void MainWindow::start(){
                     break;
                 case ProgramState::StrokeTutor:
                     strokeTutorialBoardDraw.notify(event);
+                    strokeTutorialUndoButton.notify(event);
                     // No break (C++ trick)
                 case ProgramState::KanjiTutor:
                 case ProgramState::WordTutor:
@@ -659,9 +673,11 @@ void MainWindow::start(){
             saveButton.update();
             helpButton.update();
             break;
+        case ProgramState::StrokeTutor:
+            strokeTutorialUndoButton.update();
+            // No break (C++ trick)
         case ProgramState::KanjiTutor:
         case ProgramState::WordTutor:
-        case ProgramState::StrokeTutor:
             continueButton.update();
             break;
         }
@@ -729,6 +745,7 @@ void MainWindow::start(){
             window.draw(continueButton);
             window.draw(strokeTutorialBoardDraw);
             window.draw(strokeTutorialBoardShow);
+            window.draw(strokeTutorialUndoButton);
             break;
         }
 

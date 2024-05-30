@@ -91,6 +91,9 @@ const sf::Color STROKE_DRAW_COLOR = sf::Color(0,0,0);
 // Color for the first vertex of a stroke in a tutorial
 const sf::Color FIRST_VERTEX_COLOR = sf::Color::Red;
 
+// Color for the undo arrow in the stroke tutorial
+const sf::Color UNDO_BUTTON_COLOR = HELP_COLOR;
+
 // In the title screen, distance between buttons vertically
 const int TITLE_BUTTONS_VERTICAL_DISTANCE = 60;
 
@@ -185,6 +188,10 @@ const int SAVE_BUTTON_Y = BACK_MENU_BUTTON_Y;
 const int HELP_BUTTON_X = SAVE_BUTTON_X+100;
 const int HELP_BUTTON_Y = BACK_MENU_BUTTON_Y;
 
+// Position for the undo button
+const int UNDO_BUTTON_X = BACK_MENU_BUTTON_X;
+const int UNDO_BUTTON_Y = WINDOW_HEIGHT/2;
+
 // Placeholder progress for something not yet taught
 const int NO_PROGRESS = -1;
 
@@ -265,7 +272,7 @@ const double FIRST_VERTEX_RADIUS = STROKE_THICKNESS*3;
 
 // How many frames to wait between vertices when drawing (in Windows it works differently)
 #ifdef _WIN32
-const int VERTEX_DELAY = 2;
+const int VERTEX_DELAY = 1;
 #else
 const int VERTEX_DELAY = 2;
 #endif

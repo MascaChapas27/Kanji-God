@@ -73,7 +73,7 @@ class KanjiRepository{
 
         // Checks if the current stroke was drawn properly and changes it for the correct
         // stroke if it was drawn properly
-        bool checkStroke(Exercise &exercise, sf::VertexArray &stroke, int strokeNumber, bool tutorial=false);
+        bool checkStroke(Exercise &exercise, sf::VertexArray &stroke, size_t strokeNumber, bool tutorial=false);
 
         // Checks if all answers were answered for a kanji
         bool allAnswered(Exercise &exercise, unsigned int answers);
@@ -88,7 +88,7 @@ class KanjiRepository{
         // THE KANJI'S drawingProgress IS EQUAL TO NO_PROGRESS (this means that, when learning a new kanji, the first
         // thing to learn is always its pronunciations and meaning, and then the drawing))
         Exercise makeStrokeExercise(hash_t hashCode, bool tutorial = false);
-    
+
     private:
         // When a kanji changes its progress, move it to another vector (mastered or practicing)
         void updateKanjiVectors(Kanji &kanji);

@@ -91,6 +91,8 @@ void ResourceHolder<Resource,Identifier>::loadAllTextures()
     load(TextureID::SaveTop,"sprites/save_button_top.png");
     load(TextureID::HelpBottom,"sprites/help_button_bottom.png");
     load(TextureID::HelpTop,"sprites/help_button_top.png");
+    load(TextureID::UndoArrowBottom,"sprites/undo_arrow_bottom.png");
+    load(TextureID::UndoArrowTop,"sprites/undo_arrow_top.png");
 
     load(TextureID::ShortExerciseButtonBottom,"sprites/short_exercise_button_bottom.png");
     load(TextureID::ShortExerciseButtonTop,"sprites/short_exercise_button_top.png");

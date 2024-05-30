@@ -86,6 +86,9 @@ class MainWindow {
         // Board that allows the user to draw kanjis in an exercise
         DrawingBoard strokeExerciseBoard;
 
+        // Undo button used only in the stroke tutorial
+        Button strokeTutorialUndoButton;
+
         // Button to continue when the tutorial has been completed
         Button continueButton;
 
