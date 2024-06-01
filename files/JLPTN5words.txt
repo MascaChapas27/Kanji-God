@@ -226,10 +226,6 @@ Mountains and rivers
 たいせん
 Big river
 ーーーー
-川柳
-せんりゅう
-Humorous poem
-ーーーー
 十三
 じゅうさん
 13
@@ -281,10 +277,6 @@ Earth
 一千
 いっせん
 1000
-ーーーー
-千里
-せんり
-1000 ri
 ーーーー
 女子大
 じょしだい
@@ -386,10 +378,6 @@ Outbreak of fire
 たいか
 Large fire
 ーーーー
-火災
-かさい
-Conflagration
-ーーーー
 父母
 ふぼ
 Father and mother
@@ -397,10 +385,6 @@ Father and mother
 父子
 ふし
 Father and child
-ーーーー
-義父
-ぎふ
-Father-in-law
 ーーーー
 今週
 こんしゅう
@@ -534,10 +518,6 @@ Friend
 いちえん
 One yen
 ーーーー
-円滑
-えんかつ
-Smooth
-ーーーー
 円い
 まるい
 Round
@@ -597,10 +577,6 @@ To be disconnected
 左右
 さゆう
 Left and right
-ーーーー
-右翼
-うよく
-Right-wing
 ーーーー
 右中間
 うちゅうかん
@@ -669,14 +645,6 @@ To sprout
 生
 なま
 Raw
-ーーーー
-左翼
-さよく
-Left-wing
-ーーーー
-左派
-さは
-Left wing
 ーーーー
 四つ
 よっつ
@@ -797,10 +765,6 @@ Eye and ear
 中耳
 ちゅうじ
 Middle ear
-ーーーー
-中耳炎
-ちゅうじえん
-Inflammation of the middle ear
 ーーーー
 九百
 くひゃく
@@ -1126,10 +1090,6 @@ Calligraphy
 みち
 Road
 ーーーー
-購買
-こうばい
-Procurement
-ーーーー
 買う
 かう
 To buy
@@ -1177,10 +1137,6 @@ New
 電気
 でんき
 Electricity
-ーーーー
-朗読
-ろうどく
-Reading aloud
 ーーーー
 読本
 とくほん
