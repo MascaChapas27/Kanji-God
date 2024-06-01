@@ -16,7 +16,7 @@ typedef unsigned long long hash_t;
 
 // If this is true, the application is being developed, but if it's true, the application
 // is ready to be used by users
-const bool IN_DEVELOPMENT = true;
+const bool IN_DEVELOPMENT = false;
 
 // Path for the icon
 const std::string ICON_PATH = "sprites/icon.png";
