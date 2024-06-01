@@ -18,6 +18,9 @@ typedef unsigned long long hash_t;
 // is ready to be used by users
 const bool IN_DEVELOPMENT = true;
 
+// Path for the icon
+const std::string ICON_PATH = "sprites/icon.png";
+
 // Size for the main window
 const int WINDOW_WIDTH = 800;
 const int WINDOW_HEIGHT = 600;

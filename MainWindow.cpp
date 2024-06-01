@@ -36,6 +36,13 @@ MainWindow::MainWindow(){
     // Create the window
     window.create(sf::VideoMode(WINDOW_WIDTH,WINDOW_HEIGHT),WINDOW_TITLE,sf::Style::Close);
     window.setFramerateLimit(FPS);
+    sf::Image iconImage;
+
+    if(!iconImage.loadFromFile(ICON_PATH)){
+        std::cerr << "ERROR: couldn't load the icon. Is it located at " << ICON_PATH << " and has the right permissions?" << std::endl;
+    }
+
+    window.setIcon(iconImage.getSize().x, iconImage.getSize().y, iconImage.getPixelsPtr());
 
     // Background and title for the title screen
     background.setTexture(textureHolder->get(TextureID::Background));
