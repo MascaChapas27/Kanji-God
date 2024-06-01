@@ -52,7 +52,3 @@ Type `make run` to execute the program. It should work if there were no compilat
 ## Typical errors
 
 Sometimes the project will compile properly but won't run because a resource cannot be found. Please make sure that the structure of the project is exactly the same as in the repository: if you change names or move files you may screw everything!!
-
-## Additional: How to customize the files.
-
-TODO
