@@ -14,12 +14,16 @@
 // Type for the hash code used to identify kanjis and words
 typedef unsigned long long hash_t;
 
+// If this is true, the application is being developed, but if it's true, the application
+// is ready to be used by users
+const bool IN_DEVELOPMENT = true;
+
 // Size for the main window
 const int WINDOW_WIDTH = 800;
 const int WINDOW_HEIGHT = 600;
 
 // Title for the main window
-const std::string WINDOW_TITLE = "amai";
+const std::string WINDOW_TITLE = "Kanji God";
 
 // Position for the title
 const int TITLE_X = WINDOW_WIDTH/2;

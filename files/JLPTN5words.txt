@@ -842,4 +842,380 @@ To be rested
 やすめる
 To rest
 ーーーー
+安い
+やすい
+Cheap
+ーーーー
+南西
+なんせい
+Southwest
+ーーーー
+毎週
+まいしゅう
+Every week
+ーーーー
+毎月
+まいつき
+Every month
+ーーーー
+毎日
+まいにち
+Every day
+ーーーー
+言語
+げんご
+Language
+ーーーー
+言う
+いう
+Say
+ーーーー
+言
+こと
+Word
+ーーーー
+一足
+いっそく
+Pair
+ーーーー
+足
+あし
+Foot
+ーーーー
+足りる
+たりる
+To be sufficient
+ーーーー
+足る
+たる
+To be enough
+ーーーー
+足す
+たす
+To add
+ーーーー
+社長
+しゃちょう
+Company president
+ーーーー
+社
+やしろ
+Shrine
+ーーーー
+花月
+かげつ
+Flowers and the moon
+ーーーー
+来週
+らいしゅう
+Next week
+ーーーー
+来月
+らいげつ
+Next month
+ーーーー
+来日
+らいにち
+Arrival in japan
+ーーーー
+来る
+くる
+To come
+ーーーー
+来す
+きたす
+To cause
+ーーーー
+見学
+けんがく
+Inspection
+ーーーー
+一見
+いっけん
+Look
+ーーーー
+見る
+みる
+To see
+ーーーー
+見える
+みえる
+To be seen
+ーーーー
+見せる
+みせる
+To show
+ーーーー
+車中
+しゃちゅう
+In a train or vehicle
+ーーーー
+電車
+でんしゃ
+Train
+ーーーー
+三男
+さんなん
+Three sons
+ーーーー
+一男
+いちなん
+Boy
+ーーーー
+男
+おとこ
+Man
+ーーーー
+学校
+がっこう
+School
+ーーーー
+学ぶ
+まなぶ
+To study
+ーーーー
+空
+そら
+Sky
+ーーーー
+空く
+あく
+To open
+ーーーー
+空ける
+あける
+To empty
+ーーーー
+書店
+しょてん
+Bookshop
+ーーーー
+本店
+ほんてん
+Head office
+ーーーー
+店長
+てんちょう
+Shop manager
+ーーーー
+大金
+たいきん
+Large amount of money
+ーーーー
+金
+かね
+Money
+ーーーー
+雨天
+うてん
+Rainy weather
+ーーーー
+雨中
+うちゅう
+In the rain
+ーーーー
+長い
+ながい
+Long
+ーーーー
+東南
+とうなん
+South-east
+ーーーー
+外食
+がいしょく
+Eating out
+ーーーー
+食う
+くう
+To bite
+ーーーー
+食べる
+たべる
+To eat
+ーーーー
+前後
+ぜんご
+Front and rear
+ーーーー
+前
+まえ
+Ago
+ーーーー
+後ろ
+うしろ
+Back
+ーーーー
+後
+あと
+Behind
+ーーーー
+後れる
+おくれる
+To be late
+ーーーー
+高校生
+こうこうせい
+Senior high school student
+ーーーー
+高校
+こうこう
+Senior high school
+ーーーー
+校長
+こうちょう
+Principal
+ーーーー
+時間
+じかん
+Time
+ーーーー
+高い
+たかい
+High
+ーーーー
+高まる
+たかまる
+To rise
+ーーーー
+高める
+たかめる
+To enhance
+ーーーー
+読書
+どくしょ
+Reading
+ーーーー
+書く
+かく
+To write
+ーーーー
+金魚
+きんぎょ
+Goldfish
+ーーーー
+魚
+さかな
+Fish
+ーーーー
+先週
+せんしゅう
+Last week
+ーーーー
+飲食
+いんしょく
+Food and drink
+ーーーー
+飲む
+のむ
+To drink
+ーーーー
+水道
+すいどう
+Water service
+ーーーー
+人道
+じんどう
+Humanity
+ーーーー
+書道
+しょどう
+Calligraphy
+ーーーー
+道
+みち
+Road
+ーーーー
+購買
+こうばい
+Procurement
+ーーーー
+買う
+かう
+To buy
+ーーーー
+空間
+くうかん
+Space
+ーーーー
+年間
+ねんかん
+Years
+ーーーー
+間
+あいだ
+Space
+ーーーー
+電話
+でんわ
+Telephone call
+ーーーー
+話す
+はなす
+To talk
+ーーーー
+話
+はなし
+Talk
+ーーーー
+新聞社
+しんぶんしゃ
+Newspaper company
+ーーーー
+新聞
+しんぶん
+Newspaper
+ーーーー
+新しい
+あたらしい
+New
+ーーーー
+新た
+あらた
+New
+ーーーー
+電気
+でんき
+Electricity
+ーーーー
+朗読
+ろうどく
+Reading aloud
+ーーーー
+読本
+とくほん
+Reading-book
+ーーーー
+読む
+よむ
+To read
+ーーーー
+外国語
+がいこくご
+Foreign language
+ーーーー
+国語
+こくご
+National language
+ーーーー
+語る
+かたる
+To talk about
+ーーーー
+語らう
+かたらう
+To talk
+ーーーー
+見聞
+けんぶん
+Information
+ーーーー
+聞く
+きく
+To hear
+ーーーー
+聞こえる
+きこえる
+To be heard
+ーーーー
 #

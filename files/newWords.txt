@@ -1066,4 +1066,660 @@ To be rested
 やすめる
 To rest
 ーーーー
+安打
+あんだ
+Safe hit
+ーーーー
+安定
+あんてい
+Stability
+ーーーー
+安全
+あんぜん
+Safety
+ーーーー
+安心
+あんしん
+Relief
+ーーーー
+安い
+やすい
+Cheap
+ーーーー
+南西
+なんせい
+Southwest
+ーーーー
+西方
+せいほう
+Western direction
+ーーーー
+関西
+かんさい
+Kansai
+ーーーー
+毎週
+まいしゅう
+Every week
+ーーーー
+毎月
+まいつき
+Every month
+ーーーー
+毎日
+まいにち
+Every day
+ーーーー
+毎回
+まいかい
+Every time
+ーーーー
+言語
+げんご
+Language
+ーーーー
+明言
+めいげん
+Declaration
+ーーーー
+方言
+ほうげん
+Dialect
+ーーーー
+公言
+こうげん
+Declaration
+ーーーー
+言う
+いう
+Say
+ーーーー
+言
+こと
+Word
+ーーーー
+一足
+いっそく
+Pair
+ーーーー
+発足
+ほっそく
+Starting
+ーーーー
+不足
+ふそく
+Insufficiency
+ーーーー
+両足
+りょうそく
+Both feet
+ーーーー
+足
+あし
+Foot
+ーーーー
+足りる
+たりる
+To be sufficient
+ーーーー
+足る
+たる
+To be enough
+ーーーー
+足す
+たす
+To add
+ーーーー
+自社
+じしゃ
+One's own company
+ーーーー
+社長
+しゃちょう
+Company president
+ーーーー
+社内
+しゃない
+Within a company
+ーーーー
+社
+やしろ
+Shrine
+ーーーー
+花王
+かおう
+Peony
+ーーーー
+花月
+かげつ
+Flowers and the moon
+ーーーー
+開花
+かいか
+Flowers budding
+ーーーー
+花粉症
+かふんしょう
+Hay fever
+ーーーー
+幾何学
+きかがく
+Geometry
+ーーーー
+幾何
+きかがく
+Geometry
+ーーーー
+来週
+らいしゅう
+Next week
+ーーーー
+来春
+らいしゅん
+Next spring
+ーーーー
+来月
+らいげつ
+Next month
+ーーーー
+来日
+らいにち
+Arrival in japan
+ーーーー
+来る
+くる
+To come
+ーーーー
+来す
+きたす
+To cause
+ーーーー
+見学
+けんがく
+Inspection
+ーーーー
+一見
+いっけん
+Look
+ーーーー
+発見
+はっけん
+Discovery
+ーーーー
+見る
+みる
+To see
+ーーーー
+見える
+みえる
+To be seen
+ーーーー
+見せる
+みせる
+To show
+ーーーー
+車中
+しゃちゅう
+In a train or vehicle
+ーーーー
+電車
+でんしゃ
+Train
+ーーーー
+車両
+しゃりょう
+Rolling stock
+ーーーー
+三男
+さんなん
+Three sons
+ーーーー
+一男
+いちなん
+Boy
+ーーーー
+男
+おとこ
+Man
+ーーーー
+文学
+ぶんがく
+Literature
+ーーーー
+学校
+がっこう
+School
+ーーーー
+学ぶ
+まなぶ
+To study
+ーーーー
+空
+そら
+Sky
+ーーーー
+空く
+あく
+To open
+ーーーー
+空ける
+あける
+To empty
+ーーーー
+書店
+しょてん
+Bookshop
+ーーーー
+店頭
+てんとう
+Shopfront
+ーーーー
+本店
+ほんてん
+Head office
+ーーーー
+店長
+てんちょう
+Shop manager
+ーーーー
+金石
+きんせき
+Minerals and rocks
+ーーーー
+大金
+たいきん
+Large amount of money
+ーーーー
+金
+かね
+Money
+ーーーー
+雨天
+うてん
+Rainy weather
+ーーーー
+雨中
+うちゅう
+In the rain
+ーーーー
+雨期
+うき
+Rainy season
+ーーーー
+雨量
+うりょう
+Rainfall
+ーーーー
+市長
+しちょう
+Mayor
+ーーーー
+室長
+しつちょう
+Section chief
+ーーーー
+長い
+ながい
+Long
+ーーーー
+東海
+とうかい
+Region south of Tokyo
+ーーーー
+東南
+とうなん
+South-east
+ーーーー
+東京
+とうきょう
+Tokyo
+ーーーー
+自国
+じこく
+One's own country
+ーーーー
+米国
+べいこく
+America
+ーーーー
+帰国
+きこく
+Return to one's country
+ーーーー
+昼食
+ちゅうしょく
+Lunch
+ーーーー
+食用
+しょくよう
+For use as food
+ーーーー
+朝食
+ちょうしょく
+Breakfast
+ーーーー
+外食
+がいしょく
+Eating out
+ーーーー
+食う
+くう
+To bite
+ーーーー
+食べる
+たべる
+To eat
+ーーーー
+直前
+ちょくぜん
+Just before
+ーーーー
+前後
+ぜんご
+Front and rear
+ーーーー
+前回
+ぜんかい
+Previous time
+ーーーー
+前
+まえ
+Ago
+ーーーー
+直後
+ちょくご
+Immediately following
+ーーーー
+後ろ
+うしろ
+Back
+ーーーー
+後
+あと
+Behind
+ーーーー
+後れる
+おくれる
+To be late
+ーーーー
+南米
+なんべい
+South America
+ーーーー
+南海
+なんかい
+Southern sea
+ーーーー
+高校生
+こうこうせい
+Senior high school student
+ーーーー
+高校
+こうこう
+Senior high school
+ーーーー
+登校
+とうこう
+Attendance
+ーーーー
+校長
+こうちょう
+Principal
+ーーーー
+時間
+じかん
+Time
+ーーーー
+時点
+じてん
+Point in time
+ーーーー
+当時
+とうじ
+At that time
+ーーーー
+高原
+こうげん
+Tableland
+ーーーー
+高い
+たかい
+High
+ーーーー
+高まる
+たかまる
+To rise
+ーーーー
+高める
+たかめる
+To enhance
+ーーーー
+読書
+どくしょ
+Reading
+ーーーー
+書記
+しょき
+Clerk
+ーーーー
+教科書
+きょうかしょ
+Textbook
+ーーーー
+書く
+かく
+To write
+ーーーー
+金魚
+きんぎょ
+Goldfish
+ーーーー
+魚類
+ぎょるい
+Fish
+ーーーー
+熱帯魚
+ねったいぎょ
+Tropical fish
+ーーーー
+魚介類
+ぎょかいるい
+Marine products
+ーーーー
+魚
+さかな
+Fish
+ーーーー
+先週
+せんしゅう
+Last week
+ーーーー
+飲食
+いんしょく
+Food and drink
+ーーーー
+飲酒
+いんしゅ
+Drinking alcohol
+ーーーー
+飲料
+いんりょう
+Beverage
+ーーーー
+飲用
+いんよう
+Drinking
+ーーーー
+飲む
+のむ
+To drink
+ーーーー
+水道
+すいどう
+Water service
+ーーーー
+人道
+じんどう
+Humanity
+ーーーー
+歩道
+ほどう
+Footpath
+ーーーー
+書道
+しょどう
+Calligraphy
+ーーーー
+道
+みち
+Road
+ーーーー
+売買
+ばいばい
+Trade
+ーーーー
+買収
+ばいしゅう
+Acquisition
+ーーーー
+購買力
+こうばいりょく
+Buying power
+ーーーー
+購買
+こうばい
+Procurement
+ーーーー
+買う
+かう
+To buy
+ーーーー
+夜間
+やかん
+At night
+ーーーー
+空間
+くうかん
+Space
+ーーーー
+年間
+ねんかん
+Years
+ーーーー
+間
+あいだ
+Space
+ーーーー
+電話
+でんわ
+Telephone call
+ーーーー
+通話
+つうわ
+Telephone call
+ーーーー
+話題
+わだい
+Topic
+ーーーー
+話す
+はなす
+To talk
+ーーーー
+話
+はなし
+Talk
+ーーーー
+新聞社
+しんぶんしゃ
+Newspaper company
+ーーーー
+新聞
+しんぶん
+Newspaper
+ーーーー
+新作
+しんさく
+New work
+ーーーー
+新しい
+あたらしい
+New
+ーーーー
+新た
+あらた
+New
+ーーーー
+家電
+かでん
+Consumer electronics
+ーーーー
+電気
+でんき
+Electricity
+ーーーー
+読者
+どくしゃ
+Reader
+ーーーー
+朗読
+ろうどく
+Reading aloud
+ーーーー
+読本
+とくほん
+Reading-book
+ーーーー
+読む
+よむ
+To read
+ーーーー
+用語
+ようご
+Term
+ーーーー
+外国語
+がいこくご
+Foreign language
+ーーーー
+国語
+こくご
+National language
+ーーーー
+語る
+かたる
+To talk about
+ーーーー
+語らう
+かたらう
+To talk
+ーーーー
+駅員
+えきいん
+Station attendant
+ーーーー
+宿駅
+しゅくえき
+Relay station
+ーーーー
+駅伝
+えきでん
+Long-distance relay race
+ーーーー
+終着駅
+しゅうちゃくえき
+Terminal station
+ーーーー
+見聞
+けんぶん
+Information
+ーーーー
+聞く
+きく
+To hear
+ーーーー
+聞こえる
+きこえる
+To be heard
+ーーーー
 #

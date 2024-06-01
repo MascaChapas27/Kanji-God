@@ -62,4 +62,112 @@ Event
 たすう
 Great number
 ーーーー
+安打
+あんだ
+Safe hit
+ーーーー
+安定
+あんてい
+Stability
+ーーーー
+安全
+あんぜん
+Safety
+ーーーー
+関西
+かんさい
+Kansai
+ーーーー
+両足
+りょうそく
+Both feet
+ーーーー
+社内
+しゃない
+Within a company
+ーーーー
+花王
+かおう
+Peony
+ーーーー
+幾何学
+きかがく
+Geometry
+ーーーー
+幾何
+きかがく
+Geometry
+ーーーー
+車両
+しゃりょう
+Rolling stock
+ーーーー
+金石
+きんせき
+Minerals and rocks
+ーーーー
+雨期
+うき
+Rainy season
+ーーーー
+米国
+べいこく
+America
+ーーーー
+直前
+ちょくぜん
+Just before
+ーーーー
+直後
+ちょくご
+Immediately following
+ーーーー
+南米
+なんべい
+South America
+ーーーー
+登校
+とうこう
+Attendance
+ーーーー
+時点
+じてん
+Point in time
+ーーーー
+当時
+とうじ
+At that time
+ーーーー
+高原
+こうげん
+Tableland
+ーーーー
+書記
+しょき
+Clerk
+ーーーー
+教科書
+きょうかしょ
+Textbook
+ーーーー
+魚類
+ぎょるい
+Fish
+ーーーー
+飲酒
+いんしゅ
+Drinking alcohol
+ーーーー
+買収
+ばいしゅう
+Acquisition
+ーーーー
+宿駅
+しゅくえき
+Relay station
+ーーーー
+駅伝
+えきでん
+Long-distance relay race
+ーーーー
 #

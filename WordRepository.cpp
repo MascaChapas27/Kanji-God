@@ -132,7 +132,9 @@ void WordRepository::classifyWords(){
 void WordRepository::loadAllWords(){
 
     #ifdef __linux__
-    classifyWords();
+    if(IN_DEVELOPMENT){
+        classifyWords();
+    }
     #endif
 
     for(int i=1;i<=5;i++){

@@ -126,4 +126,156 @@ Youth
 きょうかい
 Church
 ーーーー
+安心
+あんしん
+Relief
+ーーーー
+西方
+せいほう
+Western direction
+ーーーー
+毎回
+まいかい
+Every time
+ーーーー
+明言
+めいげん
+Declaration
+ーーーー
+方言
+ほうげん
+Dialect
+ーーーー
+発足
+ほっそく
+Starting
+ーーーー
+不足
+ふそく
+Insufficiency
+ーーーー
+自社
+じしゃ
+One's own company
+ーーーー
+開花
+かいか
+Flowers budding
+ーーーー
+来春
+らいしゅん
+Next spring
+ーーーー
+発見
+はっけん
+Discovery
+ーーーー
+文学
+ぶんがく
+Literature
+ーーーー
+店頭
+てんとう
+Shopfront
+ーーーー
+市長
+しちょう
+Mayor
+ーーーー
+室長
+しつちょう
+Section chief
+ーーーー
+東海
+とうかい
+Region south of Tokyo
+ーーーー
+東京
+とうきょう
+Tokyo
+ーーーー
+自国
+じこく
+One's own country
+ーーーー
+帰国
+きこく
+Return to one's country
+ーーーー
+昼食
+ちゅうしょく
+Lunch
+ーーーー
+食用
+しょくよう
+For use as food
+ーーーー
+朝食
+ちょうしょく
+Breakfast
+ーーーー
+前回
+ぜんかい
+Previous time
+ーーーー
+南海
+なんかい
+Southern sea
+ーーーー
+飲料
+いんりょう
+Beverage
+ーーーー
+飲用
+いんよう
+Drinking
+ーーーー
+歩道
+ほどう
+Footpath
+ーーーー
+売買
+ばいばい
+Trade
+ーーーー
+購買力
+こうばいりょく
+Buying power
+ーーーー
+夜間
+やかん
+At night
+ーーーー
+通話
+つうわ
+Telephone call
+ーーーー
+話題
+わだい
+Topic
+ーーーー
+新作
+しんさく
+New work
+ーーーー
+家電
+かでん
+Consumer electronics
+ーーーー
+読者
+どくしゃ
+Reader
+ーーーー
+用語
+ようご
+Term
+ーーーー
+駅員
+えきいん
+Station attendant
+ーーーー
+終着駅
+しゅうちゃくえき
+Terminal station
+ーーーー
 #
