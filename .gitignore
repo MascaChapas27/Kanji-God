@@ -44,3 +44,9 @@ KanjiGod
 
 # Progress
 save/*
+
+# DLLs
+*.DLLs
+
+# Build directory
+build/
