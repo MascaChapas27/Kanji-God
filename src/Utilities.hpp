@@ -192,7 +192,7 @@ const int SAVE_BUTTON_X = BACK_MENU_BUTTON_X+100;
 const int SAVE_BUTTON_Y = BACK_MENU_BUTTON_Y;
 
 //Position for the button that how help for the current exercise
-const int HELP_BUTTON_X = SAVE_BUTTON_X+100;
+const int HELP_BUTTON_X = SAVE_BUTTON_X;
 const int HELP_BUTTON_Y = BACK_MENU_BUTTON_Y;
 
 // Position for the undo button

@@ -22,5 +22,36 @@ Woman
 おとこのこ
 Boy
 ーーーー
-
+女の子
+おんなのこ
+Girl
+ーーーー
+友達
+ともだち
+Friend
+ーーーー
+みんな
+みんな
+All, everyone
+ーーーー
+皆さん
+みなさん
+All, everyone
+ーーーー
+外国人
+がいこくじん
+Foreigner
+ーーーー
+方
+かた
+Person (formal)
+ーーーー
+大勢
+おおぜい
+A lot of people
+ーーーー
+自分
+じぶん
+Oneself
+ーーーー
 #

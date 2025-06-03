@@ -8,6 +8,7 @@
 #include <iostream>
 #include <random>
 #include <chrono>
+#include "Controller.hpp"
 
 WordRepository * WordRepository::wordRepository = nullptr;
 
@@ -27,7 +28,7 @@ void WordRepository::classifyWords(){
 
     if(!file.is_open()){
         std::cerr << "ERROR: file " << "files/words.txt not found" << std::endl;
-        exit(EXIT_FAILURE);
+        Controller::getInstance()->saveAndExit(EXIT_FAILURE);
     }
 
     file.imbue(std::locale("C.UTF-8"));
@@ -145,7 +146,7 @@ void WordRepository::loadAllWords(){
 
         if(!file.is_open()){
             std::cerr << "ERROR: file " << "files/JLPTN"+std::to_string(i)+"words.txt not found" << std::endl;
-            exit(EXIT_FAILURE);
+            Controller::getInstance()->saveAndExit(EXIT_FAILURE);
         }
 
         file.imbue(std::locale("C.UTF-8"));

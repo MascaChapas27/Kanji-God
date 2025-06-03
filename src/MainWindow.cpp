@@ -7,16 +7,30 @@
 #include <iostream>
 #include <optional>
 
-void MainWindow::updateMasteredCount(Button &gradeSelector){
-    int masteredKanji = Controller::getInstance()->getMasteredKanji(grade);
-    int totalKanji = Controller::getInstance()->getTotalKanji(grade);
+void MainWindow::updateMasteredCount(Button &gradeSelector, Button &masteredSelector){
 
-    int masteredWords = Controller::getInstance()->getMasteredWords(grade);
-    int totalWords = Controller::getInstance()->getTotalWords(grade);
+    // 6 because it goes from 1 to 5 (index 0 is unused)
+    int masteredKanjiByGrade[6];
+    int totalKanjiByGrade[6];
+    int masteredWordsByGrade[6];
+    int totalWordsByGrade[6];
+    int mastered = 0;
 
-    gradeSelector.setText("JLPT N"+std::to_string(grade)+"\nKanji: "+std::to_string(masteredKanji)+"/"+std::to_string(totalKanji)+"\nWords: "+std::to_string(masteredWords)+"/"+std::to_string(totalWords));
+    for(int i=1;i<6;i++){
+        masteredKanjiByGrade[i] = Controller::getInstance()->getMasteredKanji(i);
+        totalKanjiByGrade[i] = Controller::getInstance()->getTotalKanji(i);
+        masteredWordsByGrade[i] = Controller::getInstance()->getMasteredWords(i);
+        totalWordsByGrade[i] = Controller::getInstance()->getTotalWords(i);
 
-    if(masteredWords == totalWords && masteredKanji == totalKanji){
+        mastered+=masteredKanjiByGrade[i];
+        mastered+=masteredWordsByGrade[i];
+    }
+
+    gradeSelector.setText("JLPT N"+std::to_string(grade)+"\nKanji: "+std::to_string(masteredKanjiByGrade[grade])+"/"+std::to_string(totalKanjiByGrade[grade])+"\nWords: "+std::to_string(masteredWordsByGrade[grade])+"/"+std::to_string(totalWordsByGrade[grade]));
+    masteredSelector.setText("God Mode\n("+std::to_string(mastered)+" mastered)\n");
+
+
+    if(masteredWordsByGrade[grade] == totalWordsByGrade[grade] && masteredKanjiByGrade[grade] == totalKanjiByGrade[grade]){
         gradeSelector.setButtonColor(BUTTON_COLOR_CORRECT);
     } else {
         gradeSelector.setButtonColor(BUTTON_COLOR_NORMAL);
@@ -63,13 +77,19 @@ void MainWindow::start(){
     gradeSelector.setTextColor(TEXT_COLOR);
     gradeSelector.setButtonColor(BUTTON_COLOR_NORMAL);
 
+    Button godModeSelector(textureHolder->get(TextureID::BigMenuButtonBottom),textureHolder->get(TextureID::BigMenuButtonTop));
+    godModeSelector.setPosition(GODMODE_MENU_BUTTON_X,GODMODE_MENU_BUTTON_Y);
+    godModeSelector.setText("God Mode");
+    godModeSelector.setTextColor(TEXT_COLOR);
+    godModeSelector.setButtonColor(BUTTON_COLOR_NORMAL);
+
     Button leftArrow(textureHolder->get(TextureID::MenuArrowLeftBottom),textureHolder->get(TextureID::MenuArrowLeftTop));
     leftArrow.setPosition(MENU_ARROW_LEFT_X,MENU_ARROW_LEFT_Y);
     leftArrow.setButtonColor(BUTTON_COLOR_NORMAL);
     leftArrow.setPressedButtonAction([&](Button &button){
         grade++;
         if(grade == 6) grade = 1;
-        this->updateMasteredCount(gradeSelector);
+        this->updateMasteredCount(gradeSelector,godModeSelector);
     });
 
     Button rightArrow(textureHolder->get(TextureID::MenuArrowRightBottom),textureHolder->get(TextureID::MenuArrowRightTop));
@@ -78,14 +98,8 @@ void MainWindow::start(){
     rightArrow.setPressedButtonAction([&](Button &button){
         grade--;
         if(grade == 0) grade = 5;
-        this->updateMasteredCount(gradeSelector);
+        this->updateMasteredCount(gradeSelector,godModeSelector);
     });
-
-    Button godModeSelector(textureHolder->get(TextureID::BigMenuButtonBottom),textureHolder->get(TextureID::BigMenuButtonTop));
-    godModeSelector.setPosition(GODMODE_MENU_BUTTON_X,GODMODE_MENU_BUTTON_Y);
-    godModeSelector.setText("God Mode");
-    godModeSelector.setTextColor(TEXT_COLOR);
-    godModeSelector.setButtonColor(BUTTON_COLOR_NORMAL);
 
     menuButtons.push_back(&leftArrow);
     menuButtons.push_back(&rightArrow);
@@ -265,18 +279,18 @@ void MainWindow::start(){
         Controller::getInstance()->save();
         this->programState = ProgramState::TitleScreen;
         for(Button * button : menuButtons) button->resetPosition();
-        updateMasteredCount(gradeSelector);
+        updateMasteredCount(gradeSelector,godModeSelector);
     });
 
     // Button to save the progress
-    Button saveButton(textureHolder->get(TextureID::SaveBottom),textureHolder->get(TextureID::SaveTop));
-    saveButton.setPosition(SAVE_BUTTON_X, SAVE_BUTTON_Y);
-    saveButton.setButtonColor(SAVED_COLOR);
-    saveButton.setPressedButtonAction([](Button &button){});
-    saveButton.setReleasedButtonAction([](Button &button){
-        Controller::getInstance()->save();
-        button.setButtonColor(SAVED_COLOR);
-    });
+//     Button saveButton(textureHolder->get(TextureID::SaveBottom),textureHolder->get(TextureID::SaveTop));
+//     saveButton.setPosition(SAVE_BUTTON_X, SAVE_BUTTON_Y);
+//     saveButton.setButtonColor(SAVED_COLOR);
+//     saveButton.setPressedButtonAction([](Button &button){});
+//     saveButton.setReleasedButtonAction([](Button &button){
+//      Controller::getInstance()->save();
+//      button.setButtonColor(SAVED_COLOR);
+//  });
 
     // Button that shows the tutorial page for the following exercise
     Button helpButton(textureHolder->get(TextureID::HelpBottom),textureHolder->get(TextureID::HelpTop));
@@ -287,7 +301,7 @@ void MainWindow::start(){
     // Function used to get an exercise (can be a tutorial for a new kanji/word)
     getExercise = [&] (Button& button){
 
-        saveButton.setButtonColor(SAVE_COLOR);
+//         saveButton.setButtonColor(SAVE_COLOR);
 
         Exercise exercise = Controller::getInstance()->getExercise();
 
@@ -443,7 +457,7 @@ void MainWindow::start(){
         }
         case ProgramState::TitleScreen:
 
-            this->updateMasteredCount(gradeSelector);
+            this->updateMasteredCount(gradeSelector,godModeSelector);
 
             break;
         default:
@@ -454,14 +468,14 @@ void MainWindow::start(){
     gradeSelector.setPressedButtonAction([&](Button &button){
         Controller::getInstance()->setGrade(grade);
         mainMenuButton.resetPosition();
-        saveButton.resetPosition();
+//         saveButton.resetPosition();
         helpButton.resetPosition();
     });
 
     godModeSelector.setPressedButtonAction([&](Button &button){
         Controller::getInstance()->setGodMode(true);
         mainMenuButton.resetPosition();
-        saveButton.resetPosition();
+//         saveButton.resetPosition();
         helpButton.resetPosition();
     });
 
@@ -471,7 +485,7 @@ void MainWindow::start(){
 
     helpButton.setReleasedButtonAction([&](Button& button){
 
-        saveButton.setButtonColor(SAVE_COLOR);
+//         saveButton.setButtonColor(SAVE_COLOR);
 
         Exercise exercise = Controller::getInstance()->getCurrentTutorial();
 
@@ -530,7 +544,7 @@ void MainWindow::start(){
             break;
         case ProgramState::TitleScreen:
 
-            this->updateMasteredCount(gradeSelector);
+            this->updateMasteredCount(gradeSelector,godModeSelector);
 
             break;
         case ProgramState::StrokeTutor:
@@ -591,7 +605,7 @@ void MainWindow::start(){
     });
 
     // Before starting, update the content of the grade selector
-    updateMasteredCount(gradeSelector);
+    updateMasteredCount(gradeSelector,godModeSelector);
 
     programState = ProgramState::TitleScreen;
 
@@ -602,7 +616,7 @@ void MainWindow::start(){
         while(event = window.pollEvent()){
             if(event->is<sf::Event::Closed>()){
                 window.close();
-                Controller::getInstance()->saveAndExit();
+                Controller::getInstance()->saveAndExit(EXIT_SUCCESS);
             } else {
                 switch(programState){
                 case ProgramState::TitleScreen:
@@ -612,13 +626,13 @@ void MainWindow::start(){
                 case ProgramState::KanjiOn:
                     for(Button &button : shortExerciseButtons) button.notify(event.value());
                     mainMenuButton.notify(event.value());
-                    saveButton.notify(event.value());
+//                     saveButton.notify(event.value());
                     helpButton.notify(event.value());
                     break;
                 case ProgramState::KanjiStroke:
                     strokeExerciseBoard.notify(event.value());
                     mainMenuButton.notify(event.value());
-                    saveButton.notify(event.value());
+//                     saveButton.notify(event.value());
                     helpButton.notify(event.value());
                     break;
                 case ProgramState::WordPron:
@@ -626,7 +640,7 @@ void MainWindow::start(){
                 case ProgramState::KanjiMean:
                     for(Button &button : longExerciseButtons) button.notify(event.value());
                     mainMenuButton.notify(event.value());
-                    saveButton.notify(event.value());
+//                     saveButton.notify(event.value());
                     helpButton.notify(event.value());
                     break;
                 case ProgramState::StrokeTutor:
@@ -652,7 +666,7 @@ void MainWindow::start(){
             // No break (C++ trick)
         case ProgramState::KanjiStroke:
             mainMenuButton.update();
-            saveButton.update();
+//             saveButton.update();
             helpButton.update();
             break;
         case ProgramState::WordPron:
@@ -660,7 +674,7 @@ void MainWindow::start(){
         case ProgramState::KanjiMean:
             for(Button &button : longExerciseButtons) button.update();
             mainMenuButton.update();
-            saveButton.update();
+//             saveButton.update();
             helpButton.update();
             break;
         case ProgramState::StrokeTutor:
@@ -689,7 +703,7 @@ void MainWindow::start(){
             window.draw(progressSign);
             for(Button &button : shortExerciseButtons) window.draw(button);
             window.draw(mainMenuButton);
-            window.draw(saveButton);
+//             window.draw(saveButton);
             window.draw(helpButton);
             break;
         case ProgramState::KanjiStroke:
@@ -698,7 +712,7 @@ void MainWindow::start(){
             window.draw(progressSign);
             window.draw(strokeExerciseBoard);
             window.draw(mainMenuButton);
-            window.draw(saveButton);
+//             window.draw(saveButton);
             window.draw(helpButton);
             break;
         case ProgramState::WordPron:
@@ -709,7 +723,7 @@ void MainWindow::start(){
             window.draw(progressSign);
             for(Button &button : longExerciseButtons) window.draw(button);
             window.draw(mainMenuButton);
-            window.draw(saveButton);
+//             window.draw(saveButton);
             window.draw(helpButton);
             break;
         case ProgramState::KanjiTutor:

@@ -235,9 +235,9 @@ bool Controller::allAnswered(){
     }
 }
 
-void Controller::saveAndExit(){
+void Controller::saveAndExit(int exitStatus){
     save();
-    exit(EXIT_SUCCESS);
+    exit(exitStatus);
 }
 
 void Controller::save(){

@@ -7,6 +7,7 @@
 #include <iostream>
 #include <random>
 #include <chrono>
+#include "Controller.hpp"
 
 KanjiRepository * KanjiRepository::kanjiRepository = nullptr;
 
@@ -30,7 +31,7 @@ void KanjiRepository::loadAllKanjis(){
 
         if(!file.is_open()){
             std::cerr << "ERROR: file " << "files/JLPTN" << std::to_string(i) << "kanji.txt" <<" not found" << std::endl;
-            exit(EXIT_FAILURE);
+            Controller::getInstance()->saveAndExit(EXIT_FAILURE);
         }
 
         file.imbue(std::locale("C.UTF-8"));
@@ -174,7 +175,7 @@ void KanjiRepository::loadAllKanjis(){
 
         if(!fileStrokes.is_open()){
             std::cerr << "ERROR: file " << "files/JLPTN" << std::to_string(i) << "strokes.txt" << " not found" << std::endl;
-            exit(EXIT_FAILURE);
+            Controller::getInstance()->saveAndExit(EXIT_FAILURE);
         }
 
         fileStrokes.imbue(std::locale("C.UTF-8"));
@@ -285,7 +286,7 @@ Exercise KanjiRepository::getExercise(int grade, bool mastered)
         exercise.setHashCode(util::hash(chosenKanji.getKanji()));
 
         // Choose the type of question
-        int exerciseType = 3;
+        int exerciseType = rand()%4;
 
         bool decided = false;
 
@@ -578,7 +579,7 @@ bool KanjiRepository::checkStroke(Exercise &exercise, sf::VertexArray &stroke, s
         if(tutorial) return false;
         else {
             std::cerr << "ERROR: Received more strokes than expected" << std::endl;
-            exit(EXIT_FAILURE);
+            Controller::getInstance()->saveAndExit(EXIT_FAILURE);
         }
     }
 

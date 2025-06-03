@@ -54,7 +54,7 @@ class MainWindow {
         std::vector<Sign> tutorialOnyomis;
 
         // Function that updates the amount of mastered/total exercises in the main menu button
-        void updateMasteredCount(Button &gradeSelector);
+        void updateMasteredCount(Button &gradeSelector, Button &masteredSelector);
 
     public:
 

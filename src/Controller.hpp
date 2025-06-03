@@ -99,8 +99,8 @@ class Controller {
         // True if all correct answers for the current exercise were selected
         bool allAnswered();
 
-        // Saves the progress and exit
-        void saveAndExit();
+        // Saves the progress and exits with the given error code
+        void saveAndExit(int errorCode);
 
         // Saves the progress but doesn't exit
         void save();
